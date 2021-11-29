@@ -55,7 +55,7 @@ ROOT_URLCONF = 'AuditProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['governanceandcontrol/template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
