@@ -3,5 +3,9 @@ from django.shortcuts import render
 
 # Create your views here.
 def dashboard(request):
-    info = {}
+    info = {
+        "apple": "green",
+        "banana": "yellow",
+        "cherry": "red"
+    }
     return render(request, 'governanceandcontrol/index.html', info)
