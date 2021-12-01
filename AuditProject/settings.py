@@ -31,7 +31,8 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
 
-    'whitenoise.runserver_nostatic', 'governanceandcontrol',
+    'whitenoise.runserver_nostatic',
+    'governanceandcontrol',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+
+    # This is the default Django Security Middleware
+    'django.middleware.security.SecurityMiddleware',
+
+    # Add whitenoise middleware here
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -123,5 +130,4 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
