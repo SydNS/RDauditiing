@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
 
-    path('gnc', views.dashboard, name='dashboard'),
+    path('', views.dashboard, name='dashboard'),
+    path('login/', views.loginuser, name='dashboard'),
 
 ]
