@@ -30,7 +30,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'governanceandcontrol',
+
+    'whitenoise.runserver_nostatic', 'governanceandcontrol',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'AuditProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['governanceandcontrol/template',  ],
+        'DIRS': ['governanceandcontrol/template', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
