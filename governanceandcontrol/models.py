@@ -10,7 +10,7 @@ from django.db import models
 # Feel free to rename the models, but don't rename db_table values or field names.
 
 
-class GovernanceAndControl(models.Model):
+class GncTable(models.Model):
     audit_project_code = models.CharField(db_column='Audit_Project_Code', max_length=100, blank=True, null=True)  # Field name made lowercase.
     audit_project_name = models.CharField(db_column='Audit_Project_Name', max_length=100, blank=True, null=True)  # Field name made lowercase.
     quarter = models.CharField(db_column='Quarter', max_length=100, blank=True, null=True)  # Field name made lowercase.
@@ -21,36 +21,36 @@ class GovernanceAndControl(models.Model):
     recommendation = models.CharField(db_column='Recommendation', max_length=100, blank=True, null=True)  # Field name made lowercase.
     action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=True, null=True)  # Field name made lowercase.
     recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    agreed_implementation_date = models.CharField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    revised_implementation_date = models.CharField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    last_status_update = models.CharField(db_column='Last_Status_Update', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=True, null=True)  # Field name made lowercase.
     ageing_days = models.FloatField(db_column='Ageing__Days', blank=True, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.
-    actual_implementation_date = models.CharField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    # owner = models.CharField(db_column='Owner', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    owner = models.CharField(db_column='Owner', max_length=100, blank=True, null=True)  # Field name made lowercase.
     final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'Governance_and_control'
+    # class Meta:
+    #     managed = False
+    #     db_table = 'GncTable'
 
 
-# class RiskManagement(models.Model):
-#     xy_strategic_pillar = models.CharField(db_column='XY_Strategic_Pillar', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     xy_strategic_objectives = models.CharField(db_column='XY_Strategic_Objectives', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     risk_category = models.CharField(db_column='Risk_Category', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     risk_description = models.CharField(db_column='Risk_Description', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     impact = models.CharField(db_column='Impact', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     risk_rating = models.CharField(db_column='Risk_Rating', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     control_exists_yesno = models.CharField(db_column='Control_Exists_YesNo', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     control_description = models.CharField(db_column='Control_Description', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     control_is_adequate_yesno = models.CharField(db_column='Control_is_Adequate_YesNo', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     recommended_control = models.CharField(db_column='Recommended_Control', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     action = models.CharField(db_column='Action', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     kri = models.CharField(db_column='KRI', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     target = models.CharField(db_column='Target', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     dept = models.CharField(db_column='Dept', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#
+class RiskManagement(models.Model):
+    xy_strategic_pillar = models.CharField(db_column='XY_Strategic_Pillar', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    xy_strategic_objectives = models.CharField(db_column='XY_Strategic_Objectives', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    risk_category = models.CharField(db_column='Risk_Category', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    risk_description = models.CharField(db_column='Risk_Description', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    impact = models.CharField(db_column='Impact', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    risk_rating = models.CharField(db_column='Risk_Rating', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    control_exists_yesno = models.CharField(db_column='Control_Exists_YesNo', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    control_description = models.CharField(db_column='Control_Description', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    control_is_adequate_yesno = models.CharField(db_column='Control_is_Adequate_YesNo', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    recommended_control = models.CharField(db_column='Recommended_Control', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    action = models.CharField(db_column='Action', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    kri = models.CharField(db_column='KRI', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    target = models.CharField(db_column='Target', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    dept = models.CharField(db_column='Dept', max_length=100, blank=True, null=True)  # Field name made lowercase.
+
 #     class Meta:
 #         managed = False
 #         db_table = 'Risk_Management'
