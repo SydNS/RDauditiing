@@ -19,8 +19,8 @@ class GncTableAdmin(admin.ModelAdmin):
                     'action_plan', 'recommendation_state', 'agreed_implementation_date', 'revised_implementation_date'
                     , 'last_status_update', 'ageing_days', 'actual_implementation_date', 'owner', 'final_approver',
                     )
-    list_filter = ('audit_project_code', 'audit_project_name', 'quarter',
-                   'criticality', 'owner',
+    list_filter = ( 'audit_project_name', 'quarter',
+                   'criticality',
                    )
     search_fields = ('audit_project_code', 'audit_project_name', 'quarter',
                      'criticality', 'owner',
