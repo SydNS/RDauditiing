@@ -135,16 +135,16 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "RDoreen Auditing Tool",
+    "site_title": "Auditing Tool",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "RDoreen Auditing Tool",
+    "site_header": "Auditing Tool",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "Welcome To RDoreen Auditing Tool",
 
     # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
-    "site_icon": None,
+    # "site_icon": None,
 
     # Welcome text on the login screen
     "welcome_sign": "Welcome to the Auditing Tool inspired by RDoreen",
@@ -152,6 +152,6 @@ JAZZMIN_SETTINGS = {
 }
 JAZZMIN_UI_TWEAKS = {
 
-    "theme": "flatly",
+    # "theme": "flatly",
     "dark_mode_theme": "darkly",
 }
