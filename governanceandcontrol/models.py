@@ -114,5 +114,5 @@ class Person(models.Model):
 
 class GradingUser(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    grade = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    grade = models.PositiveSmallIntegerField()
     deptnem = models.ForeignKey(Dept, on_delete=models.CASCADE)
