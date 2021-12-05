@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'jazzmin',
+    'crispy_forms',
     'governanceandcontrol',
     'accounts',
     'django.contrib.admin',
@@ -157,3 +158,5 @@ JAZZMIN_UI_TWEAKS = {
     # "theme": "flatly",
     "dark_mode_theme": "darkly",
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
