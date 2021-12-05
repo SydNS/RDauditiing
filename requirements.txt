@@ -10,3 +10,4 @@ SQLAlchemy==1.4.27
 sqlparse==0.4.2
 whitenoise==5.3.0
 django-jazzmin==2.4.8
+django-crispy-forms==1.10.0
