@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<!-- HK Wrapper -->
+<div class="hk-wrapper">
+
+    <!-- Main Content -->
+    <div class="hk-pg-wrapper hk-auth-wrapper">
+        <header class="d-flex justify-content-end align-items-center">
+            <div class="btn-group btn-group-sm">
+                <a href="#" class="btn btn-outline-secondary">Help</a>
+                <a href="#" class="btn btn-outline-secondary">About Us</a>
+            </div>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12 pa-0">
+                    <div class="auth-form-wrap pt-xl-0 pt-70">
+
+
+                        <form method="POST">
+                            <h1>
+                                Register
+                            </h1>
+                            {% csrf_token %}
+                            {{ register_form|crispy }}
+                            <!--                                        <button class="btn btn-primary" type="submit">Register</button>-->
+
+                            <button class="btn btn-primary btn-block" type="submit">Register</button>
+
+                            <p class="text-center">Do have an account yet? <a href="#">Sign In</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main Content -->
+
+</div>
+<!-- /HK Wrapper -->
+{% endblock %}
