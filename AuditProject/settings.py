@@ -160,3 +160,6 @@ JAZZMIN_UI_TWEAKS = {
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# removing the password help text
+AUTH_PASSWORD_VALIDATORS = []
