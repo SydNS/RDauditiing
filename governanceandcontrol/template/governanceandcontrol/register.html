@@ -22,13 +22,15 @@
 
                         <form method="POST">
                             <h1>
-                                Login
+                                Register
                             </h1>
                             {% csrf_token %}
-                            {{ login_form|crispy }}
-                            <button class="btn btn-primary btn-block" type="submit">Login</button>
-                            <p class="text-center">Do have an account yet? <a href="/register">Sign In</a></p>
+                            {{ register_form|crispy }}
+                            <!--                                        <button class="btn btn-primary" type="submit">Register</button>-->
 
+                            <button class="btn btn-primary btn-block" type="submit">Register</button>
+
+                            <p class="text-center">Do have an account yet? <a href="/login">Sign In</a></p>
                         </form>
                     </div>
                 </div>
