@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from . import models
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import  render, redirect
+from django.shortcuts import render, redirect
 from .forms import NewUserForm
-from django.contrib.auth import login, authenticate #add this
+from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm #add this
+from django.contrib.auth.forms import AuthenticationForm  # add this
+
 
 # Create your views here.
 def dashboard(request):
@@ -36,7 +37,6 @@ def loginuser(request):
     # return render(request, , info)
 
 
-
 def Registering(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
@@ -44,7 +44,13 @@ def Registering(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect("governanceandcontrol:dashboard")
+            return redirect("dashboard")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request=request, template_name="governanceandcontrol/register.html", context={"register_form": form})
+
+
+def Logout(request):
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return redirect('login')
