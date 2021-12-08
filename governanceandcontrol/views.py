@@ -55,19 +55,17 @@ def Logout(request):
     messages.info(request, "You have successfully logged out.")
     return redirect('login')
 
-def Auditprojects(request):
 
+def Auditprojects(request):
     return render(request=request, template_name="governanceandcontrol/auditprojects.html")
 
 
 def AuditIssues(request):
-
     return render(request=request, template_name="governanceandcontrol/auditissues.html")
 
 
-
 def Governcontrol(request):
-
-    return render(request=request, template_name="governanceandcontrol/governcontrol.html")
-
-
+    consolidatedgncobj = models.GncTable.objects.all()
+    # info =
+    return render(request=request, template_name="governanceandcontrol/governcontrol.html",
+                  context={'consolidateddata': consolidatedgncobj})
