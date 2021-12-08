@@ -142,7 +142,7 @@
                                         <div>
                             <span
                                     class="d-block font-15 text-dark font-weight-500"
-                            >Pending Recom'n : {{totaldays}}</span
+                            >Total Ageing Days : {{totaldays}}</span
                             >
                                         </div>
                                         <div>
@@ -190,14 +190,22 @@
                                             <th>Act'n Plan</th>
                                             <th>Recom'n State</th>
                                             <th>Ageing Days</th>
-                                            <!--                                            <th>Impl'n Date</th>-->
-                                            <!--                                            <th>Revised Impl'n Date</th>-->
-                                            <!--                                            <th>Actual Impl'n Date</th>-->
-                                            <!--                                            <th>Owner</th>-->
-                                            <!--                                            <th>Final Approver</th>-->
+                                            <th>Impl'n Date</th>
+                                            <th>Revised Impl'n Date</th>
+                                            <th>Actual Impl'n Date</th>
+                                            <th>Owner</th>
+                                            <th>Final Approver</th>
                                         </tr>
                                         </thead>
-
+<!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
+<!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
 
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
@@ -208,10 +216,14 @@
                                             <td>{{singleinfo.criticality}}</td>
                                             <td>{{singleinfo.root_cause_analysis}}</td>
                                             <td>{{singleinfo.recommendation}}</td>
-                                            <td>{{singleinfo.recommendation_state}}</td>
                                             <td>{{singleinfo.action_plan}}</td>
                                             <td>{{singleinfo.recommendation_state}}</td>
                                             <td>{{singleinfo.ageing_days}}</td>
+                                            <td>{{singleinfo.agreed_implementation_date}}</td>
+                                            <td>{{singleinfo.revised_implementation_date}}</td>
+                                            <td>{{singleinfo.actual_implementation_date}}</td>
+                                            <td>{{singleinfo.owner}}</td>
+                                            <td>{{singleinfo.final_approver}}</td>
 
 
                                         </tr>
@@ -233,11 +245,11 @@
                                             <th>Act'n Plan</th>
                                             <th>Recom'n State</th>
                                             <th>Impl'n Date</th>
-                                            <!--                                            <th>Revised Impl'n Date</th>-->
-                                            <!--                                            <th>AgeDays</th>-->
-                                            <!--                                            <th>Actual Impl'n Date</th>-->
-                                            <!--                                            <th>Owner</th>-->
-                                            <!--&lt;!&ndash;                                            <th>Final Approver</th>&ndash;&gt;-->
+                                            <th>Revised Impl'n Date</th>
+                                            <th>AgeDays</th>
+                                            <th>Actual Impl'n Date</th>
+                                            <th>Owner</th>
+                                            <th>Final Approver</th>
                                         </tr>
                                         </tfoot>
                                     </table>
