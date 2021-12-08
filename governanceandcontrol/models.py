@@ -18,12 +18,12 @@ class GncTable(models.Model):
         ('PEOPLE', 'PEOPLE'),
         ('TECHNOLOGY', 'TECHNOLOGY'),
     )
-    ROOT_CAUSE_ANALYSIS = (
+    RECOMMENDATION_STATE = (
         ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
         ('PENDING', 'PENDING'),
         ('CLOSED', 'CLOSED'),
     )
-    audit_project_code = models.URLField(db_column='Audit_Project_Code', max_length=100, blank=False,
+    audit_project_code = models.CharField(db_column='Audit_Project_Code', max_length=100, blank=False,
                                          null=True)  # Field name made lowercase.
     audit_project_name = models.CharField(db_column='Audit_Project_Name', max_length=100, blank=False,
                                           null=True)  # Field name made lowercase.
@@ -38,6 +38,7 @@ class GncTable(models.Model):
     root_cause_analysis = models.CharField(db_column='Root_Cause_Analysis', choices=ROOT_CAUSE_ANALYSIS, max_length=100,
                                            blank=False, null=True)  # Field name made lowercase.
     recommendation = models.CharField(db_column='Recommendation', max_length=100, blank=False,
+                                      choices=RECOMMENDATION_STATE,
                                       null=True)  # Field name made lowercase.
     action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False,
                                    null=True)  # Field name made lowercase.
