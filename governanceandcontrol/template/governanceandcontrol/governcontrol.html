@@ -32,7 +32,7 @@
         <div class="hk-pg-header align-items-top">
             <h2 class="hk-pg-title font-weight-600 mb-10">Auditing Tool</h2>
             <p>
-                {{consolidateddata.user}}Welcome to the
+                 {{request.user.username|upper}} Welcome to the
                 <a href="#">Auditing Tool.</a>
             </p>
             <div class="d-flex w-500p">
@@ -212,6 +212,7 @@
                                         <tr>
                                             <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
                                             <td>{{singleinfo.quarter}}</td>
+                                            <td>{{singleinfo.audit_project_type}}</td>
                                             <td>{{singleinfo.issue_title}}</td>
                                             <td>{{singleinfo.criticality}}</td>
                                             <td>{{singleinfo.root_cause_analysis}}</td>
