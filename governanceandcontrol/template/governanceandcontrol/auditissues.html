@@ -24,23 +24,41 @@
 <!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
 <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
 
-
 <!-- Main Content -->
 <div class="hk-pg-wrapper">
     <!-- Container -->
     <div class="container mt-xl-50 mt-sm-30 mt-15">
         <!-- Title -->
         <div class="hk-pg-header align-items-top">
-            <h2 class="hk-pg-title font-weight-600 mb-10">Auditing Project Issues</h2>
+            <h2 class="hk-pg-title font-weight-600 mb-10">Issues Faced</h2>
             <p>
-                {{gncobj.user}}Welcome to the
+                {{request.user.username|upper}} Welcome to the
                 <a href="#">Auditing Tool.</a>
             </p>
+            <div class="d-flex w-500p">
+
+                <select class="form-control custom-select custom-select-sm mr-15">
+                    {% for singleinfo in consolidateddata %}
+                    <option selected="">{{ singleinfo.audit_project_name | upper}}</option>
+                    {% endfor %}
+
+                </select>
+                <select class="form-control custom-select custom-select-sm mr-15">
+                    {% for singleinfo in consolidateddata %}
+                    <option selected="">{{ singleinfo.criticality | upper}}</option>
+                    {% endfor %}
+                </select>
+                <select class="form-control custom-select custom-select-sm">
+                    {% for singleinfo in consolidateddata %}
+                    <option selected="">{{ singleinfo.quarter | upper}}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
         <!-- /Title -->
 
         <!-- Row -->
-        <div class="row">
+        <div class="row ">
             <div class="col-xl-12">
                 <div class="hk-row">
                     <div class="col-sm-12">
@@ -51,92 +69,93 @@
                                         <div>
                             <span
                                     class="d-block font-15 text-dark font-weight-500"
-                            >Projects</span
-                            >
-                                        </div>
-                                        <div>
-                                            <span>10%</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                          <span class="d-block display-4 text-dark mb-5"
-                          ><span class="counter-anim">24</span></span
-                          >
-                                        <small class="d-block">Total Issues</small>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card card-sm">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-5">
-                                        <div>
-                            <span
-                                    class="d-block font-15 text-dark font-weight-500"
                             >Issues</span
                             >
                                         </div>
                                         <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >+12.5%</span
-                            >
+                                            <span></span>
                                         </div>
                                     </div>
                                     <div>
                           <span class="d-block display-4 text-dark mb-5"
-                          ><span class="counter-anim">24</span></span
+                          ><span class="counter-anim">{{consolidateddata|length}}</span></span
                           >
                                         <small class="d-block">Total Issues</small>
                                     </div>
                                 </div>
                             </div>
-
+                            <!--                            criticalit-->
                             <div class="card card-sm">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
                                     class="d-block font-15 text-dark font-weight-500"
-                            >Pending Projects</span
+                            >Low Criticality Issues : {{lowimpactissues}}</span
                             >
                                         </div>
                                         <div>
-                            <span class="text-warning font-14 font-weight-500"
-                            >-2.8%</span
+                            <span class="text-success font-14 font-weight-500"
+                            >{{ percentagecompleted}}%</span
                             >
                                         </div>
                                     </div>
                                     <div>
-                          <span class="d-block display-4 text-dark mb-5"
-                          ><span class="counter-anim">{{24}}</span></span
-                          >
-                                        <small class="d-block">Total Projects</small>
+                                        <small class="">High Criticality Issues:
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
+                                        <small class="d-block">Low Criticality Issues:{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
 
+                            <!--                            recomendation state-->
                             <div class="card card-sm">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
                                     class="d-block font-15 text-dark font-weight-500"
-                            >Win/Loss Ratio</span
+                            >Caused by Process : {{PARTIALLY_IMPLEMENTED}}</span
                             >
                                         </div>
                                         <div>
-                            <span class="text-danger font-14 font-weight-500"
-                            >-75%</span
+                            <span class="text-success font-14 font-weight-500"
+                            >{{ percentagecompleted}}%</span
                             >
                                         </div>
                                     </div>
                                     <div>
+                                        <small class="">Caused by People :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-info counter-anim">{{CLOSED}}</span></span></small>
+                                        <small class="d-block">Caused by Tech : {{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--                            ageing days-->
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
                                         <div>
-                          <span class="d-block display-4 text-dark mb-5"
-                          ><span class="counter-anim">24</span></span
-                          >
-                                            <small class="d-block">Total Issues</small>
+                            <span
+                                    class="d-block font-15 text-dark font-weight-500"
+                            >Total Ageing Days : {{totaldays}}</span
+                            >
                                         </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            >{{ percentagecompleted}}%</span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">Total Recommendations :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-info counter-anim">{{totaldays}}</span></span></small>
+                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
@@ -146,52 +165,65 @@
 
                 <div class="col-xl-12">
                     <section class="hk-sec-wrapper">
-                        <h5 class="hk-sec-title">Audit Issues</h5>
-                        <p class="mb-40">Add advanced interaction controls to HTML tables like  <a href="/governcontrol" target="_blank">View
-                                all options</a>.</p>
+                        <h5 class="hk-sec-title">Issues</h5>
                         <div class="row">
                             <div class="col-sm">
                                 <div class="table-wrap">
-                                    <table id="datable_1" class="table table-hover w-100 display pb-30">
+                                    <table id="datable_1"
+                                           class="table table-hover table-responsive w-100 display pb-30">
                                         <thead>
                                         <tr>
-<!--  Issue Title	Criticality	Root Cause Analysis	Recommendation	Audit Project Code-->
+                                            <!--                                            Audit Project Name, Quarter, Audit Project Type, Issue Title, Criticality,-->
+                                            <!--                                            Root Cause Analysis, Recommendation, Agreed Implementation Date, Ageing - -->
+                                            <!--                                            Days, Owner, Final Approver, Audit Project Code,-->
+                                            <!--                                            <th>Type</th>-->
+
+
+                                            <th>Name</th>
                                             <th>Issue Title</th>
                                             <th>Criticality</th>
+                                            <th>Qtr</th>
                                             <th>Root Cause</th>
-                                            <th>Analysis</th>
                                             <th>Recommendation</th>
-                                            <th>Audit Project Title</th>
+                                            <th>Action Plan</th>
+                                            <th>Recommendation State</th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
+                                        {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td>Aaaa Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
+                                            <td>{{singleinfo.issue_title}}</td>
+                                            <td>{{singleinfo.criticality}}</td>
+                                            <td>{{singleinfo.quarter}}</td>
+                                            <td>{{singleinfo.root_cause_analysis}}</td>
+                                            <td>{{singleinfo.recommendation}}</td>
+                                            <td>{{singleinfo.action_plan}}</td>
+                                            <td>{{singleinfo.recommendation_state}}</td>
+
                                         </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
+                                        {% endfor %}
+
                                         </tbody>
                                         <tfoot>
                                         <tr>
+                                            <!--                                            Audit Project Name, Quarter, Audit Project Type, Issue Title, Criticality,-->
+                                            <!--                                            Root Cause Analysis, Recommendation, Agreed Implementation Date, Ageing - -->
+                                            <!--                                            Days, Owner, Final Approver, Audit Project Code,-->
+                                            <!--                                            <th>Type</th>-->
+
+
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Issue Title</th>
+                                            <th>Criticality</th>
+                                            <th>Qtr</th>
+                                            <th>Root Cause</th>
+                                            <th>Recommendation</th>
+                                            <th>Action Plan</th>
+                                            <th>Recommendation State</th>
                                         </tr>
+
                                         </tfoot>
                                     </table>
                                 </div>
