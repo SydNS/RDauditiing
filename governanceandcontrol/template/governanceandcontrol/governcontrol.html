@@ -41,7 +41,7 @@
         <!-- /Title -->
 
         <!-- Row -->
-        <div class="row">
+        <div class="row ">
             <div class="col-xl-12">
                 <div class="hk-row">
                     <div class="col-sm-12">
@@ -148,28 +148,37 @@
                 <div class="col-xl-12">
                     <section class="hk-sec-wrapper">
                         <h5 class="hk-sec-title">Audit Projects</h5>
-                        <p class="mb-40">Add advanced interaction controls to HTML tables like  <a href="https://datatables.net/reference/option/" target="_blank">View
-                                all options</a>.</p>
+                        <p class="mb-40">Add advanced interaction controls to HTML tables like <a
+                                href="https://datatables.net/reference/option/" target="_blank">View
+                            all options</a>.</p>
+                        <p>Recom'n : Recommendation</p><br>
                         <div class="row">
                             <div class="col-sm">
-                                <div class="table-wrap">
+                                <div class="table-wrap" style="overflow-x:{{ auto }};display: {{block}};">
                                     <table id="datable_1" class="table table-hover w-100 display pb-30">
                                         <thead>
                                         <tr>
-<!--Audit Project Code	Audit Project Name	Quarter	Audit Project Type   Issue Title                                          -->
-                                            <th>Audit Project Code</th>
-                                            <th>Audit Project Name</th>
-                                            <th>Quarter</th>
-                                            <th>Audit Project Type</th>
-                                            <th>Audit Project Issue</th>
-
-<!--  Issue Title	Criticality	Root Cause Analysis	Recommendation	Audit Project Code-->
+                                            <!--Audit Project Code	Audit Project Name	Quarter	Audit Project Type	Issue Title	Criticality	Root Cause Analysis	Recommendation
+                                                Action Plan	Recommendation State	Agreed Implementation Date	Revised Implementation Date
+                                                Last Status Update	Ageing - Days	Actual Implementation Date	Owner	Final Approver									                                        &ndash;&gt;-->
+                                            <!--                                            <th>Code</th>-->
+                                            <th>Name</th>
+                                            <th>Qtr</th>
+                                            <th>Type</th>
                                             <th>Issue Title</th>
                                             <th>Criticality</th>
-                                            <th>Root Cause</th>
+                                            <th>R't Cause</th>
                                             <th>Analysis</th>
-                                            <th>Recommendation</th>
-                                            <th>Audit Project Title</th>
+                                            <th>Recom'n</th>
+                                            <th>Act'n Plan</th>
+                                            <th>Recom'n State</th>
+                                            <!--                                            <th>Agreed Impl'n Date</th>-->
+                                            <!--                                            <th>Revised Impl'n Date</th>-->
+                                            <!--                                            <th>Last Status Update</th>-->
+                                            <!--                                            <th>Ageing - Days</th>-->
+                                            <!--                                            <th>Actual Impl'n Date</th>-->
+                                            <!--                                            <th>Owner</th>-->
+                                            <!--                                            <th>Final Approver</th>-->
                                         </tr>
                                         </thead>
 
@@ -180,13 +189,12 @@
                                             <td>Edinburgh</td>
                                             <td>61</td>
                                             <td>2011/04/25</td>
-<!--  Issue Title	Criticality	Root Cause Analysis	Recommendation	Audit Project Code-->
+                                            <!--  Issue Title	Criticality	Root Cause Analysis	Recommendation	Audit Project Code-->
                                             <td>Aaaa Nixon</td>
                                             <td>System Architect</td>
                                             <td>Edinburgh</td>
                                             <td>61</td>
                                             <td>2011/04/25</td>
-                                            <td>$320,800</td>
                                         </tr>
                                         <tr>
                                             <td>Garrett Winters</td>
@@ -194,7 +202,7 @@
                                             <td>Tokyo</td>
                                             <td>63</td>
                                             <td>2011/07/25</td>
-<!--  Issue Title	Criticality	Root Cause Analysis	Recommendation	Audit Project Code-->
+                                            <!--  Issue Title	Criticality	Root Cause Analysis	Recommendation	Audit Project Code-->
                                             <td>Aaaa Nixon</td>
                                             <td>System Architect</td>
                                             <td>Edinburgh</td>
@@ -205,11 +213,26 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            <!--Audit Project Code	Audit Project Name	Quarter	Audit Project Type	Issue Title	Criticality	Root Cause Analysis	Recommendation
+                                                Action Plan	Recommendation State	Agreed Implementation Date	Revised Implementation Date
+                                                Last Status Update	Ageing - Days	Actual Implementation Date	Owner	Final Approver									                                        &ndash;&gt;-->
+                                            <th>Project Name</th>
+                                            <th>Quarter</th>
+                                            <th>Type</th>
+                                            <th>Issue Title</th>
+                                            <th>Criticality</th>
+                                            <th>Root Cause</th>
+                                            <th>Analysis</th>
+                                            <th>Recommendation</th>
+                                            <th>Action Plan</th>
+                                            <!--                                            <th>Recommendation State</th>-->
+                                            <!--                                            <th>Agreed Impl'n Date</th>-->
+                                            <!--                                            <th>Revised Impl'n Date</th>-->
+                                            <!--                                            <th>Last Status Update</th>-->
+                                            <!--                                            <th>Ageing - Days</th>-->
+                                            <!--                                            <th>Actual Impl'n Date</th>-->
+                                            <!--                                            <th>Owner</th>-->
+                                            <!--                                            <th>Final Approver</th>-->
                                         </tr>
                                         </tfoot>
                                     </table>
