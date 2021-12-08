@@ -96,7 +96,6 @@ def Governcontrol(request):
         criticality='low',
     ).count()
 
-
     # counting the number issues at different levels of state
     # RECOMMENDATION_STATE = (
     #     ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
@@ -113,28 +112,30 @@ def Governcontrol(request):
         recommendation_state='PARTIALLY_IMPLEMENTED',
     ).count()
     # percentage of completed recos
-    percentagecompleted=round((CLOSED/consolidatedgncobjnumber)*100,1)
+    percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
 
     # ageing days total
 
     for totaldays in consolidatedgncobj:
-        totaldays=+totaldays.ageing_days
-
+        totaldays = +totaldays.ageing_days
 
     return render(request=request, template_name="governanceandcontrol/governcontrol.html",
                   context={
                       "consolidateddata": consolidatedgncobj,
                       "consolidatedgncobjnumber": consolidatedgncobjnumber,
+
+                      # issues
                       "mediumimpactissues": mediumimpactissues,
                       "highimpactissues": highimpactissues,
                       "lowimpactissues": lowimpactissues,
 
+                      # reommendations
                       "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
                       "PENDING": PENDING,
                       "CLOSED": CLOSED,
                       "percentagecompleted": percentagecompleted,
 
-                      "totaldays": totaldays,
-
+                      # reommendations
+                      "totaldays": round(totaldays,1),
 
                   })
