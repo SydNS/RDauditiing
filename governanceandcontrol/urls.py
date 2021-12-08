@@ -9,5 +9,6 @@ urlpatterns = [
     path('register/', views.Registering, name='register'),
     path('logout/', views.Logout, name='logout'),
     path('auditprojects/', views.Auditprojects, name='auditprojects'),
+    path('auditissues/', views.AuditIssues, name='auditissues'),
 
 ]
