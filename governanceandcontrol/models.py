@@ -24,7 +24,7 @@ class GncTable(models.Model):
         ('CLOSED', 'CLOSED'),
     )
     audit_project_code = models.CharField(db_column='Audit_Project_Code', max_length=100, blank=False,
-                                         null=True)  # Field name made lowercase.
+                                          null=True)  # Field name made lowercase.
     audit_project_name = models.CharField(db_column='Audit_Project_Name', max_length=100, blank=False,
                                           null=True)  # Field name made lowercase.
     quarter = models.CharField(db_column='Quarter', choices=QUARTERS, max_length=100, blank=False,
@@ -38,11 +38,11 @@ class GncTable(models.Model):
     root_cause_analysis = models.CharField(db_column='Root_Cause_Analysis', choices=ROOT_CAUSE_ANALYSIS, max_length=100,
                                            blank=False, null=True)  # Field name made lowercase.
     recommendation = models.CharField(db_column='Recommendation', max_length=100, blank=False,
-                                      choices=RECOMMENDATION_STATE,
+
                                       null=True)  # Field name made lowercase.
     action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False,
                                    null=True)  # Field name made lowercase.
-    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False,
+    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, choices=RECOMMENDATION_STATE,
                                             null=True)  # Field name made lowercase.
     agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True,
                                                   null=True)  # Field name made lowercase.
