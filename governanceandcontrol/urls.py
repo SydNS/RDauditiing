@@ -11,5 +11,6 @@ urlpatterns = [
     path('auditprojects/', views.Auditprojects, name='auditprojects'),
     path('auditissues/', views.AuditIssues, name='auditissues'),
     path('governcontrol/', views.Governcontrol, name='governcontrol'),
+    path('auditrecommendations/', views.Auditrecommendations, name='auditrecommendations'),
 
 ]
