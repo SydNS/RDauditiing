@@ -1,3 +1,3 @@
 release:python manage.py makemigrations
 release:python manage.py migrate
-web: gunicorn AuditProject.wsgi
+web gunicorn AuditProject.wsgi
