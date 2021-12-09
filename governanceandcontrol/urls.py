@@ -16,5 +16,13 @@ urlpatterns = [
 
     # risk management
     path('risks/', views.Risks, name='risks'),
+    path('riskcontrol/', views.RiskControl, name='riskcontrol'),
+    path('keyrateindicator/', views.KRI, name='keyrateindicator'),
+
+
+    # Auditor of auditors
+    path('a_o_apractices/', views.AuditorsPractices, name='a_o_apractices'),
+    path('a_o_arecommendations/', views.AuditorsRecommendations, name='a_o_arecommendations'),
+    path('a_o_aconsolidated/', views.AuditorsConsolidated, name='a_o_aconsolidated'),
 
 ]
