@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% include 'topnavbar.html' %}
+{% include 'verticalnavbar.html' %}
+{% include 'settings.html' %}
+
+<!--data object-->
+<!--# class RiskManagement(models.Model):-->
+<!--#     xy_strategic_pillar = models.CharField(db_column='XY_Strategic_Pillar', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     xy_strategic_objectives = models.CharField(db_column='XY_Strategic_Objectives', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     risk_category = models.CharField(db_column='Risk_Category', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     risk_description = models.CharField(db_column='Risk_Description', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     impact = models.CharField(db_column='Impact', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     risk_rating = models.CharField(db_column='Risk_Rating', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     control_exists_yesno = models.CharField(db_column='Control_Exists_YesNo', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     control_description = models.CharField(db_column='Control_Description', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     control_is_adequate_yesno = models.CharField(db_column='Control_is_Adequate_YesNo', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     recommended_control = models.CharField(db_column='Recommended_Control', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     action = models.CharField(db_column='Action', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     kri = models.CharField(db_column='KRI', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     target = models.CharField(db_column='Target', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#     dept = models.CharField(db_column='Dept', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--#-->
+<!--#     class Meta:-->
+<!--#         managed = False-->
+<!--#         db_table = 'Risk_Management'-->
+
+
+
+<!-- Main Content -->
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div class="container mt-xl-50 mt-sm-30 mt-15">
+        <!-- Title -->
+        <div class="hk-pg-header align-items-top">
+            <h2 class="hk-pg-title font-weight-600 mb-10">Key Risk Indicator </h2>
+            <p>
+                {{request.user.username|upper}} Welcome to the
+                <a href="#">Key Risk Indicator.</a>
+            </p>
+            <div class="d-flex w-500p">
+
+                <select class="form-control custom-select custom-select-sm mr-15">
+                    {% for singleinfo in consolidateddata %}
+                    <option selected="">{{ singleinfo.audit_project_name | upper}}</option>
+                    {% endfor %}
+
+                </select>
+                <select class="form-control custom-select custom-select-sm mr-15">
+                    {% for singleinfo in consolidateddata %}
+                    <option selected="">{{ singleinfo.criticality | upper}}</option>
+                    {% endfor %}
+                </select>
+                <select class="form-control custom-select custom-select-sm">
+                    {% for singleinfo in consolidateddata %}
+                    <option selected="">{{ singleinfo.quarter | upper}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <!-- /Title -->
+
+        <!-- Row -->
+        <div class="row ">
+            <div class="col-xl-12">
+                <div class="hk-row">
+                    <div class="col-sm-12">
+                        <div class="card-group hk-dash-type-2">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-dark font-weight-500"
+                            >Risks</span
+                            >
+                                        </div>
+                                        <div>
+                                            <span>10%</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                          <span class="d-block display-4 text-dark mb-5"
+                          ><span class="counter-anim">{{consolidateddata|length}}</span></span
+                          >
+                                        <small class="d-block">Total Risks</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--                            Impact-->
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-warning font-weight-500"
+                            >Low Impact : {{lowimpactissues}}</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            >+12.5%</span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">High Impact :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
+                                        <small class="d-block text-info">Moderate Impact :{{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--                            Likelihood-->
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-warning font-weight-500"
+                            >Low Chances : {{lowimpactissues}}</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            >+12.5%</span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">High Chances :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
+                                        <small class="d-block text-info">Moderate Chances :{{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--                            recomendation state-->
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-warning font-weight-500"
+                            >XY Strategic pillar : {{PARTIALLY_IMPLEMENTED}}</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            >{{ percentagecompleted}}%</span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">XY Strategic pillar :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-info counter-anim">{{CLOSED}}</span></span></small>
+                                        <small class="d-block">Risk Categories : {{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--                            ageing days-->
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-dark font-weight-500"
+                            >Control Present : {{totaldays}}%</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            >{{ percentagecompleted}}%</span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">Affected Depts :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-info counter-anim">{{totaldays}}</span></span></small>
+                                        <small class="d-block">Adequate Control : {{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <section class="hk-sec-wrapper">
+                        <h5 class="hk-sec-title">Audit Projects</h5>
+                        <!--                        <p>Recom'n : Recommendation</p>-->
+                        <!--                        <p>Act'n : Action</p>-->
+                        <!--                        <p>Impl'n : Implementation</p>-->
+                        <!--                        <p>R't : Action</p><br>-->
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="table-wrap">
+                                    <table id="datable_1"
+                                           class="table table-hover table-responsive w-100 display pb-30">
+<!--XY Strategic Pillar,	XY Strategic Objectives,
+	Risk Category,	Risk Description,	Likelihood,	Impact,	Risk Rating,-->
+                                        <thead>
+
+                                        <tr>
+                                            <th>XY Strategic Pillar</th>
+                                            <th>XY Strategic Objectives</th>
+                                            <th>Risk Category</th>
+                                            <th>Risk Description</th>
+                                            <th>Likelihood</th>
+                                            <th>Impact</th>
+                                            <th>Risk Rating</th>
+                                            <th>Department</th>
+                                        </tr>
+
+                                        </thead>
+
+                                        <tbody>
+                                        {% for singleinfo in consolidateddata %}
+                                        <tr>
+                                            <td><a href="#">{{singleinfo.recommendation}}</a></td>
+                                            <td>{{singleinfo.action_plan}}</td>
+                                            <td>{{singleinfo.recommendation_state}}</td>
+                                            <td>{{singleinfo.ageing_days}}</td>
+                                            <td>{{singleinfo.agreed_implementation_date}}</td>
+                                            <td>{{singleinfo.revised_implementation_date}}</td>
+                                            <td>{{singleinfo.actual_implementation_date}}</td>
+                                            <td>{{singleinfo.owner}}</td>
+<!--                                            <td>{{singleinfo.final_approver}}</td>-->
+
+                                        </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                        <tfoot>
+                                         <tr>
+                                            <th>XY Strategic Pillar</th>
+                                            <th>XY Strategic Objectives</th>
+                                            <th>Risk Category</th>
+                                            <th>Risk Description</th>
+                                            <th>Likelihood</th>
+                                            <th>Impact</th>
+                                            <th>Risk Rating</th>
+                                            <th>Department</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </div>
+                <!-- /Row -->
+            </div>
+            <!-- /Container -->
+
+        </div>
+        <!-- /Main Content -->
+        {% include 'verticalnavbar.html' %}
+
+        {% endblock %}
+
