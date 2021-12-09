@@ -30,10 +30,10 @@
     <div class="container mt-xl-50 mt-sm-30 mt-15">
         <!-- Title -->
         <div class="hk-pg-header align-items-top">
-            <h2 class="hk-pg-title font-weight-600 mb-10">Issues Faced</h2>
+            <h2 class="hk-pg-title font-weight-600 mb-10">Auditors Of Auditors</h2>
             <p>
                 {{request.user.username|upper}} Welcome to the
-                <a href="#">Auditing Tool.</a>
+                <a href="#">Practices Section.</a>
             </p>
             <div class="d-flex w-500p">
 
@@ -69,11 +69,11 @@
                                         <div>
                             <span
                                     class="d-block font-15 text-dark font-weight-500"
-                            >Issues</span
+                            >Projects</span
                             >
                                         </div>
                                         <div>
-                                            <span></span>
+                                            <span>10%</span>
                                         </div>
                                     </div>
                                     <div>
@@ -96,7 +96,7 @@
                                         </div>
                                         <div>
                             <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
+                            >+12.5%</span
                             >
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@
                                         <div>
                             <span
                                     class="d-block font-15 text-dark font-weight-500"
-                            >Caused by Process : {{PARTIALLY_IMPLEMENTED}}</span
+                            >Pending Recom'n : {{PARTIALLY_IMPLEMENTED}}</span
                             >
                                         </div>
                                         <div>
@@ -126,10 +126,10 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">Caused by People :
+                                        <small class="">Closed Recom'n :
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-info counter-anim">{{CLOSED}}</span></span></small>
-                                        <small class="d-block">Caused by Tech : {{mediumimpactissues}} </small>
+                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">Total Recommendations :
+                                        <small class="">Total Ageing Days :
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-info counter-anim">{{totaldays}}</span></span></small>
                                         <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
@@ -165,7 +165,11 @@
 
                 <div class="col-xl-12">
                     <section class="hk-sec-wrapper">
-                        <h5 class="hk-sec-title">Issues</h5>
+                        <h5 class="hk-sec-title">Audit Projects</h5>
+                        <!--                        <p>Recom'n : Recommendation</p>-->
+                        <!--                        <p>Act'n : Action</p>-->
+                        <!--                        <p>Impl'n : Implementation</p>-->
+                        <!--                        <p>R't : Action</p><br>-->
                         <div class="row">
                             <div class="col-sm">
                                 <div class="table-wrap">
@@ -176,31 +180,40 @@
                                             <!--                                            Audit Project Name, Quarter, Audit Project Type, Issue Title, Criticality,-->
                                             <!--                                            Root Cause Analysis, Recommendation, Agreed Implementation Date, Ageing - -->
                                             <!--                                            Days, Owner, Final Approver, Audit Project Code,-->
-                                            <!--                                            <th>Type</th>-->
-
-
                                             <th>Name</th>
-                                            <th>Issue Title</th>
-                                            <th>Criticality</th>
-                                            <th>Qtr</th>
-                                            <th>Root Cause</th>
-                                            <th>Recommendation</th>
+                                            <th>Type</th>
+                                            <th>Quarter</th>
+                                            <th>Recom'n</th>
                                             <th>Action Plan</th>
                                             <th>Recommendation State</th>
+                                            <th>Ageing Days</th>
+                                            <th>Owner</th>
+                                            <th>Final Approver</th>
                                         </tr>
                                         </thead>
+                                        <!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
+                                        <!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
 
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
                                             <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
-                                            <td>{{singleinfo.issue_title}}</td>
-                                            <td>{{singleinfo.criticality}}</td>
+                                            <td>{{singleinfo.audit_project_type}}</td>
                                             <td>{{singleinfo.quarter}}</td>
-                                            <td>{{singleinfo.root_cause_analysis}}</td>
                                             <td>{{singleinfo.recommendation}}</td>
                                             <td>{{singleinfo.action_plan}}</td>
                                             <td>{{singleinfo.recommendation_state}}</td>
+                                            <td>{{singleinfo.ageing_days}}</td>
+                                            <td>{{singleinfo.owner}}</td>
+                                            <td>{{singleinfo.final_approver}}</td>
+
 
                                         </tr>
                                         {% endfor %}
@@ -211,24 +224,23 @@
                                             <!--                                            Audit Project Name, Quarter, Audit Project Type, Issue Title, Criticality,-->
                                             <!--                                            Root Cause Analysis, Recommendation, Agreed Implementation Date, Ageing - -->
                                             <!--                                            Days, Owner, Final Approver, Audit Project Code,-->
-                                            <!--                                            <th>Type</th>-->
-
-
                                             <th>Name</th>
-                                            <th>Issue Title</th>
-                                            <th>Criticality</th>
-                                            <th>Qtr</th>
-                                            <th>Root Cause</th>
-                                            <th>Recommendation</th>
+                                            <th>Type</th>
+                                            <th>Quarter</th>
+                                            <th>Recom'n</th>
                                             <th>Action Plan</th>
                                             <th>Recommendation State</th>
-                                        </tr>
+                                            <th>Ageing Days</th>
+                                            <th>Owner</th>
+                                            <th>Final Approver</th>
 
+                                        </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                             </div>
                         </div>
+
                     </section>
 
                 </div>
