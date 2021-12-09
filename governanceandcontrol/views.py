@@ -625,7 +625,7 @@ def AuditorsPractices(request):
     #     ('TECHNOLOGY', 'TECHNOLOGY'),
     # )
 
-    # counting the number issues at different levels of criticality
+    # counting the number practices at different levels of current_status_at_xy
     mediumimpactissues = models.Auditorofauditors.objects.filter(
         current_status_at_xy='PENDING',
     ).count()
@@ -636,7 +636,7 @@ def AuditorsPractices(request):
         current_status_at_xy='PARTIALLY_IMPLEMENTED',
     ).count()
 
-    # counting the number issues at different levels of state
+    # counting the number practices at different levels of current_status_at_xy
     # RECOMMENDATION_STATE = (
     #     ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
     #     ('PENDING', 'PENDING'),
