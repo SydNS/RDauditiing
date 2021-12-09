@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 
 # Register your models here.
-from .models import GncTable
+from .models import GncTable, Dept, Person, GradingUser
 from .models import RiskManagement
 
 admin.site.site_header = 'Ruth Doreen Auditing Tool'
@@ -12,6 +12,52 @@ admin.site.site_header = 'Ruth Doreen Auditing Tool'
 # admin.site.register(GncTable)
 
 
+# class Dept(models.Model):
+#     CRITICALITY_LEVELS = (
+#         ('low', 'low'),
+#         ('medium', 'medium'),
+#         ('high', 'high'),
+#     )
+#     deptname = models.TextField()
+#     deptrole = models.TextField()
+#     deptcriticality = models.TextField()
+#     numberofmembers = models.IntegerField()
+#     criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,
+#                                    choices=CRITICALITY_LEVELS, default='draft')  # Field name made lowercase.
+
+@admin.register(Dept)
+class DeptAdmin(admin.ModelAdmin):
+    list_display = ('deptname', 'deptrole', 'deptcriticality', 'numberofmembers', 'criticality',)
+    list_filter = ('deptname', 'deptrole', 'deptcriticality', 'numberofmembers', 'criticality',)
+    search_fields = ('deptname', 'deptrole', 'deptcriticality', 'numberofmembers', 'criticality',)
+
+
+# class Person(models.Model):
+#     last_name = models.TextField()
+#     first_name = models.TextField()
+#     personemail = models.EmailField()
+#     personsdept = models.ForeignKey(Dept, on_delete=models.CASCADE)
+
+@admin.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ('last_name', 'first_name', 'personemail', 'personsdept',)
+    list_filter = ('last_name', 'first_name', 'personemail', 'personsdept',)
+    search_fields = ('last_name', 'first_name', 'personemail', 'personsdept',)
+
+
+#
+# class GradingUser(models.Model):
+#     person = models.ForeignKey(Person, on_delete=models.CASCADE)
+#     grade = models.PositiveSmallIntegerField()
+#     deptnem = models.ForeignKey(Dept, on_delete=models.CASCADE)
+#
+@admin.register(GradingUser)
+class GradingUserAdmin(admin.ModelAdmin):
+    list_display = ('person', 'grade', 'deptnem',)
+    list_filter = ('person', 'grade', 'deptnem',)
+    search_fields = ('person', 'grade', 'deptnem',)
+
+
 @admin.register(GncTable)
 class GncTableAdmin(admin.ModelAdmin):
     list_display = ('audit_project_code', 'audit_project_name', 'quarter', 'audit_project_type',
@@ -19,23 +65,24 @@ class GncTableAdmin(admin.ModelAdmin):
                     'action_plan', 'recommendation_state', 'agreed_implementation_date', 'revised_implementation_date'
                     , 'last_status_update', 'ageing_days', 'actual_implementation_date', 'owner', 'final_approver',
                     )
-    list_filter = ( 'audit_project_name', 'quarter',
+    list_filter = ('audit_project_name', 'quarter',
                    'criticality',
                    )
     search_fields = ('audit_project_code', 'audit_project_name', 'quarter',
                      'criticality', 'owner',
                      )
 
+
 @admin.register(RiskManagement)
 class RiskManagementAdmin(admin.ModelAdmin):
     list_display = ('xy_strategic_pillar', 'xy_strategic_objectives', 'risk_category', 'risk_description',
                     'likelihood', 'impact', 'risk_rating', 'control_exists_yesno',
                     'control_description', 'control_is_adequate_yesno', 'recommended_control'
-                    ,  'action',
-                    'kri','target','dept',
+                    , 'action',
+                    'kri', 'target', 'dept',
                     )
-    list_filter = ( 'xy_strategic_pillar',
-                   'control_description','xy_strategic_objectives','risk_category',
+    list_filter = ('xy_strategic_pillar',
+                   'control_description', 'xy_strategic_objectives', 'risk_category',
                    )
     search_fields = ('xy_strategic_pillar', 'xy_strategic_objectives', 'dept',
                      'impact', 'target',

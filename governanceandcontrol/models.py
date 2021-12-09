@@ -6,9 +6,9 @@ class Dept(models.Model):
         ('medium', 'medium'),
         ('high', 'high'),
     )
-    deptname = models.TextField()
-    deptrole = models.TextField()
-    deptcriticality = models.TextField()
+    deptname = models.CharField(max_length=20)
+    deptrole = models.CharField(max_length=20)
+    deptcriticality = models.CharField(max_length=20)
     numberofmembers = models.IntegerField()
     criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,
                                    choices=CRITICALITY_LEVELS, default='draft')  # Field name made lowercase.
@@ -86,9 +86,8 @@ class GncTable(models.Model):
                                     null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.
     actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True,
                                                   null=True)  # Field name made lowercase.
-    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.
-    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False,
-                                      null=True)  # Field name made lowercase.
+    owner = models.CharField(db_column='Owner', max_length=100, blank=True, null=True)    # Field name made lowercase.
+    final_approver = models.ForeignKey(Person, on_delete=models.CASCADE)  # Field name made lowercase.
 
     # class Meta:
     #     managed = False
@@ -174,7 +173,7 @@ class RiskManagement(models.Model):
     action = models.CharField(db_column='Action', max_length=100, blank=True, null=True)  # Field name made lowercase.
     kri = models.CharField(db_column='KRI', max_length=100, blank=True, null=True)  # Field name made lowercase.
     target = models.CharField(db_column='Target', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    dept = models.CharField(db_column='Dept', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    dept = models.ForeignKey(Dept, on_delete=models.CASCADE) # Field name made lowercase.
 
 
 #     class Meta:
@@ -182,22 +181,22 @@ class RiskManagement(models.Model):
 #         db_table = 'Risk_Management'
 
 
-# class Auditorofauditors(models.Model):
-#     internal_audit_leading_practices = models.CharField(db_column='Internal_audit_leading_Practices', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     iia_standards = models.CharField(db_column='IIA_Standards', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     current_status_at_xy = models.CharField(db_column='Current_Status_at_XY', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     assessment = models.CharField(db_column='Assessment', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     recommendations = models.CharField(db_column='Recommendations', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     agreed_implementation_date = models.CharField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     revised_implementation_date = models.CharField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     last_status_update = models.CharField(db_column='Last_Status_Update', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     ageing_days = models.CharField(db_column='Ageing__Days', max_length=100, blank=True, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.
-#     actual_implementation_date = models.CharField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     owner = models.CharField(db_column='Owner', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#     final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=True, null=True)  # Field name made lowercase.
-#
+class Auditorofauditors(models.Model):
+    internal_audit_leading_practices = models.CharField(db_column='Internal_audit_leading_Practices', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    iia_standards = models.CharField(db_column='IIA_Standards', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    current_status_at_xy = models.CharField(db_column='Current_Status_at_XY', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    assessment = models.CharField(db_column='Assessment', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    recommendations = models.CharField(db_column='Recommendations', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    agreed_implementation_date = models.CharField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    revised_implementation_date = models.CharField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    last_status_update = models.CharField(db_column='Last_Status_Update', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    ageing_days = models.CharField(db_column='Ageing__Days', max_length=100, blank=True, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.
+    actual_implementation_date = models.CharField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    owner = models.CharField(db_column='Owner', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    final_approver =models.ForeignKey(Dept, on_delete=models.CASCADE) # Field name made lowercase.
+
 #     class Meta:
 #         managed = False
 #         db_table = 'AuditorOfAuditors'from django.db import models
