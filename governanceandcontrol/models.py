@@ -11,6 +11,9 @@ class Dept(models.Model):
     numberofmembers = models.IntegerField()
     criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,
                                    choices=CRITICALITY_LEVELS, default='draft')  # Field name made lowercase.
+    def __str__(self):
+        return self.deptname
+
 
     # class Meta:
     #     unique_together = ("deptname", "deptrole",)
@@ -24,6 +27,9 @@ class Person(models.Model):
 
     class Meta:
         verbose_name_plural = "People"
+
+    def __str__(self):
+        return self.last_name
 
 
 class GradingUser(models.Model):
@@ -97,6 +103,8 @@ class GncTable(models.Model):
     # class Meta:
     #     managed = False
     #     db_table = 'GncTable'
+    def __str__(self):
+        return self.audit_project_name
 
 
 class RiskManagement(models.Model):
@@ -184,6 +192,9 @@ class RiskManagement(models.Model):
     kri = models.CharField(db_column='KRI', max_length=100, blank=True, null=True)  # Field name made lowercase.
     target = models.CharField(db_column='Target', max_length=100, blank=True, null=True)  # Field name made lowercase.
     dept = models.ForeignKey(Dept, on_delete=models.CASCADE) # Field name made lowercase.
+
+    def __str__(self):
+        return self.xy_strategic_pillar
 
 
 #     class Meta:
