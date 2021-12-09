@@ -27,9 +27,9 @@ admin.site.site_header = 'Ruth Doreen Auditing Tool'
 
 @admin.register(Dept)
 class DeptAdmin(admin.ModelAdmin):
-    list_display = ('deptname', 'deptrole', 'deptcriticality', 'numberofmembers', 'criticality',)
-    list_filter = ('deptname', 'deptrole', 'deptcriticality', 'numberofmembers', 'criticality',)
-    search_fields = ('deptname', 'deptrole', 'deptcriticality', 'numberofmembers', 'criticality',)
+    list_display = ('deptname', 'deptrole', 'numberofmembers', 'criticality',)
+    list_filter = ('deptname', 'deptrole',  'numberofmembers', 'criticality',)
+    search_fields = ('deptname', 'deptrole', 'numberofmembers', 'criticality',)
 
 
 # class Person(models.Model):

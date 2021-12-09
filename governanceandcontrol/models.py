@@ -6,9 +6,8 @@ class Dept(models.Model):
         ('medium', 'medium'),
         ('high', 'high'),
     )
-    deptname = models.CharField(max_length=20)
-    deptrole = models.CharField(max_length=20)
-    deptcriticality = models.CharField(max_length=20)
+    deptname = models.CharField(max_length=100)
+    deptrole = models.CharField(max_length=100)
     numberofmembers = models.IntegerField()
     criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,
                                    choices=CRITICALITY_LEVELS, default='draft')  # Field name made lowercase.
@@ -18,8 +17,8 @@ class Dept(models.Model):
 
 
 class Person(models.Model):
-    last_name = models.TextField()
-    first_name = models.TextField()
+    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
     personemail = models.EmailField()
     personsdept = models.ForeignKey(Dept, on_delete=models.CASCADE)
 
@@ -55,13 +54,19 @@ class GncTable(models.Model):
         ('PENDING', 'PENDING'),
         ('CLOSED', 'CLOSED'),
     )
+
+    PROJECT_TYPE = (
+        ('Business', 'Business'),
+        ('ICT', 'ICT'),
+        ('Corporate Affairs', 'Corporate Affairs'),
+    )
     audit_project_code = models.CharField(db_column='Audit_Project_Code', max_length=100, blank=False,
                                           null=True)  # Field name made lowercase.
     audit_project_name = models.CharField(db_column='Audit_Project_Name', max_length=100, blank=False,
                                           null=True)  # Field name made lowercase.
     quarter = models.CharField(db_column='Quarter', choices=QUARTERS, max_length=100, blank=False,
                                null=True)  # Field name made lowercase.
-    audit_project_type = models.CharField(db_column='Audit_Project_Type', max_length=100, blank=True,
+    audit_project_type = models.CharField(db_column='Audit_Project_Type', max_length=100, blank=True,choices=PROJECT_TYPE,
                                           null=True)  # Field name made lowercase.
     issue_title = models.CharField(db_column='Issue_Title', max_length=50, blank=False,
                                    null=True)  # Field name made lowercase.
@@ -101,6 +106,11 @@ class RiskManagement(models.Model):
         ('high', 'high'),
     )
     RATE_LEVELS = (
+        ('low', 'low'),
+        ('moderate', 'moderate'),
+        ('high', 'high'),
+    )
+    LIKELIHOOD = (
         ('low', 'low'),
         ('moderate', 'moderate'),
         ('high', 'high'),
@@ -156,7 +166,7 @@ class RiskManagement(models.Model):
                                      null=True)  # Field name made lowercase.
     risk_description = models.CharField(db_column='Risk_Description', max_length=100, blank=True,
                                         null=True)  # Field name made lowercase.
-    likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=True,
+    likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=True,choices=LIKELIHOOD,
                                   null=True)  # Field name made lowercase.
     impact = models.CharField(db_column='Impact', max_length=100, blank=True, null=True,choices=IMPACT_LEVELS)  # Field name made lowercase.
     risk_rating = models.CharField(db_column='Risk_Rating', max_length=100, blank=True,choices=RATE_LEVELS,
