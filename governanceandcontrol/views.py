@@ -419,7 +419,7 @@ def Risks(request):
     for totaldays in consolidatedgncobj:
         totaldays = +totaldays.ageing_days
 
-    return render(request=request, template_name="governanceandcontrol/auditrecommendations.html",
+    return render(request=request, template_name="governanceandcontrol/risks.html",
                   context={
                       "consolidateddata": consolidatedgncobj,
                       "consolidatedgncobjnumber": consolidatedgncobjnumber,
