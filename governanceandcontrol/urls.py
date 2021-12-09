@@ -8,9 +8,13 @@ urlpatterns = [
     path('login/', views.loginuser, name='login'),
     path('register/', views.Registering, name='register'),
     path('logout/', views.Logout, name='logout'),
+    # governance and governances
     path('auditprojects/', views.Auditprojects, name='auditprojects'),
     path('auditissues/', views.AuditIssues, name='auditissues'),
     path('governcontrol/', views.Governcontrol, name='governcontrol'),
     path('auditrecommendations/', views.Auditrecommendations, name='auditrecommendations'),
+
+    # risk management
+    path('risks/', views.Risks, name='risks'),
 
 ]
