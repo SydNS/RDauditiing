@@ -6,33 +6,53 @@
 {% include 'verticalnavbar.html' %}
 {% include 'settings.html' %}
 
+<!-- audit_project_code = models.URLField(db_column='Audit_Project_Code', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    audit_project_name = models.CharField(db_column='Audit_Project_Name', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    quarter = models.CharField(db_column='Quarter',choices=QUARTERS ,max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    audit_project_type = models.CharField(db_column='Audit_Project_Type', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    issue_title = models.CharField(db_column='Issue_Title', max_length=50, blank=False, null=True)  # Field name made lowercase.-->
+<!--    criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,choices=CRITICAL_LEVELS,default='draft')  # Field name made lowercase.-->
+<!--    root_cause_analysis = models.CharField(db_column='Root_Cause_Analysis',choices=ROOT_CAUSE_ANALYSIS ,max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    recommendation = models.CharField(db_column='Recommendation', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
+<!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+
+<!--Audit Project Code	Audit Project Name	Quarter	Audit Project Type	Issue Title-->
+
 <!-- Main Content -->
 <div class="hk-pg-wrapper">
     <!-- Container -->
     <div class="container mt-xl-50 mt-sm-30 mt-15">
         <!-- Title -->
         <div class="hk-pg-header align-items-top">
-            <h2 class="hk-pg-title font-weight-600 mb-10">Auditors Of Auditors</h2>
+            <h2 class="hk-pg-title font-weight-600 mb-10">Auditing Tool</h2>
             <p>
-                {{request.user.username|upper}} Welcome to the
-                <a href="#">Practices Section.</a>
+                 {{request.user.username|upper}} Welcome to the
+                <a href="#">Governance & Control.</a>
             </p>
             <div class="d-flex w-500p">
 
                 <select class="form-control custom-select custom-select-sm mr-15">
                     {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.current_status_at_xy | upper}}</option>
+                    <option selected="">{{ singleinfo.audit_project_name | upper}}</option>
                     {% endfor %}
 
                 </select>
                 <select class="form-control custom-select custom-select-sm mr-15">
                     {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.recommendation_state | upper}}</option>
+                    <option selected="">{{ singleinfo.criticality | upper}}</option>
                     {% endfor %}
                 </select>
                 <select class="form-control custom-select custom-select-sm">
                     {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.final_approver | upper}}</option>
+                    <option selected="">{{ singleinfo.quarter | upper}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -44,58 +64,61 @@
             <div class="col-xl-12">
                 <div class="hk-row">
                     <div class="col-sm-12">
-                        <div class="card-group hk-dash-type-2 ">
-                            <div class="card card-sm bg-dark text-white">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-5">
-                                        <div>
-                            <span class="d-block font-15 text-white font-weight-500">
-                                Internal Audit Practices</span>
-                                        </div>
-                                        <div>
-                                            <span>{{""}}</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                          <span class="d-block display-4 text-white mb-5">
-                              <span class="counter-anim">{{consolidateddata|length}}</span>
-                          </span>
-                                        <small class="d-block">IIA Standards : {{consolidateddata|length}}</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--                            criticalit-->
-                            <div class="card card-sm bg-dark text-white">
+                        <div class="card-group hk-dash-type-2">
+                            <div class="card card-sm bg-dark-20 text-white">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-warning font-weight-500"
-                            >Partially Impl'd Practices : {{lowimpactissues}}</span
+                                    class="d-block font-15 text-dark font-weight-500"
+                            >Projects</span
                             >
                                         </div>
                                         <div>
-                                            <span class="text-success font-14 font-weight-500">{{""}}</span>
+                                            <span>10%</span>
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="text-white">Closed & Impl'd Practices:
+                          <span class="d-block display-4 text-dark mb-5"
+                          ><span class="counter-anim">{{consolidateddata|length}}</span></span
+                          >
+                                        <small class="d-block">Total Issues</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--                            criticalit-->
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-dark font-weight-500"
+                            >Low Criticality Issues : {{lowimpactissues}}</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            >+12.5%</span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">High Criticality Issues:
                                             <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-white counter-anim">{{highimpactissues}}</span></span></small>
-                                        <small class="d-block text-danger">Pending
-                                            Practices:{{mediumimpactissues}} </small>
+                                            <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
+                                        <small class="d-block">Low Criticality Issues:{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
 
                             <!--                            recomendation state-->
-                            <div class="card card-sm bg-dark text-white">
+                            <div class="card card-sm">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-danger font-weight-500"
-                            >Pending Recom'n : {{PENDING}}</span
+                                    class="d-block font-15 text-dark font-weight-500"
+                            >Pending Recom'n : {{PARTIALLY_IMPLEMENTED}}</span
                             >
                                         </div>
                                         <div>
@@ -105,23 +128,22 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="text-white">Closed Recom'n :
+                                        <small class="">Closed Recom'n :
                                             <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-white counter-anim">{{CLOSED}}</span></span></small>
-                                        <small class="d-block text-warning">Partially Completed Recom'n:
-                                            {{PARTIALLY_IMPLEMENTED}} </small>
+                                            <span class="text-info counter-anim">{{CLOSED}}</span></span></small>
+                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
 
 
                             <!--                            ageing days-->
-                            <div class="card card-sm bg-dark text-white">
+                            <div class="card card-sm">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-yellow font-weight-500"
+                                    class="d-block font-15 text-dark font-weight-500"
                             >Total Ageing Days : {{totaldays}}</span
                             >
                                         </div>
@@ -144,57 +166,70 @@
                 </div>
 
                 <div class="col-xl-12">
+
                     <section class="hk-sec-wrapper">
                         <h5 class="hk-sec-title">Audit Projects</h5>
-                        <!--                        <p>Recom'n : Recommendation</p>-->
-                        <!--                        <p>Act'n : Action</p>-->
-                        <!--                        <p>Impl'n : Implementation</p>-->
-                        <!--                        <p>R't : Action</p><br>-->
+                        <p>Recom'n : Recommendation</p>
+                  likning to none      <p>Act'n : Action</p>
+                        <p>Impl'n : Implementation</p>
+                        <p>R't : Action</p><br>
+<!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
+<!--                            export table options.</p>-->
                         <div class="row">
                             <div class="col-sm">
                                 <div class="table-wrap">
-                                    <table id="datable_1"
+                                    <table id="datable_3"
                                            class="table table-hover table-responsive w-100 display pb-30">
                                         <thead>
                                         <tr>
-                                            <th>IA_Practices</th>
-                                            <th>IA_Standards</th>
-                                            <th>Currentt Status</th>
-                                            <th>Assess't</th>
+                                            <!--                                            Audit Project Name, Quarter, Audit Project Type, Issue Title, Criticality,-->
+                                            <!--                                            Root Cause Analysis, Recommendation, Agreed Implementation Date, Ageing - -->
+                                            <!--                                            Days, Owner, Final Approver, Audit Project Code,-->
+                                            <th>Name</th>
+                                            <th>Qtr</th>
+                                            <th>Type</th>
+                                            <th>Issue Title</th>
+                                            <th>Criticality</th>
+                                            <th>R't Cause</th>
                                             <th>Recom'n</th>
-                                            <th>Action Plan</th>
-                                            <th>Recommendation State</th>
+                                            <th>Act'n Plan</th>
+                                            <th>Recom'n State</th>
                                             <th>Ageing Days</th>
+                                            <th>Impl'n Date</th>
+                                            <th>Revised Impl'n Date</th>
+                                            <th>Actual Impl'n Date</th>
                                             <th>Owner</th>
                                             <th>Final Approver</th>
-                                            <th>Agreed Implementation Date</th>
-                                            <th>Revised Implementation Date</th>
-                                            <th>Last Status Update</th>
-                                            <th>Actual Implementation Date</th>
                                         </tr>
                                         </thead>
+<!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
+<!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
 
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td>
-                                                <a href="#">
-                                                    {{singleinfo.internal_audit_leading_practices|truncatechars:40}}
-                                                </a>
-                                            </td>
-                                            <td>{{singleinfo.iia_standards|truncatechars:40}}</td>
-                                            <td>{{singleinfo.current_status_at_xy}}</td>
-                                            <td>{{singleinfo.assessment|truncatechars:40}}</td>
-                                            <td>{{singleinfo.recommendations|truncatechars:40}}</td>
-                                            <td>{{singleinfo.action_plan|truncatechars:40}}</td>
+                                            <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
+                                            <td>{{singleinfo.quarter}}</td>
+                                            <td>{{singleinfo.audit_project_type}}</td>
+                                            <td>{{singleinfo.issue_title}}</td>
+                                            <td>{{singleinfo.criticality}}</td>
+                                            <td>{{singleinfo.root_cause_analysis}}</td>
+                                            <td>{{singleinfo.recommendation}}</td>
+                                            <td>{{singleinfo.action_plan}}</td>
                                             <td>{{singleinfo.recommendation_state}}</td>
                                             <td>{{singleinfo.ageing_days}}</td>
-                                            <td>{{singleinfo.owner}}</td>
-                                            <td>{{singleinfo.final_approver}}</td>
                                             <td>{{singleinfo.agreed_implementation_date}}</td>
                                             <td>{{singleinfo.revised_implementation_date}}</td>
-                                            <td>{{singleinfo.last_status_update}}</td>
                                             <td>{{singleinfo.actual_implementation_date}}</td>
+                                            <td>{{singleinfo.owner}}</td>
+                                            <td>{{singleinfo.final_approver}}</td>
 
 
                                         </tr>
@@ -203,27 +238,30 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th>IA_Practices</th>
-                                            <th>IA_Standards</th>
-                                            <th>Currentt Status</th>
-                                            <th>Assess't</th>
+                                            <!--Audit Project Code	Audit Project Name	Quarter	Audit Project Type	Issue Title	Criticality	Root Cause Analysis	Recommendation
+                                                Action Plan	Recommendation State	Agreed Implementation Date	Revised Implementation Date
+                                                Last Status Update	Ageing - Days	Actual Implementation Date	Owner	Final Approver									                                        &ndash;&gt;-->
+                                            <th>Name</th>
+                                            <th>Qtr</th>
+                                            <th>Type</th>
+                                            <th>Issue Title</th>
+                                            <th>Criticality</th>
+                                            <th>R't Cause</th>
                                             <th>Recom'n</th>
-                                            <th>Action Plan</th>
-                                            <th>Recommendation State</th>
-                                            <th>Ageing Days</th>
+                                            <th>Act'n Plan</th>
+                                            <th>Recom'n State</th>
+                                            <th>Impl'n Date</th>
+                                            <th>Revised Impl'n Date</th>
+                                            <th>AgeDays</th>
+                                            <th>Actual Impl'n Date</th>
                                             <th>Owner</th>
                                             <th>Final Approver</th>
-                                            <th>Agreed Implementation Date</th>
-                                            <th>Revised Implementation Date</th>
-                                            <th>Last Status Update</th>
-                                            <th>Actual Implementation Date</th>
                                         </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                             </div>
                         </div>
-
                     </section>
 
                 </div>
