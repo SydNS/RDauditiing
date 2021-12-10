@@ -9,10 +9,10 @@ urlpatterns = [
     path('register/', views.Registering, name='register'),
     path('logout/', views.Logout, name='logout'),
     # governance and governances
-    path('auditprojects/', views.Auditprojects, name='auditprojects'),
-    path('auditissues/', views.AuditIssues, name='auditissues'),
-    path('governcontrol/', views.Governcontrol, name='governcontrol'),
-    path('auditrecommendations/', views.Auditrecommendations, name='auditrecommendations'),
+    path('governcontrolprojects/', views.Governcontrolprojects, name='governcontrolprojects'),
+    path('governcontrolissues/', views.GoverncontrolIssues, name='governcontrolissues'),
+    path('governcontrolrecommendations/', views.Governcontrolrecommendations, name='governcontrolrecommendations'),
+    path('governcontrolconsolidated/', views.Governcontrolconsolidated, name='governcontrolconsolidated'),
 
     # risk management
     path('risks/', views.Risks, name='risks'),
