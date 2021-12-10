@@ -66,6 +66,7 @@ class GncTable(models.Model):
         ('ICT', 'ICT'),
         ('Corporate Affairs', 'Corporate Affairs'),
     )
+    
     audit_project_code = models.CharField(db_column='Audit_Project_Code', max_length=100, blank=False,
                                           null=True)  # Field name made lowercase.
     audit_project_name = models.CharField(db_column='Audit_Project_Name', max_length=100, blank=False,

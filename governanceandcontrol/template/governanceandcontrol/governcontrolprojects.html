@@ -70,7 +70,7 @@
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
+                                    class="d-block font-15 text-white font-weight-500"
                             >Projects</span
                             >
                                         </div>
@@ -79,7 +79,7 @@
                                         </div>
                                     </div>
                                     <div>
-                          <span class="d-block display-4 text-dark mb-5"
+                          <span class="d-block display-4 text-red mb-5"
                           ><span class="counter-anim">{{consolidateddata|length}}</span></span
                           >
                                         <small class="d-block">Total Issues</small>
@@ -87,12 +87,12 @@
                                 </div>
                             </div>
                             <!--                            criticalit-->
-                            <div class="card card-sm">
-                                <div class="card-body">
+                            <div class="card card-sm bg-dark text-white">
+                                <div class="card-body ">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
+                                    class="d-block font-15 text-green font-weight-500"
                             >Low Criticality Issues : {{lowimpactissues}}</span
                             >
                                         </div>
@@ -106,18 +106,18 @@
                                         <small class="">High Criticality Issues:
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
-                                        <small class="d-block">Low Criticality Issues:{{mediumimpactissues}} </small>
+                                        <small class="d-block text-warning">Moderate Criticality Issues:{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
 
                             <!--                            recomendation state-->
-                            <div class="card card-sm">
+                            <div class="card card-sm bg-dark-20 text-white">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
+                                    class="d-block font-15 text-danger font-weight-500"
                             >Pending Recom'n : {{PARTIALLY_IMPLEMENTED}}</span
                             >
                                         </div>
@@ -128,9 +128,9 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">Closed Recom'n :
+                                        <small class="text-green">Closed Recom'n :
                                             <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-info counter-anim">{{CLOSED}}</span></span></small>
+                                            <span class="text-success counter-anim">{{CLOSED}}</span></span></small>
                                         <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
                                     </div>
                                 </div>
@@ -138,12 +138,12 @@
 
 
                             <!--                            ageing days-->
-                            <div class="card card-sm">
+                            <div class="card card-sm bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
+                                    class="d-block font-15 text-info font-weight-500"
                             >Total Ageing Days : {{totaldays}}</span
                             >
                                         </div>
@@ -169,10 +169,8 @@
 
                     <section class="hk-sec-wrapper">
                         <h5 class="hk-sec-title">Audit Projects</h5>
-                        <p>Recom'n : Recommendation</p>
-                  likning to none      <p>Act'n : Action</p>
-                        <p>Impl'n : Implementation</p>
-                        <p>R't : Action</p><br>
+                        <p>Kindly  export in the format of your choosing</p><br>
+                        
 <!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
 <!--                            export table options.</p>-->
                         <div class="row">
@@ -182,24 +180,16 @@
                                            class="table table-hover table-responsive w-100 display pb-30">
                                         <thead>
                                         <tr>
-                                            <!--                                            Audit Project Name, Quarter, Audit Project Type, Issue Title, Criticality,-->
-                                            <!--                                            Root Cause Analysis, Recommendation, Agreed Implementation Date, Ageing - -->
-                                            <!--                                            Days, Owner, Final Approver, Audit Project Code,-->
-                                            <th>Name</th>
-                                            <th>Qtr</th>
-                                            <th>Type</th>
+<!-- Audit Project Code,	Audit Project Name,	Quarter,	Audit Project Type,	Issue Title, -->
+                                            
+
+                                            <th>Audit Project Code</th>
+                                            <th>Audit Project Name</th>
+                                            <th>Quarter</th>
+                                            <th>Audit Project Type</th>
                                             <th>Issue Title</th>
-                                            <th>Criticality</th>
-                                            <th>R't Cause</th>
-                                            <th>Recom'n</th>
-                                            <th>Act'n Plan</th>
-                                            <th>Recom'n State</th>
+                                            <th>Recommendations</th>
                                             <th>Ageing Days</th>
-                                            <th>Impl'n Date</th>
-                                            <th>Revised Impl'n Date</th>
-                                            <th>Actual Impl'n Date</th>
-                                            <th>Owner</th>
-                                            <th>Final Approver</th>
                                         </tr>
                                         </thead>
 <!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
@@ -215,21 +205,14 @@
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
+                                            <td><a href="{% url 'governcontrolprojectsdetails' singleinfo.id %}">{{singleinfo.audit_project_code}}</a></td>
                                             <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
-                                            <td>{{singleinfo.quarter}}</td>
-                                            <td>{{singleinfo.audit_project_type}}</td>
-                                            <td>{{singleinfo.issue_title}}</td>
-                                            <td>{{singleinfo.criticality}}</td>
-                                            <td>{{singleinfo.root_cause_analysis}}</td>
-                                            <td>{{singleinfo.recommendation}}</td>
-                                            <td>{{singleinfo.action_plan}}</td>
-                                            <td>{{singleinfo.recommendation_state}}</td>
-                                            <td>{{singleinfo.ageing_days}}</td>
-                                            <td>{{singleinfo.agreed_implementation_date}}</td>
-                                            <td>{{singleinfo.revised_implementation_date}}</td>
-                                            <td>{{singleinfo.actual_implementation_date}}</td>
-                                            <td>{{singleinfo.owner}}</td>
-                                            <td>{{singleinfo.final_approver}}</td>
+                                            <td><a href="#">{{singleinfo.quarter}}</a></td>
+                                            <td><a href="#">{{singleinfo.audit_project_type}}</a></td>
+                                            <td><a href="#">{{singleinfo.issue_title}}</a></td>
+                                            <td><a href="#">{{singleinfo.recommendation}}</a></td>
+                                            <td><a href="#">{{singleinfo.ageing_days}}</a></td>
+                                            
 
 
                                         </tr>
@@ -238,24 +221,13 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <!--Audit Project Code	Audit Project Name	Quarter	Audit Project Type	Issue Title	Criticality	Root Cause Analysis	Recommendation
-                                                Action Plan	Recommendation State	Agreed Implementation Date	Revised Implementation Date
-                                                Last Status Update	Ageing - Days	Actual Implementation Date	Owner	Final Approver									                                        &ndash;&gt;-->
-                                            <th>Name</th>
-                                            <th>Qtr</th>
-                                            <th>Type</th>
+                                              <th>Audit Project Code</th>
+                                            <th>Audit Project Name</th>
+                                            <th>Quarter</th>
+                                            <th>Audit Project Type</th>
                                             <th>Issue Title</th>
-                                            <th>Criticality</th>
-                                            <th>R't Cause</th>
-                                            <th>Recom'n</th>
-                                            <th>Act'n Plan</th>
-                                            <th>Recom'n State</th>
-                                            <th>Impl'n Date</th>
-                                            <th>Revised Impl'n Date</th>
-                                            <th>AgeDays</th>
-                                            <th>Actual Impl'n Date</th>
-                                            <th>Owner</th>
-                                            <th>Final Approver</th>
+                                            <th>Recommendations</th>
+                                            <th>Ageing Days</th>
                                         </tr>
                                         </tfoot>
                                     </table>
