@@ -840,7 +840,7 @@ def AuditorsConsolidated(request):
 # ======================Details views===========================
 
 def GoverncontrolprojectsDetail(request,id):
-    # consolidatedgncobj = models.GncTable.objects.all()
+    consolidatedgncobj = models.GncTable.objects.get(id=id)
     # consolidatedgncobjnumber = models.GncTable.objects.all().count()
     #
     # CRITICAL_LEVELS = (
@@ -895,8 +895,8 @@ def GoverncontrolprojectsDetail(request,id):
     #     totaldays = +totaldays.ageing_days
 
     return render(request=request, template_name="governanceandcontrol/governcontrolprojectsdetails.html",
-                  # context={
-                  #     "consolidateddata": consolidatedgncobj,
+                  context={
+                      "consolidateddata": consolidatedgncobj,
                   #     "consolidatedgncobjnumber": consolidatedgncobjnumber,
                   #
                   #     # issues
@@ -913,7 +913,7 @@ def GoverncontrolprojectsDetail(request,id):
                   #     # reommendations
                   #     "totaldays": round(totaldays, 1),
                   #
-                  # }
+                  }
                   )
 
 
