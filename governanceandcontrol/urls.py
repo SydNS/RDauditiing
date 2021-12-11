@@ -18,6 +18,10 @@ urlpatterns = [
     path('governcontrolprojects/<int:id>/', views.GoverncontrolprojectsDetail, name='governcontrolprojectsdetails'),
 
 
+    # Add governance and governances
+    path('addgoverncontrol/', views.AddGoverncontrolprojects, name='addgoverncontrol'),
+
+
 
     # risk management
     path('risks/', views.Risks, name='risks'),
