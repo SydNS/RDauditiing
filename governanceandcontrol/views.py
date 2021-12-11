@@ -1,8 +1,9 @@
+import days as days
 from django.shortcuts import render
 from . import models
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from .forms import NewUserForm
+from .forms import NewUserForm, GncTableForm
 from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm  # add this
@@ -266,7 +267,7 @@ def Governcontrolrecommendations(request):
     for totaldays in consolidatedgncobj:
         totaldays = +totaldays.ageing_days
 
-    return render(request=request, template_name="governanceandcontrol/auditrecommendations.html",
+    return render(request=request, template_name="governanceandcontrol/governcontrolrecommendations.html",
                   context={
                       "consolidateddata": consolidatedgncobj,
                       "consolidatedgncobjnumber": consolidatedgncobjnumber,
@@ -839,7 +840,7 @@ def AuditorsConsolidated(request):
 
 # ======================Details views===========================
 
-def GoverncontrolprojectsDetail(request,id):
+def GoverncontrolprojectsDetail(request, id):
     consolidatedgncobj = models.GncTable.objects.get(id=id)
     # consolidatedgncobjnumber = models.GncTable.objects.all().count()
     #
@@ -897,22 +898,22 @@ def GoverncontrolprojectsDetail(request,id):
     return render(request=request, template_name="governanceandcontrol/governcontrolprojectsdetails.html",
                   context={
                       "consolidateddata": consolidatedgncobj,
-                  #     "consolidatedgncobjnumber": consolidatedgncobjnumber,
-                  #
-                  #     # issues
-                  #     "mediumimpactissues": mediumimpactissues,
-                  #     "highimpactissues": highimpactissues,
-                  #     "lowimpactissues": lowimpactissues,
-                  #
-                  #     # reommendations
-                  #     "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
-                  #     "PENDING": PENDING,
-                  #     "CLOSED": CLOSED,
-                  #     "percentagecompleted": percentagecompleted,
-                  #
-                  #     # reommendations
-                  #     "totaldays": round(totaldays, 1),
-                  #
+                      #     "consolidatedgncobjnumber": consolidatedgncobjnumber,
+                      #
+                      #     # issues
+                      #     "mediumimpactissues": mediumimpactissues,
+                      #     "highimpactissues": highimpactissues,
+                      #     "lowimpactissues": lowimpactissues,
+                      #
+                      #     # reommendations
+                      #     "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
+                      #     "PENDING": PENDING,
+                      #     "CLOSED": CLOSED,
+                      #     "percentagecompleted": percentagecompleted,
+                      #
+                      #     # reommendations
+                      #     "totaldays": round(totaldays, 1),
+                      #
                   }
                   )
 
@@ -1069,3 +1070,16 @@ def GoverncontrolrecommendationsDetails(request, id):
                       #   "totaldays": round(totaldays,1),
 
                   })
+
+
+def AddGoverncontrolprojects(request):
+    if request.method == 'POST':
+        form = GncTableForm(request.POST)
+        if form.is_valid():
+            governcontrolproject = form.save(commit=True)
+            return redirect('index', governcontrolproject.pk)
+    else:
+        form = GncTableForm()
+
+    return render(request, 'governanceandcontrol/addformgovernanceandcontrol.html',
+                  {'form': form})
