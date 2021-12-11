@@ -15,8 +15,6 @@
         <div class="row">
             <div class="col-xl-12 pa-0">
                 <div class="profile-cover-wrap overlay-wrap">
-                    <div class="profile-cover-img"></div>
-                    <div class="bg-overlay bg-trans-dark-60"></div>
                     <div class="bg-overlay bg-gradient-success"></div>
                     <div class="container profile-cover-content py-50">
                         <div class="hk-row">
@@ -43,16 +41,18 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="button-list">
-                                    <a href="#" class="btn btn-dark btn-wth-icon icon-wthot-bg btn-rounded"><span
-                                            class="btn-text">Edit</span><span class="icon-label"><i
-                                            class="icon ion-md-edit"></i> </span></a>
-                                    <a href="#" class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
+                                    <button href="#" class="btn btn-info btn-wth-icon btn-rounded"><span
+                                            class="btn-text">Say Somenthing</span></button>
+
+                                    <button href="#" class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
                                             class="btn-icon-wrap bg-success rounded-circle">Edit<i
-                                            class="fa fa-delete"></i></span></a>
-                                    <a href="#" class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
+                                            class="fa fa-delete"></i></span></button>
+                                    <button href="#"  data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
                                             class="btn-icon-wrap bg-danger rounded-circle ">Del<i
-                                            class="fa fa-delete"></i></span></a>
+                                            class="fa fa-delete"></i></span></button>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -63,19 +63,25 @@
                            <li class="nav-item">
                                 <span class="font-20">
                                     <a href="#" class="d-flex h-60p align-items-center nav-link active "><p
-                                        class="text-green">Audit Project Type : </p> {{ consolidateddata.audit_project_type }}</a>
+                                            class="text-green">Project Type : </p> <span class="text-warning"> {{ consolidateddata.audit_project_type }} </span></a>
                                 </span>
                             </li>
                             <li class="nav-item">
                             <span class="font-18">
                                 <a href="#" class="d-flex h-60p align-items-center nav-link active "><p
-                                        class="text-green">Audit Project Issue Title :  </p> {{consolidateddata.issue_title }}</a>
+                                        class="text-green">Issue Title :  </p> {{consolidateddata.issue_title }}</a>
                            </span>
                             </li>
                             <li class="nav-item">
                             <span class="font-18">
                                 <a href="#" class="d-flex h-60p align-items-center nav-link active "><p
-                                        class="text-green">Root Cause :  </p> {{consolidateddata.root_cause_analysis }}</a>
+                                        class="text-green">Root Cause :  </p> <span class="text-danger">{{consolidateddata.root_cause_analysis }}</span></a>
+                           </span>
+                            </li>
+                            <li class="nav-item">
+                            <span class="font-18">
+                                <a href="#" class="d-flex h-60p align-items-center nav-link active "><p
+                                        class="text-green">Recommendation State :  </p> <span class="text-danger"> {{consolidateddata.recommendation_state }}</span></a>
                            </span>
                             </li>
                         </ul>
@@ -110,7 +116,7 @@
                                         </div>
                                         <div class="card-body">
                                             <p class="card-text mb-30">
-                                                Root Cause : <span class="text-danger">{{consolidateddata.root_cause_analysis}}</span>
+                                                Criticality : <span class="text-danger text-capitalize font-35">{{consolidateddata.criticality}}</span>
                                             </p>
                                             <div class="card">
 
@@ -133,38 +139,39 @@
                                         </div>
                                     </div>
 
-                                    <div class="card card-profile-feed">
-                                        <div class="card-header card-header-action">
-                                            <div class="media align-items-center">
-                                                <div class="media-img-wrap d-flex mr-10">
-                                                    <div class="avatar avatar-sm">
-                                                        <img src="dist/img/avatar6.jpg" alt="user"
-                                                             class="avatar-img rounded-circle">
-                                                    </div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="text-capitalize font-weight-500 text-dark">Johnie
-                                                        Metoyer
-                                                    </div>
-                                                    <div class="font-13">11 hrs</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <p class="card-text mb-30">Below are the original Latin passages from which
-                                                Lorem Ipsum was derived, paired with their 1914 translations by H.
-                                                Rackham.</p>
-                                        </div>
-                                        <div class="card-footer justify-content-between">
-                                            <div>
-                                                <a href="#"><i class="ion ion-md-heart text-primary"></i>142</a>
-                                            </div>
-                                            <div>
-                                                <a href="#">751 comments</a>
-                                                <a href="#">2 shares</a>
-                                            </div>
-                                        </div>
-                                    </div>
+<!--                                    <div class="card card-profile-feed">-->
+<!--                                        <div class="card-header card-header-action">-->
+<!--                                            <div class="media align-items-center">-->
+<!--                                                <div class="media-img-wrap d-flex mr-10">-->
+<!--                                                    <div class="avatar avatar-sm">-->
+<!--                                                        <img src="dist/img/avatar6.jpg" alt="user"-->
+<!--                                                             class="avatar-img rounded-circle">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="media-body">-->
+<!--                                                    <div class="text-capitalize font-weight-500 text-dark">Johnie-->
+<!--                                                        Metoyer-->
+<!--                                                    </div>-->
+<!--                                                    <div class="font-13">11 hrs</div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="card-body">-->
+<!--                                            <p class="card-text mb-30">Below are the original Latin passages from which-->
+<!--                                                Lorem Ipsum was derived, paired with their 1914 translations by H.-->
+<!--                                                Rackham.</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="card-footer justify-content-between">-->
+<!--                                            <div>-->
+<!--                                                <a href="#"><i class="ion ion-md-heart text-primary"></i>142</a>-->
+<!--                                            </div>-->
+<!--                                            <div>-->
+<!--                                                <a href="#">751 comments</a>-->
+<!--                                                <a href="#">2 shares</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
                                 </div>
 <!--                              Right column-->
 
@@ -212,8 +219,8 @@
                                             </div>
                                             <div class="col-4 border-right px-0">
                                                 <div class="pa-15">
-                                                    <span class="d-block display-6 text-dark mb-5">{{consolidateddata.ageing_days}}</span>
-                                                    <span class="d-block text-capitalize font-14">followers</span>
+                                                    <span class="d-block display-6 text-dark mb-5">{{consolidateddata.quarter}}</span>
+                                                    <span class="d-block text-capitalize font-14">Quarter</span>
                                                 </div>
                                             </div>
                                             <div class="col-4 pl-0">
@@ -225,17 +232,17 @@
                                         </div>
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item"><span><i
-                                                    class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Went to:</span></span><span
-                                                    class="ml-5 text-dark">Oh, Canada criticality</span></li>
+                                                    class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Agreed Impl'n Date:</span></span><span
+                                                    class="ml-5 text-dark">{{consolidateddata.agreed_implementation_date}}</span></li>
                                             <li class="list-group-item"><span><i
-                                                    class="ion ion-md-briefcase font-18 text-light-20 mr-10"></i><span>Worked at:</span></span><span
-                                                    class="ml-5 text-dark">Companey</span></li>
+                                                    class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Revised Impl'n Date:</span></span><span
+                                                    class="ml-5 text-dark">{{consolidateddata.revised_implementation_date}}</span></li>
                                             <li class="list-group-item"><span><i
-                                                    class="ion ion-md-home font-18 text-light-20 mr-10"></i><span>Lives in:</span></span><span
-                                                    class="ml-5 text-dark">San Francisco, CA</span></li>
+                                                    class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Actual Impl'n Date:</span></span><span
+                                                    class="ml-5 text-dark">{{consolidateddata.actual_implementation_date}}</span></li>
                                             <li class="list-group-item"><span><i
-                                                    class="ion ion-md-pin font-18 text-light-20 mr-10"></i><span>From:</span></span><span
-                                                    class="ml-5 text-dark">Settle, WA</span></li>
+                                                    class="ion ion-md-pin font-18 text-light-20 mr-10"></i><span>Final Approver:</span></span><span
+                                                    class="ml-5 text-dark">{{consolidateddata.final_approver}}</span></li>
                                         </ul>
                                     </div>
 
@@ -255,8 +262,8 @@
         <footer class="footer">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <p>Pampered by<a href="https://hencework.com/" class="text-dark" target="_blank">Hencework</a> ©
-                        2019</p>
+                    <p>Created by<a href="/" class="text-dark" target="_blank">Ruth Doreen Mutebe</a> ©
+                        2021</p>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <p class="d-inline-block">Follow us</p>
@@ -271,9 +278,31 @@
         </footer>
     </div>
     <!-- /Footer -->
-
 </div>
 <!-- /Main Content -->
+ <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Are you sure ?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>
+                                                        Deleting this means the record will be erased completely
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">No Cancel</button>
+                                                    <button type="button" class="btn btn-danger">Yes Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
 
 
 {% include 'verticalnavbar.html' %}
