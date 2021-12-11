@@ -30,10 +30,10 @@
     <div class="container mt-xl-50 mt-sm-30 mt-15">
         <!-- Title -->
         <div class="hk-pg-header align-items-top">
-            <h2 class="hk-pg-title font-weight-600 mb-10">Auditing Tool</h2>
+            <h2 class="hk-pg-title font-weight-600 mb-10">Auditing Tool-GnC Section</h2>
             <p>
                  {{request.user.username|upper}} Welcome to the
-                <a href="#">Auditing Tool.</a>
+                <a href="#">Auditing Tool-GnC Section.</a>
             </p>
             <div class="d-flex w-500p">
 
@@ -61,14 +61,14 @@
         <div class="row ">
             <div class="col-xl-12">
                 <div class="hk-row">
-                    <div class="col-sm-12">
-                        <div class="card-group hk-dash-type-2">
-                            <div class="card card-sm">
+                    <div class="col-sm-12 ">
+                        <div class="card-group hk-dash-type-2 ">
+                            <div class="card card-sm bg-gradient-success">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
+                                    class="d-block font-15 text-white font-weight-500"
                             >Projects</span
                             >
                                         </div>
@@ -80,17 +80,17 @@
                           <span class="d-block display-4 text-dark mb-5"
                           ><span class="counter-anim">{{consolidateddata|length}}</span></span
                           >
-                                        <small class="d-block">Total Issues</small>
+                                        <small class="d-block text-white">Total Issues</small>
                                     </div>
                                 </div>
                             </div>
                             <!--                            criticalit-->
-                            <div class="card card-sm">
+                            <div class="card card-sm bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
+                                    class="d-block font-15 text-white font-weight-500"
                             >Low Criticality Issues : {{lowimpactissues}}</span
                             >
                                         </div>
@@ -101,21 +101,21 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">High Criticality Issues:
-                                            <span class="d-block display-4 text-dark mb-5">
+                                        <small class="text-yellow">High Criticality Issues:
+                                            <span class="d-block display-4  mb-5">
                                             <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
-                                        <small class="d-block">Low Criticality Issues:{{mediumimpactissues}} </small>
+                                        <small class="d-block text-info">Low Criticality Issues:{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
 
                             <!--                            recomendation state-->
-                            <div class="card card-sm">
+                            <div class="card card-sm bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
+                                    class="d-block font-15 text-white font-weight-500"
                             >Pending Recom'n : {{PARTIALLY_IMPLEMENTED}}</span
                             >
                                         </div>
@@ -126,10 +126,10 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">Closed Recom'n :
+                                        <small class="text-yellow">Closed Recom'n :
                                             <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-info counter-anim">{{CLOSED}}</span></span></small>
-                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
+                                            <span class="text-blue counter-anim">{{CLOSED}}</span></span></small>
+                                        <small class="d-block text-info">Partially Completed : {{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                                     <div>
                                         <small class="">Total Ageing Days :
                                             <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-info counter-anim">{{totaldays}}</span></span></small>
+                                            <span class="text-blue counter-anim">{{totaldays}}</span></span></small>
                                         <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
 
                 <div class="col-xl-12">
 
-                    <section class="hk-sec-wrapper">
+                    <section class="hk-sec-wrapper bg-white">
                         <h5 class="hk-sec-title">Audit Projects</h5>
                         <p>Recom'n : Recommendation</p>
                   likning to none      <p>Act'n : Action</p>
