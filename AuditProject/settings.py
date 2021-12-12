@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'jazzmin',
     'crispy_forms',
+    # my apps for the project
     'governanceandcontrol',
+    'auditor_of_auditors',
     'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -66,7 +68,7 @@ ROOT_URLCONF = 'AuditProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['governanceandcontrol/template', ],
+        'DIRS': ['template', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -169,3 +171,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # removing the password help text
 AUTH_PASSWORD_VALIDATORS = []
+
+LOGIN_URL="/login"
+LOGIN_REDIRECT_URL="/"

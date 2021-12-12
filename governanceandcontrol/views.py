@@ -6,10 +6,12 @@ from django.shortcuts import render, redirect
 from .forms import NewUserForm, GncTableForm
 from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm  # add this
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required
 def dashboard(request):
     gncobj = models.GncTable.objects.all()
     # info =
@@ -56,7 +58,7 @@ def Logout(request):
     messages.info(request, "You have successfully logged out.")
     return redirect('login')
 
-
+@login_required
 def Governcontrolprojects(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -134,7 +136,7 @@ def Governcontrolprojects(request):
                   }
                   )
 
-
+@login_required
 def GoverncontrolIssues(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -211,7 +213,7 @@ def GoverncontrolIssues(request):
 
                   })
 
-
+@login_required
 def Governcontrolrecommendations(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -288,7 +290,7 @@ def Governcontrolrecommendations(request):
 
                   })
 
-
+@login_required
 def Governcontrolconsolidated(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -367,6 +369,7 @@ def Governcontrolconsolidated(request):
 
 
 # Risk management section
+@login_required
 def Risks(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -445,6 +448,7 @@ def Risks(request):
 
 
 # Risk management section
+@login_required
 def RiskControl(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -523,6 +527,7 @@ def RiskControl(request):
 
 
 # Risk management section
+@login_required
 def KRI(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -605,6 +610,7 @@ def KRI(request):
 # Auditor of auditos section
 
 # Auditor of auditos section
+@login_required
 def AuditorsPractices(request):
     consolidatedgncobj = models.Auditorofauditors.objects.all()
     consolidatedgncobjnumber = models.Auditorofauditors.objects.all().count()
@@ -683,6 +689,7 @@ def AuditorsPractices(request):
 
 
 # Auditor of auditos section
+@login_required
 def AuditorsRecommendations(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -761,6 +768,7 @@ def AuditorsRecommendations(request):
 
 
 # Auditor of auditos section
+@login_required
 def AuditorsConsolidated(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -839,7 +847,7 @@ def AuditorsConsolidated(request):
 
 
 # ======================Details views===========================
-
+@login_required
 def GoverncontrolprojectsDetail(request, id):
     consolidatedgncobj = models.GncTable.objects.get(id=id)
     # consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -917,7 +925,7 @@ def GoverncontrolprojectsDetail(request, id):
                   }
                   )
 
-
+@login_required
 def GoverncontrolIssues(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -994,7 +1002,7 @@ def GoverncontrolIssues(request):
 
                   })
 
-
+@login_required
 def GoverncontrolrecommendationsDetails(request, id):
     consolidatedgncobj = models.GncTable.objects.get(id=id)
     # consolidatedgncobjnumber = models.GncTable.objects.all().count()
@@ -1071,15 +1079,15 @@ def GoverncontrolrecommendationsDetails(request, id):
 
                   })
 
-
+@login_required
 def AddGoverncontrolprojects(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = GncTableForm(request.POST)
         if form.is_valid():
             governcontrolproject = form.save(commit=True)
-            return redirect('index', governcontrolproject.pk)
+            return redirect('governcontrolprojectsdetails', governcontrolproject.pk)
     else:
         form = GncTableForm()
+    return render(request, 'governanceandcontrol/addformgovernanceandcontrol.html',{'form': form})
 
-    return render(request, 'governanceandcontrol/addformgovernanceandcontrol.html',
-                  {'form': form})
+

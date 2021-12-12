@@ -98,7 +98,7 @@ class GncTable(models.Model):
                                     null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.
     actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True,
                                                   null=True)  # Field name made lowercase.
-    owner = models.CharField(db_column='Owner', max_length=100, blank=True, null=True)    # Field name made lowercase.
+    owner = models.ForeignKey(Dept, on_delete=models.CASCADE)     # Field name made lowercase.
     final_approver = models.ForeignKey(Person, on_delete=models.CASCADE)  # Field name made lowercase.
 
     # class Meta:

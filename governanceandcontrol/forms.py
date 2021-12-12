@@ -22,11 +22,21 @@ class NewUserForm(UserCreationForm):
         return user
 
 
-class GncTableForm(forms.Form):
+class GncTableForm(forms.ModelForm):
+
     class Meta:
         model = GncTable
-        fields = ['audit_project_code', 'audit_project_name', 'quarter', 'audit_project_type',
-                  'issue_title', 'criticality', 'root_cause_analysis', 'recommendation',
-                  'action_plan', 'recommendation_state', 'agreed_implementation_date', 'revised_implementation_date'
-            , 'last_status_update', 'ageing_days', 'actual_implementation_date', 'owner', 'final_approver',
-                  ]
+        fields = "__all__"
+        widgets = {
+            'agreed_implementation_date': forms.DateInput(format=('%m/%d/%Y'),
+                                             attrs={'class': 'form-control', 'placeholder': 'Select a date',
+                                                    'type': 'date'}),
+            'revised_implementation_date': forms.DateInput(format=('%m/%d/%Y'),
+                                                          attrs={'class': 'form-control',
+                                                                 'placeholder': 'Select a date',
+                                                                 'type': 'date'}),
+            'actual_implementation_date': forms.DateInput(format=('%m/%d/%Y'),
+                                                          attrs={'class': 'form-control',
+                                                                 'placeholder': 'Select a date',
+                                                                 'type': 'date'}),
+        }

@@ -69,12 +69,14 @@
             </div>
             <ul class="navbar-nav flex-column">
 
+                {% if user.is_staff %}
                 <li class="nav-item">
                     <a class="nav-link" href="/addgoverncontrol">
                         <span class="feather-icon"><i data-feather="plus-circle"></i></span>
                         <span class="nav-link-text">Make a Record</span>
                     </a>
                 </li>
+                {% endif %}
 
                 <li class="nav-item">
                     <a class="nav-link link-with-badge" href="/governcontrolprojects">
@@ -96,7 +98,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/governcontrolconsolidated" >
+                    <a class="nav-link" href="/governcontrolconsolidated">
                         <span class="feather-icon"><i data-feather="sliders"></i></span>
                         <span class="nav-link-text">G/C Consolidated </span>
                     </a>
@@ -109,6 +111,7 @@
             </div>
             <ul class="navbar-nav flex-column">
 
+                {% if user.is_staff %}
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0);" data-toggle="collapse"
                        data-target="#Components_drp">
@@ -116,6 +119,8 @@
                         <span class="nav-link-text">Make a Record</span>
                     </a>
                 </li>
+                {% endif %}
+
 
                 <li class="nav-item">
                     <a class="nav-link" href="/risks">
@@ -142,12 +147,17 @@
                 <span>UI</span>
             </div>
             <ul class="navbar-nav flex-column">
+
+                {% if user.is_staff %}
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <span class="feather-icon"><i data-feather="plus-circle"></i></span>
                         <span class="nav-link-text">Make a Record</span>
                     </a>
                 </li>
+                {% endif %}
+
+
                 <li class="nav-item">
                     <a class="nav-link" href="/a_o_apractices">
                         <span class="feather-icon"><i data-feather="list"></i></span>
