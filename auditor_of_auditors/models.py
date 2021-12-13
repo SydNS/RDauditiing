@@ -1,8 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from AuditProject.governanceandcontrol import models
-
+# from AuditProject import governanceandcontrol
 
 class Auditorofauditors(models.Model):
     CURRENT_STATUS_XY = (
@@ -23,7 +22,7 @@ class Auditorofauditors(models.Model):
     ageing_days = models.FloatField(db_column='Ageing__Days', max_length=100, blank=True, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.
     actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
     owner = models.CharField(db_column='Owner', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    final_approver =models.ForeignKey(Person, on_delete=models.CASCADE) # Field name made lowercase.
+    final_approver =models.ForeignKey('governanceandcontrol.Person', on_delete=models.CASCADE) # Field name made lowercase.
 
     def __str__(self):
         return self.internal_audit_leading_practices

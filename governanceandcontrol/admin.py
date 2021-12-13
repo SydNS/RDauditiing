@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 
 # Register your models here.
-from .models import GncTable, Dept, Person, GradingUser, Auditorofauditors
+from .models import GncTable, Dept, Person, GradingUser
 from .models import RiskManagement
 
 admin.site.site_header = 'Ruth Doreen Auditing Tool'
@@ -88,20 +88,20 @@ class RiskManagementAdmin(admin.ModelAdmin):
                      'impact', 'target',
                      )
 
-
-@admin.register(Auditorofauditors)
-class AuditorofauditorsAdmin(admin.ModelAdmin):
-    list_display = ('internal_audit_leading_practices', 'iia_standards', 'current_status_at_xy', 'assessment',
-                    'recommendations', 'action_plan', 'recommendation_state', 'agreed_implementation_date',
-                    'revised_implementation_date', 'last_status_update', 'ageing_days'
-                    , 'actual_implementation_date','owner', 'final_approver',
-                    )
-    list_filter = ('internal_audit_leading_practices','iia_standards', 'current_status_at_xy', 'ageing_days', )
-    search_fields = ('internal_audit_leading_practices', 'iia_standards', 'current_status_at_xy', 'assessment',
-                    'recommendations', 'action_plan', 'recommendation_state', 'agreed_implementation_date',
-                    'revised_implementation_date', 'last_status_update', 'ageing_days'
-                    , 'actual_implementation_date','owner', 'final_approver',
-                    )
+#
+# @admin.register(Auditorofauditors)
+# class AuditorofauditorsAdmin(admin.ModelAdmin):
+#     list_display = ('internal_audit_leading_practices', 'iia_standards', 'current_status_at_xy', 'assessment',
+#                     'recommendations', 'action_plan', 'recommendation_state', 'agreed_implementation_date',
+#                     'revised_implementation_date', 'last_status_update', 'ageing_days'
+#                     , 'actual_implementation_date','owner', 'final_approver',
+#                     )
+#     list_filter = ('internal_audit_leading_practices','iia_standards', 'current_status_at_xy', 'ageing_days', )
+#     search_fields = ('internal_audit_leading_practices', 'iia_standards', 'current_status_at_xy', 'assessment',
+#                     'recommendations', 'action_plan', 'recommendation_state', 'agreed_implementation_date',
+#                     'revised_implementation_date', 'last_status_update', 'ageing_days'
+#                     , 'actual_implementation_date','owner', 'final_approver',
+#                     )
 
 # class Auditorofauditors(models.Model):
 #     internal_audit_leading_practices = models.CharField(db_column='Internal_audit_leading_Practices', max_length=100, blank=True, null=True)  # Field name made lowercase.
