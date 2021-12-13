@@ -38,6 +38,16 @@ def loginuser(request):
     # return render(request, , info)
 
 
+@login_required
+def dashboard(request):
+    gncobj = models.GncTable.objects.all()
+    # info =
+    return render(request, 'governanceandcontrol/index.html', {
+        "gncojbects": gncobj
+    })
+
+
+
 def Logout(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")

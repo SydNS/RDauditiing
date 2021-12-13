@@ -11,14 +11,6 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-@login_required
-def dashboard(request):
-    gncobj = models.GncTable.objects.all()
-    # info =
-    return render(request, 'governanceandcontrol/index.html', {
-        "gncojbects": gncobj
-    })
-
 
 
 @login_required
