@@ -37,3 +37,8 @@ def loginuser(request):
     return render(request=request, template_name="governanceandcontrol/login.html", context={"login_form": form})
     # return render(request, , info)
 
+
+def Logout(request):
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return redirect('login')

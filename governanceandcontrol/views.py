@@ -20,10 +20,6 @@ def dashboard(request):
     })
 
 
-def Logout(request):
-    logout(request)
-    messages.info(request, "You have successfully logged out.")
-    return redirect('login')
 
 @login_required
 def Governcontrolprojects(request):
