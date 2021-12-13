@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -15,7 +16,7 @@ def Registering(request):
             return redirect("dashboard")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
-    return render(request=request, template_name="governanceandcontrol/register.html", context={"register_form": form})
+    return render(request=request, template_name="accounts/register.html", context={"register_form": form})
 
 
 def loginuser(request):
@@ -34,18 +35,8 @@ def loginuser(request):
         else:
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
-    return render(request=request, template_name="governanceandcontrol/login.html", context={"login_form": form})
+    return render(request=request, template_name="accounts/login.html", context={"login_form": form})
     # return render(request, , info)
-
-
-@login_required
-def dashboard(request):
-    gncobj = models.GncTable.objects.all()
-    # info =
-    return render(request, 'governanceandcontrol/index.html', {
-        "gncojbects": gncobj
-    })
-
 
 
 def Logout(request):

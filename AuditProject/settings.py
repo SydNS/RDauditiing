@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'governanceandcontrol',
     'auditor_of_auditors',
     'accounts',
+    'riskmanagement',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
