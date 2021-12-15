@@ -20,12 +20,15 @@
                     <div class="auth-form-wrap pt-xl-0 pt-70">
 
 
-                        <form method="POST">
+                        <form method="POST" action="">
                             <h1>
                                 Login
                             </h1>
                             {% csrf_token %}
                             {{ login_form|crispy }}
+<!--                            {% if request.GET.next %}-->
+<!--                            <input type="hidden" name="next" value="{{request.GET.next}}">-->
+<!--                            {% endif %}-->
                             <button class="btn btn-primary btn-block" type="submit">Login</button>
                             <p class="text-center">Do have an account yet? <a href="/register">Sign In</a></p>
 
