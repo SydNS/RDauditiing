@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+app_name="governance_app"
 urlpatterns = [
 
     path('', views.dashboard, name='dashboard'),
@@ -20,11 +21,6 @@ urlpatterns = [
     path('addgoverncontrol/', views.AddGoverncontrolprojects, name='addgoverncontrol'),
 
 
-
-    # risk management
-    path('risks/', views.Risks, name='risks'),
-    path('riskcontrol/', views.RiskControl, name='riskcontrol'),
-    path('keyrateindicator/', views.KRI, name='keyrateindicator'),
 
 
 
