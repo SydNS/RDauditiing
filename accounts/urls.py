@@ -8,5 +8,6 @@ urlpatterns = [
     path('register/', views.Registering, name='register'),
     path('logout/', views.Logout, name='logout'),
 
+    path("", include("governanceandcontrol.urls"),name="dashboard"),
 
 ]
