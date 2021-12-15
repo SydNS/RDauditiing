@@ -39,10 +39,6 @@ class RiskManagement(models.Model):
         ('PENDING', 'PENDING'),
         ('CLOSED', 'CLOSED'),
     )
-    # Financial - Liquidity, Financial - Interest
-    # Rate, Financial - Foreign
-    # Exchange, Financial - Investment, Financial - Market, Operational - Transaction, Operational - Human
-    # Resources, Operational - ICT, operational - Fraud, Legal, Compliance, Strategic, Reputation, Governance, Other
 
     RISK_CATEGORY = (
         ('Financial_Liquidity', 'Financial_Liquidity'),
@@ -62,32 +58,21 @@ class RiskManagement(models.Model):
         ('Other', 'Other'),
     )
 
-    xy_strategic_pillar = models.CharField(db_column='XY_Strategic_Pillar', max_length=100, blank=True,
-                                           null=True)  # Field name made lowercase.
-    xy_strategic_objectives = models.CharField(db_column='XY_Strategic_Objectives', max_length=100, blank=True,
-                                               null=True)  # Field name made lowercase.
-    risk_category = models.CharField(db_column='Risk_Category', max_length=100, blank=True,choices=RISK_CATEGORY,
-                                     null=True)  # Field name made lowercase.
-    risk_description = models.CharField(db_column='Risk_Description', max_length=100, blank=True,
-                                        null=True)  # Field name made lowercase.
-    likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=True,choices=LIKELIHOOD,
-                                  null=True)  # Field name made lowercase.
+    xy_strategic_pillar = models.CharField(db_column='XY_Strategic_Pillar', max_length=100, blank=True,null=True)  # Field name made lowercase.
+    xy_strategic_objectives = models.CharField(db_column='XY_Strategic_Objectives', max_length=100, blank=True,null=True)  # Field name made lowercase.
+    risk_category = models.CharField(db_column='Risk_Category', max_length=100, blank=True,choices=RISK_CATEGORY,null=True)  # Field name made lowercase.
+    risk_description = models.CharField(db_column='Risk_Description', max_length=100, blank=True,null=True)  # Field name made lowercase.
+    likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=True,choices=LIKELIHOOD,null=True)  # Field name made lowercase.
     impact = models.CharField(db_column='Impact', max_length=100, blank=True, null=True,choices=IMPACT_LEVELS)  # Field name made lowercase.
-    risk_rating = models.CharField(db_column='Risk_Rating', max_length=100, blank=True,choices=RATE_LEVELS,
-                                   null=True)  # Field name made lowercase.
-    control_exists_yesno = models.CharField(db_column='Control_Exists_YesNo', max_length=100, blank=True,choices=CONTROL_EXISTANCE,
-                                            null=True)  # Field name made lowercase.
-    control_description = models.CharField(db_column='Control_Description', max_length=100, blank=True,
-                                           null=True)  # Field name made lowercase.
-    control_is_adequate_yesno = models.CharField(db_column='Control_is_Adequate_YesNo', max_length=100, blank=True
-                                                 ,choices=CONTROL_EXISTANCE,
-                                                 null=True)  # Field name made lowercase.
-    recommended_control = models.CharField(db_column='Recommended_Control', max_length=100, blank=True,
-                                           null=True)  # Field name made lowercase.
+    risk_rating = models.CharField(db_column='Risk_Rating', max_length=100, blank=True,choices=RATE_LEVELS,null=True)  # Field name made lowercase.
+    control_exists_yesno = models.CharField(db_column='Control_Exists_YesNo', max_length=100, blank=True,choices=CONTROL_EXISTANCE, null=True)  # Field name made lowercase.
+    control_description = models.CharField(db_column='Control_Description', max_length=100, blank=True,null=True)  # Field name made lowercase.
+    control_is_adequate_yesno = models.CharField(db_column='Control_is_Adequate_YesNo', max_length=100, blank=True ,choices=CONTROL_EXISTANCE,null=True)  # Field name made lowercase.
+    recommended_control = models.CharField(db_column='Recommended_Control', max_length=100, blank=True,null=True)  # Field name made lowercase.
     action = models.CharField(db_column='Action', max_length=100, blank=True, null=True)  # Field name made lowercase.
     kri = models.CharField(db_column='KRI', max_length=100, blank=True, null=True)  # Field name made lowercase.
     target = models.CharField(db_column='Target', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    dept = models.ForeignKey(Dept, on_delete=models.CASCADE) # Field name made lowercase.
+    dept = models.ForeignKey('accounts.Dept', on_delete=models.CASCADE) # Field name made lowercase.
 
     def __str__(self):
         return self.xy_strategic_pillar
