@@ -62,3 +62,41 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self,app_label):
         return True
+
+
+class Dept(models.Model):
+    CRITICALITY_LEVELS = (
+        ('low', 'low'),
+        ('medium', 'medium'),
+        ('high', 'high'),
+    )
+    deptname = models.CharField(max_length=100)
+    deptrole = models.CharField(max_length=100)
+    numberofmembers = models.IntegerField()
+    criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,
+                                   choices=CRITICALITY_LEVELS, default='draft')  # Field name made lowercase.
+    def __str__(self):
+        return self.deptname
+
+
+    # class Meta:
+    #     unique_together = ("deptname", "deptrole",)
+
+
+class Person(models.Model):
+    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    personemail = models.EmailField()
+    personsdept = models.ForeignKey(Dept, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = "People"
+
+    def __str__(self):
+        return self.last_name
+
+
+class GradingUser(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    grade = models.PositiveSmallIntegerField()
+    deptnem = models.ForeignKey(Dept, on_delete=models.CASCADE)
