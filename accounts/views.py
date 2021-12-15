@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
-
-from django.contrib.auth.decorators import login_required
+from .forms import NewUserForm
+from django.contrib.auth import login, authenticate, logout  # add this
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
 
@@ -13,7 +15,7 @@ def Registering(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect("dashboard")
+            return redirect("governance_app:dashboard")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request=request, template_name="accounts/register.html", context={"register_form": form})
@@ -29,7 +31,7 @@ def loginuser(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect("dashboard")
+                return redirect("governance_app:dashboard")
             else:
                 messages.error(request, "Invalid username or password.")
         else:
