@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from . import models
 
 # Create your forms here.
-from .models import GncTable
 
 
 class NewUserForm(UserCreationForm):
