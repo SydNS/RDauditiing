@@ -3,7 +3,7 @@ from django.shortcuts import render
 from . import models
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from .forms import NewUserForm, GncTableForm
+from .forms import  GncTableForm
 from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
