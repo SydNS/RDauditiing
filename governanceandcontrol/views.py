@@ -1,4 +1,4 @@
-import days as days
+# import days as days
 from django.shortcuts import render
 from . import models
 from django.contrib.auth.forms import UserCreationForm
