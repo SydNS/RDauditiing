@@ -20,12 +20,6 @@
             <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 <div class="media">
-                    <div class="media-img-wrap">
-                        <div class="avatar">
-                            <img src="{% static 'dist/img/p0.png' %}" alt="user" class="avatar-img rounded-circle">
-                        </div>
-                        <span class="badge badge-success badge-indicator"></span>
-                    </div>
                     <div class="media-body">
                         <span>                 {{request.user.username|upper}}
 <i class="zmdi zmdi-chevron-down"></i></span>
@@ -43,7 +37,7 @@
                 </div>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout"><i
-                        class="dropdown-icon zmdi zmdi-power"></i><span>                 {{request.user.username}} Welcome to the
+                        class="dropdown-icon zmdi zmdi-power"></i><span>                 {{request.user.username}}
 Log out</span></a>
             </div>
         </li>
