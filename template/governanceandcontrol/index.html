@@ -63,14 +63,15 @@
             <div class="col-xl-12">
                 <div class="hk-row">
                     <div class="col-sm-12">
+
                         <div class="card-group hk-dash-type-2">
-                            <div class="card card-sm">
+                            <div class="card card-sm bg-dark-20 text-white">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
-                            >Projects</span
+                                    class="d-block font-15 text-white font-weight-500"
+                            >G&Control</span
                             >
                                         </div>
                                         <div>
@@ -78,126 +79,343 @@
                                         </div>
                                     </div>
                                     <div>
-                          <span class="d-block display-4 text-dark mb-5"
-                          ><span class="counter-anim">24</span></span
+                          <span class="d-block display-4 text-red mb-5"
+                          ><span class="counter-anim">{{ gncobjnumber }}</span></span
                           >
-                                        <small class="d-block">Total Issues</small>
+                                        <small class="d-block">Audit Project{{ gncobjnumber|pluralize:"s" }}</small>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="card card-sm">
-                                <div class="card-body">
+                            <!--                            criticalit-->
+                            <div class="card card-sm bg-dark text-white">
+                                <div class="card-body ">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
-                            >Issues</span
-                            >
-                                        </div>
-                                        <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >+12.5%</span
-                            >
-                                        </div>
-                                    </div>
-                                    <div>
-                          <span class="d-block display-4 text-dark mb-5"
-                          ><span class="counter-anim">24</span></span
-                          >
-                                        <small class="d-block">Total Issues</small>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card card-sm">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-5">
-                                        <div>
-                            <span
-                                    class="d-block font-15 text-dark font-weight-500"
-                            >Pending Projects</span
-                            >
-                                        </div>
-                                        <div>
-                            <span class="text-warning font-14 font-weight-500"
-                            >-2.8%</span
-                            >
-                                        </div>
-                                    </div>
-                                    <div>
-                          <span class="d-block display-4 text-dark mb-5"
-                          ><span class="counter-anim">{{24}}</span></span
-                          >
-                                        <small class="d-block">Total Projects</small>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card card-sm">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-5">
-                                        <div>
-                            <span
-                                    class="d-block font-15 text-dark font-weight-500"
-                            >Win/Loss Ratio</span
+                                    class="d-block font-15 text-green font-weight-500"
+                            >Low Criticality Issues : {{lowimpactissues}}</span
                             >
                                         </div>
                                         <div>
                             <span class="text-danger font-14 font-weight-500"
-                            >-75%</span
+                            >+{{highimpactissues}}%</span
                             >
                                         </div>
                                     </div>
                                     <div>
+                                        <small class="">High Criticality Issues:
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
+                                        <small class="d-block text-warning">Moderate Criticality
+                                            Issues:{{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--                            recomendation state-->
+                            <div class="card card-sm bg-dark-20 text-white">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
                                         <div>
-                          <span class="d-block display-4 text-dark mb-5"
-                          ><span class="counter-anim">24</span></span
+                            <span
+                                    class="d-block font-15 text-danger font-weight-500"
+                            >Pending Recom'n : {{PARTIALLY_IMPLEMENTED}}</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            >{{ percentagecompleted}}%</span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="text-green">Closed Recom'n :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-success counter-anim">{{CLOSED}}</span></span></small>
+                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--                            ageing days-->
+                            <div class="card card-sm bg-dark">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-info font-weight-500"
+                            >Total Ageing Days : {{totaldays}}</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            >{{ percentagecompleted}}%</span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">Total Ageing Days :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-info counter-anim">{{totaldays}}</span></span></small>
+                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--risk Management-->
+                        <div class="card-group hk-dash-type-2 ">
+                            <div class="card card-sm bg-dark-80 text-white">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-white font-weight-500"
+                            >Risk Management</span
+                            >
+                                        </div>
+                                        <div>
+                                            <!--                                            <span>10%</span>-->
+                                        </div>
+                                    </div>
+                                    <div>
+                          <span class="d-block display-4 text-white mb-5"
+                          ><span class="counter-anim">{{consolidateddata|length}}</span></span
                           >
-                                            <small class="d-block">Total Issues</small>
+                                        <small class="d-block">Total Risks</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--                            Impact-->
+                            <div class="card card-sm bg-dark-20">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-danger font-weight-500"
+                            >Low Impact : {{risklowimpactissues}}</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-danger font-14 font-weight-500"
+                            ></span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">High Impact :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-danger counter-anim">{{riskhighimpactissues}}</span></span></small>
+                                        <small class="d-block text-danger">Moderate Impact
+                                            :{{riskmediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--                            Likelihood-->
+                            <div class="card card-sm bg-dark-80 text-white">
+                                <div class="card-body ">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-white font-weight-500"
+                            >Low Chances : {{risklikelihoodlow}}</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            ></span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">High Chances :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-white counter-anim">{{risklikelihoodhigh}}</span></span></small>
+                                        <small class="d-block text-white">Moderate Chances
+                                            :{{risklikelihoodmoderate}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--                            recomendation state-->
+                            <div class="card card-sm bg-dark-20 text-white">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-warning font-weight-500"
+                            >XY Strategic pillar : {{riskobjnumber}}</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            ></span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">XY Strategic pillar :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-info counter-anim">{{CLOSED}}</span></span></small>
+                                        <small class="d-block">Risk Categories : {{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--                            ageing days-->
+                            <div class="card card-sm bg-dark-80 text-white">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-white font-weight-500"
+                            >Control Present : {{totaldays}}%</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            >{{ percentagecompleted}}%</span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">Affected Depts :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-info counter-anim">{{totaldays}}</span></span></small>
+                                        <small class="d-block">Adequate Control : {{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="hk-row">
+                        <div class="col-lg-6">
+
+                            <div class="card">
+                                <div class="card-header card-header-action">
+                                    <h6>Governance and Control Summary</h6>
+                                    <div class="d-flex align-items-center card-action-wrap">
+                                        <a href="#" class="inline-block refresh mr-15">
+                                            <i class="ion ion-md-arrow-down"></i>
+                                        </a>
+                                        <a href="#" class="inline-block full-screen">
+                                            <i class="ion ion-md-expand"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body pa-0 full-screen mr-15">
+
+                                    <div class="table-wrap">
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-hover mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th class="w-25">Project Id</th>
+                                                    <th>Project name</th>
+                                                    <th>Quarter</th>
+                                                    <th> Criticality</th>
+                                                    <th>Ageing Days</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for singleinfo in gncojbects %}
+
+                                                <tr>
+                                                    <td><a href="{{ singleinfo.audit_project_code }}">
+                                                        {{singleinfo.id}}</a></td>
+                                                    <td>{{ singleinfo.audit_project_name}}</td>
+                                                    <td>{{ singleinfo.quarter}}</td>
+                                                    <td>{{ singleinfo.criticality}}</td>
+                                                    <td>{{ singleinfo.ageing_days}}</td>
+                                                </tr>
+                                                {% endfor %}
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header card-header-action">
+                                    <h6>Risk Mangement Summary </h6>
+                                    <div class="d-flex align-items-center card-action-wrap">
+                                        <a href="#" class="inline-block refresh mr-15">
+                                            <i class="ion ion-md-arrow-down"></i>
+                                        </a>
+                                        <a href="#" class="inline-block full-screen">
+                                            <i class="ion ion-md-expand"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body pa-0 full-screen mr-15">
+
+                                    <div class="table-wrap">
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-hover mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>XY Strategic Pillar</th>
+                                                    <th>XY Strategic Objectives</th>
+                                                    <th>Risk Category</th>
+                                                    <th>Risk Description</th>
+                                                    <th>Likelihood</th>
+                                                    <th>Impact</th>
+                                                    <th>Risk Rating</th>
+                                                    <th>Department</th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                {% for singleinfo in riskobj %}
+                                                <tr>
+                                                <tr>
+                                                    <td><a href="#">{{singleinfo.xy_strategic_pillar}}</a></td>
+                                                    <td>{{singleinfo.xy_strategic_objectives}}</td>
+                                                    <td>{{singleinfo.risk_category}}</td>
+                                                    <td>{{singleinfo.risk_description}}</td>
+                                                    <td>{{singleinfo.likelihood}}</td>
+                                                    <td>{{singleinfo.impact}}</td>
+                                                    <td>{{singleinfo.risk_rating}}</td>
+                                                    <td>{{singleinfo.dept}}</td>
+                                                    <!--                                            xy_strategic_pillar = models.CharField(db_column='XY_Strategic_Pillar', max_length=100, blank=True,null=True)  # Field name made lowercase.-->
+<!--    xy_strategic_objectives = models.CharField(db_column='XY_Strategic_Objectives', max_length=100, blank=True,null=True)  # Field name made lowercase.-->
+<!--    risk_category = models.CharField(db_column='Risk_Category', max_length=100, blank=True,choices=RISK_CATEGORY,null=True)  # Field name made lowercase.-->
+<!--    risk_description = models.CharField(db_column='Risk_Description', max_length=100, blank=True,null=True)  # Field name made lowercase.-->
+<!--    likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=True,choices=LIKELIHOOD,null=True)  # Field name made lowercase.-->
+<!--    impact = models.CharField(db_column='Impact', max_length=100, blank=True, null=True,choices=IMPACT_LEVELS)  # Field name made lowercase.-->
+<!--    risk_rating = models.CharField(db_column='Risk_Rating', max_length=100, blank=True,choices=RATE_LEVELS,null=True)  # Field name made lowercase.-->
+<!--    control_exists_yesno = models.CharField(db_column='Control_Exists_YesNo', max_length=100, blank=True,choices=CONTROL_EXISTANCE, null=True)  # Field name made lowercase.-->
+<!--    control_description = models.CharField(db_column='Control_Description', max_length=100, blank=True,null=True)  # Field name made lowercase.-->
+<!--    control_is_adequate_yesno = models.CharField(db_column='Control_is_Adequate_YesNo', max_length=100, blank=True ,choices=CONTROL_EXISTANCE,null=True)  # Field name made lowercase.-->
+<!--    recommended_control = models.CharField(db_column='Recommended_Control', max_length=100, blank=True,null=True)  # Field name made lowercase.-->
+<!--    action = models.CharField(db_column='Action', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    kri = models.CharField(db_column='KRI', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    target = models.CharField(db_column='Target', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    dept = models.ForeignKey('accounts.Dept', on_delete=models.CASCADE) # Field name made lowercase.-->
+
+
+                                                </tr>
+                                                </tr>
+                                                {% endfor %}
+
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="hk-row">
                         <div class="col-lg-6">
-                            <div class="card card-refresh">
-                                <div class="refresh-container">
-                                    <div class="loader-pendulums"></div>
-                                </div>
-                                <div class="card-header card-header-action">
-                                    <h6>Youtube Subscribers</h6>
-                                    <div class="d-flex align-items-center card-action-wrap">
-                                        <a href="#" class="inline-block refresh mr-15">
-                                            <i class="ion ion-md-radio-button-off"></i>
-                                        </a>
-                                        <div class="inline-block dropdown">
-                                            <a class="dropdown-toggle no-caret" data-toggle="dropdown" href="#"
-                                               aria-expanded="false" role="button"><i class="ion ion-md-more"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Separated link</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="hk-legend-wrap mb-20">
-                                        <div class="hk-legend">
-                                            <span class="d-10 bg-neon rounded-circle d-inline-block"></span><span>Desktop</span>
-                                        </div>
-                                        <div class="hk-legend">
-                                            <span class="d-10 bg-neon-light-1 rounded-circle d-inline-block"></span><span>Mobile</span>
-                                        </div>
-                                    </div>
-                                    <div id="area_chart" style="height: 240px;"></div>
-                                </div>
-                            </div>
+
                             <div class="card">
                                 <div class="card-header card-header-action">
                                     <h6></h6>
@@ -228,7 +446,8 @@
                                                 {% for singleinfo in gncojbects %}
 
                                                 <tr>
-                                                    <td><a href="{{ singleinfo.audit_project_code }}">{{ singleinfo.id}}</a></td>
+                                                    <td><a href="{{ singleinfo.audit_project_code }}">
+                                                        {{singleinfo.id}}</a></td>
                                                     <td>{{ singleinfo.audit_project_name}}</td>
                                                     <td>{{ singleinfo.quarter}}</td>
                                                     <td>{{ singleinfo.criticality}}</td>
@@ -246,173 +465,47 @@
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header card-header-action">
-                                    <h6>Linkedin Key Metrics</h6>
+                                    <h6></h6>
                                     <div class="d-flex align-items-center card-action-wrap">
                                         <a href="#" class="inline-block refresh mr-15">
                                             <i class="ion ion-md-arrow-down"></i>
                                         </a>
-                                        <a href="#" class="inline-block full-screen mr-15">
+                                        <a href="#" class="inline-block full-screen">
                                             <i class="ion ion-md-expand"></i>
-                                        </a>
-                                        <a class="inline-block card-close" href="#" data-effect="fadeOut">
-                                            <i class="ion ion-md-close"></i>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="card-body pa-0">
+                                <div class="card-body pa-0 full-screen mr-15">
+
                                     <div class="table-wrap">
                                         <div class="table-responsive">
                                             <table class="table table-sm table-hover mb-0">
                                                 <thead>
                                                 <tr>
-                                                    <th>Metrics</th>
-                                                    <th class="w-40">Period</th>
-                                                    <th class="w-25">Past</th>
-                                                    <th>Trend</th>
+                                                    <th class="w-25">Project Id</th>
+                                                    <th>Project name</th>
+                                                    <th>Quarter</th>
+                                                    <th> Criticality</th>
+                                                    <th>Ageing Days</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                {% for singleinfo in gncojbects %}
+
                                                 <tr>
-                                                    <td>Clicks</td>
-                                                    <td>
-                                                        <div class="progress-wrap lb-side-left mnw-125p">
-                                                            <div class="progress-lb-wrap">
-                                                                <label class="progress-label mnw-50p">1,184</label>
-                                                                <div class="progress progress-bar-rounded progress-bar-xs">
-                                                                    <div class="progress-bar bg-primary w-70"
-                                                                         role="progressbar" aria-valuenow="70"
-                                                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>1,234</td>
-                                                    <td>
-                                                        <div id="sparkline_1"></div>
-                                                    </td>
+                                                    <td><a href="{{ singleinfo.audit_project_code }}">
+                                                        {{singleinfo.id}}</a></td>
+                                                    <td>{{ singleinfo.audit_project_name}}</td>
+                                                    <td>{{ singleinfo.quarter}}</td>
+                                                    <td>{{ singleinfo.criticality}}</td>
+                                                    <td>{{ singleinfo.ageing_days}}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Visits</td>
-                                                    <td>
-                                                        <div class="progress-wrap lb-side-left mnw-125p">
-                                                            <div class="progress-lb-wrap">
-                                                                <label class="progress-label mnw-50p">1,425</label>
-                                                                <div class="progress progress-bar-rounded progress-bar-xs">
-                                                                    <div class="progress-bar bg-neon-light-3 w-70"
-                                                                         role="progressbar" aria-valuenow="70"
-                                                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>3,458</td>
-                                                    <td>
-                                                        <div id="sparkline_2"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Views</td>
-                                                    <td>
-                                                        <div class="progress-wrap lb-side-left mnw-125p">
-                                                            <div class="progress-lb-wrap">
-                                                                <label class="progress-label mnw-50p">5,623</label>
-                                                                <div class="progress progress-bar-rounded progress-bar-xs">
-                                                                    <div class="progress-bar bg-neon-light-4 w-60"
-                                                                         role="progressbar" aria-valuenow="70"
-                                                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>53,637</td>
-                                                    <td>
-                                                        <div id="sparkline_3"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Returns</td>
-                                                    <td>
-                                                        <div class="progress-wrap lb-side-left mnw-125p">
-                                                            <div class="progress-lb-wrap">
-                                                                <label class="progress-label mnw-50p">4,851</label>
-                                                                <div class="progress progress-bar-rounded progress-bar-xs">
-                                                                    <div class="progress-bar bg-neon-light-1 w-55"
-                                                                         role="progressbar" aria-valuenow="70"
-                                                                         aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>20,596</td>
-                                                    <td>
-                                                        <div id="sparkline_4"></div>
-                                                    </td>
-                                                </tr>
+                                                {% endfor %}
+
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header card-header-action">
-                                    <h6>Users by Gendar & Age</h6>
-                                    <div class="d-flex align-items-center card-action-wrap">
-                                        <div class="inline-block dropdown">
-                                            <a class="dropdown-toggle no-caret" data-toggle="dropdown" href="#"
-                                               aria-expanded="false" role="button"><i class="ion ion-ios-more"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Separated link</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body full-screen mr-15">
-                                    <div id="m_chart_4" style="height:250px;"></div>
-                                    <div class="hk-legend-wrap mt-20">
-                                        <div class="hk-legend">
-                                            <span class="d-10 bg-primary rounded-circle d-inline-block"></span><span>18-24</span>
-                                        </div>
-                                        <div class="hk-legend">
-                                            <span class="d-10 bg-neon-light-1 rounded-circle d-inline-block"></span><span>25-34</span>
-                                        </div>
-                                        <div class="hk-legend">
-                                            <span class="d-10 bg-neon-light-2 rounded-circle d-inline-block"></span><span>35-44</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header card-header-action">
-                                    <h6>Analytics Audience Matrics</h6>
-                                    <div class="d-flex align-items-center card-action-wrap">
-                                        <div class="inline-block dropdown">
-                                            <a class="dropdown-toggle no-caret" data-toggle="dropdown" href="#"
-                                               aria-expanded="false" role="button"><i class="ion ion-ios-more"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Separated link</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="hk-legend-wrap mb-20">
-                                        <div class="hk-legend">
-                                            <span class="d-10 bg-primary rounded-circle d-inline-block"></span><span>Users</span>
-                                        </div>
-                                        <div class="hk-legend">
-                                            <span class="d-10 bg-neon-light-1 rounded-circle d-inline-block"></span><span>Sessions</span>
-                                        </div>
-                                    </div>
-                                    <div id="e_chart_6" class="echart" style="height:225px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -420,747 +513,88 @@
                 </div>
 
                 <div class="col-xl-12">
-                    <section class="hk-sec-wrapper">
-                        <h5 class="hk-sec-title">Data Table</h5>
-                        <p class="mb-40">Add advanced interaction controls to HTML tables like <code>search, pagination
-                            & selectors</code>. For responsive table just add the <code>responsive: true</code> to your
-                            DataTables function. <a href="https://datatables.net/reference/option/" target="_blank">View
-                                all options</a>.</p>
-                        <div class="row">
-                            <div class="col-sm">
-                                <div class="table-wrap">
-                                    <table id="datable_1" class="table table-hover w-100 display pb-30">
-                                        <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2012/12/02</td>
-                                            <td>$372,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Herrod Chandler</td>
-                                            <td>Sales Assistant</td>
-                                            <td>San Francisco</td>
-                                            <td>59</td>
-                                            <td>2012/08/06</td>
-                                            <td>$137,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Tokyo</td>
-                                            <td>55</td>
-                                            <td>2010/10/14</td>
-                                            <td>$327,900</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Javascript Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>39</td>
-                                            <td>2009/09/15</td>
-                                            <td>$205,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sonya Frost</td>
-                                            <td>Software Engineer</td>
-                                            <td>Edinburgh</td>
-                                            <td>23</td>
-                                            <td>2008/12/13</td>
-                                            <td>$103,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jena Gaines</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>30</td>
-                                            <td>2008/12/19</td>
-                                            <td>$90,560</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Quinn Flynn</td>
-                                            <td>Support Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2013/03/03</td>
-                                            <td>$342,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Charde Marshall</td>
-                                            <td>Regional Director</td>
-                                            <td>San Francisco</td>
-                                            <td>36</td>
-                                            <td>2008/10/16</td>
-                                            <td>$470,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Haley Kennedy</td>
-                                            <td>Senior Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>43</td>
-                                            <td>2012/12/18</td>
-                                            <td>$313,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tatyana Fitzpatrick</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>19</td>
-                                            <td>2010/03/17</td>
-                                            <td>$385,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Silva</td>
-                                            <td>Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>66</td>
-                                            <td>2012/11/27</td>
-                                            <td>$198,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Paul Byrd</td>
-                                            <td>Chief Financial Officer (CFO)</td>
-                                            <td>New York</td>
-                                            <td>64</td>
-                                            <td>2010/06/09</td>
-                                            <td>$725,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gloria Little</td>
-                                            <td>Systems Administrator</td>
-                                            <td>New York</td>
-                                            <td>59</td>
-                                            <td>2009/04/10</td>
-                                            <td>$237,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bradley Greer</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>41</td>
-                                            <td>2012/10/13</td>
-                                            <td>$132,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dai Rios</td>
-                                            <td>Personnel Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>35</td>
-                                            <td>2012/09/26</td>
-                                            <td>$217,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jenette Caldwell</td>
-                                            <td>Development Lead</td>
-                                            <td>New York</td>
-                                            <td>30</td>
-                                            <td>2011/09/03</td>
-                                            <td>$345,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Yuri Berry</td>
-                                            <td>Chief Marketing Officer (CMO)</td>
-                                            <td>New York</td>
-                                            <td>40</td>
-                                            <td>2009/06/25</td>
-                                            <td>$675,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Caesar Vance</td>
-                                            <td>Pre-Sales Support</td>
-                                            <td>New York</td>
-                                            <td>21</td>
-                                            <td>2011/12/12</td>
-                                            <td>$106,450</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Doris Wilder</td>
-                                            <td>Sales Assistant</td>
-                                            <td>Sidney</td>
-                                            <td>23</td>
-                                            <td>2010/09/20</td>
-                                            <td>$85,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Angelica Ramos</td>
-                                            <td>Chief Executive Officer (CEO)</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2009/10/09</td>
-                                            <td>$1,200,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Joyce</td>
-                                            <td>Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>42</td>
-                                            <td>2010/12/22</td>
-                                            <td>$92,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Chang</td>
-                                            <td>Regional Director</td>
-                                            <td>Singapore</td>
-                                            <td>28</td>
-                                            <td>2010/11/14</td>
-                                            <td>$357,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brenden Wagner</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>28</td>
-                                            <td>2011/06/07</td>
-                                            <td>$206,850</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fiona Green</td>
-                                            <td>Chief Operating Officer (COO)</td>
-                                            <td>San Francisco</td>
-                                            <td>48</td>
-                                            <td>2010/03/11</td>
-                                            <td>$850,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shou Itou</td>
-                                            <td>Regional Marketing</td>
-                                            <td>Tokyo</td>
-                                            <td>20</td>
-                                            <td>2011/08/14</td>
-                                            <td>$163,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michelle House</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Sidney</td>
-                                            <td>37</td>
-                                            <td>2011/06/02</td>
-                                            <td>$95,400</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suki Burks</td>
-                                            <td>Developer</td>
-                                            <td>London</td>
-                                            <td>53</td>
-                                            <td>2009/10/22</td>
-                                            <td>$114,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Prescott Bartlett</td>
-                                            <td>Technical Author</td>
-                                            <td>London</td>
-                                            <td>27</td>
-                                            <td>2011/05/07</td>
-                                            <td>$145,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Cortez</td>
-                                            <td>Team Leader</td>
-                                            <td>San Francisco</td>
-                                            <td>22</td>
-                                            <td>2008/10/26</td>
-                                            <td>$235,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Martena Mccray</td>
-                                            <td>Post-Sales support</td>
-                                            <td>Edinburgh</td>
-                                            <td>46</td>
-                                            <td>2011/03/09</td>
-                                            <td>$324,050</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Unity Butler</td>
-                                            <td>Marketing Designer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/12/09</td>
-                                            <td>$85,675</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Howard Hatfield</td>
-                                            <td>Office Manager</td>
-                                            <td>San Francisco</td>
-                                            <td>51</td>
-                                            <td>2008/12/16</td>
-                                            <td>$164,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hope Fuentes</td>
-                                            <td>Secretary</td>
-                                            <td>San Francisco</td>
-                                            <td>41</td>
-                                            <td>2010/02/12</td>
-                                            <td>$109,850</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vivian Harrell</td>
-                                            <td>Financial Controller</td>
-                                            <td>San Francisco</td>
-                                            <td>62</td>
-                                            <td>2009/02/14</td>
-                                            <td>$452,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Timothy Mooney</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>37</td>
-                                            <td>2008/12/11</td>
-                                            <td>$136,200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jackson Bradshaw</td>
-                                            <td>Director</td>
-                                            <td>New York</td>
-                                            <td>65</td>
-                                            <td>2008/09/26</td>
-                                            <td>$645,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Olivia Liang</td>
-                                            <td>Support Engineer</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2011/02/03</td>
-                                            <td>$234,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bruno Nash</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>38</td>
-                                            <td>2011/05/03</td>
-                                            <td>$163,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sakura Yamamoto</td>
-                                            <td>Support Engineer</td>
-                                            <td>Tokyo</td>
-                                            <td>37</td>
-                                            <td>2009/08/19</td>
-                                            <td>$139,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thor Walton</td>
-                                            <td>Developer</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2013/08/11</td>
-                                            <td>$98,540</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Finn Camacho</td>
-                                            <td>Support Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/07/07</td>
-                                            <td>$87,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Serge Baldwin</td>
-                                            <td>Data Coordinator</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2012/04/09</td>
-                                            <td>$138,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zenaida Frank</td>
-                                            <td>Software Engineer</td>
-                                            <td>New York</td>
-                                            <td>63</td>
-                                            <td>2010/01/04</td>
-                                            <td>$125,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zorita Serrano</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>56</td>
-                                            <td>2012/06/01</td>
-                                            <td>$115,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Acosta</td>
-                                            <td>Junior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>43</td>
-                                            <td>2013/02/01</td>
-                                            <td>$75,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                            <td>46</td>
-                                            <td>2011/12/06</td>
-                                            <td>$145,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hermione Butler</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2011/03/21</td>
-                                            <td>$356,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lael Greer</td>
-                                            <td>Systems Administrator</td>
-                                            <td>London</td>
-                                            <td>21</td>
-                                            <td>2009/02/27</td>
-                                            <td>$103,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jonas Alexander</td>
-                                            <td>Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>30</td>
-                                            <td>2010/07/14</td>
-                                            <td>$86,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shad Decker</td>
-                                            <td>Regional Director</td>
-                                            <td>Edinburgh</td>
-                                            <td>51</td>
-                                            <td>2008/11/13</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>29</td>
-                                            <td>2011/06/27</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>27</td>
-                                            <td>2011/01/25</td>
-                                            <td>$112,000</td>
-                                        </tr>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
+                    <div class="col-xl-12">
+                        <section class="hk-sec-wrapper">
+                            <h5 class="hk-sec-title">Audit Projects</h5>
+                            <p>Kindly export in the format of your choosing</p><br>
+
+                            <!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
+                            <!--                            export table options.</p>-->
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="table-wrap">
+                                        <table id="datable_3"
+                                               class="table table-hover table-responsive w-100 display pb-30">
+                                            <thead>
+                                            <tr>
+                                                <!-- Audit Project Code,	Audit Project Name,	Quarter,	Audit Project Type,	Issue Title, -->
+
+
+                                                <th>Audit Project Code</th>
+                                                <th>Audit Project Name</th>
+                                                <th>Quarter</th>
+                                                <th>Audit Project Type</th>
+                                                <th>Issue Title</th>
+                                                <th>Recommendations</th>
+                                                <th>Ageing Days</th>
+                                            </tr>
+                                            </thead>
+                                            <!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                            <!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                            <!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                            <!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                            <!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                            <!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
+                                            <!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                            <!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                            <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+
+                                            <tbody>
+                                            {% for singleinfo in highimpactprojects %}
+                                            <tr>
+                                                <td><a href="#">{{singleinfo.audit_project_code}}</a></td>
+                                                <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
+                                                <td><a href="#">{{singleinfo.quarter}}</a></td>
+                                                <td><a href="#">{{singleinfo.audit_project_type}}</a></td>
+                                                <td><a href="#">{{singleinfo.issue_title}}</a></td>
+                                                <td><a href="#">{{singleinfo.recommendation}}</a></td>
+                                                <td><a href="#">{{singleinfo.ageing_days}}</a></td>
+
+
+                                            </tr>
+                                            {% endfor %}
+
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th>Audit Project Code</th>
+                                                <th>Audit Project Name</th>
+                                                <th>Quarter</th>
+                                                <th>Audit Project Type</th>
+                                                <th>Issue Title</th>
+                                                <th>Recommendations</th>
+                                                <th>Ageing Days</th>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                    <section class="hk-sec-wrapper full-screen mr-15">
-                        <h5 class="hk-sec-title">Export Table</h5>
-                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add
-                            export table options.</p>
-                        <div class="row">
-                            <div class="col-sm">
-                                <div class="table-wrap">
-                                    <table id="datable_3" class="table table-hover w-100 display">
-                                        <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Adwez Nash</td>
-                                            <td>Software Engineer</td>
-                                            <td>India</td>
-                                            <td>38</td>
-                                            <td>2014/05/03</td>
-                                            <td>$763,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                        </section>
 
-                    <section>
-
-          <div class="row">
-            <div class="col-xl-12">
-              <section class="hk-sec-wrapper">
-                <h5 class="hk-sec-title">Mode Switch Table</h5>
-                <p class="mb-40">
-                  The Stack Table stacks the table headers to a two column
-                  layout with headers on the left when the viewport width is
-                  less than 40em (640px). Swipe Mode, ModeSwitch, Minimap,
-                  Sortable, SortableSwitch modes are available.
-                </p>
-                <div class="row">
-                  <div class="col-sm">
-                    <div class="table-wrap">
-                      <table
-                        class="table tablesaw table-bordered table-hover mb-0"
-                        data-tablesaw-mode="swipe"
-                        data-tablesaw-sortable
-                        data-tablesaw-sortable-switch
-                        data-tablesaw-minimap
-                        data-tablesaw-mode-switch
-                      >
-                        <thead>
-                          <tr>
-                            <th
-                              scope="col"
-                              data-tablesaw-sortable-col
-                              data-tablesaw-priority="persist"
-                            >
-                              Movie
-                            </th>
-                            <th
-                              scope="col"
-                              data-tablesaw-sortable-col
-                              data-tablesaw-sortable-default-col
-                              data-tablesaw-priority="3"
-                            >
-                              Rank
-                            </th>
-                            <th
-                              scope="col"
-                              data-tablesaw-sortable-col
-                              data-tablesaw-priority="2"
-                            >
-                              Year
-                            </th>
-                            <th
-                              scope="col"
-                              data-tablesaw-sortable-col
-                              data-tablesaw-priority="1"
-                            >
-                              <abbr title="Rotten Tomato Rating">Rating</abbr>
-                            </th>
-                            <th
-                              scope="col"
-                              data-tablesaw-sortable-col
-                              data-tablesaw-priority="4"
-                            >
-                              Gross
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="title">
-                              <a href="javascript:void(0)">Avatar</a>
-                            </td>
-                            <td>1</td>
-                            <td>2009</td>
-                            <td>83%</td>
-                            <td>$2.7B</td>
-                          </tr>
-                          <tr>
-                            <td class="title">
-                              <a href="javascript:void(0)">Titanic</a>
-                            </td>
-                            <td>2</td>
-                            <td>1997</td>
-                            <td>88%</td>
-                            <td>$2.1B</td>
-                          </tr>
-                          <tr>
-                            <td class="title">
-                              <a href="javascript:void(0)">The Avengers</a>
-                            </td>
-                            <td>3</td>
-                            <td>2012</td>
-                            <td>92%</td>
-                            <td>$1.5B</td>
-                          </tr>
-                          <tr>
-                            <td class="title">
-                              <a href="javascript:void(0)"
-                                >Harry Potter and the Deathly Hallows—Part 2</a
-                              >
-                            </td>
-                            <td>4</td>
-                            <td>2011</td>
-                            <td>96%</td>
-                            <td>$1.3B</td>
-                          </tr>
-                          <tr>
-                            <td class="title">
-                              <a href="javascript:void(0)">Frozen</a>
-                            </td>
-                            <td>5</td>
-                            <td>2013</td>
-                            <td>89%</td>
-                            <td>$1.2B</td>
-                          </tr>
-                          <tr>
-                            <td class="title">
-                              <a href="javascript:void(0)">Iron Man 3</a>
-                            </td>
-                            <td>6</td>
-                            <td>2013</td>
-                            <td>78%</td>
-                            <td>$1.2B</td>
-                          </tr>
-                          <tr>
-                            <td class="title">
-                              <a href="javascript:void(0)"
-                                >Transformers: Dark of the Moon</a
-                              >
-                            </td>
-                            <td>7</td>
-                            <td>2011</td>
-                            <td>36%</td>
-                            <td>$1.1B</td>
-                          </tr>
-                          <tr>
-                            <td class="title">
-                              <a href="javascript:void(0)"
-                                >The Lord of the Rings: The Return of the
-                                King</a
-                              >
-                            </td>
-                            <td>8</td>
-                            <td>2003</td>
-                            <td>95%</td>
-                            <td>$1.1B</td>
-                          </tr>
-                          <tr>
-                            <td class="title">
-                              <a href="javascript:void(0)">Skyfall</a>
-                            </td>
-                            <td>9</td>
-                            <td>2012</td>
-                            <td>92%</td>
-                            <td>$1.1B</td>
-                          </tr>
-                          <tr>
-                            <td class="title">
-                              <a href="javascript:void(0)"
-                                >Transformers: Age of Extinction</a
-                              >
-                            </td>
-                            <td>10</td>
-                            <td>2014</td>
-                            <td>18%</td>
-                            <td>$1.0B</td>
-                          </tr>
-                        </tbody>
-                      </table>
                     </div>
-                  </div>
                 </div>
-              </section>
-            </div>
-          </div>
-                    </section>
 
-                </div>
+
+
+
+                <!-- /Row -->
             </div>
-            <!-- /Row -->
+            <!-- /Container -->
+
         </div>
-        <!-- /Container -->
+        <!-- /Main Content -->
+        {% include 'verticalnavbar.html' %}
 
-    </div>
-    <!-- /Main Content -->
-    {% include 'verticalnavbar.html' %}
-
-    {% endblock %}
+        {% endblock %}
 

@@ -21,5 +21,7 @@ urlpatterns = [
     path('', include('governanceandcontrol.urls'),name='governance_app'),
     path('', include('auditor_of_auditors.urls')),
     path('', include('accounts.urls')),
+    path('', include('calendarapp.urls')),
+    path('', include('riskmanagement.urls')),
 
 ]

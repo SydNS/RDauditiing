@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'auditor_of_auditors',
     'accounts',
     'riskmanagement',
+    'calendarapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

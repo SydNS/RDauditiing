@@ -1,5 +1,14 @@
 from django.shortcuts import render
 from . import models
+import days as days
+from django.shortcuts import render
+from . import models
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate, logout  # add this
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 # IMPACT_LEVELS = (
@@ -75,8 +84,8 @@ def Risks(request):
 
     # ageing days total
 
-    for totaldays in consolidatedgncobj:
-        totaldays = +totaldays.ageing_days
+    # for totaldays in consolidatedgncobj:
+    #     totaldays = +totaldays.ageing_days
 
     return render(request=request, template_name="riskmanagement/risks.html",
                   context={
@@ -95,7 +104,7 @@ def Risks(request):
                       "percentagecompleted": percentagecompleted,
 
                       # reommendations
-                      "totaldays": round(totaldays, 1),
+                      # "totaldays": round(totaldays, 1),
 
                   })
 
@@ -108,14 +117,14 @@ def RiskControl(request):
 
 
     # counting the number issues at different levels of criticality
-    mediumimpactissues = models.GncTable.objects.filter(
-        criticality='medium',
+    mediumimpactissues = models.RiskManagement.objects.filter(
+        impact='medium',
     ).count()
-    highimpactissues = models.GncTable.objects.filter(
-        criticality='high',
+    highimpactissues = models.RiskManagement.objects.filter(
+        impact='high',
     ).count()
-    lowimpactissues = models.GncTable.objects.filter(
-        criticality='low',
+    lowimpactissues = models.RiskManagement.objects.filter(
+        impact='low',
     ).count()
 
     # counting the number issues at different levels of state
@@ -124,22 +133,11 @@ def RiskControl(request):
     #     ('PENDING', 'PENDING'),
     #     ('CLOSED', 'CLOSED'),
     # )
-    PENDING = models.RiskManagement.objects.filter(
-        recommendation_state='PENDING',
-    ).count()
-    CLOSED = models.RiskManagement.objects.filter(
-        recommendation_state='CLOSED',
-    ).count()
-    PARTIALLY_IMPLEMENTED = models.RiskManagement.objects.filter(
-        recommendation_state='PARTIALLY_IMPLEMENTED',
-    ).count()
-    # percentage of completed recos
-    percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
-
+  
     # ageing days total
 
-    for totaldays in consolidatedgncobj:
-        totaldays = +totaldays.ageing_days
+    # for totaldays in consolidatedgncobj:
+    #     totaldays = +totaldays.ageing_days
 
     return render(request=request, template_name="riskmanagement/riskcontrol.html",
                   context={
@@ -152,13 +150,10 @@ def RiskControl(request):
                       "lowimpactissues": lowimpactissues,
 
                       # reommendations
-                      "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
-                      "PENDING": PENDING,
-                      "CLOSED": CLOSED,
-                      "percentagecompleted": percentagecompleted,
+                  
 
                       # reommendations
-                      "totaldays": round(totaldays, 1),
+                      # "totaldays": round(totaldays, 1),
 
                   })
 
@@ -172,37 +167,20 @@ def KRI(request):
 
     # counting the number issues at different levels of criticality
     mediumimpactissues = models.RiskManagement.objects.filter(
-        criticality='medium',
+        impact='medium',
     ).count()
     highimpactissues = models.RiskManagement.objects.filter(
-        criticality='high',
+        impact='high',
     ).count()
     lowimpactissues = models.RiskManagement.objects.filter(
-        criticality='low',
+        impact='low',
     ).count()
 
-    # counting the number issues at different levels of state
-    # RECOMMENDATION_STATE = (
-    #     ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
-    #     ('PENDING', 'PENDING'),
-    #     ('CLOSED', 'CLOSED'),
-    # )
-    PENDING = models.RiskManagement.objects.filter(
-        recommendation_state='PENDING',
-    ).count()
-    CLOSED = models.RiskManagement.objects.filter(
-        recommendation_state='CLOSED',
-    ).count()
-    PARTIALLY_IMPLEMENTED = models.RiskManagement.objects.filter(
-        recommendation_state='PARTIALLY_IMPLEMENTED',
-    ).count()
-    # percentage of completed recos
-    percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
 
     # ageing days total
 
-    for totaldays in consolidatedgncobj:
-        totaldays = +totaldays.ageing_days
+    # for totaldays in consolidatedgncobj:
+    #     totaldays = +totaldays.ageing_days
 
     return render(request=request, template_name="riskmanagement/riskkri.html",
                   context={
@@ -214,14 +192,6 @@ def KRI(request):
                       "highimpactissues": highimpactissues,
                       "lowimpactissues": lowimpactissues,
 
-                      # reommendations
-                      "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
-                      "PENDING": PENDING,
-                      "CLOSED": CLOSED,
-                      "percentagecompleted": percentagecompleted,
-
-                      # reommendations
-                      "totaldays": round(totaldays, 1),
 
                   })
 

@@ -195,7 +195,7 @@
 
                 <div class="col-xl-12">
                     <section class="hk-sec-wrapper">
-                        <h5 class="hk-sec-title">Audit Projects</h5>
+                        <h5 class="hk-sec-title">Risk Management Section</h5>
                         <!--                        <p>Recom'n : Recommendation</p>-->
                         <!--                        <p>Act'n : Action</p>-->
                         <!--                        <p>Impl'n : Implementation</p>-->
@@ -203,7 +203,7 @@
                         <div class="row">
                             <div class="col-sm">
                                 <div class="table-wrap">
-                                    <table id="datable_1"
+                                    <table id="datable_3"
                                            class="table table-hover table-responsive w-100 display pb-30">
 <!--XY Strategic Pillar,	XY Strategic Objectives,
 	Risk Category,	Risk Description,	Likelihood,	Impact,	Risk Rating,-->
@@ -220,20 +220,21 @@
                                             <th>Department</th>
                                         </tr>
 
+
+
                                         </thead>
 
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td><a href="#">{{singleinfo.recommendation}}</a></td>
-                                            <td>{{singleinfo.action_plan}}</td>
-                                            <td>{{singleinfo.recommendation_state}}</td>
-                                            <td>{{singleinfo.ageing_days}}</td>
-                                            <td>{{singleinfo.agreed_implementation_date}}</td>
-                                            <td>{{singleinfo.revised_implementation_date}}</td>
-                                            <td>{{singleinfo.actual_implementation_date}}</td>
-                                            <td>{{singleinfo.owner}}</td>
-<!--                                            <td>{{singleinfo.final_approver}}</td>-->
+                                              <td><a href="#">{{singleinfo.xy_strategic_pillar}}</a></td>
+                                            <td>{{singleinfo.xy_strategic_objectives}}</td>
+                                            <td>{{singleinfo.risk_category}}</td>
+                                            <td>{{singleinfo.risk_description}}</td>
+                                            <td>{{singleinfo.action}}</td>
+                                            <td>{{singleinfo.kri}}</td>
+                                            <td>{{singleinfo.target}}</td>
+                                            <td>{{singleinfo.dept}}</td>
 
                                         </tr>
                                         {% endfor %}

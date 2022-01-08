@@ -21,7 +21,8 @@ class Auditorofauditors(models.Model):
     last_status_update = models.CharField(db_column='Last_Status_Update', max_length=100, blank=True, null=True)  # Field name made lowercase.
     ageing_days = models.FloatField(db_column='Ageing__Days', max_length=100, blank=True, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.
     actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    owner = models.CharField(db_column='Owner', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    # owner = models.CharField(db_column='Owner', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    owner = models.ForeignKey('accounts.Dept', on_delete=models.CASCADE)     # Field name made lowercase.
     final_approver =models.ForeignKey('accounts.Person', on_delete=models.CASCADE) # Field name made lowercase.
 
     def __str__(self):

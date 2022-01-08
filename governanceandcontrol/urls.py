@@ -21,6 +21,10 @@ urlpatterns = [
     path('addgoverncontrol/', views.AddGoverncontrolprojects, name='addgoverncontrol'),
 
 
+    # Frequently Asked Questions
+    path('faq/', views.FAQ, name='faq'),
+
+
 
 
 

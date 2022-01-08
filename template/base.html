@@ -49,6 +49,16 @@
             rel="stylesheet"
             type="text/css"
     />
+
+    <!-- Calendar CSS -->
+    <link href="{% static 'vendors/fullcalendar/dist/fullcalendar.min.css' %}" rel="stylesheet" type="text/css"/>
+
+    <!-- Daterangepicker CSS -->
+    <link href="{% static 'vendors/daterangepicker/daterangepicker.css" rel="stylesheet' %}" type="text/css"/>
+
+
+    <!-- Custom CSS -->
+    <link href="{% static 'dist/css/style.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="content">
@@ -152,6 +162,21 @@
 <!-- FeatherIcons JavaScript -->
 <script src="{% static 'dist/js/feather.min.js' %}"></script>
 
+
+<!-- Daterangepicker JavaScript -->
+<script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+<script src="{% static 'vendors/daterangepicker/daterangepicker.js' %}"></script>
+<script src="{% static 'dist/js/daterangepicker-data.js' %}"></script>
+
+
+<!-- Fullcalendar JavaScript -->
+<!--    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>-->
+<script src="{% static 'vendors/jquery-ui.min.js' %}"></script>
+<script src="{% static 'vendors/fullcalendar/dist/fullcalendar.min.js' %}"></script>
+<script src="{% static 'dist/js/fullcalendar-data.js' %}"></script>
+
+
+<script src="{% static 'calender/main.js' %}"></script>
 </body>
 
 </html>
