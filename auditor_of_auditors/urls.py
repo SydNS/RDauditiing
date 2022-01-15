@@ -14,4 +14,10 @@ urlpatterns = [
     path('a_o_arecommendations/', views.AuditorsRecommendations, name='a_o_arecommendations'),
     path('a_o_aconsolidated/', views.AuditorsConsolidated, name='a_o_aconsolidated'),
 
+    # Risks details
+    path('auditor_of_auditors/<int:id>/', views.Auditor_of_auditorsDetail, name='auditorsofauditorsdetails'),
+
+    # addrisk
+    path('addauditorsofauditors/', views.AddAuditor_of_auditorsDetail, name='addauditorsofauditors'),
+
 ]
