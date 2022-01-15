@@ -2,6 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from . import models
 
+from .forms import AuditorofauditorsForm
+from .models import Auditorofauditors
+
 # Create your views here.
 
 # ====================================== Auditor of auditos section   ==================================
@@ -13,23 +16,6 @@ from . import models
 def AuditorsPractices(request):
     consolidatedgncobj = models.Auditorofauditors.objects.all()
     consolidatedgncobjnumber = models.Auditorofauditors.objects.all().count()
-    #
-    # CRITICAL_LEVELS = (
-    #     ('low', 'low'),
-    #     ('medium', 'medium'),
-    #     ('high', 'high'),
-    # )
-    # QUARTERS = (
-    #     ('Q1', 'Q1'),
-    #     ('Q2', 'Q2'),
-    #     ('Q3', 'Q3'),
-    #     ('Q4', 'Q4'),
-    # )
-    # ROOT_CAUSE_ANALYSIS = (
-    #     ('POCESSES', 'POCESSES'),
-    #     ('PEOPLE', 'PEOPLE'),
-    #     ('TECHNOLOGY', 'TECHNOLOGY'),
-    # )
 
     # counting the number practices at different levels of current_status_at_xy
     mediumimpactissues = models.Auditorofauditors.objects.filter(
@@ -243,4 +229,28 @@ def AuditorsConsolidated(request):
                       "totaldays": round(totaldays, 1),
 
                   })
+
+
+
+# ======================Details views===========================
+@login_required
+def Auditor_of_auditorsDetail(request, id):
+    consolidatedgncobj = models.Auditorofauditors.objects.get(id=id)
+
+    return render(request=request, template_name="auditorofauditor/auditOfauditosdetails.html",
+                  context={ "consolidateddata": consolidatedgncobj,}
+                  )
+
+
+@login_required
+def AddAuditor_of_auditorsDetail(request):
+    if request.method == "POST":
+        form = AuditorofauditorsForm(request.POST)
+        if form.is_valid():
+            auditorofauditors = form.save(commit=True)
+            return redirect('auditOfauditosdetails', auditorofauditors.pk)
+    else:
+        form = AuditorofauditorsForm()
+    return render(request, 'auditorofauditor/addformauditor.html', {'form': form})
+
 
