@@ -52,6 +52,8 @@ class GncTable(models.Model):
     # class Meta:
     #     managed = False
     #     db_table = 'GncTable'
+    #       verbose_name_plural = "Governance & Control" /o add pluralise
     def __str__(self):
         return self.audit_project_name
+
 

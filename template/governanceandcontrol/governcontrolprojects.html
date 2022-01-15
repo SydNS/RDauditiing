@@ -34,7 +34,7 @@
         <div class="hk-pg-header align-items-top">
             <h2 class="hk-pg-title font-weight-600 mb-10">Auditing Tool</h2>
             <p>
-                 {{request.user.username|upper}} Welcome to the
+                {{request.user.username|upper}} Welcome to the
                 <a href="#">Governance & Control.</a>
             </p>
             <div class="d-flex w-500p">
@@ -91,17 +91,18 @@
                                 <div class="card-body ">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
-                            <span class="d-block font-15 text-green font-weight-500">Low Criticality Issues : {{lowimpactissues}}</span>
+                                            <span class="d-block font-15 text-green font-weight-500">Low Criticality Issues : {{lowimpactissues}}</span>
                                         </div>
                                         <div>
-                            <span class="text-success font-14 font-weight-500"> </span>
+                                            <span class="text-success font-14 font-weight-500"> </span>
                                         </div>
                                     </div>
                                     <div>
                                         <small class="">High Criticality Issues:
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
-                                        <small class="d-block text-warning">Moderate Criticality Issues:{{mediumimpactissues}} </small>
+                                        <small class="d-block text-warning">Moderate Criticality
+                                            Issues:{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
@@ -164,10 +165,10 @@
 
                     <section class="hk-sec-wrapper">
                         <h5 class="hk-sec-title">Audit Projects</h5>
-                        <p>Kindly  export in the format of your choosing</p><br>
-                        
-<!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
-<!--                            export table options.</p>-->
+                        <p>Kindly export in the format of your choosing</p><br>
+
+                        <!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
+                        <!--                            export table options.</p>-->
                         <div class="row">
                             <div class="col-sm">
                                 <div class="table-wrap">
@@ -175,8 +176,8 @@
                                            class="table table-hover table-responsive w-100 display pb-30">
                                         <thead>
                                         <tr>
-<!-- Audit Project Code,	Audit Project Name,	Quarter,	Audit Project Type,	Issue Title, -->
-                                            
+                                            <!-- Audit Project Code,	Audit Project Name,	Quarter,	Audit Project Type,	Issue Title, -->
+
 
                                             <th>Audit Project Code</th>
                                             <th>Audit Project Name</th>
@@ -187,15 +188,15 @@
                                             <th>Ageing Days</th>
                                         </tr>
                                         </thead>
-<!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-<!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-<!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-<!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-<!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-<!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
-<!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-<!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-<!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
+                                        <!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
 
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
@@ -207,7 +208,6 @@
                                             <td><a href="#">{{singleinfo.issue_title}}</a></td>
                                             <td><a href="#">{{singleinfo.recommendation}}</a></td>
                                             <td><a href="#">{{singleinfo.ageing_days}}</a></td>
-                                            
 
 
                                         </tr>
@@ -216,7 +216,7 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                              <th>Audit Project Code</th>
+                                            <th>Audit Project Code</th>
                                             <th>Audit Project Name</th>
                                             <th>Quarter</th>
                                             <th>Audit Project Type</th>

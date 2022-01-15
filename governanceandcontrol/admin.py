@@ -25,7 +25,7 @@ class GncTableAdmin(admin.ModelAdmin):
     search_fields = ('audit_project_code', 'audit_project_name', 'quarter',
                      'criticality', 'owner',
                      )
-
+ 
 
 #
 # @admin.register(Auditorofauditors)
