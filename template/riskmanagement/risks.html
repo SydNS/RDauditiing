@@ -29,7 +29,6 @@
 <!--#         db_table = 'Risk_Management'-->
 
 
-
 <!-- Main Content -->
 <div class="hk-pg-wrapper">
     <!-- Container -->
@@ -79,7 +78,7 @@
                             >
                                         </div>
                                         <div>
-                                            <span>10%</span>
+                                            <span></span>
                                         </div>
                                     </div>
                                     <div>
@@ -102,7 +101,7 @@
                                         </div>
                                         <div>
                             <span class="text-success font-14 font-weight-500"
-                            >+12.5%</span
+                            ></span
                             >
                                         </div>
                                     </div>
@@ -110,7 +109,8 @@
                                         <small class="">High Impact :
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
-                                        <small class="d-block text-info">Moderate Impact :{{mediumimpactissues}} </small>
+                                        <small class="d-block text-info">Moderate Impact
+                                            :{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                                         </div>
                                         <div>
                             <span class="text-success font-14 font-weight-500"
-                            >+12.5%</span
+                            ></span
                             >
                                         </div>
                                     </div>
@@ -134,7 +134,8 @@
                                         <small class="">High Chances :
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
-                                        <small class="d-block text-info">Moderate Chances :{{mediumimpactissues}} </small>
+                                        <small class="d-block text-info">Moderate Chances
+                                            :{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
@@ -194,19 +195,18 @@
                 </div>
 
                 <div class="col-xl-12">
+                    {% if not consolidateddata %}
                     <section class="hk-sec-wrapper">
                         <h5 class="hk-sec-title">Risk Management Section</h5>
-                        <!--                        <p>Recom'n : Recommendation</p>-->
-                        <!--                        <p>Act'n : Action</p>-->
-                        <!--                        <p>Impl'n : Implementation</p>-->
-                        <!--                        <p>R't : Action</p><br>-->
+                        <p class="text-danger">No Data Available at the moment</p><br>
+
                         <div class="row">
                             <div class="col-sm">
                                 <div class="table-wrap">
-                                    <table id="datable_3"
+                                    <table id="datable_2"
                                            class="table table-hover table-responsive w-100 display pb-30">
-<!--XY Strategic Pillar,	XY Strategic Objectives,
-	Risk Category,	Risk Description,	Likelihood,	Impact,	Risk Rating,-->
+                                        <!--XY Strategic Pillar,	XY Strategic Objectives,
+                                            Risk Category,	Risk Description,	Likelihood,	Impact,	Risk Rating,-->
                                         <thead>
 
                                         <tr>
@@ -221,13 +221,12 @@
                                         </tr>
 
 
-
                                         </thead>
 
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                              <td><a href="#">{{singleinfo.xy_strategic_pillar}}</a></td>
+                                            <td><a href="#">{{singleinfo.xy_strategic_pillar}}</a></td>
                                             <td>{{singleinfo.xy_strategic_objectives}}</td>
                                             <td>{{singleinfo.risk_category}}</td>
                                             <td>{{singleinfo.risk_description}}</td>
@@ -241,7 +240,7 @@
 
                                         </tbody>
                                         <tfoot>
-                                         <tr>
+                                        <tr>
                                             <th>XY Strategic Pillar</th>
                                             <th>XY Strategic Objectives</th>
                                             <th>Risk Category</th>
@@ -256,8 +255,68 @@
                                 </div>
                             </div>
                         </div>
-
                     </section>
+                    {% else %}
+                    <section class="hk-sec-wrapper">
+                        <h5 class="hk-sec-title">Risk Management Section</h5>
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="table-wrap">
+                                    <table id="datable_3"
+                                           class="table table-hover table-responsive w-100 display pb-30">
+                                        <!--XY Strategic Pillar,	XY Strategic Objectives,
+                                            Risk Category,	Risk Description,	Likelihood,	Impact,	Risk Rating,-->
+                                        <thead>
+
+                                        <tr>
+                                            <th>XY Strategic Pillar</th>
+                                            <th>XY Strategic Objectives</th>
+                                            <th>Risk Category</th>
+                                            <th>Risk Description</th>
+                                            <th>Likelihood</th>
+                                            <th>Impact</th>
+                                            <th>Risk Rating</th>
+                                            <th>Department</th>
+                                        </tr>
+
+
+                                        </thead>
+
+                                        <tbody>
+                                        {% for singleinfo in consolidateddata %}
+                                        <tr>
+                                            <td><a href="#">{{singleinfo.xy_strategic_pillar}}</a></td>
+                                            <td>{{singleinfo.xy_strategic_objectives}}</td>
+                                            <td>{{singleinfo.risk_category}}</td>
+                                            <td>{{singleinfo.risk_description}}</td>
+                                            <td>{{singleinfo.action}}</td>
+                                            <td>{{singleinfo.kri}}</td>
+                                            <td>{{singleinfo.target}}</td>
+                                            <td>{{singleinfo.dept}}</td>
+
+                                        </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>XY Strategic Pillar</th>
+                                            <th>XY Strategic Objectives</th>
+                                            <th>Risk Category</th>
+                                            <th>Risk Description</th>
+                                            <th>Likelihood</th>
+                                            <th>Impact</th>
+                                            <th>Risk Rating</th>
+                                            <th>Department</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {% endif %}
 
                 </div>
                 <!-- /Row -->

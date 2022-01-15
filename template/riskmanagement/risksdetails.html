@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+<!--{% load static %}-->
+{% block content %}
+
+{% include 'topnavbar.html' %}
+{% include 'verticalnavbar.html' %}
+{% include 'settings.html' %}
+
+
+<!-- Main Content -->
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div class="container-fluid">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-xl-12 pa-0">
+                <div class="profile-cover-wrap overlay-wrap">
+                    <div class="bg-overlay bg-gradient-success"></div>
+                    <div class="container profile-cover-content py-50">
+                        <div class="hk-row">
+                            <div class="col-lg-6">
+                                <div class="media align-items-center">
+                                    <div class="media-img-wrap  d-flex">
+                                        <div class="avatar">
+                                            <img src="{% static 'dist/img/mg.png' %}" alt="user" class="avatar-img ">
+                                        </div>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <div class="text-white text-capitalize display-6 mb-5 font-weight-400">
+                                            {{ consolidateddata.audit_project_name }}
+                                        </div>
+                                        <div class="font-14 text-white"><span class="mr-5"><span
+                                                class="font-weight-500 pr-5">{{consolidateddata.ageing_days}}</span><span
+                                                class="mr-5">ageing days</span></span>
+                                            <span><span
+                                                    class="font-weight-500 pr-5">Agreed Implementation Date</span><span>{{consolidateddata.agreed_implementation_date}}</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="button-list">
+                                    <button href="#" class="btn btn-info btn-wth-icon btn-rounded"><span
+                                            class="btn-text">Say Somenthing</span></button>
+
+                                    <button href="#" class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
+                                            class="btn-icon-wrap bg-success rounded-circle">Edit<i
+                                            class="fa fa-delete"></i></span></button>
+                                    <button href="#"  data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
+                                            class="btn-icon-wrap bg-danger rounded-circle ">Del<i
+                                            class="fa fa-delete"></i></span></button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white shadow-bottom">
+                    <div class="container">
+                        <ul class="nav nav-light nav-tabs" role="tablist">
+                           <li class="nav-item">
+                                <span class="font-20">
+                                    <a href="#" class="d-flex h-60p align-items-center nav-link active "><p
+                                            class="text-green">Project Type : </p> <span class="text-warning"> {{ consolidateddata.audit_project_type }} </span></a>
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                            <span class="font-18">
+                                <a href="#" class="d-flex h-60p align-items-center nav-link active "><p
+                                        class="text-green">Issue Title :  </p> {{consolidateddata.issue_title }}</a>
+                           </span>
+                            </li>
+                            <li class="nav-item">
+                            <span class="font-18">
+                                <a href="#" class="d-flex h-60p align-items-center nav-link active "><p
+                                        class="text-green">Root Cause :  </p> <span class="text-danger">{{consolidateddata.root_cause_analysis }}</span></a>
+                           </span>
+                            </li>
+                            <li class="nav-item">
+                            <span class="font-18">
+                                <a href="#" class="d-flex h-60p align-items-center nav-link active "><p
+                                        class="text-green">Recommendation State :  </p> <span class="text-danger"> {{consolidateddata.recommendation_state }}</span></a>
+                           </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content mt-sm-60 mt-30">
+                    <div class="tab-pane fade show active" role="tabpanel">
+                        <div class="container">
+                            <div class="hk-row">
+                                <div class="col-lg-8">
+                                    <div class="card card-profile-feed">
+                                        <div class="card-header card-header-action">
+                                            <div class="media align-items-center">
+                                                <div class="media-img-wrap d-flex mr-10">
+                                                    <div class="avatar avatar-sm">
+                                                        <img src="{% static 'dist/img/p0.png' %}" alt="user"
+                                                             class="avatar-img ">
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="text-capitalize font-weight-500 text-dark">
+                                                        Owner : {{consolidateddata.owner }}
+                                                    </div>
+                                                    <div class="text-capitalize font-15">
+                                                        Final Approver : {{consolidateddata.final_approver }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center card-action-wrap">
+
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text mb-30">
+                                                Criticality : <span class="text-danger text-capitalize font-35">{{consolidateddata.criticality}}</span>
+                                            </p>
+                                            <div class="card">
+
+
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Recommendations : <span class="text-info">{{consolidateddata.recommendation}}</span></h5>
+                                                    <h5 class="card-text font-18">Action Plan : <span class="text-info">{{consolidateddata.action_plan}}</span>
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer justify-content-between">
+                                            <div>
+                                                <a href="#"><i class="ion ion-md-heart text-primary"></i>30K</a>
+                                            </div>
+                                            <div>
+                                                <a href="#">{{consolidateddata.ageing_days}} Ageing Days</a>
+                                                <a href="#">12 shares</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+<!--                                    <div class="card card-profile-feed">-->
+<!--                                        <div class="card-header card-header-action">-->
+<!--                                            <div class="media align-items-center">-->
+<!--                                                <div class="media-img-wrap d-flex mr-10">-->
+<!--                                                    <div class="avatar avatar-sm">-->
+<!--                                                        <img src="dist/img/avatar6.jpg" alt="user"-->
+<!--                                                             class="avatar-img rounded-circle">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="media-body">-->
+<!--                                                    <div class="text-capitalize font-weight-500 text-dark">Johnie-->
+<!--                                                        Metoyer-->
+<!--                                                    </div>-->
+<!--                                                    <div class="font-13">11 hrs</div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="card-body">-->
+<!--                                            <p class="card-text mb-30">Below are the original Latin passages from which-->
+<!--                                                Lorem Ipsum was derived, paired with their 1914 translations by H.-->
+<!--                                                Rackham.</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="card-footer justify-content-between">-->
+<!--                                            <div>-->
+<!--                                                <a href="#"><i class="ion ion-md-heart text-primary"></i>142</a>-->
+<!--                                            </div>-->
+<!--                                            <div>-->
+<!--                                                <a href="#">751 comments</a>-->
+<!--                                                <a href="#">2 shares</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+                                </div>
+<!--                              Right column-->
+
+<!--    audit_project_code = models.URLField(db_column='Audit_Project_Code', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    audit_project_name = models.CharField(db_column='Audit_Project_Name', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    quarter = models.CharField(db_column='Quarter',choices=QUARTERS ,max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    audit_project_type = models.CharField(db_column='Audit_Project_Type', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    issue_title = models.CharField(db_column='Issue_Title', max_length=50, blank=False, null=True)  # Field name made lowercase.-->
+<!--    criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,choices=CRITICAL_LEVELS,default='draft')  # Field name made lowercase.-->
+<!--    root_cause_analysis = models.CharField(db_column='Root_Cause_Analysis',choices=ROOT_CAUSE_ANALYSIS ,max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    recommendation = models.CharField(db_column='Recommendation', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
+<!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+<!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+<!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+
+
+                                <div class="col-lg-4">
+                                    <div class="card card-profile-feed">
+                                        <div class="card-header card-header-action">
+                                            <div class="media align-items-center">
+                                                <div class="media-img-wrap d-flex mr-10">
+
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="text-capitalize font-weight-500 text-dark">
+                                                        {{consolidateddata.action_plan}}
+                                                    </div>
+                                                    <div class="font-13"> {{consolidateddata.action_plan}}</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row text-center">
+                                            <div class="col-4 border-right pr-0">
+                                                <div class="pa-15">
+                                                    <span class="d-block display-6 text-dark mb-5">{{consolidateddata.ageing_days}}</span>
+                                                    <span class="d-block text-capitalize font-14">Ageing days</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 border-right px-0">
+                                                <div class="pa-15">
+                                                    <span class="d-block display-6 text-dark mb-5">{{consolidateddata.quarter}}</span>
+                                                    <span class="d-block text-capitalize font-14">Quarter</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 pl-0">
+                                                <div class="pa-15">
+                                                    <span class="d-block display-6 text-dark mb-5  text-capitalize ">{{consolidateddata.criticality}}</span>
+                                                    <span class="d-block text-danger text-capitalize font-14">Criticality</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><span><i
+                                                    class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Agreed Impl'n Date:</span></span><span
+                                                    class="ml-5 text-dark">{{consolidateddata.agreed_implementation_date}}</span></li>
+                                            <li class="list-group-item"><span><i
+                                                    class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Revised Impl'n Date:</span></span><span
+                                                    class="ml-5 text-dark">{{consolidateddata.revised_implementation_date}}</span></li>
+                                            <li class="list-group-item"><span><i
+                                                    class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Actual Impl'n Date:</span></span><span
+                                                    class="ml-5 text-dark">{{consolidateddata.actual_implementation_date}}</span></li>
+                                            <li class="list-group-item"><span><i
+                                                    class="ion ion-md-pin font-18 text-light-20 mr-10"></i><span>Final Approver:</span></span><span
+                                                    class="ml-5 text-dark">{{consolidateddata.final_approver}}</span></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+    </div>
+    <!-- /Container -->
+
+    <!-- Footer -->
+    <div class="hk-footer-wrap container">
+        <footer class="footer">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <p>Created by<a href="/" class="text-dark" target="_blank">Ruth Doreen Mutebe</a> ©
+                        2021</p>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <p class="d-inline-block">Follow us</p>
+                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
+                            class="btn-icon-wrap"><i class="fa fa-facebook"></i></span></a>
+                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
+                            class="btn-icon-wrap"><i class="fa fa-twitter"></i></span></a>
+                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
+                            class="btn-icon-wrap"><i class="fa fa-google-plus"></i></span></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- /Footer -->
+</div>
+<!-- /Main Content -->
+ <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Are you sure ?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>
+                                                        Deleting this means the record will be erased completely
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">No Cancel</button>
+                                                    <button type="button" class="btn btn-danger">Yes Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+{% include 'verticalnavbar.html' %}
+{% endblock %}

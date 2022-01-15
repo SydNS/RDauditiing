@@ -32,7 +32,7 @@
         <div class="hk-pg-header align-items-top">
             <h2 class="hk-pg-title font-weight-600 mb-10">Governance & Control Issues</h2>
             <p>
-                 {{request.user.username|upper}} Welcome to the
+                {{request.user.username|upper}} Welcome to the
                 <a href="#">G & C Issues.</a>
             </p>
             <div class="d-flex w-500p">
@@ -165,18 +165,18 @@
 
                 <div class="col-xl-12">
 
+
+                    {% if not consolidateddata %}
                     <section class="hk-sec-wrapper">
                         <h5 class="hk-sec-title">Audit Projects</h5>
-                        <p>Recom'n : Recommendation</p>
-                  likning to none      <p>Act'n : Action</p>
-                        <p>Impl'n : Implementation</p>
-                        <p>R't : Action</p><br>
-<!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
-<!--                            export table options.</p>-->
+                        <p  class="text-danger" >No Data Available at the moment</p><br>
+
+                        <!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
+                        <!--                            export table options.</p>-->
                         <div class="row">
                             <div class="col-sm">
                                 <div class="table-wrap">
-                                    <table id="datable_3"
+                                    <table id="datable_2"
                                            class="table table-hover table-responsive w-100 display pb-30">
                                         <thead>
                                         <tr>
@@ -200,15 +200,15 @@
                                             <th>Final Approver</th>
                                         </tr>
                                         </thead>
-<!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-<!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-<!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-<!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-<!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-<!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
-<!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-<!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-<!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
+                                        <!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
 
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
@@ -261,6 +261,104 @@
                             </div>
                         </div>
                     </section>
+                    {% else %}
+                    <section class="hk-sec-wrapper">
+                        <h5 class="hk-sec-title">Audit Projects</h5>
+                        <p>Recom'n : Recommendation</p>
+                        likning to none <p>Act'n : Action</p>
+                        <p>Impl'n : Implementation</p>
+                        <p>R't : Action</p><br>
+                        <!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
+                        <!--                            export table options.</p>-->
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="table-wrap">
+                                    <table id="datable_3"
+                                           class="table table-hover table-responsive w-100 display pb-30">
+                                        <thead>
+                                        <tr>
+                                            <!--                                            Audit Project Name, Quarter, Audit Project Type, Issue Title, Criticality,-->
+                                            <!--                                            Root Cause Analysis, Recommendation, Agreed Implementation Date, Ageing - -->
+                                            <!--                                            Days, Owner, Final Approver, Audit Project Code,-->
+                                            <th>Name</th>
+                                            <th>Qtr</th>
+                                            <th>Type</th>
+                                            <th>Issue Title</th>
+                                            <th>Criticality</th>
+                                            <th>R't Cause</th>
+                                            <th>Recom'n</th>
+                                            <th>Act'n Plan</th>
+                                            <th>Recom'n State</th>
+                                            <th>Ageing Days</th>
+                                            <th>Impl'n Date</th>
+                                            <th>Revised Impl'n Date</th>
+                                            <th>Actual Impl'n Date</th>
+                                            <th>Owner</th>
+                                            <th>Final Approver</th>
+                                        </tr>
+                                        </thead>
+                                        <!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
+                                        <!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                        <!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                        <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+
+                                        <tbody>
+                                        {% for singleinfo in consolidateddata %}
+                                        <tr>
+                                            <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
+                                            <td>{{singleinfo.quarter}}</td>
+                                            <td>{{singleinfo.audit_project_type}}</td>
+                                            <td>{{singleinfo.issue_title}}</td>
+                                            <td>{{singleinfo.criticality}}</td>
+                                            <td>{{singleinfo.root_cause_analysis}}</td>
+                                            <td>{{singleinfo.recommendation}}</td>
+                                            <td>{{singleinfo.action_plan}}</td>
+                                            <td>{{singleinfo.recommendation_state}}</td>
+                                            <td>{{singleinfo.ageing_days}}</td>
+                                            <td>{{singleinfo.agreed_implementation_date}}</td>
+                                            <td>{{singleinfo.revised_implementation_date}}</td>
+                                            <td>{{singleinfo.actual_implementation_date}}</td>
+                                            <td>{{singleinfo.owner}}</td>
+                                            <td>{{singleinfo.final_approver}}</td>
+
+
+                                        </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <!--Audit Project Code	Audit Project Name	Quarter	Audit Project Type	Issue Title	Criticality	Root Cause Analysis	Recommendation
+                                                Action Plan	Recommendation State	Agreed Implementation Date	Revised Implementation Date
+                                                Last Status Update	Ageing - Days	Actual Implementation Date	Owner	Final Approver									                                        &ndash;&gt;-->
+                                            <th>Name</th>
+                                            <th>Qtr</th>
+                                            <th>Type</th>
+                                            <th>Issue Title</th>
+                                            <th>Criticality</th>
+                                            <th>R't Cause</th>
+                                            <th>Recom'n</th>
+                                            <th>Act'n Plan</th>
+                                            <th>Recom'n State</th>
+                                            <th>Impl'n Date</th>
+                                            <th>Revised Impl'n Date</th>
+                                            <th>AgeDays</th>
+                                            <th>Actual Impl'n Date</th>
+                                            <th>Owner</th>
+                                            <th>Final Approver</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {% endif %}
 
                 </div>
                 <!-- /Row -->
