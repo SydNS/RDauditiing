@@ -23,48 +23,47 @@ def dashboard(request):
     consolidatedgncobj = models.GncTable.objects.all()
     if not consolidatedgncobj:
         return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
-                      context= {
+                      context={
 
-    # ============# governanceandcontrol========================================
-            "gncojbects": 0,
-            "gncobjnumber": 0,
-            # issues
-            "mediumimpactissues": 0,
-            "highimpactissues": 0,
-            "lowimpactissues": 0,
+                          # ============# governanceandcontrol========================================
+                          "gncojbects": 0,
+                          "gncobjnumber": 0,
+                          # issues
+                          "mediumimpactissues": 0,
+                          "highimpactissues": 0,
+                          "lowimpactissues": 0,
 
-            # highimpactprojects
-            "highimpactprojects": 0,
+                          # highimpactprojects
+                          "highimpactprojects": 0,
 
-            # likelihood
-            "risklikelihoodmoderate": 0,
-            "risklikelihoodlow": 0,
-            "risklikelihoodhigh": 0,
+                          # likelihood
+                          "risklikelihoodmoderate": 0,
+                          "risklikelihoodlow": 0,
+                          "risklikelihoodhigh": 0,
 
-            # reommendations
-            "PARTIALLY_IMPLEMENTED": 0,
-            "PENDING": 0,
-            "CLOSED": 0,
-            "percentagecompleted": 0,
+                          # reommendations
+                          "PARTIALLY_IMPLEMENTED": 0,
+                          "PENDING": 0,
+                          "CLOSED": 0,
+                          "percentagecompleted": 0,
 
-            # reommendations
-            "totaldays": round(0, 1),
+                          # reommendations
+                          "totaldays": round(0, 1),
 
-    # ========================# riskmanagement================================
+                          # ========================# riskmanagement================================
 
-            "riskobj": 0,
-            "riskobjnumber": 0,
-            # issues
-            "riskmediumimpactissues": 0,
-            "riskhighimpactissues": 0,
-            "risklowimpactissues": 0,
+                          "riskobj": 0,
+                          "riskobjnumber": 0,
+                          # issues
+                          "riskmediumimpactissues": 0,
+                          "riskhighimpactissues": 0,
+                          "risklowimpactissues": 0,
 
-
-            "AoAobj": 0,
-            "Deptobj": 0,
-            "Personobj": 0,
-            "Gradingobj": 0,
-        }
+                          "AoAobj": 0,
+                          "Deptobj": 0,
+                          "Personobj": 0,
+                          "Gradingobj": 0,
+                      }
                       )
     else:
         gncobj = models.GncTable.objects.all()
@@ -103,7 +102,7 @@ def dashboard(request):
         for totaldays in gncobj:
             totaldays = +totaldays.ageing_days
 
-    # ===========================================# riskmanagement===============================================================================
+        # ===========================================# riskmanagement===============================================================================
 
         riskobj = RiskManagement.objects.all()
         riskobjnumber = RiskManagement.objects.all().count()
@@ -132,7 +131,6 @@ def dashboard(request):
             likelihood='low',
         ).count()
 
-
         AoAobj = Auditorofauditors.objects.all()
 
         Deptobj = Dept.objects.all()
@@ -142,7 +140,7 @@ def dashboard(request):
         # info =
         return render(request, 'governanceandcontrol/index.html', {
 
-    # ============# governanceandcontrol========================================
+            # ============# governanceandcontrol========================================
             "gncojbects": gncobj,
             "gncobjnumber": gncobjnumber,
             # issues
@@ -167,7 +165,7 @@ def dashboard(request):
             # reommendations
             "totaldays": round(totaldays, 1),
 
-    # ========================# riskmanagement================================
+            # ========================# riskmanagement================================
 
             "riskobj": riskobj,
             "riskobjnumber": riskobjnumber,
@@ -176,15 +174,11 @@ def dashboard(request):
             "riskhighimpactissues": riskhighimpactissues,
             "risklowimpactissues": risklowimpactissues,
 
-
             "AoAobj": AoAobj,
             "Deptobj": Deptobj,
             "Personobj": Personobj,
             "Gradingobj": Gradingobj,
         })
-
-
-
 
 
 # ==================================================GNC========================================================
@@ -380,7 +374,6 @@ def Governcontrolrecommendations(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
 
-
     if not consolidatedgncobj:
         return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
                       context={
@@ -459,225 +452,104 @@ def Governcontrolrecommendations(request):
 def Governcontrolconsolidated(request):
     consolidatedgncobj = models.GncTable.objects.all()
     consolidatedgncobjnumber = models.GncTable.objects.all().count()
+    if not consolidatedgncobj:
+        return render(request=request, template_name="governanceandcontrol/governcontrolconsolidated.html",
+                      context={
+                          "consolidateddata": {},
+                          "consolidatedgncobjnumber": 0,
 
-    mediumimpactissues = models.GncTable.objects.filter(
-        criticality='medium',
-    ).count()
-    highimpactissues = models.GncTable.objects.filter(
-        criticality='high',
-    ).count()
-    lowimpactissues = models.GncTable.objects.filter(
-        criticality='low',
-    ).count()
+                          # issues
+                          "mediumimpactissues": 0,
+                          "highimpactissues": 0,
+                          "lowimpactissues": 0,
 
-    # counting the number issues at different levels of state
-    # RECOMMENDATION_STATE = (
-    #     ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
-    #     ('PENDING', 'PENDING'),
-    #     ('CLOSED', 'CLOSED'),
-    # )
-    PENDING = models.GncTable.objects.filter(
-        recommendation_state='PENDING',
-    ).count()
-    CLOSED = models.GncTable.objects.filter(
-        recommendation_state='CLOSED',
-    ).count()
-    PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
-        recommendation_state='PARTIALLY_IMPLEMENTED',
-    ).count()
-    # percentage of completed recos
-    # percentage of completed recos
-    try:
-        percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
-    except ZeroDivisionError:
-        percentagecompleted = 0
+                          # reommendations
+                          "PARTIALLY_IMPLEMENTED": 0,
+                          "PENDING": 0,
+                          "CLOSED": 0,
+                          "percentagecompleted": 0,
 
-    # ageing days total
+                          # reommendations
+                          "totaldays": 0,
 
-    for totaldays in consolidatedgncobj:
-        totaldays = +totaldays.ageing_days
+                      }
+                      )
+    else:
+        mediumimpactissues = models.GncTable.objects.filter(
+            criticality='medium',
+        ).count()
+        highimpactissues = models.GncTable.objects.filter(
+            criticality='high',
+        ).count()
+        lowimpactissues = models.GncTable.objects.filter(
+            criticality='low',
+        ).count()
 
-    return render(request=request, template_name="governanceandcontrol/governcontrolconsolidated.html",
-                  context={
-                      "consolidateddata": consolidatedgncobj,
-                      "consolidatedgncobjnumber": consolidatedgncobjnumber,
+        # counting the number issues at different levels of state
+        # RECOMMENDATION_STATE = (
+        #     ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
+        #     ('PENDING', 'PENDING'),
+        #     ('CLOSED', 'CLOSED'),
+        # )
+        PENDING = models.GncTable.objects.filter(
+            recommendation_state='PENDING',
+        ).count()
+        CLOSED = models.GncTable.objects.filter(
+            recommendation_state='CLOSED',
+        ).count()
+        PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
+            recommendation_state='PARTIALLY_IMPLEMENTED',
+        ).count()
+        # percentage of completed recos
+        # percentage of completed recos
+        try:
+            percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
+        except ZeroDivisionError:
+            percentagecompleted = 0
 
-                      # issues
-                      "mediumimpactissues": mediumimpactissues,
-                      "highimpactissues": highimpactissues,
-                      "lowimpactissues": lowimpactissues,
+        # ageing days total
 
-                      # reommendations
-                      "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
-                      "PENDING": PENDING,
-                      "CLOSED": CLOSED,
-                      "percentagecompleted": percentagecompleted,
+        for totaldays in consolidatedgncobj:
+            totaldays = +totaldays.ageing_days
 
-                      # reommendations
-                      "totaldays": round(totaldays, 1),
+        return render(request=request, template_name="governanceandcontrol/governcontrolconsolidated.html",
+                      context={
+                          "consolidateddata": consolidatedgncobj,
+                          "consolidatedgncobjnumber": consolidatedgncobjnumber,
 
-                  })
+                          # issues
+                          "mediumimpactissues": mediumimpactissues,
+                          "highimpactissues": highimpactissues,
+                          "lowimpactissues": lowimpactissues,
+
+                          # reommendations
+                          "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
+                          "PENDING": PENDING,
+                          "CLOSED": CLOSED,
+                          "percentagecompleted": percentagecompleted,
+
+                          # reommendations
+                          "totaldays": round(totaldays, 1),
+
+                      })
 
 
 # ======================Details views===========================
 @login_required
 def GoverncontrolprojectsDetail(request, id):
     consolidatedgncobj = models.GncTable.objects.get(id=id)
-    # consolidatedgncobjnumber = models.GncTable.objects.all().count()
-    #
-    # CRITICAL_LEVELS = (
-    #     ('low', 'low'),
-    #     ('medium', 'medium'),
-    #     ('high', 'high'),
-    # )
-    # QUARTERS = (
-    #     ('Q1', 'Q1'),
-    #     ('Q2', 'Q2'),
-    #     ('Q3', 'Q3'),
-    #     ('Q4', 'Q4'),
-    # )
-    # ROOT_CAUSE_ANALYSIS = (
-    #     ('POCESSES', 'POCESSES'),
-    #     ('PEOPLE', 'PEOPLE'),
-    #     ('TECHNOLOGY', 'TECHNOLOGY'),
-    # )
-
-    # counting the number issues at different levels of criticality
-    # mediumimpactissues = models.GncTable.objects.filter(
-    #     criticality='medium',
-    # ).count()
-    # highimpactissues = models.GncTable.objects.filter(
-    #     criticality='high',
-    # ).count()
-    # lowimpactissues = models.GncTable.objects.filter(
-    #     criticality='low',
-    # ).count()
-
-    # counting the number issues at different levels of state
-    # RECOMMENDATION_STATE = (
-    #     ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
-    #     ('PENDING', 'PENDING'),
-    #     ('CLOSED', 'CLOSED'),
-    # )
-    # PENDING = models.GncTable.objects.filter(
-    #     recommendation_state='PENDING',
-    # ).count()
-    # CLOSED = models.GncTable.objects.filter(
-    #     recommendation_state='CLOSED',
-    # ).count()
-    # PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
-    #     recommendation_state='PARTIALLY_IMPLEMENTED',
-    # ).count()
-    # percentage of completed recos
-    # percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
-
-    # ageing days total
-
-    # for totaldays in consolidatedgncobj:
-    #     totaldays = +totaldays.ageing_days
 
     return render(request=request, template_name="governanceandcontrol/governcontrolprojectsdetails.html",
-                  context={
-                      "consolidateddata": consolidatedgncobj,
-                      #     "consolidatedgncobjnumber": consolidatedgncobjnumber,
-                      #
-                      #     # issues
-                      #     "mediumimpactissues": mediumimpactissues,
-                      #     "highimpactissues": highimpactissues,
-                      #     "lowimpactissues": lowimpactissues,
-                      #
-                      #     # reommendations
-                      #     "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
-                      #     "PENDING": PENDING,
-                      #     "CLOSED": CLOSED,
-                      #     "percentagecompleted": percentagecompleted,
-                      #
-                      #     # reommendations
-                      #     "totaldays": round(totaldays, 1),
-                      #
-                  }
+                  context={ "consolidateddata": consolidatedgncobj,}
                   )
 
 
 @login_required
 def GoverncontrolrecommendationsDetails(request, id):
     consolidatedgncobj = models.GncTable.objects.get(id=id)
-    # consolidatedgncobjnumber = models.GncTable.objects.all().count()
-    #
-    # CRITICAL_LEVELS = (
-    #     ('low', 'low'),
-    #     ('medium', 'medium'),
-    #     ('high', 'high'),
-    # )
-    # QUARTERS = (
-    #     ('Q1', 'Q1'),
-    #     ('Q2', 'Q2'),
-    #     ('Q3', 'Q3'),
-    #     ('Q4', 'Q4'),
-    # )
-    # ROOT_CAUSE_ANALYSIS = (
-    #     ('POCESSES', 'POCESSES'),
-    #     ('PEOPLE', 'PEOPLE'),
-    #     ('TECHNOLOGY', 'TECHNOLOGY'),
-    # )
-
-    # counting the number issues at different levels of criticality
-    # mediumimpactissues = models.GncTable.objects.filter(
-    #     criticality='medium',
-    # ).count()
-    # highimpactissues = models.GncTable.objects.filter(
-    #     criticality='high',
-    # ).count()
-    # lowimpactissues = models.GncTable.objects.filter(
-    #     criticality='low',
-    # ).count()
-
-    # counting the number issues at different levels of state
-    # RECOMMENDATION_STATE = (
-    #     ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
-    #     ('PENDING', 'PENDING'),
-    #     ('CLOSED', 'CLOSED'),
-    # )
-    # PENDING = models.GncTable.objects.filter(
-    #     recommendation_state='PENDING',
-    # ).count()
-    # CLOSED = models.GncTable.objects.filter(
-    #     recommendation_state='CLOSED',
-    # ).count()
-    # PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
-    #     recommendation_state='PARTIALLY_IMPLEMENTED',
-    # ).count()
-    # percentage of completed recos
-    # try:
-    #     percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
-    # except ZeroDivisionError:
-    #     percentagecompleted = 0
-
-    # ageing days total
-
-    # for totaldays in consolidatedgncobj:
-    #     totaldays = +totaldays.ageing_days
 
     return render(request=request, template_name="governanceandcontrol/governcontrolprojectsdetails.html",
-                  context={
-                      "consolidateddata": consolidatedgncobj,
-                      #   "consolidatedgncobjnumber": consolidatedgncobjnumber,
-
-                      #   # issues
-                      #   "mediumimpactissues": mediumimpactissues,
-                      #   "highimpactissues": highimpactissues,
-                      #   "lowimpactissues": lowimpactissues,
-
-                      #   # reommendations
-                      #   "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
-                      #   "PENDING": PENDING,
-                      #   "CLOSED": CLOSED,
-                      #   "percentagecompleted": percentagecompleted,
-
-                      #   # reommendations
-                      #   "totaldays": round(totaldays,1),
-
-                  })
+                  context={ "consolidateddata": consolidatedgncobj, })
 
 
 @login_required
