@@ -22,48 +22,48 @@ import datetime
 def dashboard(request):
     consolidatedgncobj = models.GncTable.objects.all()
     if not consolidatedgncobj:
-        return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
+        return render(request=request, template_name="governanceandcontrol/index.html",
                       context={
 
-                          # ============# governanceandcontrol========================================
-                          "gncojbects": 0,
-                          "gncobjnumber": 0,
-                          # issues
-                          "mediumimpactissues": 0,
-                          "highimpactissues": 0,
-                          "lowimpactissues": 0,
+            # ============# governanceandcontrol========================================
+            "gncojbects": {},
+            "gncobjnumber": 0,
+            # issues
+            "mediumimpactissues": 0,
+            "highimpactissues": 0,
+            "lowimpactissues": 0,
 
-                          # highimpactprojects
-                          "highimpactprojects": 0,
+            # highimpactprojects
+            "highimpactprojects": {},
 
-                          # likelihood
-                          "risklikelihoodmoderate": 0,
-                          "risklikelihoodlow": 0,
-                          "risklikelihoodhigh": 0,
+            # likelihood
+            "risklikelihoodmoderate": 0,
+            "risklikelihoodlow": 0,
+            "risklikelihoodhigh": 0,
 
-                          # reommendations
-                          "PARTIALLY_IMPLEMENTED": 0,
-                          "PENDING": 0,
-                          "CLOSED": 0,
-                          "percentagecompleted": 0,
+            # reommendations
+            "PARTIALLY_IMPLEMENTED": 0,
+            "PENDING": 0,
+            "CLOSED": 0,
+            "percentagecompleted": 0,
 
-                          # reommendations
-                          "totaldays": round(0, 1),
+            # reommendations
+            "totaldays": round(0, 1),
 
-                          # ========================# riskmanagement================================
+            # ========================# riskmanagement================================
 
-                          "riskobj": 0,
-                          "riskobjnumber": 0,
-                          # issues
-                          "riskmediumimpactissues": 0,
-                          "riskhighimpactissues": 0,
-                          "risklowimpactissues": 0,
+            "riskobj": {},
+            "riskobjnumber": 0,
+            # issues
+            "riskmediumimpactissues": 0,
+            "riskhighimpactissues": 0,
+            "risklowimpactissues": 0,
 
-                          "AoAobj": 0,
-                          "Deptobj": 0,
-                          "Personobj": 0,
-                          "Gradingobj": 0,
-                      }
+            "AoAobj": {},
+            "Deptobj": {},
+            "Personobj": {},
+            "Gradingobj": {},
+        }
                       )
     else:
         gncobj = models.GncTable.objects.all()
