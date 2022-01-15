@@ -5,14 +5,14 @@ $(document).ready(function() {
 	"use strict";
 	
 	$.toast({
-		heading: 'Well done!',
-		text: '<p>You have successfully completed level 1.</p><button class="btn btn-primary btn-sm mt-10">Play again</button>',
-		position: 'top-right',
-		loaderBg:'#7a5449',
-		class: 'jq-toast-primary',
-		hideAfter: 3500, 
-		stack: 6,
-		showHideTransition: 'fade'
+//		heading: 'Well done!',
+//		text: '<p>You have successfully completed level 1.</p>',
+//		position: 'bottom-right',
+//		loaderBg:'#7a5449',
+//		class: 'jq-toast-primary',
+//		hideAfter: 3500,
+//		stack: 6,
+//		showHideTransition: 'fade'
 	});
 	
 	$('.tst1').on('click',function(e){
@@ -81,14 +81,14 @@ $(document).ready(function() {
 	    $.toast().reset('all');   
 		$("body").removeAttr('class');
 		$.toast({
-            heading: 'Well done!',
-			text: '<p>You have successfully completed level 1.</p><button class="btn btn-primary btn-sm mt-10">Play again</button>',
-			position: 'top-left',
-			loaderBg:'#7a5449',
-			class: 'jq-toast-primary',
-			hideAfter: 3500, 
-			stack: 6,
-			showHideTransition: 'fade'
+//            heading: 'Well done!',
+//			text: '<p>You have successfully completed level 1.</p>',
+//			position: 'top-left',
+//			loaderBg:'#7a5449',
+//			class: 'jq-toast-primary',
+//			hideAfter: 3500,
+//			stack: 6,
+//			showHideTransition: 'fade'
         });
 		return false;
     });
@@ -97,14 +97,14 @@ $(document).ready(function() {
 		$.toast().reset('all');
 		$("body").removeAttr('class');
 		$.toast({
-            heading: 'Well done!',
-			text: '<p>You have successfully completed level 1.</p><button class="btn btn-primary btn-sm mt-10">Play again</button>',
-			position: 'top-right',
-			loaderBg:'#7a5449',
-			class: 'jq-toast-primary',
-			hideAfter: 3500, 
-			stack: 6,
-			showHideTransition: 'fade'
+//            heading: 'Well done!',
+//			text: '<p>You have successfully completed level 1.</p>',
+//			position: 'top-right',
+//			loaderBg:'#7a5449',
+//			class: 'jq-toast-primary',
+//			hideAfter: 3500,
+//			stack: 6,
+//			showHideTransition: 'fade'
         });
 		return false;
     });
@@ -113,14 +113,14 @@ $(document).ready(function() {
 		$.toast().reset('all');
 		$("body").removeAttr('class');
 		$.toast({
-           heading: 'Well done!',
-			text: '<p>You have successfully completed level 1.</p><button class="btn btn-primary btn-sm mt-10">Play again</button>',
-			position: 'bottom-left',
-			loaderBg:'#7a5449',
-			class: 'jq-toast-primary',
-			hideAfter: 3500, 
-			stack: 6,
-			showHideTransition: 'fade'
+//           heading: 'Well done!',
+//			text: '<p>You have successfully completed level 1.</p>',
+//			position: 'bottom-left',
+//			loaderBg:'#7a5449',
+//			class: 'jq-toast-primary',
+//			hideAfter: 3500,
+//			stack: 6,
+//			showHideTransition: 'fade'
         });
 		return false;
     });
@@ -130,11 +130,11 @@ $(document).ready(function() {
 		$("body").removeAttr('class');
 		$.toast({
             heading: 'Well done!',
-			text: '<p>You have successfully completed level 1.</p><button class="btn btn-primary btn-sm mt-10">Play again</button>',
+			text: '<p>You have successfully completed level 1.</p>',
 			position: 'bottom-right',
 			loaderBg:'#7a5449',
 			class: 'jq-toast-primary',
-			hideAfter: 3500, 
+			hideAfter: 3500,
 			stack: 6,
 			showHideTransition: 'fade'
         });
@@ -160,7 +160,7 @@ $(document).ready(function() {
 	    $.toast().reset('all');
 		$("body").removeAttr('class').addClass("bottom-center-fullwidth");
 		$.toast({
-            text: '<i class="jq-toast-icon ti-face-smile"></i><p>Welcome to Prototip Dashboard.</p>',
+            text: '<i class="jq-toast-icon ti-face-smile"></i><p>Welcome to the Dashboard.</p>',
 			position: 'bottom-center',
 			loaderBg:'#7a5449',
 			class: 'jq-has-icon jq-toast-dark',

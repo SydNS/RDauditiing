@@ -20,123 +20,174 @@ import datetime
 # Create your views here.
 @login_required
 def dashboard(request):
-    gncobj = models.GncTable.objects.all()
-    gncobjnumber = models.GncTable.objects.all().count()
+    consolidatedgncobj = models.GncTable.objects.all()
+    if not consolidatedgncobj:
+        return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
+                      context= {
 
-    highimpactprojects = models.GncTable.objects.filter(
-        criticality='high',
-    )
+    # ============# governanceandcontrol========================================
+            "gncojbects": 0,
+            "gncobjnumber": 0,
+            # issues
+            "mediumimpactissues": 0,
+            "highimpactissues": 0,
+            "lowimpactissues": 0,
 
-    mediumimpactissues = models.GncTable.objects.filter(
-        criticality='medium',
-    ).count()
-    highimpactissues = models.GncTable.objects.filter(
-        criticality='high',
-    ).count()
-    lowimpactissues = models.GncTable.objects.filter(
-        criticality='low',
-    ).count()
-    PENDING = models.GncTable.objects.filter(
-        recommendation_state='PENDING',
-    ).count()
-    CLOSED = models.GncTable.objects.filter(
-        recommendation_state='CLOSED',
-    ).count()
-    PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
-        recommendation_state='PARTIALLY_IMPLEMENTED',
-    ).count()
-    # percentage of completed recos
-    try:
-        percentagecompleted = round((CLOSED / gncobjnumber) * 100, 1)
-    except ZeroDivisionError:
-        percentagecompleted = 0
+            # highimpactprojects
+            "highimpactprojects": 0,
 
-    # ageing days total
+            # likelihood
+            "risklikelihoodmoderate": 0,
+            "risklikelihoodlow": 0,
+            "risklikelihoodhigh": 0,
 
-    for totaldays in gncobj:
-        totaldays = +totaldays.ageing_days
+            # reommendations
+            "PARTIALLY_IMPLEMENTED": 0,
+            "PENDING": 0,
+            "CLOSED": 0,
+            "percentagecompleted": 0,
 
-# ===========================================# riskmanagement===============================================================================
+            # reommendations
+            "totaldays": round(0, 1),
 
-    riskobj = RiskManagement.objects.all()
-    riskobjnumber = RiskManagement.objects.all().count()
+    # ========================# riskmanagement================================
 
-    # counting the number issues at different levels of criticality
-    riskmediumimpactissues = RiskManagement.objects.filter(
-        impact='medium',
-    ).count()
-    riskhighimpactissues = RiskManagement.objects.filter(
-        impact='high',
-    ).count()
-    risklowimpactissues = RiskManagement.objects.filter(
-        impact='low',
-    ).count()
-    # likelihood
-    xy_strategic_pillar = RiskManagement.objects.filter(
-        xy_strategic_pillar='low',
-    ).count()
-    risklikelihoodhigh = RiskManagement.objects.filter(
-        likelihood='high',
-    ).count()
-    risklikelihoodmoderate = RiskManagement.objects.filter(
-        likelihood='moderate',
-    ).count()
-    risklikelihoodlow = RiskManagement.objects.filter(
-        likelihood='low',
-    ).count()
+            "riskobj": 0,
+            "riskobjnumber": 0,
+            # issues
+            "riskmediumimpactissues": 0,
+            "riskhighimpactissues": 0,
+            "risklowimpactissues": 0,
 
 
-    AoAobj = Auditorofauditors.objects.all()
+            "AoAobj": 0,
+            "Deptobj": 0,
+            "Personobj": 0,
+            "Gradingobj": 0,
+        }
+                      )
+    else:
+        gncobj = models.GncTable.objects.all()
+        gncobjnumber = models.GncTable.objects.all().count()
 
-    Deptobj = Dept.objects.all()
-    Personobj = Person.objects.all()
-    Gradingobj = GradingUser.objects.all()
+        highimpactprojects = models.GncTable.objects.filter(
+            criticality='high',
+        )
 
-    # info =
-    return render(request, 'governanceandcontrol/index.html', {
+        mediumimpactissues = models.GncTable.objects.filter(
+            criticality='medium',
+        ).count()
+        highimpactissues = models.GncTable.objects.filter(
+            criticality='high',
+        ).count()
+        lowimpactissues = models.GncTable.objects.filter(
+            criticality='low',
+        ).count()
+        PENDING = models.GncTable.objects.filter(
+            recommendation_state='PENDING',
+        ).count()
+        CLOSED = models.GncTable.objects.filter(
+            recommendation_state='CLOSED',
+        ).count()
+        PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
+            recommendation_state='PARTIALLY_IMPLEMENTED',
+        ).count()
+        # percentage of completed recos
+        try:
+            percentagecompleted = round((CLOSED / gncobjnumber) * 100, 1)
+        except ZeroDivisionError:
+            percentagecompleted = 0
 
-# ============# governanceandcontrol========================================
-        "gncojbects": gncobj,
-        "gncobjnumber": gncobjnumber,
-        # issues
-        "mediumimpactissues": mediumimpactissues,
-        "highimpactissues": highimpactissues,
-        "lowimpactissues": lowimpactissues,
+        # ageing days total
 
-        # highimpactprojects
-        "highimpactprojects": highimpactprojects,
+        for totaldays in gncobj:
+            totaldays = +totaldays.ageing_days
 
+    # ===========================================# riskmanagement===============================================================================
+
+        riskobj = RiskManagement.objects.all()
+        riskobjnumber = RiskManagement.objects.all().count()
+
+        # counting the number issues at different levels of criticality
+        riskmediumimpactissues = RiskManagement.objects.filter(
+            impact='medium',
+        ).count()
+        riskhighimpactissues = RiskManagement.objects.filter(
+            impact='high',
+        ).count()
+        risklowimpactissues = RiskManagement.objects.filter(
+            impact='low',
+        ).count()
         # likelihood
-        "risklikelihoodmoderate": risklikelihoodmoderate,
-        "risklikelihoodlow": risklikelihoodlow,
-        "risklikelihoodhigh": risklikelihoodhigh,
-
-        # reommendations
-        "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
-        "PENDING": PENDING,
-        "CLOSED": CLOSED,
-        "percentagecompleted": percentagecompleted,
-
-        # reommendations
-        "totaldays": round(totaldays, 1),
-
-# ========================# riskmanagement================================
-
-        "riskobj": riskobj,
-        "riskobjnumber": riskobjnumber,
-        # issues
-        "riskmediumimpactissues": riskmediumimpactissues,
-        "riskhighimpactissues": riskhighimpactissues,
-        "risklowimpactissues": risklowimpactissues,
+        xy_strategic_pillar = RiskManagement.objects.filter(
+            xy_strategic_pillar='low',
+        ).count()
+        risklikelihoodhigh = RiskManagement.objects.filter(
+            likelihood='high',
+        ).count()
+        risklikelihoodmoderate = RiskManagement.objects.filter(
+            likelihood='moderate',
+        ).count()
+        risklikelihoodlow = RiskManagement.objects.filter(
+            likelihood='low',
+        ).count()
 
 
-        "AoAobj": AoAobj,
-        "Deptobj": Deptobj,
-        "Personobj": Personobj,
-        "Gradingobj": Gradingobj,
-    })
+        AoAobj = Auditorofauditors.objects.all()
+
+        Deptobj = Dept.objects.all()
+        Personobj = Person.objects.all()
+        Gradingobj = GradingUser.objects.all()
+
+        # info =
+        return render(request, 'governanceandcontrol/index.html', {
+
+    # ============# governanceandcontrol========================================
+            "gncojbects": gncobj,
+            "gncobjnumber": gncobjnumber,
+            # issues
+            "mediumimpactissues": mediumimpactissues,
+            "highimpactissues": highimpactissues,
+            "lowimpactissues": lowimpactissues,
+
+            # highimpactprojects
+            "highimpactprojects": highimpactprojects,
+
+            # likelihood
+            "risklikelihoodmoderate": risklikelihoodmoderate,
+            "risklikelihoodlow": risklikelihoodlow,
+            "risklikelihoodhigh": risklikelihoodhigh,
+
+            # reommendations
+            "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
+            "PENDING": PENDING,
+            "CLOSED": CLOSED,
+            "percentagecompleted": percentagecompleted,
+
+            # reommendations
+            "totaldays": round(totaldays, 1),
+
+    # ========================# riskmanagement================================
+
+            "riskobj": riskobj,
+            "riskobjnumber": riskobjnumber,
+            # issues
+            "riskmediumimpactissues": riskmediumimpactissues,
+            "riskhighimpactissues": riskhighimpactissues,
+            "risklowimpactissues": risklowimpactissues,
 
 
+            "AoAobj": AoAobj,
+            "Deptobj": Deptobj,
+            "Personobj": Personobj,
+            "Gradingobj": Gradingobj,
+        })
+
+
+
+
+
+# ==================================================GNC========================================================
 @login_required
 def Governcontrolprojects(request):
     consolidatedgncobj = models.GncTable.objects.all()
@@ -144,8 +195,8 @@ def Governcontrolprojects(request):
     if not consolidatedgncobj:
         return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
                       context={
-                          "consolidateddata": consolidatedgncobj,
-                          "consolidatedgncobjnumber": consolidatedgncobjnumber,
+                          "consolidateddata": {},
+                          "consolidatedgncobjnumber": 0,
 
                           # issues
                           "mediumimpactissues": 0,
@@ -153,9 +204,9 @@ def Governcontrolprojects(request):
                           "lowimpactissues": 0,
 
                           # reommendations
-                          "PARTIALLY_IMPLEMENTED": records_,
-                          "PENDING": records_,
-                          "CLOSED": records_,
+                          "PARTIALLY_IMPLEMENTED": 0,
+                          "PENDING": 0,
+                          "CLOSED": 0,
                           "percentagecompleted": 0,
 
                           # reommendations
