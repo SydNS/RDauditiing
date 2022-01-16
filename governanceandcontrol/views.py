@@ -100,7 +100,7 @@ def dashboard(request):
         # ageing days total
 
         for totaldays in gncobj:
-            totaldays +=totaldays.ageing_days
+            totaldays = +totaldays.ageing_days
 
         # ===========================================# riskmanagement===============================================================================
 
@@ -262,7 +262,7 @@ def Governcontrolprojects(request):
         # ageing days total
 
         for totaldays in consolidatedgncobj:
-            totaldays += totaldays.ageing_days
+            totaldays = +totaldays.ageing_days
 
         return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
                       context={
@@ -345,7 +345,7 @@ def GoverncontrolIssues(request):
         # ageing days total
 
         for totaldays in consolidatedgncobj:
-            totaldays += totaldays.ageing_days
+            totaldays = +totaldays.ageing_days
 
             return render(request=request, template_name="governanceandcontrol/governcontrolissues.html",
                           context={
@@ -424,7 +424,7 @@ def Governcontrolrecommendations(request):
         # ageing days total
 
         for totaldays in consolidatedgncobj:
-            totaldays += totaldays.ageing_days
+            totaldays = +totaldays.ageing_days
 
         return render(request=request, template_name="governanceandcontrol/governcontrolrecommendations.html",
                       context={
@@ -510,7 +510,7 @@ def Governcontrolconsolidated(request):
         # ageing days total
 
         for totaldays in consolidatedgncobj:
-            totaldays += totaldays.ageing_days
+            totaldays = +totaldays.ageing_days
 
         return render(request=request, template_name="governanceandcontrol/governcontrolconsolidated.html",
                       context={
