@@ -128,14 +128,20 @@ def AuditorsRecommendations(request):
     else:
 
         # counting the number issues at different levels of criticality
+
+        # CURRENT_STATUS_XY = (
+        #     ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
+        #     ('PENDING', 'PENDING'),
+        #     ('CLOSED', 'CLOSED'),
+        # )
         mediumimpactissues = models.Auditorofauditors.objects.filter(
-            criticality='medium',
+            current_status_at_xy='PARTIALLY_IMPLEMENTED',
         ).count()
         highimpactissues = models.Auditorofauditors.objects.filter(
-            criticality='high',
+            current_status_at_xy='PENDING',
         ).count()
         lowimpactissues = models.Auditorofauditors.objects.filter(
-            criticality='low',
+            current_status_at_xy='CLOSED',
         ).count()
 
         # counting the number issues at different levels of state
