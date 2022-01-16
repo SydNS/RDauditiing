@@ -67,12 +67,15 @@ def AuditorsPractices(request):
             current_status_at_xy='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
-        percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
+        try:
+            percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
+        except ZeroDivisionError:
+            percentagecompleted = 0
 
         # ageing days total
 
         for totaldays in consolidatedgncobj:
-            totaldays+=totaldays.ageing_days
+            totaldays =+totaldays.ageing_days
 
         return render(request=request, template_name="auditorofauditor/auditpractices.html",
                       context={
@@ -101,7 +104,6 @@ def AuditorsPractices(request):
 def AuditorsRecommendations(request):
     consolidatedgncobj = models.Auditorofauditors.objects.all()
     consolidatedgncobjnumber = models.Auditorofauditors.objects.all().count()
-
 
     if not consolidatedgncobj:
         return render(request=request, template_name="auditorofauditor/auditrecommendations.html",
@@ -160,12 +162,15 @@ def AuditorsRecommendations(request):
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
-        percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
+        try:
+            percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
+        except ZeroDivisionError:
+            percentagecompleted = 0
 
         # ageing days total
 
         for totaldays in consolidatedgncobj:
-            totaldays += totaldays.ageing_days
+            totaldays =+totaldays.ageing_days
 
         return render(request=request, template_name="auditorofauditor/auditrecommendations.html",
                       context={
@@ -244,12 +249,14 @@ def AuditorsConsolidated(request):
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
-        percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
-
+        try:
+            percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
+        except ZeroDivisionError:
+            percentagecompleted = 0
         # ageing days total
 
         for totaldays in consolidatedgncobj:
-            totaldays+=totaldays.ageing_days
+            totaldays =+totaldays.ageing_days
 
         return render(request=request, template_name="auditorofauditor/auditconsolidated.html",
                       context={
