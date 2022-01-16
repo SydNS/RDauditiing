@@ -73,7 +73,7 @@ def AuditorsPractices(request):
             percentagecompleted = 0
 
         # ageing days total
-
+        days=0
         for totaldays in consolidatedgncobj:
             days +=totaldays.ageing_days
 
