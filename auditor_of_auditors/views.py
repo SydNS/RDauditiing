@@ -73,9 +73,9 @@ def AuditorsPractices(request):
             percentagecompleted = 0
 
         # ageing days total
-        days=0
+        days=0.0
         for totaldays in consolidatedgncobj:
-            days +=totaldays.ageing_days
+            days+=totaldays.ageing_days
 
         return render(request=request, template_name="auditorofauditor/auditpractices.html",
                       context={
