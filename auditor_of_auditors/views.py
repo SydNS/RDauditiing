@@ -224,13 +224,13 @@ def AuditorsConsolidated(request):
                       )
     else:
         mediumimpactissues = models.Auditorofauditors.objects.filter(
-            criticality='medium',
+            current_status_at_xy='PARTIALLY_IMPLEMENTED',
         ).count()
         highimpactissues = models.Auditorofauditors.objects.filter(
-            criticality='high',
+            current_status_at_xy='PENDING',
         ).count()
         lowimpactissues = models.Auditorofauditors.objects.filter(
-            criticality='low',
+            current_status_at_xy='CLOSED',
         ).count()
 
         # counting the number issues at different levels of state
