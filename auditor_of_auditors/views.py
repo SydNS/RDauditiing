@@ -99,8 +99,8 @@ def AuditorsPractices(request):
 # Auditor of auditos section
 @login_required
 def AuditorsRecommendations(request):
-    consolidatedgncobj = models.GncTable.objects.all()
-    consolidatedgncobjnumber = models.GncTable.objects.all().count()
+    consolidatedgncobj = models.Auditorofauditors.objects.all()
+    consolidatedgncobjnumber = models.Auditorofauditors.objects.all().count()
 
 
     if not consolidatedgncobj:
@@ -128,13 +128,13 @@ def AuditorsRecommendations(request):
     else:
 
         # counting the number issues at different levels of criticality
-        mediumimpactissues = models.GncTable.objects.filter(
+        mediumimpactissues = models.Auditorofauditors.objects.filter(
             criticality='medium',
         ).count()
-        highimpactissues = models.GncTable.objects.filter(
+        highimpactissues = models.Auditorofauditors.objects.filter(
             criticality='high',
         ).count()
-        lowimpactissues = models.GncTable.objects.filter(
+        lowimpactissues = models.Auditorofauditors.objects.filter(
             criticality='low',
         ).count()
 
@@ -144,13 +144,13 @@ def AuditorsRecommendations(request):
         #     ('PENDING', 'PENDING'),
         #     ('CLOSED', 'CLOSED'),
         # )
-        PENDING = models.GncTable.objects.filter(
+        PENDING = models.Auditorofauditors.objects.filter(
             recommendation_state='PENDING',
         ).count()
-        CLOSED = models.GncTable.objects.filter(
+        CLOSED = models.Auditorofauditors.objects.filter(
             recommendation_state='CLOSED',
         ).count()
-        PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
+        PARTIALLY_IMPLEMENTED = models.Auditorofauditors.objects.filter(
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
@@ -186,8 +186,8 @@ def AuditorsRecommendations(request):
 # Auditor of auditos section
 @login_required
 def AuditorsConsolidated(request):
-    consolidatedgncobj = models.GncTable.objects.all()
-    consolidatedgncobjnumber = models.GncTable.objects.all().count()
+    consolidatedgncobj = models.Auditorofauditors.objects.all()
+    consolidatedgncobjnumber = models.Auditorofauditors.objects.all().count()
 
     if not consolidatedgncobj:
         return render(request=request, template_name="auditorofauditor/auditconsolidated.html",
@@ -212,13 +212,13 @@ def AuditorsConsolidated(request):
                       }
                       )
     else:
-        mediumimpactissues = models.GncTable.objects.filter(
+        mediumimpactissues = models.Auditorofauditors.objects.filter(
             criticality='medium',
         ).count()
-        highimpactissues = models.GncTable.objects.filter(
+        highimpactissues = models.Auditorofauditors.objects.filter(
             criticality='high',
         ).count()
-        lowimpactissues = models.GncTable.objects.filter(
+        lowimpactissues = models.Auditorofauditors.objects.filter(
             criticality='low',
         ).count()
 
@@ -228,13 +228,13 @@ def AuditorsConsolidated(request):
         #     ('PENDING', 'PENDING'),
         #     ('CLOSED', 'CLOSED'),
         # )
-        PENDING = models.GncTable.objects.filter(
+        PENDING = models.Auditorofauditors.objects.filter(
             recommendation_state='PENDING',
         ).count()
-        CLOSED = models.GncTable.objects.filter(
+        CLOSED = models.Auditorofauditors.objects.filter(
             recommendation_state='CLOSED',
         ).count()
-        PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
+        PARTIALLY_IMPLEMENTED = models.Auditorofauditors.objects.filter(
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
