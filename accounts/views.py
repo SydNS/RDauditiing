@@ -4,7 +4,7 @@ from .forms import NewUserForm
 from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-
+from .models import Person
 # Create your views here.
 
 
@@ -45,3 +45,7 @@ def Logout(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect('login')
+
+def Employeesview(request):
+    people=Person.objects.all()
+    return render(request=request, template_name="accounts/people.html", context={"people": people})
