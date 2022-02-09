@@ -72,13 +72,12 @@ class RiskManagement(models.Model):
     action = models.CharField(db_column='Action', max_length=100, blank=True, null=True)  # Field name made lowercase.
     kri = models.CharField(db_column='KRI', max_length=100, blank=True, null=True)  # Field name made lowercase.
     target = models.CharField(db_column='Target', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    dept = models.ForeignKey('accounts.Dept', on_delete=models.CASCADE) # Field name made lowercase.
+    dept = models.ForeignKey('accounts.Department', on_delete=models.CASCADE) # Field name made lowercase.
 
     def __str__(self):
         return self.xy_strategic_pillar
 
 
-#     class Meta:
-#         managed = False
-#         db_table = 'Risk_Management'
+    class Meta:
+        verbose_name_plural = "Risk Management"
 

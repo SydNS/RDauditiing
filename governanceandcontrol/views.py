@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from riskmanagement.models import RiskManagement
-from auditor_of_auditors.models import Auditorofauditors
+from auditor_of_auditors.models import Auditor_of_auditors
 from accounts.models import Department
 from accounts.models import Person
 from accounts.models import RatingUser
@@ -131,7 +131,7 @@ def dashboard(request):
             likelihood='low',
         ).count()
 
-        AoAobj = Auditorofauditors.objects.all()
+        AoAobj = Auditor_of_auditors.objects.all()
 
         Deptobj = Dept.objects.all()
         Personobj = Person.objects.all()

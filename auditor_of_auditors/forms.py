@@ -4,12 +4,12 @@ from django.contrib.auth.models import User
 from . import models
 
 # Create your forms here.
-from .models import Auditorofauditors
+from .models import Auditor_of_auditors
 
-class AuditorofauditorsForm(forms.ModelForm):
+class Auditor_of_auditorsForm(forms.ModelForm):
 
     class Meta:
-        model = Auditorofauditors
+        model = Auditor_of_auditors
         fields = "__all__"
         widgets = {
             'agreed_implementation_date': forms.DateInput(format=('%m/%d/%Y'),

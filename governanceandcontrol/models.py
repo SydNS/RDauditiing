@@ -30,7 +30,7 @@ class Governance_And_Control(models.Model):
         ('ICT', 'ICT'),
         ('Corporate Affairs', 'Corporate Affairs'),
     )
-    
+
     audit_project_code = models.CharField(db_column='Audit_Project_Code', max_length=100, blank=False,null=True)  # Field name made lowercase.
     audit_project_name = models.CharField(db_column='Audit_Project_Name', max_length=100, blank=False,null=True)  # Field name made lowercase.
     quarter = models.CharField(db_column='Quarter', choices=QUARTERS, max_length=100, blank=False,null=True)  # Field name made lowercase.
@@ -49,10 +49,8 @@ class Governance_And_Control(models.Model):
     owner = models.ForeignKey('accounts.Department', on_delete=models.CASCADE)     # Field name made lowercase.
     final_approver = models.ForeignKey('accounts.Person', on_delete=models.CASCADE)  # Field name made lowercase.
 
-    # class Meta:
-    #     managed = False
-    #     db_table = 'GncTable'
-    #       verbose_name_plural = "Governance & Control" /o add pluralise
+    class Meta:
+          verbose_name_plural = "Governance And Control"
     def __str__(self):
         return self.audit_project_name
 

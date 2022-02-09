@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 # from AuditProject import governanceandcontrol
 
-class Auditorofauditors(models.Model):
+class Auditor_of_auditors(models.Model):
     CURRENT_STATUS_XY = (
         ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
         ('PENDING', 'PENDING'),
@@ -28,7 +28,8 @@ class Auditorofauditors(models.Model):
     def __str__(self):
         return self.internal_audit_leading_practices
 
-#     class Meta:
-#         managed = False
-#         db_table = 'AuditorOfAuditors'from django.db import models
+    class Meta:
+        verbose_name_plural = "Auditor of auditors"
+
+
 

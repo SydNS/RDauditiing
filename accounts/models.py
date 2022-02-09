@@ -71,7 +71,7 @@ class Department(models.Model):
         ('medium', 'medium'),
         ('high', 'high'),
     )
-    departmenttname = models.CharField(max_length=100)
+    departmentname = models.CharField(max_length=100)
     departmentrole = models.CharField(max_length=100)
     numberofmembers = models.IntegerField()
     criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,
@@ -118,8 +118,8 @@ class RatingUser(models.Model):
         ('10', '10/10'),
     )
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    rate_levels = models.PositiveSmallIntegerField()
-    deptnem = models.ForeignKey(Department, on_delete=models.CASCADE)
+    rate_level = models.PositiveSmallIntegerField(choices=RATINGS)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Ratings"

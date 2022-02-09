@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from . import models
 
-from .forms import AuditorofauditorsForm
-from .models import Auditorofauditors
+from .forms import Auditor_of_auditorsForm
+from .models import Auditor_of_auditors
 
 # Create your views here.
 
@@ -14,8 +14,8 @@ from .models import Auditorofauditors
 # Auditor of auditos section
 @login_required
 def AuditorsPractices(request):
-    consolidatedgncobj = models.Auditorofauditors.objects.all()
-    consolidatedgncobjnumber = models.Auditorofauditors.objects.all().count()
+    consolidatedgncobj = models.Auditor_of_auditors.objects.all()
+    consolidatedgncobjnumber = models.Auditor_of_auditors.objects.all().count()
 
     if not consolidatedgncobj:
         return render(request=request, template_name="auditorofauditor/auditpractices.html",
@@ -41,13 +41,13 @@ def AuditorsPractices(request):
                       )
     else:
         # counting the number practices at different levels of current_status_at_xy
-        mediumimpactissues = models.Auditorofauditors.objects.filter(
+        mediumimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='PENDING',
         ).count()
-        highimpactissues = models.Auditorofauditors.objects.filter(
+        highimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='CLOSED',
         ).count()
-        lowimpactissues = models.Auditorofauditors.objects.filter(
+        lowimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='PARTIALLY_IMPLEMENTED',
         ).count()
 
@@ -57,13 +57,13 @@ def AuditorsPractices(request):
         #     ('PENDING', 'PENDING'),
         #     ('CLOSED', 'CLOSED'),
         # )
-        PENDING = models.Auditorofauditors.objects.filter(
+        PENDING = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='PENDING',
         ).count()
-        CLOSED = models.Auditorofauditors.objects.filter(
+        CLOSED = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='CLOSED',
         ).count()
-        PARTIALLY_IMPLEMENTED = models.Auditorofauditors.objects.filter(
+        PARTIALLY_IMPLEMENTED = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
@@ -102,8 +102,8 @@ def AuditorsPractices(request):
 # Auditor of auditos section
 @login_required
 def AuditorsRecommendations(request):
-    consolidatedgncobj = models.Auditorofauditors.objects.all()
-    consolidatedgncobjnumber = models.Auditorofauditors.objects.all().count()
+    consolidatedgncobj = models.Auditor_of_auditors.objects.all()
+    consolidatedgncobjnumber = models.Auditor_of_auditors.objects.all().count()
 
     if not consolidatedgncobj:
         return render(request=request, template_name="auditorofauditor/auditrecommendations.html",
@@ -136,13 +136,13 @@ def AuditorsRecommendations(request):
         #     ('PENDING', 'PENDING'),
         #     ('CLOSED', 'CLOSED'),
         # )
-        mediumimpactissues = models.Auditorofauditors.objects.filter(
+        mediumimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='PARTIALLY_IMPLEMENTED',
         ).count()
-        highimpactissues = models.Auditorofauditors.objects.filter(
+        highimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='PENDING',
         ).count()
-        lowimpactissues = models.Auditorofauditors.objects.filter(
+        lowimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='CLOSED',
         ).count()
 
@@ -152,13 +152,13 @@ def AuditorsRecommendations(request):
         #     ('PENDING', 'PENDING'),
         #     ('CLOSED', 'CLOSED'),
         # )
-        PENDING = models.Auditorofauditors.objects.filter(
+        PENDING = models.Auditor_of_auditors.objects.filter(
             recommendation_state='PENDING',
         ).count()
-        CLOSED = models.Auditorofauditors.objects.filter(
+        CLOSED = models.Auditor_of_auditors.objects.filter(
             recommendation_state='CLOSED',
         ).count()
-        PARTIALLY_IMPLEMENTED = models.Auditorofauditors.objects.filter(
+        PARTIALLY_IMPLEMENTED = models.Auditor_of_auditors.objects.filter(
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
@@ -197,8 +197,8 @@ def AuditorsRecommendations(request):
 # Auditor of auditos section
 @login_required
 def AuditorsConsolidated(request):
-    consolidatedgncobj = models.Auditorofauditors.objects.all()
-    consolidatedgncobjnumber = models.Auditorofauditors.objects.all().count()
+    consolidatedgncobj = models.Auditor_of_auditors.objects.all()
+    consolidatedgncobjnumber = models.Auditor_of_auditors.objects.all().count()
 
     if not consolidatedgncobj:
         return render(request=request, template_name="auditorofauditor/auditconsolidated.html",
@@ -223,13 +223,13 @@ def AuditorsConsolidated(request):
                       }
                       )
     else:
-        mediumimpactissues = models.Auditorofauditors.objects.filter(
+        mediumimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='PARTIALLY_IMPLEMENTED',
         ).count()
-        highimpactissues = models.Auditorofauditors.objects.filter(
+        highimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='PENDING',
         ).count()
-        lowimpactissues = models.Auditorofauditors.objects.filter(
+        lowimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='CLOSED',
         ).count()
 
@@ -239,13 +239,13 @@ def AuditorsConsolidated(request):
         #     ('PENDING', 'PENDING'),
         #     ('CLOSED', 'CLOSED'),
         # )
-        PENDING = models.Auditorofauditors.objects.filter(
+        PENDING = models.Auditor_of_auditors.objects.filter(
             recommendation_state='PENDING',
         ).count()
-        CLOSED = models.Auditorofauditors.objects.filter(
+        CLOSED = models.Auditor_of_auditors.objects.filter(
             recommendation_state='CLOSED',
         ).count()
-        PARTIALLY_IMPLEMENTED = models.Auditorofauditors.objects.filter(
+        PARTIALLY_IMPLEMENTED = models.Auditor_of_auditors.objects.filter(
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
@@ -284,7 +284,7 @@ def AuditorsConsolidated(request):
 # ======================Details views===========================
 @login_required
 def Auditor_of_auditorsDetail(request, id):
-    consolidatedgncobj = models.Auditorofauditors.objects.get(id=id)
+    consolidatedgncobj = models.Auditor_of_auditors.objects.get(id=id)
 
     return render(request=request, template_name="auditorofauditor/auditOfauditosdetails.html",
                   context={ "consolidateddata": consolidatedgncobj,}
@@ -294,12 +294,12 @@ def Auditor_of_auditorsDetail(request, id):
 @login_required
 def AddAuditor_of_auditorsDetail(request):
     if request.method == "POST":
-        form = AuditorofauditorsForm(request.POST)
+        form = Auditor_of_auditorsForm(request.POST)
         if form.is_valid():
-            auditorofauditors = form.save(commit=True)
-            return redirect('auditOfauditosdetails', auditorofauditors.pk)
+            Auditor_of_auditors = form.save(commit=True)
+            return redirect('auditOfauditosdetails', Auditor_of_auditors.pk)
     else:
-        form = AuditorofauditorsForm()
+        form = Auditor_of_auditorsForm()
     return render(request, 'auditorofauditor/addformauditor.html', {'form': form})
 
 

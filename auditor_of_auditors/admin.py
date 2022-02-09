@@ -2,12 +2,12 @@ from django.contrib import admin
 from . import models
 
 # Register your models here.
-from .models import Auditorofauditors
+from .models import Auditor_of_auditors
 
 admin.site.site_header = 'Ruth Doreen Auditing Tool'
 
 
-@admin.register(Auditorofauditors)
+@admin.register(Auditor_of_auditors)
 class AuditorofauditorsAdmin(admin.ModelAdmin):
     list_display = ('internal_audit_leading_practices', 'iia_standards', 'current_status_at_xy', 'assessment',
                     'recommendations', 'action_plan', 'recommendation_state', 'agreed_implementation_date',
