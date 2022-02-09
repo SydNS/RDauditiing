@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,User
+
 
 
 
@@ -84,6 +85,10 @@ class Department(models.Model):
 
 
 class Person(models.Model):
+    GENDER_CHOICES = [
+        ('male', 'Male'),
+        ('female', 'Female')
+    ]
     name_user = models.ForeignKey(User, on_delete=models.CASCADE)
     last_name = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
