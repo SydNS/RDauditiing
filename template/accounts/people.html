@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 
@@ -12,7 +13,7 @@
     <div class="container mt-xl-50 mt-sm-30 mt-15">
         <!-- Title -->
         <div class="hk-pg-header align-items-top">
-            <h2 class="hk-pg-title font-weight-600 mb-10">Auditors Of Auditors</h2>
+            <h2 class="hk-pg-title font-weight-600 mb-10">Employees</h2>
             <p>
                 {{request.user.username|upper}} Welcome to the
                 <a href="#">Practices Section.</a>
@@ -41,7 +42,7 @@
 
         <!-- Row -->
         <div class="row ">
-            <div class="col-xl-12">
+            <section class="col-xl-12">
                 <div class="hk-row">
                     <div class="col-sm-12">
                         <div class="card-group hk-dash-type-2 ">
@@ -143,62 +144,54 @@
                     </div>
                 </div>
 
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-body pa-0">
+                <section class="hk-sec-wrapper">
+                    <h5 class="hk-sec-title">Employee</h5>
+
+                    <div class="row">
+                        <div class="col-sm">
                             <div class="table-wrap">
-                                <div class="table-responsive">
-                                    <table id="datable_3" class="table table-sm table-hover mb-0">
-                                        <thead>
-                                        <tr>
-                                            <th>Logo</th>
-                                            <th>Project</th>
-                                            <th>Company</th>
-                                            <th>Update</th>
-                                            <th>Budget</th>
-                                            <th>Tasks</th>
-                                            <th class="w-10">Status</th>
-                                            <th>Deadline</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td><img class="img-fluid rounded" src="dist/img/logo1.jpg" alt="icon"></td>
-                                            <td>Branding</td>
-                                            <td>Pineapple Inc</td>
-                                            <td>13 Nov 2018</td>
-                                            <td><span class="badge badge-success">Completed</span></td>
-                                            <td><span class="d-flex align-items-center"><i
-                                                    class="zmdi zmdi-time-restore font-25 mr-10 text-light-40"></i><span>0</span></span>
-                                            </td>
-                                            <td>
-                                                <div class="progress-wrap lb-side-left mnw-125p">
-                                                    <div class="progress-lb-wrap">
-                                                        <label class="progress-label mnw-25p">95%</label>
-                                                        <div class="progress progress-bar-xs">
-                                                            <div class="progress-bar bg-success w-95" role="progressbar"
-                                                                 aria-valuenow="70" aria-valuemin="0"
-                                                                 aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>10 Nov 2018</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-
+                                <table id="datable_3" class="table table-success table-hover w-100 display pb-30">
+                                    <thead class="thead-success">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Department</th>
+                                        <th>Address</th>
+                                        <th>Username</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for person in people %}
+                                    <tr>
+                                        <td><a href="#">{{ person.first_name }} {{ person.last_name }}</a></td>
+                                        <td>{{ person.gender|title }}</td>
+                                        <td><span class="badge
+                                            {% if person.personsdept.criticality == 'low'  %}
+                                            badge-success
+                                            {% elif person.personsdept.criticality == 'medium' %}
+                                            badge-warning
+                                            {% else %}
+                                            badge-danger
+                                            {% endif %}
+                                            ">{{person.personsdept}}</span></td>
+                                        <td>{{ person.address }}</td>
+                                        <td>{{ person.name_user }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
-                            <!-- /Row -->
+
+
                         </div>
+                        <!-- /Row -->
                     </div>
-                    <!-- /Container -->
+                </section>
+                <!-- /Container -->
 
-                </div>
-                <!-- /Main Content -->
-                {% include 'verticalnavbar.html' %}
+        </div>
+        <!-- /Main Content -->
+        {% include 'verticalnavbar.html' %}
 
-                {% endblock %}
+        {% endblock %}
 
