@@ -10,6 +10,9 @@ urlpatterns = [
     path('register/', views.Registering, name='register'),
     path('logout/', views.Logout, name='logout'),
 
+    # peopleview
+    path('employees/', views.Employeesview, name='employees'),
+
     path("", include("governanceandcontrol.urls"),name="dashboard"),
 
 ]
