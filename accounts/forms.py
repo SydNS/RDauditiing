@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from . import models
+from .models import Person
 
 # Create your forms here.
 
@@ -21,21 +21,9 @@ class NewUserForm(UserCreationForm):
         return user
 
 
-# class AccountsForm(forms.ModelForm):
-#
-#     class Meta:
-#         model = GncTable
-#         fields = "__all__"
-#         widgets = {
-#             'agreed_implementation_date': forms.DateInput(format=('%m/%d/%Y'),
-#                                              attrs={'class': 'form-control', 'placeholder': 'Select a date',
-#                                                     'type': 'date'}),
-#             'revised_implementation_date': forms.DateInput(format=('%m/%d/%Y'),
-#                                                           attrs={'class': 'form-control',
-#                                                                  'placeholder': 'Select a date',
-#                                                                  'type': 'date'}),
-#             'actual_implementation_date': forms.DateInput(format=('%m/%d/%Y'),
-#                                                           attrs={'class': 'form-control',
-#                                                                  'placeholder': 'Select a date',
-#                                                                  'type': 'date'}),
-#         }
+class ProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Person
+        fields='__all__'
+
