@@ -1,6 +1,6 @@
 /*Dashboard3 Init*/
  
-"use strict"; 
+//"use strict";
 
 /*****E-Charts function start*****/
 var echartsConfig = function() { 
@@ -51,7 +51,7 @@ var echartsConfig = function() {
 				},
 				axisLabel: {
 					textStyle: {
-						color: '#5e7d8a'
+						color: '#5e9d8a'
 					}
 				},
 				splitLine: {
