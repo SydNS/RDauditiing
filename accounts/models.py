@@ -114,7 +114,7 @@ class RatingUser(models.Model):
         (9, "9 of 10"),
         (10, "10 of 10"),
     )
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE,unique=True)
     rate_level = models.IntegerField(choices=RATINGS)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
 
