@@ -64,14 +64,14 @@ class Account(AbstractBaseUser):
         return True
 
 
-class Dept(models.Model):
+class Department(models.Model):
     CRITICALITY_LEVELS = (
         ('low', 'low'),
         ('medium', 'medium'),
         ('high', 'high'),
     )
-    deptname = models.CharField(max_length=100)
-    deptrole = models.CharField(max_length=100)
+    departmenttname = models.CharField(max_length=100)
+    departmentrole = models.CharField(max_length=100)
     numberofmembers = models.IntegerField()
     criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,
                                    choices=CRITICALITY_LEVELS, default='draft')  # Field name made lowercase.
@@ -100,45 +100,21 @@ class Person(models.Model):
 
 
 class RatingUser(models.Model):
+    RATINGS = (
+        ('1', '1/10'),
+        ('2', '2/10'),
+        ('3', '3/10'),
+        ('4', '4/10'),
+        ('5', '5/10'),
+        ('6', '6/10'),
+        ('7', '7/10'),
+        ('8', '8/10'),
+        ('9', '9/10'),
+        ('10', '10/10'),
+    )
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     rate_levels = models.PositiveSmallIntegerField()
     deptnem = models.ForeignKey(Dept, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.grade
-
-
-
-class Student(models.Model):
-    GENDER_CHOICES = [
-        ('male', 'Male'),
-        ('female', 'Female')
-    ]
-    YEAR = [
-        ('FIRST_YEAR', 'FIRST_YEAR'),
-        ('SECOND_YEAR', 'SECOND_YEAR'),
-        ('THIRD_YEAR', 'THIRD_YEAR'),
-        ('FORTH_YEAR', 'FORTH_YEAR'),
-    ]
-
-    name_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    gender = models.CharField(choices=GENDER_CHOICES, default='male', max_length=6)
-    photo = models.ImageField(upload_to='profileimages/')
-    phonenumber = models.CharField(max_length=10)
-    parent_name = models.CharField(max_length=200)
-    parent_phonenumber = models.CharField(max_length=10)
-    date_of_birth = models.DateField()
-    reporting_date = models.DateField()
-    address = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    studentIdnumber = models.CharField(max_length=10)
-    level_of_study = models.CharField(max_length=11, choices=YEAR)
-    # photo_img = models.ImageField(upload_to=user_directory_path, null=True, blank=True)
-
-    class Meta:
-        verbose_name_plural = "Student Accounts"
-
-
-    def __str__(self):
-        return str(self.name_user)
