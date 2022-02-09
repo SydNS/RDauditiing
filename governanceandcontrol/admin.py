@@ -2,18 +2,18 @@ from django.contrib import admin
 from . import models
 
 # Register your models here.
-from .models import GncTable
+from .models import Governance_And_Control
 # from .models import RiskManagement
 
 admin.site.site_header = 'Ruth Doreen Auditing Tool'
 
 
 # admin.site.register(RiskManagement)
-# admin.site.register(GncTable)
+# admin.site.register(Governance_And_Control)
 
 
-@admin.register(GncTable)
-class GncTableAdmin(admin.ModelAdmin):
+@admin.register(Governance_And_Control)
+class Governance_And_ControlAdmin(admin.ModelAdmin):
     list_display = ('audit_project_code', 'audit_project_name', 'quarter', 'audit_project_type',
                     'issue_title', 'criticality', 'root_cause_analysis', 'recommendation',
                     'action_plan', 'recommendation_state', 'agreed_implementation_date', 'revised_implementation_date'

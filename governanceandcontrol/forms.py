@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from . import models
 
 # Create your forms here.
-from .models import GncTable
+from .models import Governance_And_Control
 
 
 # class NewUserForm(UserCreationForm):
@@ -22,10 +22,10 @@ from .models import GncTable
 #         return user
 
 
-class GncTableForm(forms.ModelForm):
+class Governance_And_ControlForm(forms.ModelForm):
 
     class Meta:
-        model = GncTable
+        model = Governance_And_Control
         fields = "__all__"
         widgets = {
             'agreed_implementation_date': forms.DateInput(format=('%m/%d/%Y'),

@@ -2,7 +2,7 @@ from django.db import models
 
 
 
-class GncTable(models.Model):
+class Governance_And_Control(models.Model):
     CRITICAL_LEVELS = (
         ('low', 'low'),
         ('medium', 'medium'),
@@ -46,7 +46,7 @@ class GncTable(models.Model):
     last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False,null=True)  # Field name made lowercase.
     ageing_days = models.FloatField(db_column='Ageing__Days', max_length=10, blank=False,null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.
     actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True,null=True)  # Field name made lowercase.
-    owner = models.ForeignKey('accounts.Dept', on_delete=models.CASCADE)     # Field name made lowercase.
+    owner = models.ForeignKey('accounts.Department', on_delete=models.CASCADE)     # Field name made lowercase.
     final_approver = models.ForeignKey('accounts.Person', on_delete=models.CASCADE)  # Field name made lowercase.
 
     # class Meta:

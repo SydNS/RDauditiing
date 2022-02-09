@@ -119,7 +119,7 @@ class RatingUser(models.Model):
     )
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     rate_levels = models.PositiveSmallIntegerField()
-    deptnem = models.ForeignKey(Dept, on_delete=models.CASCADE)
+    deptnem = models.ForeignKey(Department, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.grade

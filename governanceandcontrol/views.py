@@ -3,16 +3,16 @@ from django.shortcuts import render
 from . import models
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from .forms import GncTableForm
+from .forms import Governance_And_ControlForm
 from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from riskmanagement.models import RiskManagement
 from auditor_of_auditors.models import Auditorofauditors
-from accounts.models import Dept
+from accounts.models import Department
 from accounts.models import Person
-from accounts.models import GradingUser
+from accounts.models import RatingUser
 # importing datetime module
 import datetime
 
@@ -20,7 +20,7 @@ import datetime
 # Create your views here.
 @login_required
 def dashboard(request):
-    consolidatedgncobj = models.GncTable.objects.all()
+    consolidatedgncobj = models.Governance_And_Control.objects.all()
     if not consolidatedgncobj:
         return render(request=request, template_name="governanceandcontrol/index.html",
                       context={
@@ -66,29 +66,29 @@ def dashboard(request):
                       }
                       )
     else:
-        gncobj = models.GncTable.objects.all()
-        gncobjnumber = models.GncTable.objects.all().count()
+        gncobj = models.Governance_And_Control.objects.all()
+        gncobjnumber = models.Governance_And_Control.objects.all().count()
 
-        highimpactprojects = models.GncTable.objects.filter(
+        highimpactprojects = models.Governance_And_Control.objects.filter(
             criticality='high',
         )
 
-        mediumimpactissues = models.GncTable.objects.filter(
+        mediumimpactissues = models.Governance_And_Control.objects.filter(
             criticality='medium',
         ).count()
-        highimpactissues = models.GncTable.objects.filter(
+        highimpactissues = models.Governance_And_Control.objects.filter(
             criticality='high',
         ).count()
-        lowimpactissues = models.GncTable.objects.filter(
+        lowimpactissues = models.Governance_And_Control.objects.filter(
             criticality='low',
         ).count()
-        PENDING = models.GncTable.objects.filter(
+        PENDING = models.Governance_And_Control.objects.filter(
             recommendation_state='PENDING',
         ).count()
-        CLOSED = models.GncTable.objects.filter(
+        CLOSED = models.Governance_And_Control.objects.filter(
             recommendation_state='CLOSED',
         ).count()
-        PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
+        PARTIALLY_IMPLEMENTED = models.Governance_And_Control.objects.filter(
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
@@ -184,8 +184,8 @@ def dashboard(request):
 # ==================================================GNC========================================================
 @login_required
 def Governcontrolprojects(request):
-    consolidatedgncobj = models.GncTable.objects.all()
-    consolidatedgncobjnumber = models.GncTable.objects.all().count()
+    consolidatedgncobj = models.Governance_And_Control.objects.all()
+    consolidatedgncobjnumber = models.Governance_And_Control.objects.all().count()
     if not consolidatedgncobj:
         return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
                       context={
@@ -228,13 +228,13 @@ def Governcontrolprojects(request):
         # )
 
         # counting the number issues at different levels of criticality
-        mediumimpactissues = models.GncTable.objects.filter(
+        mediumimpactissues = models.Governance_And_Control.objects.filter(
             criticality='medium',
         ).count()
-        highimpactissues = models.GncTable.objects.filter(
+        highimpactissues = models.Governance_And_Control.objects.filter(
             criticality='high',
         ).count()
-        lowimpactissues = models.GncTable.objects.filter(
+        lowimpactissues = models.Governance_And_Control.objects.filter(
             criticality='low',
         ).count()
 
@@ -244,13 +244,13 @@ def Governcontrolprojects(request):
         #     ('PENDING', 'PENDING'),
         #     ('CLOSED', 'CLOSED'),
         # )
-        PENDING = models.GncTable.objects.filter(
+        PENDING = models.Governance_And_Control.objects.filter(
             recommendation_state='PENDING',
         ).count()
-        CLOSED = models.GncTable.objects.filter(
+        CLOSED = models.Governance_And_Control.objects.filter(
             recommendation_state='CLOSED',
         ).count()
-        PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
+        PARTIALLY_IMPLEMENTED = models.Governance_And_Control.objects.filter(
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
@@ -289,8 +289,8 @@ def Governcontrolprojects(request):
 
 @login_required
 def GoverncontrolIssues(request):
-    consolidatedgncobj = models.GncTable.objects.all()
-    consolidatedgncobjnumber = models.GncTable.objects.all().count()
+    consolidatedgncobj = models.Governance_And_Control.objects.all()
+    consolidatedgncobjnumber = models.Governance_And_Control.objects.all().count()
 
     if not consolidatedgncobj:
         return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
@@ -316,23 +316,23 @@ def GoverncontrolIssues(request):
                       )
     else:
         # counting the number issues at different levels of criticality
-        mediumimpactissues = models.GncTable.objects.filter(
+        mediumimpactissues = models.Governance_And_Control.objects.filter(
             criticality='medium',
         ).count()
-        highimpactissues = models.GncTable.objects.filter(
+        highimpactissues = models.Governance_And_Control.objects.filter(
             criticality='high',
         ).count()
-        lowimpactissues = models.GncTable.objects.filter(
+        lowimpactissues = models.Governance_And_Control.objects.filter(
             criticality='low',
         ).count()
 
-        PENDING = models.GncTable.objects.filter(
+        PENDING = models.Governance_And_Control.objects.filter(
             recommendation_state='PENDING',
         ).count()
-        CLOSED = models.GncTable.objects.filter(
+        CLOSED = models.Governance_And_Control.objects.filter(
             recommendation_state='CLOSED',
         ).count()
-        PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
+        PARTIALLY_IMPLEMENTED = models.Governance_And_Control.objects.filter(
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
@@ -371,8 +371,8 @@ def GoverncontrolIssues(request):
 
 @login_required
 def Governcontrolrecommendations(request):
-    consolidatedgncobj = models.GncTable.objects.all()
-    consolidatedgncobjnumber = models.GncTable.objects.all().count()
+    consolidatedgncobj = models.Governance_And_Control.objects.all()
+    consolidatedgncobjnumber = models.Governance_And_Control.objects.all().count()
 
     if not consolidatedgncobj:
         return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
@@ -397,22 +397,22 @@ def Governcontrolrecommendations(request):
                       }
                       )
     else:
-        mediumimpactissues = models.GncTable.objects.filter(
+        mediumimpactissues = models.Governance_And_Control.objects.filter(
             criticality='medium',
         ).count()
-        highimpactissues = models.GncTable.objects.filter(
+        highimpactissues = models.Governance_And_Control.objects.filter(
             criticality='high',
         ).count()
-        lowimpactissues = models.GncTable.objects.filter(
+        lowimpactissues = models.Governance_And_Control.objects.filter(
             criticality='low',
         ).count()
-        PENDING = models.GncTable.objects.filter(
+        PENDING = models.Governance_And_Control.objects.filter(
             recommendation_state='PENDING',
         ).count()
-        CLOSED = models.GncTable.objects.filter(
+        CLOSED = models.Governance_And_Control.objects.filter(
             recommendation_state='CLOSED',
         ).count()
-        PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
+        PARTIALLY_IMPLEMENTED = models.Governance_And_Control.objects.filter(
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
@@ -450,8 +450,8 @@ def Governcontrolrecommendations(request):
 
 @login_required
 def Governcontrolconsolidated(request):
-    consolidatedgncobj = models.GncTable.objects.all()
-    consolidatedgncobjnumber = models.GncTable.objects.all().count()
+    consolidatedgncobj = models.Governance_And_Control.objects.all()
+    consolidatedgncobjnumber = models.Governance_And_Control.objects.all().count()
     if not consolidatedgncobj:
         return render(request=request, template_name="governanceandcontrol/governcontrolconsolidated.html",
                       context={
@@ -475,13 +475,13 @@ def Governcontrolconsolidated(request):
                       }
                       )
     else:
-        mediumimpactissues = models.GncTable.objects.filter(
+        mediumimpactissues = models.Governance_And_Control.objects.filter(
             criticality='medium',
         ).count()
-        highimpactissues = models.GncTable.objects.filter(
+        highimpactissues = models.Governance_And_Control.objects.filter(
             criticality='high',
         ).count()
-        lowimpactissues = models.GncTable.objects.filter(
+        lowimpactissues = models.Governance_And_Control.objects.filter(
             criticality='low',
         ).count()
 
@@ -491,13 +491,13 @@ def Governcontrolconsolidated(request):
         #     ('PENDING', 'PENDING'),
         #     ('CLOSED', 'CLOSED'),
         # )
-        PENDING = models.GncTable.objects.filter(
+        PENDING = models.Governance_And_Control.objects.filter(
             recommendation_state='PENDING',
         ).count()
-        CLOSED = models.GncTable.objects.filter(
+        CLOSED = models.Governance_And_Control.objects.filter(
             recommendation_state='CLOSED',
         ).count()
-        PARTIALLY_IMPLEMENTED = models.GncTable.objects.filter(
+        PARTIALLY_IMPLEMENTED = models.Governance_And_Control.objects.filter(
             recommendation_state='PARTIALLY_IMPLEMENTED',
         ).count()
         # percentage of completed recos
@@ -537,7 +537,7 @@ def Governcontrolconsolidated(request):
 # ======================Details views===========================
 @login_required
 def GoverncontrolprojectsDetail(request, id):
-    consolidatedgncobj = models.GncTable.objects.get(id=id)
+    consolidatedgncobj = models.Governance_And_Control.objects.get(id=id)
 
     return render(request=request, template_name="governanceandcontrol/governcontrolprojectsdetails.html",
                   context={"consolidateddata": consolidatedgncobj, }
@@ -546,7 +546,7 @@ def GoverncontrolprojectsDetail(request, id):
 
 @login_required
 def GoverncontrolrecommendationsDetails(request, id):
-    consolidatedgncobj = models.GncTable.objects.get(id=id)
+    consolidatedgncobj = models.Governance_And_Control.objects.get(id=id)
 
     return render(request=request, template_name="governanceandcontrol/governcontrolprojectsdetails.html",
                   context={"consolidateddata": consolidatedgncobj, })
@@ -555,12 +555,12 @@ def GoverncontrolrecommendationsDetails(request, id):
 @login_required
 def AddGoverncontrolprojects(request):
     if request.method == "POST":
-        form = GncTableForm(request.POST)
+        form = Governance_And_ControlForm(request.POST)
         if form.is_valid():
             governcontrolproject = form.save(commit=True)
             return redirect('governcontrolprojectsdetails', governcontrolproject.pk)
     else:
-        form = GncTableForm()
+        form = Governance_And_ControlForm()
     return render(request, 'governanceandcontrol/addformgovernanceandcontrol.html', {'form': form})
 
 

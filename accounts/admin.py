@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Dept,Person,GradingUser
+from .models import Department,Person,RatingUser
 
 # class Dept(models.Model):
 #     CRITICALITY_LEVELS = (
@@ -16,7 +16,7 @@ from .models import Dept,Person,GradingUser
 #     criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,
 #                                    choices=CRITICALITY_LEVELS, default='draft')  # Field name made lowercase.
 
-@admin.register(Dept)
+@admin.register(Department)
 class DeptAdmin(admin.ModelAdmin):
     list_display = ('deptname', 'deptrole', 'numberofmembers', 'criticality',)
     list_filter = ('deptname', 'deptrole',  'numberofmembers', 'criticality',)
@@ -42,8 +42,8 @@ class PersonAdmin(admin.ModelAdmin):
 #     grade = models.PositiveSmallIntegerField()
 #     deptnem = models.ForeignKey(Dept, on_delete=models.CASCADE)
 #
-@admin.register(GradingUser)
-class GradingUserAdmin(admin.ModelAdmin):
+@admin.register(RatingUser)
+class RatingUserAdmin(admin.ModelAdmin):
     list_display = ('person', 'grade', 'deptnem',)
     list_filter = ('person', 'grade', 'deptnem',)
     search_fields = ('person', 'grade', 'deptnem',)
