@@ -1,19 +1,17 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,User
-
-
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, User
 
 
 # Create your models here.
 # Create a user
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self,email,username,password=None):
+    def create_user(self, email, username, password=None):
         if not email:
             raise ValueError("Users must have an email")
         if not username:
             raise ValueError("Users must have an email")
-        user=self.model(
+        user = self.model(
             email=self.normalize_email(email),
             username=username,
         )
@@ -21,47 +19,46 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self.db)
         return user
 
-    def create_superuser(self,email,username,password=None):
+    def create_superuser(self, email, username, password=None):
 
-        user=self.create_user(
+        user = self.create_user(
             email=self.normalize_email(email),
             username=username,
             password=password
         )
-        user.is_admin=True
-        user.is_staff=True
-        user.is_superuser=True
+        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
 
         user.set_password(password)
         user.save(using=self.db)
         return user
 
 
-
 class Account(AbstractBaseUser):
-    email   =models.EmailField(verbose_name="email",max_length=60,unique=True)
-    username   =models.CharField(max_length=30,unique=True)
-    date_joined   =models.DateTimeField(verbose_name="date_joined",auto_now_add=True)
-    last_login   =models.DateTimeField(verbose_name="last_login",auto_now=True)
-    is_admin   =models.BooleanField(default=False)
-    is_active    =models.BooleanField(default=True)
-    is_staff   =models.BooleanField(default=False)
-    is_superuser   =models.BooleanField(default=False)
-    hide_email=models.BooleanField(default=True)
+    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
+    username = models.CharField(max_length=30, unique=True)
+    date_joined = models.DateTimeField(verbose_name="date_joined", auto_now_add=True)
+    last_login = models.DateTimeField(verbose_name="last_login", auto_now=True)
+    is_admin = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    hide_email = models.BooleanField(default=True)
     # profileimage=models.ImageField(max_length=255,upload_to=,null=True,default=)
 
-    objects=MyAccountManager()
+    objects = MyAccountManager()
 
-    USERNAME_FIELD="email"
-    REQUIRED_FIELDS=["email"]
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["email"]
 
     def __str__(self):
         return self.username
 
-    def has_perm(self,perm,obj=None):
+    def has_perm(self, perm, obj=None):
         return self.username
 
-    def has_module_perms(self,app_label):
+    def has_module_perms(self, app_label):
         return True
 
 
@@ -76,12 +73,12 @@ class Department(models.Model):
     numberofmembers = models.IntegerField()
     criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,
                                    choices=CRITICALITY_LEVELS, default='draft')  # Field name made lowercase.
+
     def __str__(self):
-        return self.deptname
+        return self.departmentname
 
-
-    # class Meta:
-    #     unique_together = ("deptname", "deptrole",)
+    class Meta:
+        unique_together = ("departmentname",)
 
 
 class Person(models.Model):
@@ -106,23 +103,24 @@ class Person(models.Model):
 
 class RatingUser(models.Model):
     RATINGS = (
-        ('1', '1/10'),
-        ('2', '2/10'),
-        ('3', '3/10'),
-        ('4', '4/10'),
-        ('5', '5/10'),
-        ('6', '6/10'),
-        ('7', '7/10'),
-        ('8', '8/10'),
-        ('9', '9/10'),
-        ('10', '10/10'),
+        (1, "1 of 10"),
+        (2, "2 of 10"),
+        (3, "3 of 10"),
+        (4, "4 of 10"),
+        (5, "5 of 10"),
+        (6, "6 of 10"),
+        (7, "7 of 10"),
+        (8, "8 of 10"),
+        (9, "9 of 10"),
+        (10, "10 of 10"),
+
     )
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    rate_level = models.PositiveSmallIntegerField(choices=RATINGS)
+    rate_level = models.IntegerField(choices=RATINGS)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Ratings"
 
     def __str__(self):
-        return self.grade
+        return str(self.rate_level)
