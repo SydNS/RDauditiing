@@ -25,45 +25,45 @@ def dashboard(request):
         return render(request=request, template_name="governanceandcontrol/index.html",
                       context={
 
-            # ============# governanceandcontrol========================================
-            "gncojbects": {},
-            "gncobjnumber": 0,
-            # issues
-            "mediumimpactissues": 0,
-            "highimpactissues": 0,
-            "lowimpactissues": 0,
+                          # ============# governanceandcontrol========================================
+                          "gncojbects": {},
+                          "gncobjnumber": 0,
+                          # issues
+                          "mediumimpactissues": 0,
+                          "highimpactissues": 0,
+                          "lowimpactissues": 0,
 
-            # highimpactprojects
-            "highimpactprojects": {},
+                          # highimpactprojects
+                          "highimpactprojects": {},
 
-            # likelihood
-            "risklikelihoodmoderate": 0,
-            "risklikelihoodlow": 0,
-            "risklikelihoodhigh": 0,
+                          # likelihood
+                          "risklikelihoodmoderate": 0,
+                          "risklikelihoodlow": 0,
+                          "risklikelihoodhigh": 0,
 
-            # reommendations
-            "PARTIALLY_IMPLEMENTED": 0,
-            "PENDING": 0,
-            "CLOSED": 0,
-            "percentagecompleted": 0,
+                          # reommendations
+                          "PARTIALLY_IMPLEMENTED": 0,
+                          "PENDING": 0,
+                          "CLOSED": 0,
+                          "percentagecompleted": 0,
 
-            # reommendations
-            "totaldays": round(0, 1),
+                          # reommendations
+                          "totaldays": round(0, 1),
 
-            # ========================# riskmanagement================================
+                          # ========================# riskmanagement================================
 
-            "riskobj": {},
-            "riskobjnumber": 0,
-            # issues
-            "riskmediumimpactissues": 0,
-            "riskhighimpactissues": 0,
-            "risklowimpactissues": 0,
+                          "riskobj": {},
+                          "riskobjnumber": 0,
+                          # issues
+                          "riskmediumimpactissues": 0,
+                          "riskhighimpactissues": 0,
+                          "risklowimpactissues": 0,
 
-            "AoAobj": {},
-            "Deptobj": {},
-            "Personobj": {},
-            "Gradingobj": {},
-        }
+                          "AoAobj": {},
+                          "Deptobj": {},
+                          "Personobj": {},
+                          "Gradingobj": {},
+                      }
                       )
     else:
         gncobj = models.GncTable.objects.all()
@@ -540,7 +540,7 @@ def GoverncontrolprojectsDetail(request, id):
     consolidatedgncobj = models.GncTable.objects.get(id=id)
 
     return render(request=request, template_name="governanceandcontrol/governcontrolprojectsdetails.html",
-                  context={ "consolidateddata": consolidatedgncobj,}
+                  context={"consolidateddata": consolidatedgncobj, }
                   )
 
 
@@ -549,7 +549,7 @@ def GoverncontrolrecommendationsDetails(request, id):
     consolidatedgncobj = models.GncTable.objects.get(id=id)
 
     return render(request=request, template_name="governanceandcontrol/governcontrolprojectsdetails.html",
-                  context={ "consolidateddata": consolidatedgncobj, })
+                  context={"consolidateddata": consolidatedgncobj, })
 
 
 @login_required
