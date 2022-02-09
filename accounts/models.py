@@ -95,7 +95,7 @@ class Person(models.Model):
     photo = models.ImageField(upload_to='profileimages/')
     gender = models.CharField(choices=GENDER_CHOICES, default='male', max_length=6)
     address = models.CharField(max_length=100)
-    personsdept = models.ForeignKey(Dept, on_delete=models.CASCADE)
+    personsdept = models.ForeignKey(Department, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "People"
