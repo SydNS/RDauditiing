@@ -50,3 +50,12 @@ def Employeesview(request):
     people=Person.objects.all()
     ratings=RatingUser.objects.all()
     return render(request=request, template_name="accounts/people.html", context={"people": people,"ratings": ratings,})
+
+
+def Personview(request,id):
+    person=Person.objects.get(id=id)
+    xy=person.id
+    rating=RatingUser.objects.get( person=xy)
+    return render(request=request, template_name="accounts/person.html", context={"person": person,
+                                                                                  "rating": rating,
+                                                                                  })
