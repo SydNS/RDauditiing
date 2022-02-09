@@ -72,7 +72,7 @@ class Department(models.Model):
     departmentrole = models.CharField(max_length=100)
     numberofmembers = models.IntegerField()
     criticality = models.CharField(db_column='Criticality', max_length=20, blank=False, null=True,
-                                   choices=CRITICALITY_LEVELS, default='draft')  # Field name made lowercase.
+                                   choices=CRITICALITY_LEVELS, default='Low')  # Field name made lowercase.
 
     def __str__(self):
         return self.departmentname
@@ -113,7 +113,6 @@ class RatingUser(models.Model):
         (8, "8 of 10"),
         (9, "9 of 10"),
         (10, "10 of 10"),
-
     )
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     rate_level = models.IntegerField(choices=RATINGS)
