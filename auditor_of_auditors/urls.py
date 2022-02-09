@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+app_name="auditor_of_auditors"
 urlpatterns = [
 
     # path('', views.dashboard, name='dashboard'),
