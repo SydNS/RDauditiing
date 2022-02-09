@@ -4,7 +4,7 @@ from .forms import NewUserForm
 from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Person
+from .models import Person,RatingUser
 # Create your views here.
 
 
@@ -48,4 +48,5 @@ def Logout(request):
 
 def Employeesview(request):
     people=Person.objects.all()
-    return render(request=request, template_name="accounts/people.html", context={"people": people})
+    ratings=RatingUser.objects.all()
+    return render(request=request, template_name="accounts/people.html", context={"people": people,"ratings": ratings,})
