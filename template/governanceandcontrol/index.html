@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 
 {% include 'topnavbar.html' %}
@@ -420,9 +421,7 @@
                                 <div class="card-header card-header-action">
                                     <h6></h6>
                                     <div class="d-flex align-items-center card-action-wrap">
-                                        <a href="#" class="inline-block refresh mr-15">
-                                            <i class="ion ion-md-arrow-down"></i>
-                                        </a>
+
                                         <a href="#" class="inline-block full-screen">
                                             <i class="ion ion-md-expand"></i>
                                         </a>
@@ -432,31 +431,8 @@
 
                                     <div class="table-wrap">
                                         <div class="table-responsive">
-                                            <table class="table table-sm table-hover mb-0">
-                                                <thead>
-                                                <tr>
-                                                    <th class="w-25">Project Id</th>
-                                                    <th>Project name</th>
-                                                    <th>Quarter</th>
-                                                    <th> Criticality</th>
-                                                    <th>Ageing Days</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for singleinfo in gncojbects %}
+                                            <div id="e_chart_1" class="echart" style="height:294px;"></div>
 
-                                                <tr>
-                                                    <td><a href="{{ singleinfo.audit_project_code }}">
-                                                        {{singleinfo.id}}</a></td>
-                                                    <td>{{ singleinfo.audit_project_name}}</td>
-                                                    <td>{{ singleinfo.quarter}}</td>
-                                                    <td>{{ singleinfo.criticality}}</td>
-                                                    <td>{{ singleinfo.ageing_days}}</td>
-                                                </tr>
-                                                {% endfor %}
-
-                                                </tbody>
-                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -590,7 +566,107 @@
             </div>
             <!-- /Container -->
 
+<!--"use strict";-->
+<script>
+
+var echartsConfig = function() {
+	if( $('#e_chart_1').length > 0 ){
+		var eChart_1 = echarts.init(document.getElementById('e_chart_1'));
+		var option = {
+			color: ['#88c241'],
+			tooltip: {
+				show: true,
+				trigger: 'axis',
+				backgroundColor: '#fff',
+				borderRadius:6,
+				padding:6,
+				axisPointer:{
+					lineStyle:{
+						width:0,
+					}
+				},
+				textStyle: {
+					color: '#324148',
+					fontFamily: '"Nunito", sans-serif',
+					fontSize: 12
+				}
+			},
+
+			xAxis: [{
+				type: 'category',
+				data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+				axisLine: {
+					show:false
+				},
+				axisTick: {
+					show:false
+				},
+				axisLabel: {
+					textStyle: {
+						color: '#5e7d8a'
+					}
+				}
+			}],
+			yAxis: {
+				type: 'value',
+				axisLine: {
+					show:false
+				},
+				axisTick: {
+					show:false
+				},
+				axisLabel: {
+					textStyle: {
+						color: '#5e9d8a'
+					}
+				},
+				splitLine: {
+					lineStyle: {
+						color: 'transparent',
+					}
+				}
+			},
+			grid: {
+				top: '3%',
+				left: '3%',
+				right: '3%',
+				bottom: '3%',
+				containLabel: true
+			},
+			series: [{
+				data: [120, 200, 150, 80, 70, 110, 130],
+				type: 'bar',
+				barMaxWidth: 30,
+				itemStyle: {
+					normal: {
+						barBorderRadius: [6, 6, 0, 0] ,
+					}
+				},
+			}]
+		};
+		eChart_1.setOption(option);
+		eChart_1.resize();
+	}
+
+}
+
+var echartResize;
+$(window).on("resize", function () {
+	clearTimeout(echartResize);
+	echartResize = setTimeout(echartsConfig, 200);
+}).resize();
+
+echartsConfig();
+
+
+
+
+
+
+
+</script>
         </div>
+
         <!-- /Main Content -->
         {% include 'verticalnavbar.html' %}
 
