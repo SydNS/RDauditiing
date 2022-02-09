@@ -121,5 +121,8 @@ class RatingUser(models.Model):
     rate_levels = models.PositiveSmallIntegerField()
     deptnem = models.ForeignKey(Department, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = "Ratings"
+
     def __str__(self):
         return self.grade
