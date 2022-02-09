@@ -12,6 +12,7 @@ urlpatterns = [
 
     # peopleview
     path('employees/', views.Employeesview, name='employees'),
+    path('employee/<int:id>/', views.Personview, name='employee'),
 
     path("", include("governanceandcontrol.urls"),name="dashboard"),
 
