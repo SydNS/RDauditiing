@@ -42,9 +42,9 @@ def dashboard(request):
                           "risklikelihoodhigh": 60,
 
                           # reommendations
-                          "PARTIALLY_IMPLEMENTED": 0,
-                          "PENDING": 0,
-                          "CLOSED": 0,
+                          "PARTIALLY_IMPLEMENTED": 15,
+                          "PENDING": 20,
+                          "CLOSED": 10,
                           "percentagecompleted": 0,
 
                           # reommendations
