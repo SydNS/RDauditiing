@@ -29,17 +29,17 @@ def dashboard(request):
                           "gncojbects": {},
                           "gncobjnumber": 0,
                           # issues
-                          "mediumimpactissues": 0,
-                          "highimpactissues": 0,
-                          "lowimpactissues": 0,
+                          "mediumimpactissues": 5,
+                          "highimpactissues": 10,
+                          "lowimpactissues": 20,
 
                           # highimpactprojects
                           "highimpactprojects": {},
 
                           # likelihood
-                          "risklikelihoodmoderate": 0,
-                          "risklikelihoodlow": 0,
-                          "risklikelihoodhigh": 0,
+                          "risklikelihoodmoderate": 40,
+                          "risklikelihoodlow": 20,
+                          "risklikelihoodhigh": 60,
 
                           # reommendations
                           "PARTIALLY_IMPLEMENTED": 0,
