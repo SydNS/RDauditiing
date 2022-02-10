@@ -49,19 +49,20 @@
     };
 
     var config_status = {
-      type: 'pie',
+      type: 'doughnut',
       data: {
         datasets: [{
-          data: [{{lowimpactissues}},{{mediumimpactissues}},{{highimpactissues}},],
+          data: [{{CLOSED}},{{PARTIALLY_IMPLEMENTED}},{{PENDING}}],
           backgroundColor: [
              '#22af47', '#ffbf36', '#f83f37'
           ],
-          label: 'Governance and Control Issues Criticality'
+          label: 'Issues per Status of Completion'
         }],
-        labels: ["Low Impact","Medium Impact","High Impact"]
+        labels: ["Closed","Partial","Pending"]
       },
       options: {
-        responsive: true
+        responsive: true,
+        indexAxis: 'x'
       }
     };
 
@@ -73,6 +74,14 @@
       var ctx = document.getElementById('pie-chart').getContext('2d');
       window.myPie = new Chart(ctx, config);
     };
+
+
+
+
+
+
+
+
 
 </script>
 
@@ -122,7 +131,7 @@
                                         <div>
                             <span
                                     class="d-block font-15 text-white font-weight-500"
-                            >G&Control</span
+                            >Governance & Control Issues</span
                             >
                                         </div>
                                         <div>
@@ -210,6 +219,57 @@
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-info counter-anim">{{totaldays}}</span></span></small>
                                         <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="card bg-dark-20 text-white">
+                                        <div class="card-header card-header-action">
+                                            <h6 class="text-white">Governance and Control Issues Criticality</h6>
+                                            <div class="d-flex align-items-center card-action-wrap">
+                                                <a href="#" class="inline-block refresh mr-15">
+                                                    <i class="ion ion-md-arrow-down"></i>
+                                                </a>
+                                                <a href="#" class="inline-block full-screen">
+                                                    <i class="ion ion-md-expand"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pa-0 full-screen mr-15">
+
+
+                                            <div class="inner-card text-white" style="height:294px;width:100%;">
+
+                                                <canvas id="pie-chart"></canvas>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="card bg-dark text-white">
+                                        <div class="card-header card-header-action">
+                                            <h6 class="text-white">Recommendations' Status of Completion</h6>
+                                            <div class="d-flex align-items-center card-action-wrap">
+                                                <a href="#" class="inline-block refresh mr-15">
+                                                    <i class="ion ion-md-arrow-down"></i>
+                                                </a>
+                                                <a href="#" class="inline-block full-screen">
+                                                    <i class="ion ion-md-expand"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pa-0 full-screen mr-15">
+
+                                            <div class="inner-card" style="height:294px;width:100%;">
+                                                <canvas id="bar-chart_status"></canvas>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -340,136 +400,12 @@
                             </div>
                         </div>
 
-
-                    </div>
-                    <div class="hk-row">
-                        <div class="col-lg-6">
-
-                            <div class="card">
-                                <div class="card-header card-header-action">
-                                    <h6>Governance and Control Summary</h6>
-                                    <div class="d-flex align-items-center card-action-wrap">
-                                        <a href="#" class="inline-block refresh mr-15">
-                                            <i class="ion ion-md-arrow-down"></i>
-                                        </a>
-                                        <a href="#" class="inline-block full-screen">
-                                            <i class="ion ion-md-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-body pa-0 full-screen mr-15">
-
-                                    <div class="table-wrap">
-                                        <div class="table-responsive">
-                                            <table class="table table-sm table-hover mb-0">
-                                                <thead>
-                                                <tr>
-                                                    <th class="w-25">Project Id</th>
-                                                    <th>Project name</th>
-                                                    <th>Quarter</th>
-                                                    <th> Criticality</th>
-                                                    <th>Ageing Days</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for singleinfo in gncojbects %}
-
-                                                <tr>
-                                                    <td><a href="{{ singleinfo.audit_project_code }}">
-                                                        {{singleinfo.id}}</a></td>
-                                                    <td>{{ singleinfo.audit_project_name}}</td>
-                                                    <td>{{ singleinfo.quarter}}</td>
-                                                    <td>{{ singleinfo.criticality}}</td>
-                                                    <td>{{ singleinfo.ageing_days}}</td>
-                                                </tr>
-                                                {% endfor %}
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-header card-header-action">
-                                    <h6>Risk Mangement Summary </h6>
-                                    <div class="d-flex align-items-center card-action-wrap">
-                                        <a href="#" class="inline-block refresh mr-15">
-                                            <i class="ion ion-md-arrow-down"></i>
-                                        </a>
-                                        <a href="#" class="inline-block full-screen">
-                                            <i class="ion ion-md-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-body pa-0 full-screen mr-15">
-
-                                    <div class="table-wrap">
-                                        <div class="table-responsive">
-                                            <table class="table table-sm table-hover mb-0">
-                                                <thead>
-                                                <tr>
-                                                    <th>XY Strategic Pillar</th>
-                                                    <th>XY Strategic Objectives</th>
-                                                    <th>Risk Category</th>
-                                                    <th>Risk Description</th>
-                                                    <th>Likelihood</th>
-                                                    <th>Impact</th>
-                                                    <th>Risk Rating</th>
-                                                    <th>Department</th>
-                                                </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                {% for singleinfo in riskobj %}
-                                                <tr>
-                                                <tr>
-                                                    <td><a href="#">{{singleinfo.xy_strategic_pillar}}</a></td>
-                                                    <td>{{singleinfo.xy_strategic_objectives}}</td>
-                                                    <td>{{singleinfo.risk_category}}</td>
-                                                    <td>{{singleinfo.risk_description}}</td>
-                                                    <td>{{singleinfo.likelihood}}</td>
-                                                    <td>{{singleinfo.impact}}</td>
-                                                    <td>{{singleinfo.risk_rating}}</td>
-                                                    <td>{{singleinfo.dept}}</td>
-                                                    <!--                                            xy_strategic_pillar = models.CharField(db_column='XY_Strategic_Pillar', max_length=100, blank=True,null=True)  # Field name made lowercase.-->
-                                                    <!--    xy_strategic_objectives = models.CharField(db_column='XY_Strategic_Objectives', max_length=100, blank=True,null=True)  # Field name made lowercase.-->
-                                                    <!--    risk_category = models.CharField(db_column='Risk_Category', max_length=100, blank=True,choices=RISK_CATEGORY,null=True)  # Field name made lowercase.-->
-                                                    <!--    risk_description = models.CharField(db_column='Risk_Description', max_length=100, blank=True,null=True)  # Field name made lowercase.-->
-                                                    <!--    likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=True,choices=LIKELIHOOD,null=True)  # Field name made lowercase.-->
-                                                    <!--    impact = models.CharField(db_column='Impact', max_length=100, blank=True, null=True,choices=IMPACT_LEVELS)  # Field name made lowercase.-->
-                                                    <!--    risk_rating = models.CharField(db_column='Risk_Rating', max_length=100, blank=True,choices=RATE_LEVELS,null=True)  # Field name made lowercase.-->
-                                                    <!--    control_exists_yesno = models.CharField(db_column='Control_Exists_YesNo', max_length=100, blank=True,choices=CONTROL_EXISTANCE, null=True)  # Field name made lowercase.-->
-                                                    <!--    control_description = models.CharField(db_column='Control_Description', max_length=100, blank=True,null=True)  # Field name made lowercase.-->
-                                                    <!--    control_is_adequate_yesno = models.CharField(db_column='Control_is_Adequate_YesNo', max_length=100, blank=True ,choices=CONTROL_EXISTANCE,null=True)  # Field name made lowercase.-->
-                                                    <!--    recommended_control = models.CharField(db_column='Recommended_Control', max_length=100, blank=True,null=True)  # Field name made lowercase.-->
-                                                    <!--    action = models.CharField(db_column='Action', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                                    <!--    kri = models.CharField(db_column='KRI', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                                    <!--    target = models.CharField(db_column='Target', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                                    <!--    dept = models.ForeignKey('accounts.Dept', on_delete=models.CASCADE) # Field name made lowercase.-->
-
-
-                                                </tr>
-                                                </tr>
-                                                {% endfor %}
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="hk-row" style="margin:2%;">
-                        <div class="row">
-                                <div class="col-xl-6" >
-                                    <div class="card">
+                        <div class="col-xl-12" >
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="card bg-dark-20 text-white">
                                         <div class="card-header card-header-action">
-                                            <h6>Governance and Control Issues Criticality</h6>
+                                            <h6 class="text-white">No. of Risk Per Level of Impact</h6>
                                             <div class="d-flex align-items-center card-action-wrap">
                                                 <a href="#" class="inline-block refresh mr-15">
                                                     <i class="ion ion-md-arrow-down"></i>
@@ -481,93 +417,33 @@
                                         </div>
                                         <div class="card-body pa-0 full-screen mr-15">
 
+
+                                            <div class="inner-card text-white" style="height:294px;width:100%;">
+
+                                                <canvas id="pie-chart_risks_impact"></canvas>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="card bg-dark text-white">
+                                        <div class="card-header card-header-action">
+                                            <h6 class="text-white">No. of Risks Per Chances of Occurances</h6>
+                                            <div class="d-flex align-items-center card-action-wrap">
+                                                <a href="#" class="inline-block refresh mr-15">
+                                                    <i class="ion ion-md-arrow-down"></i>
+                                                </a>
+                                                <a href="#" class="inline-block full-screen">
+                                                    <i class="ion ion-md-expand"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pa-0 full-screen mr-15">
 
                                             <div class="inner-card" style="height:294px;width:100%;">
-
-                                                <canvas id="pie-chart"></canvas>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6" >
-
-                                    <div class="card">
-                                        <div class="card-header card-header-action">
-                                            <h6>Governance and Control Issues Criticality</h6>
-                                            <div class="d-flex align-items-center card-action-wrap">
-                                                <a href="#" class="inline-block refresh mr-15">
-                                                    <i class="ion ion-md-arrow-down"></i>
-                                                </a>
-                                                <a href="#" class="inline-block full-screen">
-                                                    <i class="ion ion-md-expand"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="card-body pa-0 full-screen mr-15">
-
-                                            <div class="table-wrap">
-                                                <div class="table-responsive">
-                                                    <div class="inner-card" style="height:294px;width:100%;">
-                                                        <canvas id="bar-chart_status"></canvas>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="hk-row" style="margin:2%;">
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card">
-                                    <div class="card-header card-header-action">
-                                        <h6>Governance and Control Issues Criticality</h6>
-                                        <div class="d-flex align-items-center card-action-wrap">
-                                            <a href="#" class="inline-block refresh mr-15">
-                                                <i class="ion ion-md-arrow-down"></i>
-                                            </a>
-                                            <a href="#" class="inline-block full-screen">
-                                                <i class="ion ion-md-expand"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pa-0 full-screen mr-15">
-
-
-                                        <div class="inner-card" style="height:294px;width:100%;">
-
-                                            <canvas id="pie-chart_risks"></canvas>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-
-                                <div class="card">
-                                    <div class="card-header card-header-action">
-                                        <h6>Governance and Control Issues Criticality</h6>
-                                        <div class="d-flex align-items-center card-action-wrap">
-                                            <a href="#" class="inline-block refresh mr-15">
-                                                <i class="ion ion-md-arrow-down"></i>
-                                            </a>
-                                            <a href="#" class="inline-block full-screen">
-                                                <i class="ion ion-md-expand"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pa-0 full-screen mr-15">
-
-                                        <div class="table-wrap">
-                                            <div class="table-responsive">
-                                                <div class="inner-card" style="height:294px;width:100%;">
-                                                    <canvas id="bar-chart_risks"></canvas>
-
-                                                </div>
+                                                <canvas id="bar-chart_chances_of_occurance"></canvas>
 
                                             </div>
                                         </div>
@@ -576,82 +452,81 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-xl-12">
-                        <div class="col-xl-12">
-                            <section class="hk-sec-wrapper">
-                                <h5 class="hk-sec-title">Audit Projects</h5>
-                                <p>Kindly export in the format of your choosing</p><br>
-
-                                <!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
-                                <!--                            export table options.</p>-->
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <div class="table-wrap">
-                                            <table id="datable_3"
-                                                   class="table table-hover table-responsive w-100 display pb-30">
-                                                <thead>
-                                                <tr>
-                                                    <!-- Audit Project Code,	Audit Project Name,	Quarter,	Audit Project Type,	Issue Title, -->
-
-
-                                                    <th>Audit Project Code</th>
-                                                    <th>Audit Project Name</th>
-                                                    <th>Quarter</th>
-                                                    <th>Audit Project Type</th>
-                                                    <th>Issue Title</th>
-                                                    <th>Recommendations</th>
-                                                    <th>Ageing Days</th>
-                                                </tr>
-                                                </thead>
-                                                <!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                                <!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                                <!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                                <!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                                <!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                                <!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
-                                                <!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                                <!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                                <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-
-                                                <tbody>
-                                                {% for singleinfo in highimpactprojects %}
-                                                <tr>
-                                                    <td><a href="#">{{singleinfo.audit_project_code}}</a></td>
-                                                    <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
-                                                    <td><a href="#">{{singleinfo.quarter}}</a></td>
-                                                    <td><a href="#">{{singleinfo.audit_project_type}}</a></td>
-                                                    <td><a href="#">{{singleinfo.issue_title}}</a></td>
-                                                    <td><a href="#">{{singleinfo.recommendation}}</a></td>
-                                                    <td><a href="#">{{singleinfo.ageing_days}}</a></td>
-
-
-                                                </tr>
-                                                {% endfor %}
-
-                                                </tbody>
-                                                <tfoot>
-                                                <tr>
-                                                    <th>Audit Project Code</th>
-                                                    <th>Audit Project Name</th>
-                                                    <th>Quarter</th>
-                                                    <th>Audit Project Type</th>
-                                                    <th>Issue Title</th>
-                                                    <th>Recommendations</th>
-                                                    <th>Ageing Days</th>
-                                                </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                        </div>
-                    </div>
-
-
                     <!-- /Row -->
+                </div>
+
+
+                <div class="col-xl-12">
+                    <div class="col-xl-12">
+                        <section class="hk-sec-wrapper">
+                            <h5 class="hk-sec-title">Audit Projects</h5>
+                            <p>Kindly export in the format of your choosing</p><br>
+
+                            <!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
+                            <!--                            export table options.</p>-->
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="table-wrap">
+                                        <table id="datable_3"
+                                               class="table table-hover table-responsive w-100 display pb-30">
+                                            <thead>
+                                            <tr>
+                                                <!-- Audit Project Code,	Audit Project Name,	Quarter,	Audit Project Type,	Issue Title, -->
+
+
+                                                <th>Audit Project Code</th>
+                                                <th>Audit Project Name</th>
+                                                <th>Quarter</th>
+                                                <th>Audit Project Type</th>
+                                                <th>Issue Title</th>
+                                                <th>Recommendations</th>
+                                                <th>Ageing Days</th>
+                                            </tr>
+                                            </thead>
+                                            <!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                            <!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                            <!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                            <!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                            <!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                            <!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
+                                            <!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
+                                            <!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+                                            <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
+
+                                            <tbody>
+                                            {% for singleinfo in highimpactprojects %}
+                                            <tr>
+                                                <td><a href="#">{{singleinfo.audit_project_code}}</a></td>
+                                                <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
+                                                <td><a href="#">{{singleinfo.quarter}}</a></td>
+                                                <td><a href="#">{{singleinfo.audit_project_type}}</a></td>
+                                                <td><a href="#">{{singleinfo.issue_title}}</a></td>
+                                                <td><a href="#">{{singleinfo.recommendation}}</a></td>
+                                                <td><a href="#">{{singleinfo.ageing_days}}</a></td>
+
+
+                                            </tr>
+                                            {% endfor %}
+
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th>Audit Project Code</th>
+                                                <th>Audit Project Name</th>
+                                                <th>Quarter</th>
+                                                <th>Audit Project Type</th>
+                                                <th>Issue Title</th>
+                                                <th>Recommendations</th>
+                                                <th>Ageing Days</th>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
                 </div>
                 <!-- /Container -->
 
