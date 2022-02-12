@@ -54,14 +54,14 @@
                                     <button href="#" class="btn btn-info btn-wth-icon btn-rounded"><span
                                             class="btn-text">Say Somenthing</span></button>
 
-                                    <button href="#"
+                                    <a href="/editrisk/{{consolidateddata.id}}"
                                             class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
                                             class="btn-icon-wrap bg-success rounded-circle">Edit<i
-                                            class="fa fa-delete"></i></span></button>
-                                    <button href="#" data-toggle="modal" data-target="#exampleModalCenter"
+                                            class="fa fa-delete"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter"
                                             class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
                                             class="btn-icon-wrap bg-danger rounded-circle ">Del<i
-                                            class="fa fa-delete"></i></span></button>
+                                            class="fa fa-delete"></i></span></a>
                                 </div>
 
 
@@ -405,7 +405,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">No Cancel</button>
-                <button type="button" class="btn btn-danger">Yes Delete</button>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes Delete</button>
+                </form>
             </div>
         </div>
     </div>
