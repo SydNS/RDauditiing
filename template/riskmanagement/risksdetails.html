@@ -53,15 +53,21 @@
                                 <div class="button-list">
                                     <button href="#" class="btn btn-info btn-wth-icon btn-rounded"><span
                                             class="btn-text">Say Somenthing</span></button>
+                                                        {% for group in request.user.groups.all %}
+                                                        {% if group.name == 'with_auditing_rights' %}
 
                                     <a href="/editrisk/{{consolidateddata.id}}"
                                             class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
                                             class="btn-icon-wrap bg-success rounded-circle">Edit<i
                                             class="fa fa-delete"></i></span></a>
+                                    {% if user.is_superuser %}
                                     <a href="#" data-toggle="modal" data-target="#exampleModalCenter"
                                             class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
                                             class="btn-icon-wrap bg-danger rounded-circle ">Del<i
                                             class="fa fa-delete"></i></span></a>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                        {% endfor %}
                                 </div>
 
 
@@ -106,7 +112,13 @@
                                                         <a href="#" class="text-secondary mr-15" onclick="printDiv()"><span
                                                                 class="feather-icon"><i
                                                                 data-feather="printer"></i></span></a>
-                                                        <button class="btn btn-primary btn-sm">Create New</button>
+                                                        {% for group in request.user.groups.all %}
+                                                        {% if group.name == 'with_auditing_rights' %}
+                                                        <a href="/addrisk" class="btn btn-primary btn-sm text-white">Create
+                                                            New</a>
+                                                        {% endif %}
+                                                        {% endfor %}
+<!--                                                        {{ user.groups.all }}-->
                                                     </div>
                                                 </div>
                                                 <!-- /Title -->
