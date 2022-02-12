@@ -66,21 +66,58 @@
       }
     };
 
-    window.onload = function() {
-      var ctx_status = document.getElementById('bar-chart_status').getContext('2d');
-      window.myPie = new Chart(ctx_status, config_status);
 
+<!--    risk managements portion-->
+    var configRiskImpact = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: [{{risklowimpactissues}},{{riskmediumimpactissues}},{{riskhighimpactissues}},],
+          backgroundColor: [
+             '#22af47', '#ffbf36', '#f83f37'
+          ],
+          label: 'No. of Risk Per Level of Impact'
+        }],
+        labels: ["Low Impact","Medium Impact","High Impact"]
+      },
+      options: {
+        responsive: true
+      }
+    };
 
-      var ctx = document.getElementById('pie-chart').getContext('2d');
-      window.myPie = new Chart(ctx, config);
+    var configRiskOccurance = {
+      type: 'bar',
+      data: {
+        datasets: [{
+          data: [{{risklikelihoodlow}},{{risklikelihoodmoderate}},{{risklikelihoodhigh}},],
+          backgroundColor: [
+             '#22af47', '#ffbf36', '#f83f37'
+          ],
+          label: 'No. of Risks Per Chances of Occurances'
+        }],
+        labels: ["Low","Medium","High"]
+      },
+      options: {
+        responsive: true
+
+      }
     };
 
 
+    window.onload = function() {
+      var ctx_status = document.getElementById('bar-chart_status').getContext('2d');
+      window.myPie = new Chart(ctx_status, config_status);
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
 
+<!--      Risk Management-->
 
+      var ctx_status = document.getElementById('pie-chart_risks_impact').getContext('2d');
+      window.myPie = new Chart(ctx_status, config_status);
+      var ctx = document.getElementById('bar-chart_chances_of_occurance').getContext('2d');
+      window.myPie = new Chart(ctx, configRiskOccurance);
 
-
-
+    };
 
 
 </script>
@@ -400,12 +437,12 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-12" >
+                        <div class="col-xl-12">
                             <div class="row">
                                 <div class="col-xl-6">
                                     <div class="card bg-dark-20 text-white">
                                         <div class="card-header card-header-action">
-                                            <h6 class="text-white">No. of Risk Per Level of Impact</h6>
+                                            <h6 class="text-white">AMOUNT of Risk Per Level of Impact</h6>
                                             <div class="d-flex align-items-center card-action-wrap">
                                                 <a href="#" class="inline-block refresh mr-15">
                                                     <i class="ion ion-md-arrow-down"></i>
@@ -428,9 +465,10 @@
                                 </div>
                                 <div class="col-lg-6">
 
+
                                     <div class="card bg-dark text-white">
                                         <div class="card-header card-header-action">
-                                            <h6 class="text-white">No. of Risks Per Chances of Occurances</h6>
+                                            <h6 class="text-white">AMOUNT of Risks Per Chances of Occurances</h6>
                                             <div class="d-flex align-items-center card-action-wrap">
                                                 <a href="#" class="inline-block refresh mr-15">
                                                     <i class="ion ion-md-arrow-down"></i>
