@@ -271,6 +271,9 @@ def KRI(request):
 @login_required
 def RisksDetail(request, id):
     consolidatedgncobj = models.RiskManagement.objects.get(id=id)
+    if request.method == "POST":
+        consolidatedgncobj.delete()
+        return redirect('riskmanagement:risks')
 
     return render(request=request, template_name="riskmanagement/risksdetails.html",
                   context={ "consolidateddata": consolidatedgncobj,}
