@@ -41,25 +41,7 @@
                 {{request.user.username|upper}} Welcome to the
                 <a href="#">Risk Control Section.</a>
             </p>
-            <div class="d-flex w-500p">
 
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.audit_project_name | upper}}</option>
-                    {% endfor %}
-
-                </select>
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.criticality | upper}}</option>
-                    {% endfor %}
-                </select>
-                <select class="form-control custom-select custom-select-sm">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.quarter | upper}}</option>
-                    {% endfor %}
-                </select>
-            </div>
         </div>
         <!-- /Title -->
 
@@ -239,7 +221,7 @@
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td><a href="#">{{singleinfo.xy_strategic_pillar}}</a></td>
+                                            <td><a href="/risk/{{singleinfo.id}}">{{singleinfo.xy_strategic_pillar}}</a></td>
                                             <td>{{singleinfo.control_exists_yesno}}</td>
                                             <td>{{singleinfo.control_description}}</td>
                                             <td>{{singleinfo.control_is_adequate_yesno}}</td>
