@@ -44,7 +44,7 @@ def loginuser(request):
 def Logout(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
-    return redirect('login')
+    return redirect('accounts:login')
 
 def Employeesview(request):
     people=Person.objects.all()
