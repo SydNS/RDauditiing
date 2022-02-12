@@ -5,65 +5,7 @@
     <div class="nicescroll-bar">
         <div class="navbar-nav-wrap">
             <ul class="navbar-nav flex-column">
-<!--                <li class="nav-item active">-->
-<!--                    <a class="nav-link" href="javascript:void(0);" data-toggle="collapse" data-target="#dash_drp">-->
-<!--                        <span class="feather-icon"><i data-feather="activity"></i></span>-->
-<!--                        <span class="nav-link-text">Resources</span>-->
-<!--                    </a>-->
-<!--                    <ul id="dash_drp" class="nav flex-column collapse collapse-level-1">-->
-<!--                        <li class="nav-item">-->
-<!--                            <ul class="nav flex-column">-->
 
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="dashboard2.html">Company Goals</a>-->
-<!--                                </li>-->
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="dashboard3.html">Financial Quarter</a>-->
-<!--                                </li>-->
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="dashboard3.html">Employees</a>-->
-<!--                                </li>-->
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="dashboard4.html">Department</a>-->
-<!--                                </li>-->
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="dashboard5.html">Policies</a>-->
-<!--                                </li>-->
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="dashboard5.html">Leaders</a>-->
-<!--                                </li>-->
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="dashboard5.html">File Manager</a>-->
-<!--                                </li>-->
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="/faq">FAQ</a>-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="javascript:void(0);" data-toggle="collapse" data-target="#pages_drp">-->
-<!--                        <span class="feather-icon"><i data-feather="file-text"></i></span>-->
-<!--                        <span class="nav-link-text">Profile Management</span>-->
-<!--                    </a>-->
-<!--                    <ul id="pages_drp" class="nav flex-column collapse collapse-level-1">-->
-<!--                        <li class="nav-item">-->
-<!--                            <ul class="nav flex-column">-->
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="profile.html">Leaders</a>-->
-<!--                                </li>-->
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="invoice.html">Employees</a>-->
-<!--                                </li>-->
-<!--                                <li class="nav-item">-->
-<!--                                    <a class="nav-link" href="gallery.html">Users</a>-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </li>-->
             </ul>
             <hr class="nav-separator">
             <div class="nav-header">
@@ -72,7 +14,8 @@
             </div>
             <ul class="navbar-nav flex-column">
 
-                {% if user.is_staff %}
+                {% for group in request.user.groups.all %}
+                {% if user.is_staff or group.name == 'with_auditing_rights' %}
                 <li class="nav-item">
                     <a class="nav-link" href="/addgoverncontrol">
                         <span class="feather-icon"><i data-feather="plus-circle"></i></span>
@@ -80,6 +23,7 @@
                     </a>
                 </li>
                 {% endif %}
+                {% endfor %}
 
                 <li class="nav-item">
                     <a class="nav-link link-with-badge" href="/governcontrolprojects">
@@ -113,15 +57,16 @@
                 <span>UI</span>
             </div>
             <ul class="navbar-nav flex-column">
-
-                {% if user.is_staff %}
+                {% for group in request.user.groups.all %}
+                {% if user.is_staff or group.name == 'with_auditing_rights' %}
                 <li class="nav-item">
                     <a class="nav-link" href="/addrisk" >
                         <span class="feather-icon"><i data-feather="plus-circle"></i></span>
-                        <span class="nav-link-text">Make a Record</span>
+                        <span class="nav-link-text">Create</span>
                     </a>
                 </li>
                 {% endif %}
+                {% endfor %}
 
 
                 <li class="nav-item">
@@ -142,6 +87,13 @@
                         <span class="nav-link-text">Key Rate Indicator</span>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/a_o_aconsolidated">
+                        <span class="feather-icon"><i data-feather="list"></i></span>
+                        <span class="nav-link-text">Consolidated</span>
+                    </a>
+                </li>
             </ul>
             <hr class="nav-separator">
             <div class="nav-header">
@@ -149,8 +101,8 @@
                 <span>UI</span>
             </div>
             <ul class="navbar-nav flex-column">
-
-                {% if user.is_staff %}
+                {% for group in request.user.groups.all %}
+                {% if user.is_staff or group.name == 'with_auditing_rights' %}
                 <li class="nav-item">
                     <a class="nav-link" href="/addauditorsofauditors">
                         <span class="feather-icon"><i data-feather="plus-circle"></i></span>
@@ -158,6 +110,7 @@
                     </a>
                 </li>
                 {% endif %}
+                {% endfor %}
 
 
                 <li class="nav-item">
