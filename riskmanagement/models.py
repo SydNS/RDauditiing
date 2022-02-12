@@ -62,7 +62,7 @@ class RiskManagement(models.Model):
     xy_strategic_objectives = models.CharField(db_column='XY_Strategic_Objectives', max_length=100, blank=True,null=True)  # Field name made lowercase.
     risk_category = models.CharField(db_column='Risk_Category', max_length=100, blank=True,choices=RISK_CATEGORY,null=True)  # Field name made lowercase.
     risk_description = models.CharField(db_column='Risk_Description', max_length=100, blank=True,null=True)  # Field name made lowercase.
-    likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=True,choices=LIKELIHOOD,null=True)  # Field name made lowercase.
+    likelihood = models.CharField(db_column='Likelihood', max_length=100, blank=False,default='low',choices=LIKELIHOOD)  # Field name made lowercase.
     impact = models.CharField(db_column='Impact', max_length=100, blank=True, null=True,choices=IMPACT_LEVELS)  # Field name made lowercase.
     risk_rating = models.CharField(db_column='Risk_Rating', max_length=100, blank=True,choices=RATE_LEVELS,null=True)  # Field name made lowercase.
     control_exists_yesno = models.CharField(db_column='Control_Exists_YesNo', max_length=100, blank=True,choices=CONTROL_EXISTANCE, null=True)  # Field name made lowercase.
