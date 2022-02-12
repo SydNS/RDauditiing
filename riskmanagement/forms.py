@@ -14,12 +14,9 @@ class RiskManagementForm(forms.ModelForm):
         widgets = {
             'likelihood': forms.RadioSelect(attrs={'class': 'form-control', 'placeholder': 'Chances of occuring',
                                                     'type': 'date'}),
-            'revised_implementation_date': forms.DateInput(format=('%m/%d/%Y'),
-                                                          attrs={'class': 'form-control',
-                                                                 'placeholder': 'Select a date',
-                                                                 'type': 'date'}),
-            'actual_implementation_date': forms.DateInput(format=('%m/%d/%Y'),
-                                                          attrs={'class': 'form-control',
-                                                                 'placeholder': 'Select a date',
-                                                                 'type': 'date'}),
+            'impact': forms.RadioSelect(attrs={'class': 'form-control', 'placeholder': 'Chances of occuring',
+                                                    'type': 'date'}),
+            'risk_description': forms.Textarea(attrs={'cols': 80, 'rows': 4}),
+            'control_description': forms.Textarea(attrs={'cols': 80, 'rows': 4}),
+
         }
