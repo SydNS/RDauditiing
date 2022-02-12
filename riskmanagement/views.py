@@ -286,7 +286,7 @@ def AddRiskRecords(request):
             return redirect('riskmanagement:risksdetails', riskmanagementrecord.pk)
     else:
         form = RiskManagementForm()
-    return render(request, 'riskmanagement/addformrisk.html', {'form': form})
+    return render(request, 'riskmanagement/addformrisk.html', {'type': 'add_form','form': form,'bannertitle':"Add A Risk Management Record"})
 
 
 
@@ -300,4 +300,4 @@ def EditRiskRecords(request,id):
             return redirect('riskmanagement:risksdetails', riskmanagementrecord.pk)
     else:
         form = RiskManagementForm(instance=consolidatedgncobj)
-    return render(request, 'riskmanagement/addformrisk.html', {'form': form})
+    return render(request, 'riskmanagement/addformrisk.html', {'type': 'edit_form','form': form,'bannertitle':"Edit this Risk Management Record"})
