@@ -282,8 +282,8 @@ def AddRiskRecords(request):
     if request.method == "POST":
         form = RiskManagementForm(request.POST)
         if form.is_valid():
-            governcontrolproject = form.save(commit=True)
-            return redirect('risksdetails', governcontrolproject.pk)
+            riskmanagementrecord = form.save(commit=True)
+            return redirect('riskmanagement:risksdetails', riskmanagementrecord.pk)
     else:
         form = RiskManagementForm()
     return render(request, 'riskmanagement/addformrisk.html', {'form': form})
