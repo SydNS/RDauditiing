@@ -12,7 +12,7 @@ urlpatterns = [
     path('keyrateindicator/', views.KRI, name='keyrateindicator'),
 
     # Risks details
-    path('risks/<int:id>/', views.RisksDetail, name='risksdetails'),
+    path('risk/<int:id>/', views.RisksDetail, name='risksdetails'),
 
     # addrisk
     path('addrisk/', views.AddRiskRecords, name='addrisk'),
