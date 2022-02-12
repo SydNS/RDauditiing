@@ -55,9 +55,9 @@ def dashboard(request):
                           "riskobj": {},
                           "riskobjnumber": 0,
                           # issues
-                          "riskmediumimpactissues": 0,
-                          "riskhighimpactissues": 0,
-                          "risklowimpactissues": 0,
+                          "riskmediumimpactissues": 10,
+                          "riskhighimpactissues": 40,
+                          "risklowimpactissues":20,
 
                           "AoAobj": {},
                           "Deptobj": {},
