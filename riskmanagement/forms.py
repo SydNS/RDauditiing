@@ -12,8 +12,7 @@ class RiskManagementForm(forms.ModelForm):
         model = RiskManagement
         fields = "__all__"
         widgets = {
-            'agreed_implementation_date': forms.DateInput(format=('%m/%d/%Y'),
-                                             attrs={'class': 'form-control', 'placeholder': 'Select a date',
+            'likelihood': forms.RadioSelect(attrs={'class': 'form-control', 'placeholder': 'Chances of occuring',
                                                     'type': 'date'}),
             'revised_implementation_date': forms.DateInput(format=('%m/%d/%Y'),
                                                           attrs={'class': 'form-control',
