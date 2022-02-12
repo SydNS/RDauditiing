@@ -40,11 +40,28 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
-                    <h5 class="hk-sec-title"> Add A Risk Management Record </h5>
+                    <h5 class="hk-sec-title"> {{ bannertitle }} </h5>
                     <br/>
                     <form method="POST" action="#">
                         {% csrf_token %}
+                        <!--                        if the user wishes to add a record dd this-->
+                        {% if type == 'add_form'%}
                         <table>{{ form|crispy }}</table>
+
+                        <!--                        if the user wants to edit the details render this form-->
+                        {% elif type == 'edit_form'%}
+
+                        <div class="row">
+                            {% for field in form %}
+                            <div class="col-md-6 form-group">
+                                {{ field|as_crispy_field }}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        {% endif %}
+
+
                         <button class="btn btn-info" type="submit"> Add</button>
                     </form>
                 </section>
