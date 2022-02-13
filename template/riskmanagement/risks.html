@@ -5,6 +5,40 @@
 {% include 'topnavbar.html' %}
 {% include 'verticalnavbar.html' %}
 {% include 'settings.html' %}
+
+
+
+<script>
+
+    var config = {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [{{lowimpactissues}},{{mediumimpactissues}},{{highimpactissues}},],
+          backgroundColor: [
+             '#22af47', '#ffbf36', '#f83f37'
+          ],
+          label: 'Governance and Control Issues Criticality'
+        }],
+        labels: ["Low Impact","Medium Impact","High Impact"]
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+
+
+    };
+
+
+</script>
+
+
 <!-- Main Content -->
 <div class="hk-pg-wrapper">
     <!-- Container -->
@@ -23,7 +57,7 @@
         <div class="row ">
             <div class="col-xl-12">
                 <div class="hk-row">
-                    <div class="col-sm-12">
+                    <div class="col-xl-8">
                         <div class="card-group hk-dash-type-2">
                             <div class="card card-sm">
                                 <div class="card-body">
@@ -52,8 +86,8 @@
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-warning font-weight-500"
-                            >Low Impact : {{lowimpactissues}}</span
+                                    class="d-block font-15 text-success font-weight-500"
+                            >Low Impact : {{ lowimpactissues }}</span
                             >
                                         </div>
                                         <div>
@@ -63,10 +97,10 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">High Impact :
+                                        <small class="text-danger font-14">High Impact :
                                             <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
-                                        <small class="d-block text-info">Moderate Impact
+                                            <span class="text-danger counter-anim">{{ highimpactissues }}</span></span></small>
+                                        <small class="d-block text-warning">Moderate Impact
                                             :{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
@@ -77,77 +111,34 @@
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-warning font-weight-500"
-                            >Low Chances : {{lowimpactissues}}</span
+                                    class="d-block font-15 text-success font-weight-500"
+                            >Low Likelihood To Occur : {{lowimpactissues}}</span
                             >
                                         </div>
                                         <div>
-                            <span class="text-success font-14 font-weight-500"
-                            ></span
-                            >
+                            <span class="text-success font-14 font-weight-500"></span>
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">High Chances :
+                                        <small class="text-danger">High Likelihood To Occur :
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
-                                        <small class="d-block text-info">Moderate Chances
+                                        <small class="d-block text-warning">Moderate Likelihood To Occur
                                             :{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
 
-                            <!--                            recomendation state-->
-                            <div class="card card-sm">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-5">
-                                        <div>
-                            <span
-                                    class="d-block font-15 text-warning font-weight-500"
-                            >XY Strategic pillar : {{PARTIALLY_IMPLEMENTED}}</span
-                            >
-                                        </div>
-                                        <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
-                            >
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <small class="">XY Strategic pillar :
-                                            <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-info counter-anim">{{CLOSED}}</span></span></small>
-                                        <small class="d-block">Risk Categories : {{mediumimpactissues}} </small>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <!--                            ageing days-->
-                            <div class="card card-sm">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-5">
-                                        <div>
-                            <span
-                                    class="d-block font-15 text-dark font-weight-500"
-                            >Control Present : {{totaldays}}%</span
-                            >
-                                        </div>
-                                        <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
-                            >
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <small class="">Affected Depts :
-                                            <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-info counter-anim">{{totaldays}}</span></span></small>
-                                        <small class="d-block">Adequate Control : {{mediumimpactissues}} </small>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+
+                    </div>
+                    <div class="col-sm-4" >
+                            <!--                            recomendation state-->
+                            <div class="card">
+                                <div class="card-body">
+                                    <canvas id="pie-chart"></canvas>
+                                </div>
+                            </div>
                     </div>
                 </div>
 

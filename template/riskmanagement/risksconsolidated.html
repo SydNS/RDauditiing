@@ -5,49 +5,22 @@
 {% include 'topnavbar.html' %}
 {% include 'verticalnavbar.html' %}
 {% include 'settings.html' %}
-
-
 <script>
-
-    var config = {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: [{{lowimpactissues}},{{mediumimpactissues}},{{highimpactissues}},],
-          backgroundColor: [
-             '#22af47', '#ffbf36', '#f83f37'
-          ],
-          label: 'Governance and Control Issues Criticality'
-        }],
-        labels: ["Low Impact","Medium Impact","High Impact"]
-      },
-      options: {
-        responsive: true
-      }
-    };
-
-    window.onload = function() {
-
-      var ctx = document.getElementById('pie-chart').getContext('2d');
-      window.myPie = new Chart(ctx, config);
-
-
-    };
-
+    $('#datable_3').dataTable( {
+  "scrollX": true
+} );
 
 </script>
-
-
 <!-- Main Content -->
 <div class="hk-pg-wrapper">
     <!-- Container -->
     <div class="container mt-xl-50 mt-sm-30 mt-15">
         <!-- Title -->
         <div class="hk-pg-header align-items-top">
-            <h2 class="hk-pg-title font-weight-600 mb-10">Key Risk Indicator </h2>
+            <h2 class="hk-pg-title font-weight-600 mb-10">Risks </h2>
             <p>
                 {{request.user.username|upper}} Welcome to the
-                <a href="#">Key Risk Indicator.</a>
+                <a href="#">Risks Section.</a>
             </p>
         </div>
         <!-- /Title -->
@@ -55,8 +28,8 @@
         <!-- Row -->
         <div class="row ">
             <div class="col-xl-12">
-                <div class="hk-row" >
-                    <div class="col-xl-8">
+                <div class="hk-row">
+                    <div class="col-sm-12">
                         <div class="card-group hk-dash-type-2">
                             <div class="card card-sm">
                                 <div class="card-body">
@@ -85,8 +58,8 @@
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-success font-weight-500"
-                            >Low Impact : {{ lowimpactissues }}</span
+                                    class="d-block font-15 text-warning font-weight-500"
+                            >Low Impact : {{lowimpactissues}}</span
                             >
                                         </div>
                                         <div>
@@ -96,10 +69,10 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="text-danger font-14">High Impact :
+                                        <small class="">High Impact :
                                             <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-danger counter-anim">{{ highimpactissues }}</span></span></small>
-                                        <small class="d-block text-warning">Moderate Impact
+                                            <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
+                                        <small class="d-block text-info">Moderate Impact
                                             :{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
@@ -110,41 +83,59 @@
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-success font-weight-500"
-                            >Low Likelihood to Occur : {{lowimpactissues}}</span
+                                    class="d-block font-15 text-warning font-weight-500"
+                            >Low Chances : {{lowimpactissues}}</span
                             >
                                         </div>
                                         <div>
-                            <span class="text-success font-14 font-weight-500"></span>
+                            <span class="text-success font-14 font-weight-500"
+                            ></span
+                            >
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="text-danger">High Likelihood to Occur :
+                                        <small class="">High Chances :
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
-                                        <small class="d-block text-warning">Moderate Likelihood to Occur
+                                        <small class="d-block text-info">Moderate Chances
                                             :{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
 
-                        </div>
-
-                    </div>
-                    <div class="col-sm-4" >
                             <!--                            recomendation state-->
-                            <div class="card">
+                            <div class="card card-sm">
                                 <div class="card-body">
-                                    <canvas id="pie-chart"></canvas>
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                            <span
+                                    class="d-block font-15 text-warning font-weight-500"
+                            >XY Strategic pillar : {{PARTIALLY_IMPLEMENTED}}</span
+                            >
+                                        </div>
+                                        <div>
+                            <span class="text-success font-14 font-weight-500"
+                            > </span
+                            >
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="">XY Strategic pillar :
+                                            <span class="d-block display-4 text-dark mb-5">
+                                            <span class="text-info counter-anim">{{CLOSED}}</span></span></small>
+                                        <small class="d-block">Risk Categories : {{mediumimpactissues}} </small>
+                                    </div>
                                 </div>
                             </div>
+
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-xl-12">
                     {% if not consolidateddata %}
                     <section class="hk-sec-wrapper">
-                        <h5 class="hk-sec-title">Key Risk Indicator</h5>
+                        <h5 class="hk-sec-title">Risk Management Section</h5>
                         <p class="text-danger">No Data Available at the moment</p><br>
 
                         <div class="row">
@@ -161,24 +152,38 @@
                                             <th>XY Strategic Objectives</th>
                                             <th>Risk Category</th>
                                             <th>Risk Description</th>
+                                            <th>Likelihood</th>
+                                            <th>Impact</th>
+                                            <th>Risk Rating</th>
                                             <th>Action</th>
                                             <th>KRI</th>
                                             <th>Target</th>
+                                            <th>Control Exists (Yes/No)</th>
+                                            <th>Recommended Control</th>
+                                            <th>Control Description</th>
+                                            <th>Control is Adequate (Yes/No)</th>
                                             <th>Department</th>
                                         </tr>
 
                                         </thead>
-
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td><a href="/risk/{{singleinfo.id}}">{{singleinfo.xy_strategic_pillar}}</a></td>
+                                            <td><a href="/risk/{{singleinfo.id}}">{{singleinfo.xy_strategic_pillar}}</a>
+                                            </td>
                                             <td>{{singleinfo.xy_strategic_objectives}}</td>
                                             <td>{{singleinfo.risk_category}}</td>
                                             <td>{{singleinfo.risk_description}}</td>
+                                            <td>{{singleinfo.likelihood}}</td>
+                                            <td>{{singleinfo.impact}}</td>
+                                            <td>{{singleinfo.risk_rating}}</td>
                                             <td>{{singleinfo.action}}</td>
                                             <td>{{singleinfo.kri}}</td>
                                             <td>{{singleinfo.target}}</td>
+                                            <td>{{singleinfo.control_exists_yesno}}</td>
+                                            <td>{{singleinfo.recommended_control}}</td>
+                                            <td>{{singleinfo.control_description}}</td>
+                                            <td>{{singleinfo.control_is_adequate_yesno}}</td>
                                             <td>{{singleinfo.dept}}</td>
 
                                         </tr>
@@ -194,6 +199,13 @@
                                             <th>Likelihood</th>
                                             <th>Impact</th>
                                             <th>Risk Rating</th>
+                                            <th>Action</th>
+                                            <th>KRI</th>
+                                            <th>Target</th>
+                                            <th>Control Exists (Yes/No)</th>
+                                            <th>Recommended Control</th>
+                                            <th>Control Description</th>
+                                            <th>Control is Adequate (Yes/No)</th>
                                             <th>Department</th>
                                         </tr>
                                         </tfoot>
@@ -201,17 +213,16 @@
                                 </div>
                             </div>
                         </div>
-
                     </section>
                     {% else %}
                     <section class="hk-sec-wrapper">
-                        <h5 class="hk-sec-title">Key Risk Indicator</h5>
+                        <h5 class="hk-sec-title">Risk Management Section</h5>
 
                         <div class="row">
                             <div class="col-sm">
                                 <div class="table-wrap">
                                     <table id="datable_3"
-                                           class="table table-hover table-responsive w-100 display pb-30">
+                                           class="table  w-100 display pb-30">
                                         <!--XY Strategic Pillar,	XY Strategic Objectives,
                                             Risk Category,	Risk Description,	Likelihood,	Impact,	Risk Rating,-->
                                         <thead>
@@ -221,9 +232,16 @@
                                             <th>XY Strategic Objectives</th>
                                             <th>Risk Category</th>
                                             <th>Risk Description</th>
+                                            <th>Likelihood</th>
+                                            <th>Impact</th>
+                                            <th>Risk Rating</th>
                                             <th>Action</th>
                                             <th>KRI</th>
                                             <th>Target</th>
+                                            <th>Control Exists (Yes/No)</th>
+                                            <th>Recommended Control</th>
+                                            <th>Control Description</th>
+                                            <th>Control is Adequate (Yes/No)</th>
                                             <th>Department</th>
                                         </tr>
 
@@ -231,13 +249,21 @@
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td><a href="/risk/{{singleinfo.id}}">{{singleinfo.xy_strategic_pillar}}</a></td>
+                                            <td><a href="/risk/{{singleinfo.id}}">{{singleinfo.xy_strategic_pillar}}</a>
+                                            </td>
                                             <td>{{singleinfo.xy_strategic_objectives}}</td>
                                             <td>{{singleinfo.risk_category}}</td>
                                             <td>{{singleinfo.risk_description}}</td>
+                                            <td>{{singleinfo.likelihood}}</td>
+                                            <td>{{singleinfo.impact}}</td>
+                                            <td>{{singleinfo.risk_rating}}</td>
                                             <td>{{singleinfo.action}}</td>
                                             <td>{{singleinfo.kri}}</td>
                                             <td>{{singleinfo.target}}</td>
+                                            <td>{{singleinfo.control_exists_yesno}}</td>
+                                            <td>{{singleinfo.recommended_control}}</td>
+                                            <td>{{singleinfo.control_description}}</td>
+                                            <td>{{singleinfo.control_is_adequate_yesno}}</td>
                                             <td>{{singleinfo.dept}}</td>
 
                                         </tr>
@@ -253,6 +279,13 @@
                                             <th>Likelihood</th>
                                             <th>Impact</th>
                                             <th>Risk Rating</th>
+                                            <th>Action</th>
+                                            <th>KRI</th>
+                                            <th>Target</th>
+                                            <th>Control Exists (Yes/No)</th>
+                                            <th>Recommended Control</th>
+                                            <th>Control Description</th>
+                                            <th>Control is Adequate (Yes/No)</th>
                                             <th>Department</th>
                                         </tr>
                                         </tfoot>
@@ -260,10 +293,8 @@
                                 </div>
                             </div>
                         </div>
-
                     </section>
                     {% endif %}
-
 
                 </div>
                 <!-- /Row -->
