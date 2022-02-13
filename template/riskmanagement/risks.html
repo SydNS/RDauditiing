@@ -160,7 +160,7 @@
                         <div class="row">
                             <div class="col-sm">
                                 <div class="table-wrap">
-                                    <table id="datable_2"
+                                    <table id="datable_3"
                                            class="table table-hover table-responsive w-100 display pb-30">
                                         <!--XY Strategic Pillar,	XY Strategic Objectives,
                                             Risk Category,	Risk Description,	Likelihood,	Impact,	Risk Rating,-->
@@ -181,11 +181,13 @@
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td><a href="#">{{singleinfo.xy_strategic_pillar}}</a></td>
+                                            <td><a href="/risk/{{singleinfo.id}}">{{singleinfo.xy_strategic_pillar}}</a>
+                                            </td>
                                             <td>{{singleinfo.xy_strategic_objectives}}</td>
                                             <td>{{singleinfo.risk_category}}</td>
                                             <td>{{singleinfo.risk_description}}</td>
                                             <td>{{singleinfo.likelihood}}</td>
+                                            <td>{{singleinfo.impact}}</td>
                                             <td>{{singleinfo.risk_rating}}</td>
                                             <td>{{singleinfo.dept}}</td>
 
@@ -234,19 +236,18 @@
                                             <th>Department</th>
                                         </tr>
 
-
                                         </thead>
-
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td><a href="#">{{singleinfo.xy_strategic_pillar}}</a></td>
+                                            <td><a href="/risk/{{singleinfo.id}}">{{singleinfo.xy_strategic_pillar}}</a>
+                                            </td>
                                             <td>{{singleinfo.xy_strategic_objectives}}</td>
                                             <td>{{singleinfo.risk_category}}</td>
                                             <td>{{singleinfo.risk_description}}</td>
-                                            <td>{{singleinfo.action}}</td>
-                                            <td>{{singleinfo.kri}}</td>
-                                            <td>{{singleinfo.target}}</td>
+                                            <td>{{singleinfo.likelihood}}</td>
+                                            <td>{{singleinfo.impact}}</td>
+                                            <td>{{singleinfo.risk_rating}}</td>
                                             <td>{{singleinfo.dept}}</td>
 
                                         </tr>
