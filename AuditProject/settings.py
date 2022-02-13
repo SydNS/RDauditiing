@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'jazzmin',
     'crispy_forms',
+    'import_export',
     # my apps for the project
     'governanceandcontrol',
     'auditor_of_auditors',
@@ -187,3 +188,5 @@ AUTH_PASSWORD_VALIDATORS = []
 
 LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = "/"
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
