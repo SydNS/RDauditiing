@@ -15,7 +15,7 @@ def Registering(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect("governance_app:dashboard")
+            return redirect("accounts:profilesetup")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request=request, template_name="accounts/register.html", context={"register_form": form})
@@ -71,9 +71,9 @@ def ProfileSetting(request):
 
         if profile_form.is_valid():
             try:
-                student = profile_form.save(commit=True)
-                student.save()
-                print(student.photo)
+                Person = profile_form.save(commit=True)
+                Person.save()
+                print(Person.photo)
                 registered = True
                 return HttpResponseRedirect("/profiledetails")
             except:
@@ -87,7 +87,7 @@ def ProfileSetting(request):
         profile_form = ProfileForm(initial={'name_user': request.user})
         # profile_form.fields["name_user"]=request.user
 
-    return render(request, 'dashboard/hostel/hostelstudentprofile.html', {
+    return render(request, 'accounts/person.html', {
         'profile_form': profile_form,
         'registered': registered,
     })
@@ -99,15 +99,15 @@ def Profiledetails(request):
         profile_form = ProfileForm(request.POST, request.FILES)
 
         # fetch the object related to passed user in the GET request
-        profile_deatils_to_update = Student.objects.get(name_user=currentuser)
+        profile_deatils_to_update = Person.objects.get(name_user=currentuser)
 
         # pass the object as instance in form
         profile_deatils_to_update_form = ProfileForm(request.POST,request.FILES, instance=profile_deatils_to_update)
 
         if profile_form.is_valid():
             try:
-                student = profile_deatils_to_update_form.save(commit=True)
-                student.save()
+                Person = profile_deatils_to_update_form.save(commit=True)
+                Person.save()
                 registered = True
                 return HttpResponseRedirect("/profiledetails")
             except:
@@ -118,33 +118,19 @@ def Profiledetails(request):
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
     elif request.method == 'GET':
-        # profile_deatils = Student.objects.get(name_user=request.user)
+        # profile_deatils = Person.objects.get(name_user=request.user)
 
         # if not profile_deatils:
         #
         try:
-            profile_deatils = Student.objects.get(name_user=request.user)
-            profile_form = ProfileForm(initial={
-                'name_user': profile_deatils.name_user,
-                'photo': profile_deatils.photo,
-                'gender': profile_deatils.gender,
-                'date_of_birth': profile_deatils.date_of_birth,
-                'reporting_date': profile_deatils.reporting_date,
-                'address': profile_deatils.address,
-                'parent_name': profile_deatils.parent_name,
-                'phonenumber': profile_deatils.phonenumber,
-                'city': profile_deatils.city,
-                'state': profile_deatils.state,
-                'studentIdnumber': profile_deatils.studentIdnumber,
-                'level_of_study': profile_deatils.level_of_study
-
-            })
+            profile_deatils = Person.objects.get(name_user=request.user)
+            profile_form = ProfileForm(initial=profile_deatils)
 
             age = datetime.datetime.now()
             age = age.year
             age = age - profile_deatils.date_of_birth.year
 
-            return render(request, 'dashboard/hostel/userprofiledetails.html', {
+            return render(request, 'accounts/person.html', {
                 'profile_deatils': profile_deatils,
                 'profile_form': profile_form,
                 'mod_profile': "Edit Profile",
@@ -154,49 +140,19 @@ def Profiledetails(request):
         except:
             profile_deatils = {
                 'name_user': "Enter Your Name Here",
+                'last_name': "Enter Your Name Here",
+                'first_name': "Enter Your Name Here",
                 'gender': "Gender",
-                'date_of_birth': "Enter Birthday",
+                'photo': "Enter Profile Pic",
                 'reporting_date': "Reporting Date",
                 'address': "Your Address",
-                'parent_name': "Parent Names",
-                'phonenumber': "Phone Contact",
-                'city': "Home City",
-                'state': "State/Region",
-                'studentIdnumber': "Your ID.Numebr",
-                'level_of_study': "Year Of Study"
+                'personsdept': "Department",
 
             }
-            profile_form = ProfileForm(initial={
-                'name_user': "Enter Your Name ",
-                'gender': "Gender",
-                'date_of_birth': "Enter Birthday",
-                'reporting_date': "Reporting Date",
-                'address': "Your Address",
-                'parent_name': "Parent Names",
-                'phonenumber': "Phone Contact",
-                'city': "Home City",
-                'state': "State/Region",
-                'studentIdnumber': "Your ID.Numebr",
-                'level_of_study': "Year Of Study"
-
-            })
-            age = datetime.datetime.now()
-            age = age.year
-            age = age - 2003
-            req_age = "Should be atleast" + str(age)
-            return render(request, 'dashboard/hostel/userprofiledetails.html', {
+            profile_form = ProfileForm(initial=profile_deatils)
+            return render(request, 'accounts/person.html', {
                 'profile_deatils': profile_deatils,
                 'profile_form': profile_form,
                 'mod_profile': "Create Profile",
-                'age': req_age
             })
 
-
-
-def Customerdetailsview(request,id):
-    profile_deatils = Student.objects.get(id=id)
-
-    return render(request, 'dashboard/hostel/userprofiledetails.html', {
-        'profile_deatils': profile_deatils,
-
-    })
