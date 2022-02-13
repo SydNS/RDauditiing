@@ -81,7 +81,7 @@ def Risks(request):
     else:
         # counting the number issues at different levels of criticality
         mediumimpactissues = models.RiskManagement.objects.filter(
-            impact='medium',
+            impact='moderate',
         ).count()
         highimpactissues = models.RiskManagement.objects.filter(
             impact='high',
@@ -113,6 +113,88 @@ def Risks(request):
         #     totaldays = +totaldays.ageing_days
 
         return render(request=request, template_name="riskmanagement/risks.html",
+                      context={
+                          "consolidateddata": consolidatedgncobj,
+                          "consolidatedgncobjnumber": consolidatedgncobjnumber,
+
+                          # impact_levels
+                          "mediumimpactissues": mediumimpactissues,
+                          "highimpactissues": highimpactissues,
+                          "lowimpactissues": lowimpactissues,
+
+                          # reommendations
+                          "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
+                          "PENDING": PENDING,
+                          "CLOSED": CLOSED,
+                          "percentagecompleted": percentagecompleted,
+
+                          # reommendations
+                          # "totaldays": round(totaldays, 1),
+
+                      })
+
+# Risk management section
+@login_required
+def Risks_consolidated(request):
+    consolidatedgncobj = models.RiskManagement.objects.all()
+    consolidatedgncobjnumber = models.RiskManagement.objects.all().count()
+    if not consolidatedgncobj:
+        return render(request=request, template_name="riskmanagement/risksconsolidated.html",
+                      context={
+                          "consolidateddata": {},
+                          "consolidatedgncobjnumber": 0,
+
+                          # issues
+                          "mediumimpactissues": 0,
+                          "highimpactissues": 0,
+                          "lowimpactissues": 0,
+
+                          # reommendations
+                          "PARTIALLY_IMPLEMENTED": 0,
+                          "PENDING": 0,
+                          "CLOSED": 0,
+                          "percentagecompleted": 0,
+
+                          # reommendations
+                          "totaldays": 0,
+
+                      }
+                      )
+    else:
+        # counting the number issues at different levels of criticality
+        mediumimpactissues = models.RiskManagement.objects.filter(
+            impact='moderate',
+        ).count()
+        highimpactissues = models.RiskManagement.objects.filter(
+            impact='high',
+        ).count()
+        lowimpactissues = models.RiskManagement.objects.filter(
+            impact='low',
+        ).count()
+
+        # LIKELIHOOD = (
+        #     ('low', 'low'),
+        #     ('moderate', 'moderate'),
+        #     ('high', 'high'),
+        # )
+        PENDING = models.RiskManagement.objects.filter(
+            likelihood='low',
+        ).count()
+        CLOSED = models.RiskManagement.objects.filter(
+            likelihood='high',
+        ).count()
+        PARTIALLY_IMPLEMENTED = models.RiskManagement.objects.filter(
+            likelihood='moderate',
+        ).count()
+        # percentage of completed recos
+        percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
+
+        # ageing days total
+
+        # for totaldays in consolidatedgncobj:
+        #     totaldays = +totaldays.ageing_days
+
+        return render(request=request, template_name="riskmanagement/risksconsolidated.html",
                       context={
                           "consolidateddata": consolidatedgncobj,
                           "consolidatedgncobjnumber": consolidatedgncobjnumber,
@@ -165,7 +247,7 @@ def RiskControl(request):
 
         # counting the number issues at different levels of criticality
         mediumimpactissues = models.RiskManagement.objects.filter(
-            impact='medium',
+            impact='moderate',
         ).count()
         highimpactissues = models.RiskManagement.objects.filter(
             impact='high',
@@ -174,17 +256,23 @@ def RiskControl(request):
             impact='low',
         ).count()
 
-        # counting the number issues at different levels of state
-        # RECOMMENDATION_STATE = (
-        #     ('PARTIALLY_IMPLEMENTED', 'PARTIALLY_IMPLEMENTED'),
-        #     ('PENDING', 'PENDING'),
-        #     ('CLOSED', 'CLOSED'),
+        # LIKELIHOOD = (
+        #     ('low', 'low'),
+        #     ('moderate', 'moderate'),
+        #     ('high', 'high'),
         # )
+        PENDING = models.RiskManagement.objects.filter(
+            likelihood='low',
+        ).count()
+        CLOSED = models.RiskManagement.objects.filter(
+            likelihood='high',
+        ).count()
+        PARTIALLY_IMPLEMENTED = models.RiskManagement.objects.filter(
+            likelihood='moderate',
+        ).count()
+        # percentage of completed recos
+        percentagecompleted = round((CLOSED / consolidatedgncobjnumber) * 100, 1)
 
-        # ageing days total
-
-        # for totaldays in consolidatedgncobj:
-        #     totaldays = +totaldays.ageing_days
 
         return render(request=request, template_name="riskmanagement/riskcontrol.html",
                       context={
@@ -197,10 +285,10 @@ def RiskControl(request):
                           "lowimpactissues": lowimpactissues,
 
                           # reommendations
-
-
-                          # reommendations
-                          # "totaldays": round(totaldays, 1),
+                          "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
+                          "PENDING": PENDING,
+                          "CLOSED": CLOSED,
+                          "percentagecompleted": percentagecompleted,
 
                       })
 
@@ -237,7 +325,7 @@ def KRI(request):
 
         # counting the number issues at different levels of criticality
         mediumimpactissues = models.RiskManagement.objects.filter(
-            impact='medium',
+            impact='moderate',
         ).count()
         highimpactissues = models.RiskManagement.objects.filter(
             impact='high',
@@ -304,3 +392,6 @@ def EditRiskRecords(request,id):
     else:
         form = RiskManagementForm(instance=consolidatedgncobj)
     return render(request, 'riskmanagement/addformrisk.html', {'type': 'edit_form','form': form,'bannertitle':"Edit this Risk Management Record"})
+
+
+
