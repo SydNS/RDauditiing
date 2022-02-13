@@ -18,8 +18,8 @@ import psycopg2
 
 # import pymysql
 from decouple import config
-
-pymysql.install_as_MySQLdb()
+#
+# pymysql.install_as_MySQLdb()
 
 # import pymysql
 # pymysql.install_as_MySQLdb()
