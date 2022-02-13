@@ -16,7 +16,7 @@ from decouple import config
 from pathlib import Path
 import psycopg2
 
-import pymysql
+# import pymysql
 from decouple import config
 
 pymysql.install_as_MySQLdb()
