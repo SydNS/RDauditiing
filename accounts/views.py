@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import NewUserForm
+from .forms import NewUserForm,ProfileForm
 from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -77,19 +77,16 @@ def ProfileSetting(request):
                 registered = True
                 return HttpResponseRedirect("/profiledetails")
             except:
+                print("Person.photo")
                 messages.error(request, "Sorry something went worng.")
         # else:
         #     return HttpResponseRedirect('<p>Hello</p>')
 
-    # Not a HTTP POST, so we render our form using two ModelForm instances.
-    # These forms will be blank, ready for user input.
-    elif request.method == 'GET':
-        profile_form = ProfileForm(initial={'name_user': request.user})
+    profile_form = ProfileForm(initial={'name_user': request.user})
         # profile_form.fields["name_user"]=request.user
 
-    return render(request, 'accounts/person.html', {
-        'profile_form': profile_form,
-        'registered': registered,
+    return render(request, 'accounts/profilesetup.html', {
+        'form': profile_form,
     })
 
 
