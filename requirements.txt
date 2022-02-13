@@ -13,3 +13,4 @@ django-jazzmin
 django-crispy-forms==1.10.0
 python-decouple
 dj-database-url
+django-import-export==2.7.1

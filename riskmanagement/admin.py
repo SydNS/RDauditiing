@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 
 # Register your models here.
@@ -6,7 +7,7 @@ from django.contrib import admin
 from .models import RiskManagement
 
 @admin.register(RiskManagement)
-class RiskManagementAdmin(admin.ModelAdmin):
+class RiskManagementAdmin(ImportExportModelAdmin):
     list_display = ('xy_strategic_pillar', 'xy_strategic_objectives', 'risk_category', 'risk_description',
                     'likelihood', 'impact', 'risk_rating', 'control_exists_yesno',
                     'control_description', 'control_is_adequate_yesno', 'recommended_control'
