@@ -12,7 +12,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from decouple import config
-import dj_database_url
+
+from pathlib import Path
+import psycopg2
+
+import pymysql
+from decouple import config
+
+pymysql.install_as_MySQLdb()
 
 # import pymysql
 # pymysql.install_as_MySQLdb()
@@ -100,6 +107,11 @@ DATABASES["default"] = {
     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 }
 
+
+import dj_database_url
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 # else:
 # DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 # DATABASES['default'] = dj_database_url.config(default=config('DATABASE_URL'))
