@@ -8,6 +8,7 @@ urlpatterns = [
 
     # risk management
     path('risks/', views.Risks, name='risks'),
+    path('risks_consolidated/', views.Risks_consolidated, name='risks_consolidated'),
     path('riskcontrol/', views.RiskControl, name='riskcontrol'),
     path('keyrateindicator/', views.KRI, name='keyrateindicator'),
 
