@@ -192,15 +192,6 @@ def Profiledetails(request):
             })
 
 
-def Profiledetailofanotheruser(request, id):
-    profile_deatils = Student.objects.get(id=id)
-
-    return render(request, 'dashboard/hostel/profiledetails.html', {
-        'profile_deatils': profile_deatils,
-
-    })
-
-
 def Customersview(request):
     profile_deatils = Student.objects.all()
     totalusers = profile_deatils.count()
