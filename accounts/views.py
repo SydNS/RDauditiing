@@ -75,7 +75,7 @@ def ProfileSetting(request):
                 Person.save()
                 print(Person.photo)
                 registered = True
-                return HttpResponseRedirect("/profiledetails")
+                return redirect("accounts:profiledetails")
             except:
                 print("Person.photo")
                 messages.error(request, "Sorry something went worng.")
@@ -148,6 +148,72 @@ def Profiledetails(request):
             }
             profile_form = ProfileForm(initial=profile_deatils)
             return render(request, 'accounts/person.html', {
+                'profile_deatils': profile_deatils,
+                'profile_form': profile_form,
+                'mod_profile': "Create Profile",
+            })
+
+
+
+
+def Accountshome(request):
+    currentuser = request.user
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST, request.FILES)
+
+        # fetch the object related to passed user in the GET request
+        profile_deatils_to_update = Person.objects.get(name_user=currentuser)
+
+        # pass the object as instance in form
+        profile_deatils_to_update_form = ProfileForm(request.POST,request.FILES, instance=profile_deatils_to_update)
+
+        if profile_form.is_valid():
+            try:
+                Person = profile_deatils_to_update_form.save(commit=True)
+                Person.save()
+                registered = True
+                return HttpResponseRedirect("/profiledetails")
+            except:
+                pass
+        # else:
+        #     return HttpResponseRedirect('<p>Hello</p>')
+
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    elif request.method == 'GET':
+        # profile_deatils = Person.objects.get(name_user=request.user)
+
+        # if not profile_deatils:
+        #
+        try:
+            profile_deatils = Person.objects.get(name_user=request.user)
+            profile_form = ProfileForm(initial=profile_deatils)
+
+            age = datetime.datetime.now()
+            age = age.year
+            age = age - profile_deatils.date_of_birth.year
+
+            return render(request, 'accounts/person.html', {
+                'profile_deatils': profile_deatils,
+                'profile_form': profile_form,
+                'mod_profile': "Edit Profile",
+                'age': age
+            })
+
+        except:
+            profile_deatils = {
+                'name_user': "Enter Your Name Here",
+                'last_name': "Enter Your Name Here",
+                'first_name': "Enter Your Name Here",
+                'gender': "Gender",
+                'photo': "Enter Profile Pic",
+                'reporting_date': "Reporting Date",
+                'address': "Your Address",
+                'personsdept': "Department",
+
+            }
+            profile_form = ProfileForm(initial=profile_deatils)
+            return render(request, 'accounts/accounts_home.html', {
                 'profile_deatils': profile_deatils,
                 'profile_form': profile_form,
                 'mod_profile': "Create Profile",
