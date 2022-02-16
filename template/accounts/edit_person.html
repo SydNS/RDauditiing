@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+{% include 'topnavbar.html' %}
+{% include 'verticalnavbar.html' %}
+{% include 'settings.html' %}
+
+<!-- Main Content -->
+<div class="hk-pg-wrapper">
+
+    <!-- Container -->
+    <div class="container-fluid">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-xl-12 pa-0">
+                <div class="profile-cover-wrap overlay-wrap">
+                    <div class="profile-cover-img"
+                         style="background-image:url({% static 'dist/img/trans-bg.jpg' %})"></div>
+                    <div class="bg-overlay bg-trans-dark-50"></div>
+                    <div class="container profile-cover-content py-50">
+                        <div class="hk-row">
+                            <div class="col-lg-6">
+                                <div class="media align-items-center">
+                                    <div class="media-img-wrap  d-flex">
+                                        <div class="avatar">
+                                            <img src="{{ person.photo.url }}" alt=""
+                                                 class="avatar-img rounded-circle">
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="text-white text-capitalize display-6 mb-5 font-weight-400">
+                                            {{ person.first_name }} {{ person.last_name }}
+                                        </div>
+                                        <div class="font-14 text-white">
+                                        <span class="mr-5">Department : <span
+                                                class="font-weight-500 pr-5">{{ person.personsdept }} <a href="#">
+                                                    {% for star in rating_range %}
+                                                    <i class="ion ion-md-star text-primary"></i>
+                                                    {% endfor %}
+                                                    {% for star in rating_reverse_range %}
+                                                    <i class="ion ion-md-star text-grey"></i>
+                                                    {% endfor %}
+                                                </a></span></span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="button-list">
+                                    <a href="#" class="btn btn-dark btn-wth-icon icon-wthot-bg btn-rounded"><span
+                                            class="btn-text">Message</span><span class="icon-label"><i
+                                            class="icon ion-md-mail"></i> </span></a>
+                                {% for group in request.user.groups.all %}
+                                {% if group.name == 'with_auditing_rights' %}
+                                    <a href="#" class="btn btn-info btn-wth-icon icon-wthot-bg btn-rounded"><span
+                                            class="btn-text">Edit</span><span class="icon-label"><i
+                                            class="icon glyphicon-pencil"></i> </span></a>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white shadow-bottom">
+                    <div class="container">
+                        <a href="#" class="d-flex h-60p align-items-center nav-link active">
+                            User Details concerning {{ person }}
+                        </a>
+
+                    </div>
+                </div>
+                <div class="tab-content mt-sm-60 mt-30">
+                    <div class="tab-pane fade show active" role="tabpanel">
+                        <div class="container">
+                            <div class="hk-row">
+                                <div class="col-lg-8">
+                                    <div class="card card-profile-feed">
+                                        <div class="card-header card-header-action">
+                                            <div class="media align-items-center">
+                                                <div class="media-img-wrap d-flex mr-10">
+                                                    <div class="avatar avatar-sm">
+                                                        <img src="{{ person.photo.url }}" alt="user"
+                                                             class="avatar-img rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="text-capitalize font-weight-500 text-dark">
+                                                        {{ person }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text mb-30"></p>
+                                            <div class="card">
+                                                <div class="position-relative">
+                                                    <img class="card-img-top d-block" src="{{person.photo.url}}"
+                                                         alt="User Profile Pic">
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Bio</h5>
+                                                    <p class="card-text">Username: {{person.name_user}}</p>
+                                                    <p class="card-text">Last Name: {{person.last_name|title}}</p>
+                                                    <p class="card-text">First Name: {{person.first_name|title}}</p>
+                                                    <p class="card-text">Gender : {{person.gender|title}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card card-profile-feed">
+                                        <div class="card-header card-header-action">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <div class="text-capitalize font-weight-500 text-dark">
+                                                        Department
+                                                    </div>
+                                                    <div class="font-13">{{ person.personsdept }}</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row text-center">
+                                            <div class="col-4 border-right pr-0">
+                                                <div class="pa-15">
+                                                    <span class="d-block display-6 text-dark mb-5">{{ rating|title  }}/10   </span>
+                                                    <span class="d-block text-capitalize font-14">Rating</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 border-right px-0">
+                                                <div class="pa-15">
+                                                    <span class="d-block display-6 text-dark mb-5">{{person.personsdept|truncatechars:7 }}</span>
+                                                    <span class="d-block text-capitalize font-14">Department</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 pl-0">
+                                                <div class="pa-15">
+                                                <span class="d-block display-6 text-dark mb-5">
+                                                    <span class="badge
+                                            {% if rating.department.criticality == 'low'  %}
+                                            badge-success
+                                            {% elif rating.department.criticality == 'medium' %}
+                                            badge-warning
+                                            {% else %}
+                                            badge-danger
+                                            {% endif %}
+                                            ">{{ person.personsdept.criticality }}</span>
+
+                                                </span>
+                                                    <span class="d-block text-capitalize font-14">Dept Criticality</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><span><i
+                                                    class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Address :</span></span><span
+                                                    class="ml-5 text-dark">{{person.address }}</span></li>
+
+                                        </ul>
+                                        <div class="card-footer justify-content-between">
+                                            <div>
+                                                <a href="#">
+                                                    {% for star in rating_range %}
+                                                    <i class="ion ion-md-star text-primary"></i>
+                                                    {% endfor %}
+                                                    {% for star in rating_reverse_range %}
+                                                    <i class="ion ion-md-star text-grey"></i>
+                                                    {% endfor %}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card card-profile-feed">
+                                        <div class="card-header card-header-action">
+                                            <h6>You May know these people ?</h6>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            {% for person in people_in_same_dept %}
+                                            <li class="list-group-item border-0">
+
+
+                                                <div class="media align-items-center">
+                                                    <div class="d-flex media-img-wrap mr-15">
+                                                        <div class="avatar avatar-sm">
+                                                            <img src="{{person.photo.url}}" alt="user"
+                                                                 class="avatar-img rounded-circle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <span class="d-block text-dark text-capitalize">{{person.first_name}} {{person.last_name}}</span>
+                                                        <span class="d-block font-13">{{person.personsdept}}</span>
+                                                    </div>
+                                                    <a href="/employee/{{person.id}}/"
+                                                       class="text-light-40 ml-auto">more</a>
+                                                </div>
+
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="card card-profile-feed">
+                                        <div class="card-header card-header-action">
+                                            <h6>People from {{person.address}} </h6>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            {% for person in people_in_same_address %}
+                                            <li class="list-group-item border-0">
+
+
+                                                {% if person.name_user is request.user %}
+                                                <div class="media align-items-center">
+                                                    <div class="d-flex media-img-wrap mr-15">
+                                                        <div class="avatar avatar-sm">
+                                                            <img src="#" alt="user"
+                                                                 class="avatar-img rounded-circle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <span class="d-block text-dark text-capitalize">None</span>
+                                                        <span class="d-block font-13">Currently</span>
+                                                    </div>
+                                                </div>
+                                                {% else %}
+                                                <div class="media align-items-center">
+                                                    <div class="d-flex media-img-wrap mr-15">
+                                                        <div class="avatar avatar-sm">
+                                                            <img src="{{person.photo.url}}" alt="user"
+                                                                 class="avatar-img rounded-circle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <span class="d-block text-dark text-capitalize">{{person.first_name}} {{person.last_name}}</span>
+                                                        <span class="d-block font-13">{{person.personsdept}}</span>
+                                                    </div>
+                                                    <a href="/employee/{{person.id}}/"
+                                                       class="text-light-40 ml-auto">more...</a>
+                                                </div>
+                                                {% endif %}
+
+
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+    </div>
+        <!-- /Main Content -->
+        {% include 'verticalnavbar.html' %}
+
+        {% endblock %}
+
