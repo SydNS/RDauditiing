@@ -121,6 +121,7 @@
 
 
 
+
 </script>
 
 <!-- Main Content -->
@@ -139,11 +140,12 @@
         <!-- Row -->
         <div class="row">
             <div class="col-xl-12">
+
                 <div class="hk-row">
                     <div class="col-lg-4">
                         <div class="card overflow-hide border-0">
                             <div class="card-body pa-0">
-                                <div id="owl_demo_1" class="owl-carousel dots-on-item owl-theme">
+                                <div class="">
                                     <div class="fadeOut item img-background overlay-wrap"
                                          style="background-image:url(dist/img/slide1.jpg);">
                                         <div class="position-relative z-index-2 pa-20">
@@ -161,29 +163,6 @@
                                                     <div class="media-body">
                                                         <span class="d-block font-14 font-weight-500">Zuck Chan</span>
                                                         <span class="d-block font-12">Design Lead, Hencework</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-overlay bg-trans-dark-50"></div>
-                                    </div>
-                                    <div class="fadeOut item img-background overlay-wrap"
-                                         style="background-image:url(dist/img/slide2.jpg);">
-                                        <div class="position-relative z-index-2 pa-20">
-                                            <div class="position-relative text-white mnh-225p">
-                                                <p>Nice work on your design. Design is worth much more than I paid.
-                                                    We've used design for the last five years. I just can't get enough
-                                                    of design.</p>
-                                                <div class="media position-absolute b-0 l-0 align-items-center">
-                                                    <div class="media-img-wrap d-flex mr-15">
-                                                        <div class="avatar avatar-sm">
-                                                            <span class="avatar-text avatar-text-inv-primary rounded-circle"><span
-                                                                    class="initial-wrap"><span>NT</span></span></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <span class="d-block font-14 font-weight-500">Normand T.</span>
-                                                        <span class="d-block font-12">Sales Executive, Media</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -682,33 +661,77 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-        <!-- /Row -->
-    </div>
-    <!-- /Container -->
+        <div class="row">
+            <div class="col-xl-12">
 
-    <!-- Footer -->
-    <div class="hk-footer-wrap container">
-        <footer class="footer">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <p>Pampered by<a href="https://hencework.com/" class="text-dark" target="_blank">Hencework</a> ©
-                        2019</p>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <p class="d-inline-block">Follow us</p>
-                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
-                            class="btn-icon-wrap"><i class="fa fa-facebook"></i></span></a>
-                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
-                            class="btn-icon-wrap"><i class="fa fa-twitter"></i></span></a>
-                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
-                            class="btn-icon-wrap"><i class="fa fa-google-plus"></i></span></a>
+                <div class="hk-row">
+                    {% for x in people %}
+                    <div class="col-lg-4">
+                        <a href="/employee/{{x.id}}/">
+                        <div class="card overflow-hide border-0">
+                            <div class="card-body pa-0">
+                                <div class="">
+                                    <div class="fadeOut item img-background overlay-wrap"
+                                         style="background-image:url({{ x.photo.url }});">
+                                        <div class="position-relative z-index-2 pa-20">
+                                            <div class="position-relative text-white mnh-225p">
+                                                <p>Very easy to use. Thanks to design, we've just launched our 5th
+                                                    website! Thank you for making it painless, pleasant and most of all
+                                                    hassle free! Just what I was looking for.</p>
+                                                <div class="media position-absolute b-0 l-0 align-items-center">
+                                                    <div class="media-img-wrap d-flex mr-15">
+                                                        <div class="avatar avatar-sm">
+                                                            <span class="avatar-text avatar-text-inv-pink rounded-circle"><span
+                                                                    class="initial-wrap"><span>ZC</span></span></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <span class="d-block font-14 font-weight-500">{{ x.last_name }} {{ x.first_name }}</span>
+                                                        <span class="d-block font-12">{{ x.personsdept }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-overlay bg-trans-dark-50"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </a></div>
+                    {% endfor %}
                 </div>
             </div>
-        </footer>
+        </div>
+
     </div>
-    <!-- /Footer -->
+    <!-- /Row -->
+</div>
+<!-- /Container -->
+
+<!-- Footer -->
+<div class="hk-footer-wrap container">
+    <footer class="footer">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <p>Pampered by<a href="https://hencework.com/" class="text-dark" target="_blank">Hencework</a> ©
+                    2019</p>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <p class="d-inline-block">Follow us</p>
+                <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
+                        class="btn-icon-wrap"><i class="fa fa-facebook"></i></span></a>
+                <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
+                        class="btn-icon-wrap"><i class="fa fa-twitter"></i></span></a>
+                <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
+                        class="btn-icon-wrap"><i class="fa fa-google-plus"></i></span></a>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- /Footer -->
 </div>
 <!-- /Main Content -->
 
