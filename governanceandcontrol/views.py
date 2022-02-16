@@ -13,8 +13,8 @@ from auditor_of_auditors.models import Auditor_of_auditors
 from accounts.models import Department
 from accounts.models import Person
 from accounts.models import RatingUser
+
 # importing datetime module
-import datetime
 
 
 # Create your views here.
