@@ -7,17 +7,18 @@ app_name='accounts'
 urlpatterns = [
 
     path('login/', views.loginuser, name='login'),
-    path('register/', views.Registering, name='register'),
+    path('register/', views.registering, name='register'),
 
-    path('profilesetup/', views.ProfileSetting, name='profilesetup'),
+    path('profilesetup/', views.profileSetting, name='profilesetup'),
 
-    path('profiledetails/', views.Profiledetails, name='profiledetails'),
+    path('profiledetails/', views.profiledetails, name='profiledetails'),
 
-    path('logout/', views.Logout, name='logout'),
+    path('logout/', views.logout, name='logout'),
 
     # peopleview
-    path('employees/', views.Employeesview, name='employees'),
-    path('employee/<int:id>/', views.Personview, name='employee'),
+    path('employees/', views.employeesview, name='employees'),
+    path('accountshome/', views.accountshome, name='accountshome'),
+    path('employee/<int:id>/', views.personview, name='employee'),
 
     path("", include("governanceandcontrol.urls"),name="dashboard"),
 
