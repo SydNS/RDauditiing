@@ -73,42 +73,27 @@
                                                 <div class="text-capitalize font-weight-500 text-dark">
                                                     {{ person }}
                                                 </div>
-                                                <div class="font-13">25 min</div>
                                             </div>
                                         </div>
 
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-text mb-30">There was that time artists at Sequence opted to
-                                            hand-Sharpie the lorem ipsum passage on a line of paper bags they
-                                            designed for Chipotle.</p>
+                                        <p class="card-text mb-30"></p>
                                         <div class="card">
                                             <div class="position-relative">
                                                 <img class="card-img-top d-block" src="{{person.photo.url}}"
-                                                     alt="Card image cap">
-                                                <a href="#"
-                                                   class="btn btn-dark btn-wth-icon icon-wthot-bg btn-rounded btn-pg-link"><span
-                                                        class="icon-label"><i
-                                                        class="ion ion-md-link"></i></span><span
-                                                        class="btn-text">More</span></a>
+                                                     alt="User Profile Pic">
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="card-title">Bacon chicken turducken spare ribs.</h5>
-                                                <p class="card-text">Of course, we'd be remiss not to include the
-                                                    veritable cadre of lorem ipsum knock offs featuring: Bacon
-                                                    Ipsum, Hipster Ipsum, Corporate Ipsum, Legal Ipsum.</p>
+                                                <h5 class="card-title">Bio</h5>
+                                                <p class="card-text">Username: {{person.name_user}}</p>
+                                                <p class="card-text">Last Name: {{person.last_name|title}}</p>
+                                                <p class="card-text">First Name: {{person.first_name|title}}</p>
+                                                <p class="card-text">Gender : {{person.gender|title}}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer justify-content-between">
-                                        <div>
-                                            <a href="#"><i class="ion ion-md-heart text-primary"></i>30K</a>
-                                        </div>
-                                        <div>
-                                            <a href="#">1K comments</a>
-                                            <a href="#">12 shares</a>
-                                        </div>
-                                    </div>
+
                                 </div>
 
                             </div>
@@ -128,14 +113,14 @@
                                     <div class="row text-center">
                                         <div class="col-4 border-right pr-0">
                                             <div class="pa-15">
-                                                <span class="d-block display-6 text-dark mb-5">{{ 23   }}</span>
-                                                <span class="d-block text-capitalize font-14">Age</span>
+                                                <span class="d-block display-6 text-dark mb-5">{{ rating|title  }}/10   </span>
+                                                <span class="d-block text-capitalize font-14">Rating</span>
                                             </div>
                                         </div>
                                         <div class="col-4 border-right px-0">
                                             <div class="pa-15">
-                                                <span class="d-block display-6 text-dark mb-5">{{rating.rate_level }}</span>
-                                                <span class="d-block text-capitalize font-14">Department Rating</span>
+                                                <span class="d-block display-6 text-dark mb-5">{{person.personsdept|truncatechars:7 }}</span>
+                                                <span class="d-block text-capitalize font-14">Department</span>
                                             </div>
                                         </div>
                                         <div class="col-4 pl-0">
@@ -149,143 +134,103 @@
                                             {% else %}
                                             badge-danger
                                             {% endif %}
-                                            ">{{ rating.department.criticality }}</span>
+                                            ">{{ person.personsdept.criticality }}</span>
 
                                                 </span>
-                                                <span class="d-block text-capitalize font-14">Criticality</span>
+                                                <span class="d-block text-capitalize font-14">Dept Criticality</span>
                                             </div>
                                         </div>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"><span><i
-                                                class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Stay at:</span></span><span
-                                                class="ml-5 text-dark">{{rating.rate_level }}</span></li>
-                                        <li class="list-group-item"><span><i
-                                                class="ion ion-md-briefcase font-18 text-light-20 mr-10"></i><span>Worked at:</span></span><span
-                                                class="ml-5 text-dark">Companey</span></li>
-                                        <li class="list-group-item"><span><i
-                                                class="ion ion-md-home font-18 text-light-20 mr-10"></i><span>Lives in:</span></span><span
-                                                class="ml-5 text-dark">San Francisco, CA</span></li>
-                                        <li class="list-group-item"><span><i
-                                                class="ion ion-md-pin font-18 text-light-20 mr-10"></i><span>From:</span></span><span
-                                                class="ml-5 text-dark">Settle, WA</span></li>
+                                                class="ion ion-md-calendar font-18 text-light-20 mr-10"></i><span>Address :</span></span><span
+                                                class="ml-5 text-dark">{{person.address }}</span></li>
+
+                                    </ul>
+                                    <div class="card-footer justify-content-between">
+                                        <div>
+                                            <a href="#">
+                                                {% for star in rating_range %}
+                                                <i class="ion ion-md-star text-primary"></i>
+                                                {% endfor %}
+                                                {% for star in rating_reverse_range %}
+                                                <i class="ion ion-md-star text-grey"></i>
+                                                {% endfor %}
+                                                </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-profile-feed">
+                                    <div class="card-header card-header-action">
+                                        <h6>You May know these people ?</h6>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        {% for person in people_in_same_dept %}
+                                        <li class="list-group-item border-0">
+
+
+                                            <div class="media align-items-center">
+                                                <div class="d-flex media-img-wrap mr-15">
+                                                    <div class="avatar avatar-sm">
+                                                        <img src="{{person.photo.url}}" alt="user"
+                                                             class="avatar-img rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <span class="d-block text-dark text-capitalize">{{person.first_name}} {{person.last_name}}</span>
+                                                    <span class="d-block font-13">{{person.personsdept}}</span>
+                                                </div>
+                                                <a href="/employee/{{person.id}}/"
+                                                   class="text-light-40 ml-auto">more</a>
+                                            </div>
+
+                                        </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                                 <div class="card card-profile-feed">
                                     <div class="card-header card-header-action">
-                                        <h6>You know these people ?</h6>
-                                        <div class="d-flex align-items-center card-action-wrap">
-                                            <div class="inline-block dropdown">
-                                                <a class="dropdown-toggle no-caret" data-toggle="dropdown" href="#"
-                                                   aria-expanded="false" role="button"><i
-                                                        class="ion ion-ios-more"></i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Separated link</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <h6>People from {{person.address}} </h6>
                                     </div>
                                     <ul class="list-group list-group-flush">
+                                        {% for person in people_in_same_address %}
                                         <li class="list-group-item border-0">
-                                            <div class="media align-items-center">
+
+
+                                            {% if person.name_user is request.user %}
+                                             <div class="media align-items-center">
                                                 <div class="d-flex media-img-wrap mr-15">
                                                     <div class="avatar avatar-sm">
-                                                        <img src="dist/img/avatar1.jpg" alt="user"
+                                                        <img src="#" alt="user"
                                                              class="avatar-img rounded-circle">
                                                     </div>
                                                 </div>
                                                 <div class="media-body">
-                                                    <span class="d-block text-dark text-capitalize">Evie Ono</span>
-                                                    <span class="d-block font-13">Apple Inc</span>
+                                                    <span class="d-block text-dark text-capitalize">None</span>
+                                                    <span class="d-block font-13">Currently</span>
                                                 </div>
-                                                <a href="#" class="text-light-40 ml-auto"><i
-                                                        class="ion ion-md-add font-24"></i></a>
                                             </div>
-                                        </li>
-                                        <li class="list-group-item border-0">
+                                            {% else %}
                                             <div class="media align-items-center">
                                                 <div class="d-flex media-img-wrap mr-15">
                                                     <div class="avatar avatar-sm">
-                                                        <img src="dist/img/avatar2.jpg" alt="user"
+                                                        <img src="{{person.photo.url}}" alt="user"
                                                              class="avatar-img rounded-circle">
                                                     </div>
                                                 </div>
                                                 <div class="media-body">
-                                                    <span class="d-block text-dark text-capitalize">Clay Masse</span>
-                                                    <span class="d-block font-13">Hencework.com</span>
+                                                    <span class="d-block text-dark text-capitalize">{{person.first_name}} {{person.last_name}}</span>
+                                                    <span class="d-block font-13">{{person.personsdept}}</span>
                                                 </div>
-                                                <a href="#" class="text-light-40 ml-auto"><i
-                                                        class="ion ion-md-add font-24"></i></a>
+                                                <a href="/employee/{{person.id}}/"
+                                                   class="text-light-40 ml-auto">more...</a>
                                             </div>
+                                            {% endif %}
+
+
+
                                         </li>
-                                        <li class="list-group-item border-0">
-                                            <div class="media align-items-center">
-                                                <div class="d-flex media-img-wrap mr-15">
-                                                    <div class="avatar avatar-sm">
-                                                        <img src="dist/img/avatar3.jpg" alt="user"
-                                                             class="avatar-img rounded-circle">
-                                                    </div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <span class="d-block text-dark text-capitalize">Madelyn Rascon</span>
-                                                    <span class="d-block font-13">Godaddy.co.in</span>
-                                                </div>
-                                                <a href="#" class="text-success ml-auto"><i
-                                                        class="ion ion-md-checkmark font-20"></i></a>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item border-0">
-                                            <div class="media align-items-center">
-                                                <div class="d-flex media-img-wrap mr-15">
-                                                    <div class="avatar avatar-sm">
-                                                        <img src="dist/img/avatar4.jpg" alt="user"
-                                                             class="avatar-img rounded-circle">
-                                                    </div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <span class="d-block text-dark text-capitalize">Mitsoku Heid</span>
-                                                    <span class="d-block font-13">Flipkart</span>
-                                                </div>
-                                                <a href="#" class="text-success ml-auto"><i
-                                                        class="ion ion-md-checkmark font-20"></i></a>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item border-0">
-                                            <div class="media align-items-center">
-                                                <div class="d-flex media-img-wrap mr-15">
-                                                    <div class="avatar avatar-sm">
-                                                        <img src="dist/img/avatar5.jpg" alt="user"
-                                                             class="avatar-img rounded-circle">
-                                                    </div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <span class="d-block text-dark text-capitalize">Eziquiel Merideth</span>
-                                                    <span class="d-block font-13">Paypal</span>
-                                                </div>
-                                                <a href="#" class="text-light-40 ml-auto"><i
-                                                        class="ion ion-md-add font-24"></i></a>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item border-0">
-                                            <div class="media align-items-center">
-                                                <div class="d-flex media-img-wrap mr-15">
-                                                    <div class="avatar avatar-sm">
-                                                        <img src="dist/img/avatar6.jpg" alt="user"
-                                                             class="avatar-img rounded-circle">
-                                                    </div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <span class="d-block text-dark text-capitalize">Johnie Metoyer</span>
-                                                    <span class="d-block font-13">Robocon</span>
-                                                </div>
-                                                <a href="#" class="text-success ml-auto"><i
-                                                        class="ion ion-md-checkmark font-20"></i></a>
-                                            </div>
-                                        </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </div>

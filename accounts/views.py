@@ -7,8 +7,16 @@ from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 
-# Create your views here.
 from . import models
+from governanceandcontrol.models import Governance_And_Control
+from riskmanagement.models import RiskManagement
+from auditor_of_auditors.models import Auditor_of_auditors
+from accounts.models import Department
+from accounts.models import Person
+from accounts.models import RatingUser
+
+
+# Create your views here.
 
 
 def registering(request):
@@ -51,17 +59,32 @@ def logout(request):
 
 def employeesview(request):
     people = models.Person.objects.all()
-    ratings = models.RatingUser.objects.all()
+    try:
+        ratings = models.RatingUser.objects.all()
+    except:
+        ratings = {}
     return render(request=request, template_name="accounts/people.html",
                   context={"people": people, "ratings": ratings, })
 
 
 def personview(request, id):
-    person = models.Person.objects.get(id=id)
-    xy = person.id
-    rating = models.RatingUser.objects.get(person=xy)
+    try:
+        people_in_same_dept = models.Person.objects.filter(personsdept=models.Person.objects.get(id=id).personsdept)
+        print(people_in_same_dept)
+        people_in_same_address = models.Person.objects.filter(address=models.Person.objects.get(id=id).address)
+        print(people_in_same_address)
+        person = models.Person.objects.get(id=id)
+        rating = models.RatingUser.objects.get(person=person.id)
+        rating_range=range(rating.rate_level)
+        rating_reverse_range=range(10-rating.rate_level)
+    except:
+        rating = {}
     return render(request=request, template_name="accounts/person.html", context={"person": person,
                                                                                   "rating": rating,
+                                                                                  "rating_range": rating_range,
+                                                                                  "rating_reverse_range": rating_reverse_range,
+                                                                                  "people_in_same_dept": people_in_same_dept,
+                                                                                  "people_in_same_address": people_in_same_address,
                                                                                   })
 
 
