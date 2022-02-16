@@ -56,7 +56,7 @@
                                             class="icon ion-md-mail"></i> </span></a>
                                 {% for group in request.user.groups.all %}
                                 {% if group.name == 'with_auditing_rights' %}
-                                    <a href="#" class="btn btn-info btn-wth-icon icon-wthot-bg btn-rounded"><span
+                                    <a href="/profilesetup/{{person.id}}" class="btn btn-info btn-wth-icon icon-wthot-bg btn-rounded"><span
                                             class="btn-text">Edit</span><span class="icon-label"><i
                                             class="icon glyphicon-pencil"></i> </span></a>
                                 </div>
