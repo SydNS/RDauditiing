@@ -69,23 +69,38 @@ def employeesview(request):
 
 def personview(request, id):
     try:
-        people_in_same_dept = models.Person.objects.filter(personsdept=models.Person.objects.get(id=id).personsdept)
-        print(people_in_same_dept)
-        people_in_same_address = models.Person.objects.filter(address=models.Person.objects.get(id=id).address)
-        print(people_in_same_address)
         person = models.Person.objects.get(id=id)
-        rating = models.RatingUser.objects.get(person=person.id)
-        rating_range=range(rating.rate_level)
-        rating_reverse_range=range(10-rating.rate_level)
+        try:
+            people_in_same_dept = models.Person.objects.filter(personsdept=models.Person.objects.get(id=id).personsdept)
+            print(people_in_same_dept)
+            people_in_same_address = models.Person.objects.filter(address=models.Person.objects.get(id=id).address)
+            print(people_in_same_address)
+            print("==============================")
+            length_username_in_request = len(str(request.user))
+            length_username_in_person_obj = len(str(person.name_user))
+            if len(str(person.name_user)) == len(str(request.user)):
+                print(yes)
+
+            rating = models.RatingUser.objects.get(person=person.id)
+
+            rating_range = range(rating.rate_level)
+            rating_reverse_range = range(10 - rating.rate_level)
+        except:
+            rating = 1
+            rating_range = range(1)
+            rating_reverse_range = range(10 - 1)
+        return render(request=request, template_name="accounts/person.html", context={"person": person,
+                                                                                      "rating": rating,
+                                                                                      "rating_range": rating_range,
+                                                                                      "rating_reverse_range": rating_reverse_range,
+                                                                                      "people_in_same_dept": people_in_same_dept,
+                                                                                      "people_in_same_address": people_in_same_address,
+                                                                                      # permitting
+                                                                                      "length_username_in_request": length_username_in_request,
+                                                                                      "length_username_in_person_obj": length_username_in_person_obj,
+                                                                                      })
     except:
-        rating = {}
-    return render(request=request, template_name="accounts/person.html", context={"person": person,
-                                                                                  "rating": rating,
-                                                                                  "rating_range": rating_range,
-                                                                                  "rating_reverse_range": rating_reverse_range,
-                                                                                  "people_in_same_dept": people_in_same_dept,
-                                                                                  "people_in_same_address": people_in_same_address,
-                                                                                  })
+        return redirect('accounts:profileediting', id)
 
 
 # profile registering
@@ -117,48 +132,52 @@ def profileSetting(request):
         'form': profile_form,
     })
 
+
 # @login_required
-def profileEditing(request,id):
-    # Set to False initially. Code changes value to True when registration succeeds.
-    registered = False
-    personEdit=models.Person.objects.get(id=id)
-    people_in_same_dept = models.Person.objects.filter(personsdept=models.Person.objects.get(id=id).personsdept)
-    print(people_in_same_dept)
-    people_in_same_address = models.Person.objects.filter(address=models.Person.objects.get(id=id).address)
-    print(people_in_same_address)
-    person = models.Person.objects.get(id=id)
-    rating = models.RatingUser.objects.get(person=person.id)
-    rating_range = range(rating.rate_level)
-    rating_reverse_range = range(10 - rating.rate_level)
-    if request.method == 'POST':
-        profile_form = ProfileForm(request.POST, request.FILES)
+def profileEditing(request, id):
+    try:
+        personEdit = models.Person.objects.get(id=id)
+        people_in_same_dept = models.Person.objects.filter(personsdept=models.Person.objects.get(id=id).personsdept)
+        print(people_in_same_dept)
+        people_in_same_address = models.Person.objects.filter(address=models.Person.objects.get(id=id).address)
+        print(people_in_same_address)
+        person = models.Person.objects.get(id=id)
+        rating = models.RatingUser.objects.get(person=person.id)
+        rating_range = range(rating.rate_level)
+        rating_reverse_range = range(10 - rating.rate_level)
+        if request.method == 'POST':
+            profile_form = ProfileForm(request.POST, request.FILES)
 
-        if profile_form.is_valid():
-            try:
-                person = profile_form.save(commit=True)
-                person.save()
-                print(Person.photo)
-                registered = True
-                return redirect("accounts:profiledetails")
-            except:
-                print("Person.photo")
-                messages.error(request, "Sorry something went worng.")
-        # else:
-        #     return HttpResponseRedirect('<p>Hello</p>')
+            if profile_form.is_valid():
+                try:
+                    person = profile_form.save(commit=True)
+                    person.save()
+                    print(Person.photo)
+                    registered = True
+                    return redirect("accounts:profiledetails")
+                except:
+                    print("Person.photo")
+                    messages.error(request, "Sorry something went worng.")
+            # else:
+            #     return HttpResponseRedirect('<p>Hello</p>')
 
-    profile_form = ProfileForm(instance=personEdit)
-    # profile_form.fields["name_user"]=request.user
+        profile_form = ProfileForm(instance=personEdit)
+        # profile_form.fields["name_user"]=request.user
 
-    return render(request, 'accounts/edit_person.html', {
-        'form': profile_form,
-        "person": person,
-        "rating": rating,
-        "rating_range": rating_range,
-        "rating_reverse_range": rating_reverse_range,
-        "people_in_same_dept": people_in_same_dept,
-        "people_in_same_address": people_in_same_address,
-    })
-
+        return render(request, 'accounts/edit_person.html', {
+            'form': profile_form,
+            "person": person,
+            "rating": rating,
+            "rating_range": rating_range,
+            "rating_reverse_range": rating_reverse_range,
+            "people_in_same_dept": people_in_same_dept,
+            "people_in_same_address": people_in_same_address,
+        })
+    except:
+        profile_form = ProfileForm(initial={'name_user': request.user,'last_name': 'Last Name','first_name': 'First Name','photo': '',})
+        return render(request, 'accounts/edit_person.html', {
+            'form': profile_form,
+        })
 
 
 def profiledetails(request):
