@@ -1,14 +1,17 @@
-from django.shortcuts import render,redirect
+import datetime
+
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import NewUserForm,ProfileForm
+from .forms import NewUserForm, ProfileForm
 from django.contrib.auth import login, authenticate, logout  # add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Person,RatingUser
+
 # Create your views here.
+from . import models
 
 
-def Registering(request):
+def registering(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
         if form.is_valid():
@@ -41,28 +44,30 @@ def loginuser(request):
     # return render(request, , info)
 
 
-def Logout(request):
-    logout(request)
+def logout(request):
     messages.info(request, "You have successfully logged out.")
     return redirect('accounts:login')
 
-def Employeesview(request):
-    people=Person.objects.all()
-    ratings=RatingUser.objects.all()
-    return render(request=request, template_name="accounts/people.html", context={"people": people,"ratings": ratings,})
+
+def employeesview(request):
+    people = models.Person.objects.all()
+    ratings = models.RatingUser.objects.all()
+    return render(request=request, template_name="accounts/people.html",
+                  context={"people": people, "ratings": ratings, })
 
 
-def Personview(request,id):
-    person=Person.objects.get(id=id)
-    xy=person.id
-    rating=RatingUser.objects.get( person=xy)
+def personview(request, id):
+    person = models.Person.objects.get(id=id)
+    xy = person.id
+    rating = models.RatingUser.objects.get(person=xy)
     return render(request=request, template_name="accounts/person.html", context={"person": person,
                                                                                   "rating": rating,
                                                                                   })
 
+
 # profile registering
 # @login_required
-def ProfileSetting(request):
+def profileSetting(request):
     # Set to False initially. Code changes value to True when registration succeeds.
     registered = False
 
@@ -71,8 +76,8 @@ def ProfileSetting(request):
 
         if profile_form.is_valid():
             try:
-                Person = profile_form.save(commit=True)
-                Person.save()
+                person = profile_form.save(commit=True)
+                person.save()
                 print(Person.photo)
                 registered = True
                 return redirect("accounts:profiledetails")
@@ -83,30 +88,30 @@ def ProfileSetting(request):
         #     return HttpResponseRedirect('<p>Hello</p>')
 
     profile_form = ProfileForm(initial={'name_user': request.user})
-        # profile_form.fields["name_user"]=request.user
+    # profile_form.fields["name_user"]=request.user
 
     return render(request, 'accounts/profilesetup.html', {
         'form': profile_form,
     })
 
 
-def Profiledetails(request):
+def profiledetails(request):
     currentuser = request.user
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, request.FILES)
 
         # fetch the object related to passed user in the GET request
-        profile_deatils_to_update = Person.objects.get(name_user=currentuser)
+        profile_deatils_to_update = models.Person.objects.get(name_user=currentuser)
 
         # pass the object as instance in form
-        profile_deatils_to_update_form = ProfileForm(request.POST,request.FILES, instance=profile_deatils_to_update)
+        profile_deatils_to_update_form = ProfileForm(request.POST, request.FILES, instance=profile_deatils_to_update)
 
         if profile_form.is_valid():
             try:
                 Person = profile_deatils_to_update_form.save(commit=True)
                 Person.save()
                 registered = True
-                return HttpResponseRedirect("/profiledetails")
+                return redirect("profiledetails")
             except:
                 pass
         # else:
@@ -120,7 +125,7 @@ def Profiledetails(request):
         # if not profile_deatils:
         #
         try:
-            profile_deatils = Person.objects.get(name_user=request.user)
+            profile_deatils = models.Person.objects.get(name_user=request.user)
             profile_form = ProfileForm(initial=profile_deatils)
 
             age = datetime.datetime.now()
@@ -154,68 +159,7 @@ def Profiledetails(request):
             })
 
 
-
-
-def Accountshome(request):
-    currentuser = request.user
-    if request.method == 'POST':
-        profile_form = ProfileForm(request.POST, request.FILES)
-
-        # fetch the object related to passed user in the GET request
-        profile_deatils_to_update = Person.objects.get(name_user=currentuser)
-
-        # pass the object as instance in form
-        profile_deatils_to_update_form = ProfileForm(request.POST,request.FILES, instance=profile_deatils_to_update)
-
-        if profile_form.is_valid():
-            try:
-                Person = profile_deatils_to_update_form.save(commit=True)
-                Person.save()
-                registered = True
-                return HttpResponseRedirect("/profiledetails")
-            except:
-                pass
-        # else:
-        #     return HttpResponseRedirect('<p>Hello</p>')
-
-    # Not a HTTP POST, so we render our form using two ModelForm instances.
-    # These forms will be blank, ready for user input.
-    elif request.method == 'GET':
-        # profile_deatils = Person.objects.get(name_user=request.user)
-
-        # if not profile_deatils:
-        #
-        try:
-            profile_deatils = Person.objects.get(name_user=request.user)
-            profile_form = ProfileForm(initial=profile_deatils)
-
-            age = datetime.datetime.now()
-            age = age.year
-            age = age - profile_deatils.date_of_birth.year
-
-            return render(request, 'accounts/person.html', {
-                'profile_deatils': profile_deatils,
-                'profile_form': profile_form,
-                'mod_profile': "Edit Profile",
-                'age': age
-            })
-
-        except:
-            profile_deatils = {
-                'name_user': "Enter Your Name Here",
-                'last_name': "Enter Your Name Here",
-                'first_name': "Enter Your Name Here",
-                'gender': "Gender",
-                'photo': "Enter Profile Pic",
-                'reporting_date': "Reporting Date",
-                'address': "Your Address",
-                'personsdept': "Department",
-
-            }
-            profile_form = ProfileForm(initial=profile_deatils)
-            return render(request, 'accounts/accounts_home.html', {
-                'profile_deatils': profile_deatils,
-                'profile_form': profile_form,
-                'mod_profile': "Create Profile",
-            })
-
+# noinspection PyUnresolvedReferences
+def accountshome(request):
+    people = models.Person.objects.all()
+    return render(request, 'accounts/accounts_home.html', {'people': people})
