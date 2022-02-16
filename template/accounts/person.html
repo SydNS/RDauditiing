@@ -148,9 +148,9 @@
                                                 <div class="pa-15">
                                                 <span class="d-block display-6 text-dark mb-5">
                                                     <span class="badge
-                                            {% if rating.department.criticality == 'low'  %}
+                                            {% if person.personsdept.criticality == 'low'  %}
                                             badge-success
-                                            {% elif rating.department.criticality == 'medium' %}
+                                            {% elif person.personsdept.criticality == 'medium' %}
                                             badge-warning
                                             {% else %}
                                             badge-danger
