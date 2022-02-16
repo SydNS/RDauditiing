@@ -35,9 +35,17 @@
                                         </div>
                                         <div class="font-14 text-white">
                                         <span class="mr-5">Department : <span
-                                                class="font-weight-500 pr-5">{{ person.personsdept }}</span></span>
+                                                class="font-weight-500 pr-5">{{ person.personsdept }} <a href="#">
+                                                    {% for star in rating_range %}
+                                                    <i class="ion ion-md-star text-primary"></i>
+                                                    {% endfor %}
+                                                    {% for star in rating_reverse_range %}
+                                                    <i class="ion ion-md-star text-grey"></i>
+                                                    {% endfor %}
+                                                </a></span></span>
 
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +54,14 @@
                                     <a href="#" class="btn btn-dark btn-wth-icon icon-wthot-bg btn-rounded"><span
                                             class="btn-text">Message</span><span class="icon-label"><i
                                             class="icon ion-md-mail"></i> </span></a>
+                                {% for group in request.user.groups.all %}
+                                {% if group.name == 'with_auditing_rights' %}
+                                    <a href="#" class="btn btn-info btn-wth-icon icon-wthot-bg btn-rounded"><span
+                                            class="btn-text">Edit</span><span class="icon-label"><i
+                                            class="icon glyphicon-pencil"></i> </span></a>
                                 </div>
+                                {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
