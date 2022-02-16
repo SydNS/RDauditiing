@@ -26,10 +26,17 @@
                             <div class="col-lg-6">
                                 <div class="media align-items-center">
                                     <div class="media-img-wrap  d-flex">
+                                        {% if not person.photo.url %}
+                                        <div class="img-sm">
+                                            <img src=" {%static 'dist/img/logo-dark.png'%} " alt="user"
+                                                 class="avatar-img">
+                                        </div>
+                                        {% else %}
                                         <div class="avatar">
-                                            <img src="{{ person.photo.url }}" alt=""
+                                            <img src="{{person.photo.url}}" alt="user"
                                                  class="avatar-img rounded-circle">
                                         </div>
+                                        {%endif%}
                                     </div>
                                     <div class="media-body">
                                         <div class="text-white text-capitalize display-6 mb-5 font-weight-400">
@@ -56,8 +63,8 @@
                                     <a href="#" class="btn btn-dark btn-wth-icon icon-wthot-bg btn-rounded"><span
                                             class="btn-text">Message</span><span class="icon-label"><i
                                             class="icon ion-md-mail"></i> </span></a>
-                                {% for group in request.user.groups.all %}
-                                {% if group.name == 'with_auditing_rights' %}
+                                    {% for group in request.user.groups.all %}
+                                    {% if group.name == 'with_auditing_rights' %}
                                     <a href="#" class="btn btn-info btn-wth-icon icon-wthot-bg btn-rounded"><span
                                             class="btn-text">Edit</span><span class="icon-label"><i
                                             class="icon glyphicon-pencil"></i> </span></a>
@@ -85,10 +92,17 @@
                                         <div class="card-header card-header-action">
                                             <div class="media align-items-center">
                                                 <div class="media-img-wrap d-flex mr-10">
+                                                    {% if not person.photo.url %}
+                                                    <div class="img-sm">
+                                                        <img src=" {%static 'dist/img/logo-dark.png'%} " alt="user"
+                                                             class="avatar-img">
+                                                    </div>
+                                                    {% else %}
                                                     <div class="avatar avatar-sm">
-                                                        <img src="{{ person.photo.url }}" alt="user"
+                                                        <img src="{{person.photo.url}}" alt="user"
                                                              class="avatar-img rounded-circle">
                                                     </div>
+                                                    {%endif%}
                                                 </div>
                                                 <div class="media-body">
                                                     <div class="text-capitalize font-weight-500 text-dark">
@@ -101,20 +115,24 @@
                                         <div class="card-body">
                                             <p class="card-text mb-30"></p>
                                             <div class="card">
-                                               <form class="col-lg-12" method="POST" enctype="multipart/form-data" action="">
-                                {% csrf_token %}
-                                <h4 class="display-4 mb-10">{{person|title}} Edit Your Profile</h4>
-                                <div class="row">
-                                    {% for field in form %}
-                                    <div class="col-md-4 form-group">
-                                        {{ field|as_crispy_field }}
-                                    </div>
-                                    {% endfor %}
-                                </div>
+                                                <form class="col-lg-12" method="POST" enctype="multipart/form-data"
+                                                      action="">
+                                                    {% csrf_token %}
+                                                    <h4 class="display-4 mb-10">{{person|title}} Edit Your Profile</h4>
+                                                    <div class="row">
+                                                        {% for field in form %}
+                                                        <div class="col-md-4 form-group">
+                                                            {{ field|as_crispy_field }}
+                                                        </div>
+                                                        {% endfor %}
+                                                    </div>
 
-                                <button class="btn btn-primary btn-block" type="submit"><Edit></Edit> Profile</button>
+                                                    <button class="btn btn-primary btn-block" type="submit">
+                                                        <Edit></Edit>
+                                                        Profile
+                                                    </button>
 
-                            </form>
+                                                </form>
                                             </div>
                                         </div>
 
@@ -265,8 +283,8 @@
         </div>
         <!-- /Row -->
     </div>
-        <!-- /Main Content -->
-        {% include 'verticalnavbar.html' %}
+    <!-- /Main Content -->
+    {% include 'verticalnavbar.html' %}
 
-        {% endblock %}
+    {% endblock %}
 
