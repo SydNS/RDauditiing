@@ -86,7 +86,7 @@ class Person(models.Model):
         ('male', 'Male'),
         ('female', 'Female')
     ]
-    name_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name_user = models.ForeignKey(User, on_delete=models.CASCADE,unique=True)
     last_name = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     photo = models.ImageField(upload_to='profileimages/')
