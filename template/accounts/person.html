@@ -53,20 +53,16 @@
                                 <div class="button-list">
                                     <a href="#" class="btn btn-dark btn-wth-icon icon-wthot-bg btn-rounded"><span
                                             class="btn-text">Message</span><span class="icon-label"><i
-                                            class="icon ion-md-mail"></i> </span></a>
+                                            class="icon ion-md-mail"></i> </span></a>{{request.user}}{{person.name_user}}
 
-                                    {% if request.user == person.name_user  %}
-
-                                    {% for group in request.user.groups.all %}
-                                    {% if group.name == 'with_auditing_rights' %}
+                                    {% if request.user == person.name_user %}
                                     <a href="/profilesetup/{{person.id}}"
                                        class="btn btn-info btn-wth-icon icon-wthot-bg btn-rounded"><span
                                             class="btn-text">Edit</span><span class="icon-label"><i
                                             class="icon glyphicon-pencil"></i> </span></a>
 
                                     {% endif %}
-                                    {% endfor %}
-                                    {% endif  %}
+
                                 </div>
                             </div>
                         </div>
