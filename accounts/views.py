@@ -174,7 +174,8 @@ def profileEditing(request, id):
             "people_in_same_address": people_in_same_address,
         })
     except:
-        profile_form = ProfileForm(initial={'name_user': request.user,'last_name': 'Last Name','first_name': 'First Name','photo': '',})
+        profile_form = ProfileForm(
+            initial={'name_user': request.user, 'last_name': 'Last Name', 'first_name': 'First Name', 'photo': '', })
         return render(request, 'accounts/edit_person.html', {
             'form': profile_form,
         })
@@ -214,7 +215,8 @@ def profiledetails(request):
 
         except:
             profile_deatils = models.Person.objects.get(name_user=request.user)
-            print(profile_deatils,profile_deatils.name_user,profile_deatils.last_name,profile_deatils.first_name,profile_deatils.photo,)
+            print(profile_deatils, profile_deatils.name_user, profile_deatils.last_name, profile_deatils.first_name,
+                  profile_deatils.photo, )
             # profile_form = ProfileForm(initial=profile_deatils)
             return render(request, 'accounts/person.html', {
                 'person': profile_deatils,
@@ -226,5 +228,11 @@ def profiledetails(request):
 # noinspection PyUnresolvedReferences
 def accountshome(request):
     people = models.Person.objects.all()
-    ratings = models.RatingUser.objects.all()
-    return render(request, 'accounts/accounts_home.html', {'people': people,'ratings': ratings})
+    ratings = models.RatingUser.objects.all().order_by('-rate_level')[:5]
+    labels = []
+    data = []
+    for rate in ratings:
+        labels.append(rate.person)
+        data.append(rate.rate_level)
+    return render(request, 'accounts/accounts_home.html', {'label': labels, 'ratings': data, 'rating_range': range(4),
+                                                           'people': people})
