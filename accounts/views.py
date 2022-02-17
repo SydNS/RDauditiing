@@ -199,47 +199,26 @@ def profiledetails(request):
                 return redirect("profiledetails")
             except:
                 pass
-        # else:
-        #     return HttpResponseRedirect('<p>Hello</p>')
-
-    # Not a HTTP POST, so we render our form using two ModelForm instances.
-    # These forms will be blank, ready for user input.
     elif request.method == 'GET':
-        # profile_deatils = Person.objects.get(name_user=request.user)
-
-        # if not profile_deatils:
-        #
         try:
             profile_deatils = models.Person.objects.get(name_user=request.user)
             profile_form = ProfileForm(initial=profile_deatils)
-
-            age = datetime.datetime.now()
-            age = age.year
-            age = age - profile_deatils.date_of_birth.year
+            print(profile_deatils)
 
             return render(request, 'accounts/person.html', {
-                'profile_deatils': profile_deatils,
+                'person': profile_deatils,
                 'profile_form': profile_form,
                 'mod_profile': "Edit Profile",
                 'age': age
             })
 
         except:
-            profile_deatils = {
-                'name_user': "Enter Your Name Here",
-                'last_name': "Enter Your Name Here",
-                'first_name': "Enter Your Name Here",
-                'gender': "Gender",
-                'photo': "Enter Profile Pic",
-                'reporting_date': "Reporting Date",
-                'address': "Your Address",
-                'personsdept': "Department",
-
-            }
-            profile_form = ProfileForm(initial=profile_deatils)
+            profile_deatils = models.Person.objects.get(name_user=request.user)
+            print(profile_deatils,profile_deatils.name_user,profile_deatils.last_name,profile_deatils.first_name,profile_deatils.photo,)
+            # profile_form = ProfileForm(initial=profile_deatils)
             return render(request, 'accounts/person.html', {
-                'profile_deatils': profile_deatils,
-                'profile_form': profile_form,
+                'person': profile_deatils,
+                # 'profile_form': profile_form,
                 'mod_profile': "Create Profile",
             })
 
@@ -247,4 +226,5 @@ def profiledetails(request):
 # noinspection PyUnresolvedReferences
 def accountshome(request):
     people = models.Person.objects.all()
-    return render(request, 'accounts/accounts_home.html', {'people': people})
+    ratings = models.RatingUser.objects.all()
+    return render(request, 'accounts/accounts_home.html', {'people': people,'ratings': ratings})
