@@ -7,10 +7,16 @@
     <a class="navbar-brand" href="/">
         <img class="brand-img d-inline-block" src="{% static 'dist/img/logo-dark.png' %}" alt="Auditing Tool"/>
     </a>
+    <a id="#" class="nav-link nav-link-hover" href="/accountshome"><span
+            class="feather-icon"><i data-feather="home"></i></span></a>
     <ul class="navbar-nav hk-navbar-content">
         <li class="nav-item">
             <a id="navbar_search_btn" class="nav-link nav-link-hover" href="javascript:void(0);"><span
                     class="feather-icon"><i data-feather="search"></i></span></a>
+        </li>
+        <li class="nav-item">
+            <a id="" class="nav-link nav-link-hover" href="javascript:void(0);"><span
+                    class="">Employees</span></a>
         </li>
         <li class="nav-item">
             <a id="settings_toggle_btn" class="nav-link nav-link-hover" href="javascript:void(0);"><span
@@ -27,7 +33,8 @@
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-                <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
+                <a class="dropdown-item" href="/profiledetails"><i
+                        class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
 
                 <div class="dropdown-divider"></div>
                 <div class="sub-dropdown-menu show-on-hover">
