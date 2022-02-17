@@ -228,12 +228,26 @@ def profiledetails(request):
 # noinspection PyUnresolvedReferences
 def accountshome(request):
     people = models.Person.objects.all().exclude(name_user=request.user)
-    person = models.Person.objects.get(name_user=request.user)
-    ratings = models.RatingUser.objects.all().order_by('-rate_level')[:5]
-    labels = []
-    data = []
-    for rate in ratings:
-        labels.append(rate.person)
-        data.append(rate.rate_level)
-    return render(request, 'accounts/accounts_home.html', {'label': labels, 'ratings': data, 'rating_range': range(4),
-                                                           'people': people,'person': person,})
+    if not people:
+        person = {}
+        ratings = {}
+        labels = []
+        data = []
+        for rate in ratings:
+            labels.append(rate.person)
+            data.append(rate.rate_level)
+        return render(request, 'accounts/accounts_home.html',
+                      {'label': labels, 'ratings': data, 'rating_range': range(4),
+                       'people': people, 'person': person, })
+    else:
+        person = models.Person.objects.get(name_user=request.user)
+        ratings = models.RatingUser.objects.all().order_by('-rate_level')[:5]
+        labels = []
+        data = []
+        for rate in ratings:
+            labels.append(rate.person)
+            data.append(rate.rate_level)
+        return render(request, 'accounts/accounts_home.html',
+                      {'label': labels, 'ratings': data, 'rating_range': range(4),
+                       'people': people, 'person': person, })
+
