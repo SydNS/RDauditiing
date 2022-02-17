@@ -7,100 +7,6 @@
 {% include 'verticalnavbar.html' %}
 {% include 'settings.html' %}
 
-<script>
-
-    var config = {
-      type: 'pie',
-      data: {
-        datasets: [{
-          data: [{{lowimpactissues}},{{mediumimpactissues}},{{highimpactissues}},],
-          backgroundColor: [
-             '#22af47', '#ffbf36', '#f83f37'
-          ],
-          label: 'Governance and Control Issues Criticality'
-        }],
-        labels: ["Low Impact","Medium Impact","High Impact"]
-      },
-      options: {
-        responsive: true
-      }
-    };
-
-    var config_status = {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: [{{CLOSED}},{{PARTIALLY_IMPLEMENTED}},{{PENDING}}],
-          backgroundColor: [
-             '#22af47', '#ffbf36', '#f83f37'
-          ],
-          label: 'Issues per Status of Completion'
-        }],
-        labels: ["Closed","Partial","Pending"]
-      },
-      options: {
-        responsive: true,
-        indexAxis: 'x'
-      }
-    };
-
-
-<!--    risk managements portion-->
-    var configRiskImpact = {
-      type: 'pie',
-      data: {
-        datasets: [{
-          data: [{{risklowimpactissues}},{{riskmediumimpactissues}},{{riskhighimpactissues}},],
-          backgroundColor: [
-             '#22af47', '#ffbf36', '#f83f37'
-          ],
-          label: 'No. of Risk Per Level of Impact'
-        }],
-        labels: ["Low Impact","Medium Impact","High Impact"]
-      },
-      options: {
-        responsive: true
-      }
-    };
-
-    var configRiskOccurance = {
-      type: 'bar',
-      data: {
-        datasets: [{
-          data: [{{risklikelihoodlow}},{{risklikelihoodmoderate}},{{risklikelihoodhigh}},],
-          backgroundColor: [
-             '#22af47', '#ffbf36', '#f83f37'
-          ],
-          label: 'No. of Risks Per Chances of Occurances'
-        }],
-        labels: ["Low","Medium","High"]
-      },
-      options: {
-        responsive: true
-
-      }
-    };
-
-
-    window.onload = function() {
-      var ctx_status = document.getElementById('bar-chart_status').getContext('2d');
-      window.myPie = new Chart(ctx_status, config_status);
-      var ctx = document.getElementById('pie-chart').getContext('2d');
-      window.myPie = new Chart(ctx, config);
-
-<!--      Risk Management-->
-
-      var ctx_status = document.getElementById('pie-chart_risks_impact').getContext('2d');
-      window.myPie = new Chart(ctx_status, config_status);
-      var ctx = document.getElementById('bar-chart_chances_of_occurance').getContext('2d');
-      window.myPie = new Chart(ctx, configRiskOccurance);
-
-    };
-
-
-
-
-</script>
 
 <!-- Main Content -->
 <div class="hk-pg-wrapper">
@@ -121,35 +27,37 @@
 
                 <div class="hk-row">
                     <div class="col-lg-4">
-                        <div class="card overflow-hide border-0">
-                            <div class="card-body pa-0">
-                                <div class="">
-                                    <div class="fadeOut item img-background overlay-wrap"
-                                         style="background-image:url(dist/img/slide1.jpg);">
-                                        <div class="position-relative z-index-2 pa-20">
-                                            <div class="position-relative text-white mnh-225p">
-                                                <p>Very easy to use. Thanks to design, we've just launched our 5th
-                                                    website! Thank you for making it painless, pleasant and most of all
-                                                    hassle free! Just what I was looking for.</p>
-                                                <div class="media position-absolute b-0 l-0 align-items-center">
-                                                    <div class="media-img-wrap d-flex mr-15">
-                                                        <div class="avatar avatar-sm">
-                                                            <span class="avatar-text avatar-text-inv-pink rounded-circle"><span
-                                                                    class="initial-wrap"><span>ZC</span></span></span>
+                        <a href="/employee/{{x.id}}/">
+                            <div class="card overflow-hide border-0">
+                                <div class="card-body pa-0">
+                                    <div class="">
+                                        <div class="fadeOut item img-background overlay-wrap"
+                                             style="background-image:url({{ x.photo.url }});">
+                                            <div class="position-relative z-index-2 pa-20">
+                                                <div class="position-relative text-white mnh-225p">
+                                                    <p>{% if x.gender == 'male' %}Mr.{% elif x.gender == 'female'%}Ms.{% endif %}
+                                                        {{x.name_user}} works in the department of {{x.personsdept}}.
+                                                        Hails from {{x.address}} </p>
+                                                    <div class="media position-absolute b-0 l-0 align-items-center">
+                                                        <div class="media-img-wrap d-flex mr-15">
+                                                            <div class="avatar avatar-sm">
+                                                            <span class="avatar-text avatar-text-inv-success rounded-circle"><span
+                                                                    class="initial-wrap"><span>{{ x.last_name|make_list|first}}{{ x.first_name|make_list|first}}</span></span></span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <span class="d-block font-14 font-weight-500">Zuck Chan</span>
-                                                        <span class="d-block font-12">Design Lead, Hencework</span>
+                                                        <div class="media-body">
+                                                            <span class="d-block font-14 font-weight-500">{{ x.last_name }} {{ x.first_name }}</span>
+                                                            <span class="d-block font-12">{{ x.personsdept }}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="bg-overlay bg-trans-dark-50"></div>
                                         </div>
-                                        <div class="bg-overlay bg-trans-dark-50"></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
 
                         <div class="card">
                             <div class="card-header card-header-action">
@@ -382,34 +290,11 @@
                                 <div class="loader-pendulums"></div>
                             </div>
                             <div class="card-header card-header-action">
-                                <h6>Double Click Campaigning Stats</h6>
-                                <div class="d-flex align-items-center card-action-wrap">
-                                    <a href="#" class="inline-block refresh mr-15">
-                                        <i class="ion ion-md-radio-button-off"></i>
-                                    </a>
-                                    <div class="inline-block dropdown">
-                                        <a class="dropdown-toggle no-caret" data-toggle="dropdown" href="#"
-                                           aria-expanded="false" role="button"><i class="ion ion-md-more"></i></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Separated link</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h6>Ratings per person</h6>
+
                             </div>
                             <div class="card-body">
-                                <div class="hk-legend-wrap mb-20">
-                                    <div class="hk-legend">
-                                        <span class="d-10 bg-primary rounded-circle d-inline-block"></span><span>Click Rate</span>
-                                    </div>
-                                    <div class="hk-legend">
-                                        <span class="d-10 bg-neon-light-1 rounded-circle d-inline-block"></span><span>Impression</span>
-                                    </div>
-                                </div>
-                                <div id="e_chart_3" class="echart" style="height: 240px;"></div>
+                                <canvas id="bar_chart_status"></canvas>
                             </div>
                         </div>
 
@@ -644,39 +529,41 @@
         </div>
         <div class="row">
             <div class="col-xl-12">
-
+                <h3>Other Employees . . .
+                </h3><br/>
                 <div class="hk-row">
                     {% for x in people %}
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <a href="/employee/{{x.id}}/">
-                        <div class="card overflow-hide border-0">
-                            <div class="card-body pa-0">
-                                <div class="">
-                                    <div class="fadeOut item img-background overlay-wrap"
-                                         style="background-image:url({{ x.photo.url }});">
-                                        <div class="position-relative z-index-2 pa-20">
-                                            <div class="position-relative text-white mnh-225p">
-                                                <p>{% if x.gender == 'male' %}Mr.{% elif x.gender == 'female' %}Ms.{% endif %}
-                                                    {{x.name_user}} works in the department of {{x.personsdept}}. Hails from {{x.address}} </p>
-                                                <div class="media position-absolute b-0 l-0 align-items-center">
-                                                    <div class="media-img-wrap d-flex mr-15">
-                                                        <div class="avatar avatar-sm">
+                            <div class="card overflow-hide border-0">
+                                <div class="card-body pa-0">
+                                    <div class="">
+                                        <div class="fadeOut item img-background overlay-wrap"
+                                             style="background-image:url({{ x.photo.url }});">
+                                            <div class="position-relative z-index-2 pa-20">
+                                                <div class="position-relative text-white mnh-225p">
+                                                    <p>{% if x.gender == 'male' %}Mr.{% elif x.gender == 'female'%}Ms.{% endif %}
+                                                        {{x.name_user}} works in the department of {{x.personsdept}}.
+                                                        Hails from {{x.address}} </p>
+                                                    <div class="media position-absolute b-0 l-0 align-items-center">
+                                                        <div class="media-img-wrap d-flex mr-15">
+                                                            <div class="avatar avatar-sm">
                                                             <span class="avatar-text avatar-text-inv-success rounded-circle"><span
                                                                     class="initial-wrap"><span>{{ x.last_name|make_list|first}}{{ x.first_name|make_list|first}}</span></span></span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <span class="d-block font-14 font-weight-500">{{ x.last_name }} {{ x.first_name }}</span>
-                                                        <span class="d-block font-12">{{ x.personsdept }}</span>
+                                                        <div class="media-body">
+                                                            <span class="d-block font-14 font-weight-500">{{ x.last_name }} {{ x.first_name }}</span>
+                                                            <span class="d-block font-12">{{ x.personsdept }}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="bg-overlay bg-trans-dark-50"></div>
                                         </div>
-                                        <div class="bg-overlay bg-trans-dark-50"></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </a></div>
                     {% endfor %}
                 </div>
@@ -688,32 +575,40 @@
 </div>
 <!-- /Container -->
 
-<!-- Footer -->
-<div class="hk-footer-wrap container">
-    <footer class="footer">
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <p>Pampered by<a href="https://hencework.com/" class="text-dark" target="_blank">Hencework</a> ©
-                    2019</p>
-            </div>
-            <div class="col-md-6 col-sm-12">
-                <p class="d-inline-block">Follow us</p>
-                <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
-                        class="btn-icon-wrap"><i class="fa fa-facebook"></i></span></a>
-                <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
-                        class="btn-icon-wrap"><i class="fa fa-twitter"></i></span></a>
-                <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
-                        class="btn-icon-wrap"><i class="fa fa-google-plus"></i></span></a>
-            </div>
-        </div>
-    </footer>
-</div>
-<!-- /Footer -->
-</div>
-<!-- /Main Content -->
 
 </div>
 <!-- /HK Wrapper -->
+
+<script>
+
+    var config_status ={
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [{% for i in ratings %}{{i}},{% endfor %}],
+          backgroundColor: [{% for i in rating_range %}'#0C'+{{9}}+{{i}}+{{4}}+'C',{% endfor %}
+            '#FF5733'
+          ],
+          label: 'Ratings'
+        }],
+        labels: [{% for i in labels %}"{{i}}",{% endfor %}]
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx_status = document.getElementById('bar_chart_status').getContext('2d');
+      window.myPie = new Chart(ctx_status, config_status);
+
+    };
+
+
+
+
+
+</script>
 
 {% endblock %}
 
