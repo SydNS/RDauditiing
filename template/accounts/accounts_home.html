@@ -27,27 +27,27 @@
 
                 <div class="hk-row">
                     <div class="col-lg-4">
-                        <a href="/employee/{{x.id}}/">
+                        <a href="/employee/{{person.id}}/">
                             <div class="card overflow-hide border-0">
                                 <div class="card-body pa-0">
                                     <div class="">
                                         <div class="fadeOut item img-background overlay-wrap"
-                                             style="background-image:url({{ x.photo.url }});">
+                                             style="background-image:url({{ person.photo.url }});">
                                             <div class="position-relative z-index-2 pa-20">
                                                 <div class="position-relative text-white mnh-225p">
-                                                    <p>{% if x.gender == 'male' %}Mr.{% elif x.gender == 'female'%}Ms.{% endif %}
-                                                        {{x.name_user}} works in the department of {{x.personsdept}}.
-                                                        Hails from {{x.address}} </p>
+                                                    <p>{% if person.gender == 'male' %}Mr.{% elif person.gender == 'female'%}Ms.{% endif %}
+                                                        {{person.name_user}} works in the department of {{person.personsdept}}.
+                                                        Hails from {{person.address}} </p>
                                                     <div class="media position-absolute b-0 l-0 align-items-center">
                                                         <div class="media-img-wrap d-flex mr-15">
                                                             <div class="avatar avatar-sm">
                                                             <span class="avatar-text avatar-text-inv-success rounded-circle"><span
-                                                                    class="initial-wrap"><span>{{ x.last_name|make_list|first}}{{ x.first_name|make_list|first}}</span></span></span>
+                                                                    class="initial-wrap"><span>{{ person.last_name|make_list|first}}{{ person.first_name|make_list|first}}</span></span></span>
                                                             </div>
                                                         </div>
                                                         <div class="media-body">
-                                                            <span class="d-block font-14 font-weight-500">{{ x.last_name }} {{ x.first_name }}</span>
-                                                            <span class="d-block font-12">{{ x.personsdept }}</span>
+                                                            <span class="d-block font-14 font-weight-500">{{ person.last_name }} {{ person.first_name }}</span>
+                                                            <span class="d-block font-12">{{ person.personsdept }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
