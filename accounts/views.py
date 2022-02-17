@@ -227,7 +227,8 @@ def profiledetails(request):
 
 # noinspection PyUnresolvedReferences
 def accountshome(request):
-    people = models.Person.objects.all()
+    people = models.Person.objects.all().exclude(name_user=request.user)
+    person = models.Person.objects.get(name_user=request.user)
     ratings = models.RatingUser.objects.all().order_by('-rate_level')[:5]
     labels = []
     data = []
@@ -235,4 +236,4 @@ def accountshome(request):
         labels.append(rate.person)
         data.append(rate.rate_level)
     return render(request, 'accounts/accounts_home.html', {'label': labels, 'ratings': data, 'rating_range': range(4),
-                                                           'people': people})
+                                                           'people': people,'person': person,})
