@@ -203,26 +203,30 @@ def profiledetails(request):
     elif request.method == 'GET':
         try:
             profile_deatils = models.Person.objects.get(name_user=request.user)
-            profile_form = ProfileForm(initial=profile_deatils)
-            print(profile_deatils)
+            try:
+                profile_form = ProfileForm(initial=profile_deatils)
+                print(profile_deatils)
 
-            return render(request, 'accounts/person.html', {
-                'person': profile_deatils,
-                'profile_form': profile_form,
-                'mod_profile': "Edit Profile",
-                'age': age
-            })
+                return render(request, 'accounts/person.html', {
+                    'person': profile_deatils,
+                    'profile_form': profile_form,
+                    'mod_profile': "Edit Profile",
+                    'age': age
+                })
 
+            except:
+                profile_deatils = models.Person.objects.get(name_user=request.user)
+                # print(profile_deatils, profile_deatils.name_user, profile_deatils.last_name, profile_deatils.first_name,
+                #       profile_deatils.photo, )
+                profile_form = ProfileForm(initial={'name_user': request.user})
+                return render(request, 'accounts/person.html', {
+                    'person': profile_deatils,
+                    'profile_form': profile_form,
+                    'mod_profile': "Create Profile",
+                })
         except:
-            profile_deatils = models.Person.objects.get(name_user=request.user)
-            print(profile_deatils, profile_deatils.name_user, profile_deatils.last_name, profile_deatils.first_name,
-                  profile_deatils.photo, )
-            # profile_form = ProfileForm(initial=profile_deatils)
-            return render(request, 'accounts/person.html', {
-                'person': profile_deatils,
-                # 'profile_form': profile_form,
-                'mod_profile': "Create Profile",
-            })
+            return redirect('accounts:profilesetup')
+
 
 
 # noinspection PyUnresolvedReferences
