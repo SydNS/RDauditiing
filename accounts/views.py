@@ -246,7 +246,10 @@ def accountshome(request):
     else:
         person = models.Person.objects.get(name_user=request.user)
         ratings = models.RatingUser.objects.all().order_by('-rate_level')[:5]
-        my_rating = models.RatingUser.objects.get(id=person.id)
+        try:
+            my_rating = models.RatingUser.objects.get(id=person.id)
+        except:
+            my_rating={}
         labels = []
         data = []
         for rate in ratings:
