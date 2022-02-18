@@ -145,7 +145,7 @@
                 </div>
 
                 <section class="hk-sec-wrapper">
-                    <h5 class="hk-sec-title">Employee</h5>
+                    <h5 class="hk-sec-title">Employee (printable)</h5>
 
                     <div class="row">
                         <div class="col-sm">
@@ -164,8 +164,10 @@
                                     <tbody>
                                     {% for person in people %}
                                     <tr>
-                                        <td><a href="/employee/{{person.id}}"> <img src="{{ person.photo.url }}" class="avatar-img avatar-xs rounded-circle d-10" > </a></td>
-                                        <td><a href="/employee/{{person.id}}">{{ person.first_name }} {{ person.last_name }}</a></td>
+                                        <td><a href="/employee/{{person.id}}"> <img src="{{ person.photo.url }}"
+                                                                                    class="avatar-img avatar-xs rounded-circle d-10">
+                                        </a></td>
+                                        <td><a href="/employee/{{person.id}}">{{ person.first_name }} {{person.last_name }}</a></td>
                                         <td>{{ person.gender|title }}</td>
                                         <td><span class="badge
                                             {% if person.personsdept.criticality == 'low'  %}
@@ -189,11 +191,99 @@
                         <!-- /Row -->
                     </div>
                 </section>
+                <section class="hk-sec-wrapper">
+                    <h5 class="hk-sec-title">Employee</h5>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h3>Employees . . .
+                            </h3><br/>
+                            <div class="hk-row">
+                                {% for x in people %}
+                                <div class="col-lg-3">
+                                    <a href="/employee/{{x.id}}/">
+                                        <div class="card overflow-hide border-0">
+                                            <div class="card-body pa-0">
+                                                <div class="">
+                                                    <div class="fadeOut item img-background overlay-wrap"
+                                                         style="background-image:url({{ x.photo.url }});">
+                                                        <div class="position-relative z-index-2 pa-20">
+                                                            <div class="position-relative text-white mnh-225p">
+                                                                <p>{% if x.gender == 'male' %}Mr.{% elif x.gender == 'female'%}Ms.{% endif %}
+                                                                    {{x.name_user}} works in the department of
+                                                                    {{x.personsdept}}.
+                                                                    Hails from {{x.address}} </p>
+                                                                <div class="media position-absolute b-0 l-0 align-items-center">
+                                                                    <div class="media-img-wrap d-flex mr-15">
+                                                                        <div class="avatar avatar-sm">
+                                                            <span class="avatar-text avatar-text-inv-success rounded-circle"><span
+                                                                    class="initial-wrap"><span>{{ x.last_name|make_list|first}}{{ x.first_name|make_list|first}}</span></span></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="media-body">
+                                                                        <span class="d-block font-14 font-weight-500">{{ x.last_name }} {{ x.first_name }}</span>
+                                                                        <span class="d-block font-12">{{ x.personsdept }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="bg-overlay bg-trans-dark-50"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a></div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="hk-sec-wrapper">
+                    <h5 class="hk-sec-title align-items-center"><u>Graph Showing Rating Per Person</u></h5>
+                    <div class="row">
+                                <canvas id="bar_chart_status"></canvas>
+                    </div>
+                </section>
+
                 <!-- /Container -->
 
         </div>
-        <!-- /Main Content -->
-        {% include 'verticalnavbar.html' %}
 
+<script>
+
+    var config_status ={
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [{% for i in ratings %}{{i.rate_level}},{% endfor %}],
+          backgroundColor: [{% for i in rating_range %}'#0C'+{{9}}+{{i.rate_level}}+{{4}}+'C',{% endfor %}
+            '#FF5733'
+          ],
+          label: 'Ratings'
+        }],
+        labels: [{% for i in ratings %}"{{i.person}}",{% endfor %}]
+      },
+      options: {
+               scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    window.onload = function() {
+      var ctx_status = document.getElementById('bar_chart_status').getContext('2d');
+      window.myPie = new Chart(ctx_status, config_status);
+
+    };
+
+
+
+
+
+</script>
         {% endblock %}
 
