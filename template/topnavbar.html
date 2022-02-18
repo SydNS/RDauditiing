@@ -15,8 +15,12 @@
                     class="feather-icon"><i data-feather="search"></i></span></a>
         </li>
         <li class="nav-item">
-            <a id="" class="nav-link nav-link-hover" href="javascript:void(0);"><span
+            <a id="#" class="nav-link nav-link-hover" href="javascript:void(0);"><span
                     class="">Employees</span></a>
+        </li>
+        <li class="nav-item">
+            <a id="#" class="nav-link nav-link-hover" href="/profiledetails"><span
+                    class="">Profile</span></a>
         </li>
         <li class="nav-item">
             <a id="settings_toggle_btn" class="nav-link nav-link-hover" href="javascript:void(0);"><span
@@ -33,15 +37,8 @@
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-                <a class="dropdown-item" href="/profiledetails"><i
-                        class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
 
-                <div class="dropdown-divider"></div>
-                <div class="sub-dropdown-menu show-on-hover">
-                    <a href="#" class="dropdown-toggle dropdown-item no-caret"><i
-                            class="zmdi zmdi-check text-success"></i>Online</a>
 
-                </div>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout"><i
                         class="dropdown-icon zmdi zmdi-power"></i><span>                 {{request.user.username}}
