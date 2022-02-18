@@ -15,8 +15,8 @@
         <!-- Title -->
         <div class="hk-pg-header align-items-top">
             <div>
-                <h2 class="hk-pg-title font-weight-600 mb-10">Welcome Back!</h2>
-                <p>Questions about onboarding lead data? <a href="#">Learn more.</a></p>
+                <h2 class="hk-pg-title font-weight-600 mb-10">Welcome !</h2>
+                <p>below is information concerning your account? <a href="/employee/{{person.id}}/">Learn more.</a></p>
             </div>
         </div>
         <!-- /Title -->
@@ -217,69 +217,44 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header card-header-action">
-                                <h6>Ratings & Reviews</h6>
-                                <div class="d-flex align-items-center card-action-wrap">
-                                    <button class="btn btn-secondary btn-sm">Rate the template</button>
-                                </div>
+                                <h6>Your Rating</h6>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-6">
                                         <div class="d-flex align-items-center h-100 justify-content-center text-center">
                                             <div>
                                                 <div class="d-flex align-items-center  justify-content-center text-dark">
-                                                    <span class="counter-anim display-2">4.4</span>
+                                                    <span class="counter-anim display-2 {% if  my_rating <= 4 %} text-danger {% elif  my_rating >= 5 and my_rating <= 7 %}  text-warning {% elif  my_rating >= 8 and my_rating <= 10 %} text-success {% endif %} ">{{my_rating}}</span>
                                                     <span class="review-star starred ml-10">
 																<span class="feather-icon"><i
                                                                         data-feather="star"></i></span>
 															</span>
                                                 </div>
-                                                <span class="font-18">949 ratings & 18 reviews</span>
+                                                <span class="font-18"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-7">
-                                        <div class="progress-wrap lb-side-left mt-5">
-                                            <div class="progress-lb-wrap mb-10">
-                                                <label class="progress-label mnw-50p">5.0<i
-                                                        class="zmdi zmdi-star text-light-20 ml-5"></i></label>
-                                                <div class="progress progress-bar-rounded progress-bar-xs">
-                                                    <div class="progress-bar bg-primary w-85" role="progressbar"
-                                                         aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="col-sm-6">
+                                        <div class="d-flex align-items-center h-100 justify-content-center text-center">
+
+
+                                                <div class="pa-15">
+                                                <span class="d-block display-6 text-dark mb-5">
+                                                    <span class="badge
+                                            {% if person.personsdept.criticality == 'low'  %}
+                                            badge-success
+                                            {% elif person.personsdept.criticality == 'medium' %}
+                                            badge-warning
+                                            {% else %}
+                                            badge-danger
+                                            {% endif %}
+                                            ">{{ person.personsdept.criticality }} Criticality</span>
+
+                                                </span>
+                                                    <span class="d-block text-capitalize font-14">{{ person.personsdept }} Department </span>
                                                 </div>
-                                            </div>
-                                            <div class="progress-lb-wrap mb-10">
-                                                <label class="progress-label mnw-50p">4.0<i
-                                                        class="zmdi zmdi-star text-light-20 ml-5"></i></label>
-                                                <div class="progress progress-bar-rounded progress-bar-xs">
-                                                    <div class="progress-bar bg-brown-light-1 w-75" role="progressbar"
-                                                         aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                            <div class="progress-lb-wrap mb-10">
-                                                <label class="progress-label mnw-50p">3.0<i
-                                                        class="zmdi zmdi-star text-light-20 ml-5"></i></label>
-                                                <div class="progress progress-bar-rounded progress-bar-xs">
-                                                    <div class="progress-bar bg-brown-light-2 w-65" role="progressbar"
-                                                         aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                            <div class="progress-lb-wrap mb-10">
-                                                <label class="progress-label mnw-50p">2.0<i
-                                                        class="zmdi zmdi-star text-light-20 ml-5"></i></label>
-                                                <div class="progress progress-bar-rounded progress-bar-xs">
-                                                    <div class="progress-bar bg-brown-light-3 w-55" role="progressbar"
-                                                         aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                            <div class="progress-lb-wrap mb-10">
-                                                <label class="progress-label mnw-50p">1.0<i
-                                                        class="zmdi zmdi-star text-light-20 ml-5"></i></label>
-                                                <div class="progress progress-bar-rounded progress-bar-xs">
-                                                    <div class="progress-bar bg-danger w-25" role="progressbar"
-                                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -591,7 +566,7 @@
           ],
           label: 'Ratings'
         }],
-        labels: [{% for i in labels %}"{{i}}",{% endfor %}]
+        labels: [{% for i in label %}"{{i}}",{% endfor %}]
       },
       options: {
         responsive: true
