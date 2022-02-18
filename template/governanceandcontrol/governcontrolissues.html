@@ -180,9 +180,6 @@
                                            class="table table-hover table-responsive w-100 display pb-30">
                                         <thead>
                                         <tr>
-                                            <!--                                            Audit Project Name, Quarter, Audit Project Type, Issue Title, Criticality,-->
-                                            <!--                                            Root Cause Analysis, Recommendation, Agreed Implementation Date, Ageing - -->
-                                            <!--                                            Days, Owner, Final Approver, Audit Project Code,-->
                                             <th>Name</th>
                                             <th>Qtr</th>
                                             <th>Type</th>
@@ -297,15 +294,6 @@
                                             <th>Final Approver</th>
                                         </tr>
                                         </thead>
-                                        <!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                        <!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                        <!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                        <!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                        <!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                        <!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
-                                        <!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                        <!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                        <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
 
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
