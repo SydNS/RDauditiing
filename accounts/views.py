@@ -228,7 +228,6 @@ def profiledetails(request):
             return redirect('accounts:profilesetup')
 
 
-
 # noinspection PyUnresolvedReferences
 def accountshome(request):
     people = models.Person.objects.all().exclude(name_user=request.user)
@@ -248,14 +247,15 @@ def accountshome(request):
         ratings = models.RatingUser.objects.all().order_by('-rate_level')[:5]
         try:
             my_rating = models.RatingUser.objects.get(id=person.id)
+            governanceandcontrol = Governance_And_Control.objects.filter(owner=request.user.personsdept)
         except:
-            my_rating={}
+            my_rating = {}
+            governanceandcontrol = {}
         labels = []
         data = []
         for rate in ratings:
             labels.append(rate.person)
             data.append(rate.rate_level)
         return render(request, 'accounts/accounts_home.html',
-                      {'label': labels, 'ratings': data, 'rating_range': range(4),'my_rating': my_rating,
-                       'people': people, 'person': person, })
-
+                      {'label': labels, 'ratings': data, 'rating_range': range(4), 'my_rating': my_rating,
+                       'people': people, 'person': person,'consolidateddata': governanceandcontrol, })
