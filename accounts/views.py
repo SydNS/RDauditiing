@@ -174,8 +174,8 @@ def profileEditing(request, id):
             "people_in_same_address": people_in_same_address,
         })
     except:
-        profile_form = ProfileForm(
-            initial={'name_user': request.user, 'last_name': 'Last Name', 'first_name': 'First Name', 'photo': '', })
+        personEdit = models.Person.objects.get(id=id)
+        profile_form = ProfileForm(instance=personEdit)
         return render(request, 'accounts/edit_person.html', {
             'form': profile_form,
         })
