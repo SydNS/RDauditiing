@@ -12,15 +12,15 @@ class Auditor_of_auditors(models.Model):
     ASSESSMENT = (
         ('GENERALLY_CONFORMS', 'GENERALLY_CONFORMS'),
         ('PARTIALLY_CONFORMS', 'PARTIALLY_CONFORMS'),
-        ('DOES_NOT_CONFORMS', 'GENERALLY_CONFORMS'),
+        ('DOES_NOT_CONFORMS', 'DOES_NOT_CONFORMS'),
     )
-    internal_audit_leading_practices = models.CharField(db_column='Internal_audit_leading_Practices', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    iia_standards = models.CharField(db_column='IIA_Standards', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    current_status_at_xy = models.CharField(choices=CURRENT_STATUS_XY,db_column='Current_Status_at_XY', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    assessment = models.CharField(choices=ASSESSMENT,db_column='Assessment', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    recommendations = models.CharField(db_column='Recommendations', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    recommendation_state = models.CharField(choices=CURRENT_STATUS_XY,db_column='Recommendation_State', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    internal_audit_leading_practices = models.TextField(db_column='Internal_audit_leading_Practices', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    iia_standards = models.TextField(db_column='IIA_Standards', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    current_status_at_xy = models.CharField(choices=CURRENT_STATUS_XY,db_column='Current_Status_at_XY', max_length=100, blank=False, null=True)  # Field name made lowercase.
+    assessment = models.CharField(choices=ASSESSMENT,db_column='Assessment', max_length=100, blank=False, null=True)  # Field name made lowercase.
+    recommendations = models.TextField(db_column='Recommendations', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    action_plan = models.TextField(db_column='Action_Plan', max_length=500, blank=True, null=True)  # Field name made lowercase.
+    recommendation_state = models.CharField(choices=CURRENT_STATUS_XY,db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.
     agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
     revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.
     last_status_update = models.CharField(db_column='Last_Status_Update', max_length=100, blank=True, null=True)  # Field name made lowercase.
