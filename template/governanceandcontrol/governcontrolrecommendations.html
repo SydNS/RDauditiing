@@ -103,17 +103,12 @@
                             >Pending Recom'n : {{PARTIALLY_IMPLEMENTED}}</span
                             >
                                         </div>
-                                        <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
-                            >
-                                        </div>
                                     </div>
                                     <div>
                                         <small class="text-green">Closed Recom'n :
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-success counter-anim">{{CLOSED}}</span></span></small>
-                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
+                                        <small class="d-block">Partially Completed : {{PARTIALLY_IMPLEMENTED}} </small>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +147,7 @@
 <!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
 <!--                            export table options.</p>-->
                         <div class="row">
-                            <div class="col-sm">
+                            <div class="col-sm-12">
                                 <div class="table-wrap">
                                     <table id="datable_3"
                                            class="table table-hover table-responsive w-100 display pb-30">
@@ -197,14 +192,14 @@
 <!--                                            <th>Ageing Days</th>-->
 <!--                                            <th>Quarter</th>-->
 
-                                            <td><a href="#  ">{{singleinfo.audit_project_name}}</a></td>
-                                            <td><a href="#">{{singleinfo.issue_title}}</a></td>
-                                            <td><a href="#">{{singleinfo.recommendation}}</a></td>
-                                            <td><a href="#">{{singleinfo.action_plan}}</a></td>
-                                            <td><a href="#">{{singleinfo.recommendation_state}}</a></td>
-                                            <td><a href="#">{{singleinfo.agreed_implementation_date}}</a></td>
-                                            <td><a href="#">{{singleinfo.ageing_days}}</a></td>
-                                            <td><a href="#">{{singleinfo.quarter}}</a></td>
+                                            <td><a href="/governanceandcontrolprojects/{{singleinfo.id}}" class="text-dark">{{singleinfo.audit_project_name}}</a></td>
+                                            <td>{{singleinfo.issue_title}}</td>
+                                            <td>{{singleinfo.recommendation}}</td>
+                                            <td>{{singleinfo.action_plan}}</td>
+                                            <td>{{singleinfo.recommendation_state}}</td>
+                                            <td>{{singleinfo.agreed_implementation_date}}</td>
+                                            <td>{{singleinfo.ageing_days}}</td>
+                                            <td>{{singleinfo.quarter}}</td>
 
 
 
@@ -212,18 +207,6 @@
                                         {% endfor %}
 
                                         </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th>Audit Project Name</th>
-                                            <th>Issue Title</th>
-                                            <th>Recommendations</th>
-                                            <th>Action Plan</th>
-                                            <th>Recommendation State</th>
-                                            <th>Agreed Implementation Date</th>
-                                            <th>Ageing Days</th>
-                                            <th>Quarter</th>
-                                        </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>

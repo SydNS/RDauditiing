@@ -232,7 +232,7 @@
                         <!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
                         <!--                            export table options.</p>-->
                         <div class="row">
-                            <div class="col-sm">
+                            <div class="col-sm-12">
                                 <div class="table-wrap">
                                     <table id="datable_3"
                                            class="table table-hover table-responsive w-100 display pb-30">
@@ -262,7 +262,7 @@
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td><a href="/governanceandcontrolprojects/{{singleinfo.id}}">{{singleinfo.audit_project_name}}</a></td>
+                                            <td><a href="/governanceandcontrolprojects/{{singleinfo.id}}" class="text-dark">{{singleinfo.audit_project_name}}</></td>
                                             <td>{{singleinfo.quarter}}</td>
                                             <td>{{singleinfo.audit_project_type}}</td>
                                             <td>{{singleinfo.issue_title}}</td>
@@ -283,28 +283,6 @@
                                         {% endfor %}
 
                                         </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <!--Audit Project Code	Audit Project Name	Quarter	Audit Project Type	Issue Title	Criticality	Root Cause Analysis	Recommendation
-                                                Action Plan	Recommendation State	Agreed Implementation Date	Revised Implementation Date
-                                                Last Status Update	Ageing - Days	Actual Implementation Date	Owner	Final Approver									                                        &ndash;&gt;-->
-                                            <th>Name</th>
-                                            <th>Qtr</th>
-                                            <th>Type</th>
-                                            <th>Issue Title</th>
-                                            <th>Criticality</th>
-                                            <th>R't Cause</th>
-                                            <th>Recom'n</th>
-                                            <th>Act'n Plan</th>
-                                            <th>Recom'n State</th>
-                                            <th>Impl'n Date</th>
-                                            <th>Revised Impl'n Date</th>
-                                            <th>AgeDays</th>
-                                            <th>Actual Impl'n Date</th>
-                                            <th>Owner</th>
-                                            <th>Final Approver</th>
-                                        </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>

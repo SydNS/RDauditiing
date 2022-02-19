@@ -187,21 +187,18 @@
                     </section>
                     {% else %}
                     <section class="hk-sec-wrapper">
-                        <h5 class="hk-sec-title">Audit Projects</h5>
+                        <h5 class="hk-sec-title">Governance and Control Projects</h5>
                         <p>Kindly export in the format of your choosing</p><br>
 
                         <!--                        <p class="mb-40">Use buttons: <code>['copy', 'csv', 'excel', 'pdf', 'print']</code> to add-->
                         <!--                            export table options.</p>-->
                         <div class="row">
-                            <div class="col-sm">
-                                <div class="table-wrap">
+                            <div class="col-sm-12">
+                                <div class="table-lg">
                                     <table id="datable_3"
                                            class="table table-hover table-responsive w-100 display pb-30">
                                         <thead>
                                         <tr>
-                                            <!-- Audit Project Code,	Audit Project Name,	Quarter,	Audit Project Type,	Issue Title, -->
-
-
                                             <th>Audit Project Code</th>
                                             <th>Audit Project Name</th>
                                             <th>Quarter</th>
@@ -211,21 +208,10 @@
                                             <th>Ageing Days</th>
                                         </tr>
                                         </thead>
-                                        <!--    action_plan = models.CharField(db_column='Action_Plan', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                        <!--    recommendation_state = models.CharField(db_column='Recommendation_State', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                        <!--    agreed_implementation_date = models.DateField(db_column='Agreed_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                        <!--    revised_implementation_date = models.DateField(db_column='Revised_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                        <!--    last_status_update = models.DateField(db_column='Last_Status_Update', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                        <!--    ageing_days = models.FloatField(db_column='Ageing__Days',max_length=10, blank=False, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.-->
-                                        <!--    actual_implementation_date = models.DateField(db_column='Actual_Implementation_Date', max_length=100, blank=True, null=True)  # Field name made lowercase.-->
-                                        <!--    owner = models.CharField(db_column='Owner', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-                                        <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
-
-
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td><a href="/governanceandcontrolprojects/{{singleinfo.id}}">{{singleinfo.audit_project_code}}</a></td>
+                                            <td><a href="/governanceandcontrolprojects/{{singleinfo.id}}" class="text-dark">{{singleinfo.audit_project_code}}</a></td>
                                             <td>{{singleinfo.audit_project_name}}</td>
                                             <td>{{singleinfo.quarter}}</td>
                                             <td>{{singleinfo.audit_project_type}}</td>
