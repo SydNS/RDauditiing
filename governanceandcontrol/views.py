@@ -27,24 +27,24 @@ def dashboard(request):
 
                           # ============# governanceandcontrol========================================
                           "gncojbects": {},
-                          "gncobjnumber": 0,
+                          "gncobjnumber": {},
                           # issues
-                          "mediumimpactissues": 5,
-                          "highimpactissues": 10,
-                          "lowimpactissues": 20,
+                          "mediumimpactissues": {},
+                          "highimpactissues": {},
+                          "lowimpactissues": {},
 
                           # highimpactprojects
                           "highimpactprojects": {},
 
                           # likelihood
-                          "risklikelihoodmoderate": 40,
-                          "risklikelihoodlow": 20,
-                          "risklikelihoodhigh": 60,
+                          "risklikelihoodmoderate": {},
+                          "risklikelihoodlow": {},
+                          "risklikelihoodhigh": {},
 
                           # reommendations
-                          "PARTIALLY_IMPLEMENTED": 15,
-                          "PENDING": 20,
-                          "CLOSED": 10,
+                          "PARTIALLY_IMPLEMENTED": {},
+                          "PENDING": {},
+                          "CLOSED": {},
                           "percentagecompleted": 0,
 
                           # reommendations
@@ -55,9 +55,9 @@ def dashboard(request):
                           "riskobj": {},
                           "riskobjnumber": 0,
                           # issues
-                          "riskmediumimpactissues": 10,
-                          "riskhighimpactissues": 40,
-                          "risklowimpactissues":20,
+                          "riskmediumimpactissues": {},
+                          "riskhighimpactissues": {},
+                          "risklowimpactissues": {},
 
                           "AoAobj": {},
                           "Deptobj": {},
@@ -99,10 +99,12 @@ def dashboard(request):
 
         # ageing days total
 
-        for totaldays in gncobj:
-            totaldays = +totaldays.ageing_days
+        totaldays=0
+        for x in gncobj:
+            totaldays += x.ageing_days
 
-        # ===========================================# riskmanagement===============================================================================
+        # ===========================================#
+        # riskmanagement===============================================================================
 
         riskobj = RiskManagement.objects.all()
         riskobjnumber = RiskManagement.objects.all().count()
@@ -133,9 +135,14 @@ def dashboard(request):
 
         AoAobj = Auditor_of_auditors.objects.all()
 
-        Deptobj = Dept.objects.all()
-        Personobj = Person.objects.all()
-        Gradingobj = GradingUser.objects.all()
+        try:
+            Deptobj = Dept.objects.all()
+            Personobj = Person.objects.all()
+            Gradingobj = GradingUser.objects.all()
+        except:
+            Deptobj={}
+            Personobj={}
+            Gradingobj={}
 
         # info =
         return render(request, 'governanceandcontrol/index.html', {
@@ -260,9 +267,10 @@ def Governcontrolprojects(request):
             percentagecompleted = 0
 
         # ageing days total
-
-        for totaldays in consolidatedgncobj:
-            totaldays = +totaldays.ageing_days
+        totaldays=0
+        for x in consolidatedgncobj:
+            totaldays +=x.ageing_days
+        print(totaldays)
 
         return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
                       context={
@@ -344,29 +352,31 @@ def GoverncontrolIssues(request):
 
         # ageing days total
 
-        for totaldays in consolidatedgncobj:
-            totaldays = +totaldays.ageing_days
+        totaldays=0
+        for x in consolidatedgncobj:
+            totaldays +=x.ageing_days
+        print(totaldays)
 
-            return render(request=request, template_name="governanceandcontrol/governcontrolissues.html",
-                          context={
-                              "consolidateddata": consolidatedgncobj,
-                              "consolidatedgncobjnumber": consolidatedgncobjnumber,
+        return render(request=request, template_name="governanceandcontrol/governcontrolissues.html",
+                      context={
+                          "consolidateddata": consolidatedgncobj,
+                          "consolidatedgncobjnumber": consolidatedgncobjnumber,
 
-                              # issues
-                              "mediumimpactissues": mediumimpactissues,
-                              "highimpactissues": highimpactissues,
-                              "lowimpactissues": lowimpactissues,
+                          # issues
+                          "mediumimpactissues": mediumimpactissues,
+                          "highimpactissues": highimpactissues,
+                          "lowimpactissues": lowimpactissues,
 
-                              # reommendations
-                              "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
-                              "PENDING": PENDING,
-                              "CLOSED": CLOSED,
-                              "percentagecompleted": percentagecompleted,
+                          # reommendations
+                          "PARTIALLY_IMPLEMENTED": PARTIALLY_IMPLEMENTED,
+                          "PENDING": PENDING,
+                          "CLOSED": CLOSED,
+                          "percentagecompleted": percentagecompleted,
 
-                              # reommendations
-                              "totaldays": round(totaldays, 1),
+                          # reommendations
+                          "totaldays": round(totaldays, 1),
 
-                          })
+                      })
 
 
 @login_required
@@ -423,8 +433,9 @@ def Governcontrolrecommendations(request):
 
         # ageing days total
 
-        for totaldays in consolidatedgncobj:
-            totaldays = +totaldays.ageing_days
+        totaldays=0
+        for x in consolidatedgncobj:
+            totaldays += x.ageing_days
 
         return render(request=request, template_name="governanceandcontrol/governcontrolrecommendations.html",
                       context={
@@ -509,8 +520,10 @@ def Governcontrolconsolidated(request):
 
         # ageing days total
 
-        for totaldays in consolidatedgncobj:
-            totaldays = +totaldays.ageing_days
+        totaldays=0
+        for x in consolidatedgncobj:
+            totaldays += x.ageing_days
+        print(totaldays)
 
         return render(request=request, template_name="governanceandcontrol/governcontrolconsolidated.html",
                       context={
@@ -538,10 +551,26 @@ def Governcontrolconsolidated(request):
 @login_required
 def GoverncontrolprojectsDetail(request, id):
     consolidatedgncobj = models.Governance_And_Control.objects.get(id=id)
+    if request.method == "POST":
+        consolidatedgncobj.delete()
+        return redirect('governance_app:governcontrolprojects')
 
     return render(request=request, template_name="governanceandcontrol/governcontrolprojectsdetails.html",
                   context={"consolidateddata": consolidatedgncobj, }
                   )
+@login_required
+def EditGoverncontrolprojects(request,id):
+    consolidatedgncobj = models.Governance_And_Control.objects.get(id=id)
+    if request.method == "POST":
+        form = Governance_And_ControlForm(request.POST,instance=consolidatedgncobj)
+
+        if form.is_valid():
+            gncrecord = form.save(commit=True)
+            print(gncrecord)
+            return redirect('governance_app:governcontrolprojectsdetails', gncrecord.id)
+    else:
+        form = Governance_And_ControlForm(instance=consolidatedgncobj)
+    return render(request, 'governanceandcontrol/editformgovernanceandcontrol.html', {'type': 'edit_form','form': form,'consolidatedgncobj':consolidatedgncobj})
 
 
 @login_required
@@ -558,7 +587,7 @@ def AddGoverncontrolprojects(request):
         form = Governance_And_ControlForm(request.POST)
         if form.is_valid():
             governcontrolproject = form.save(commit=True)
-            return redirect('governcontrolprojectsdetails', governcontrolproject.pk)
+            return redirect('governance_app:governcontrolprojectsdetails', governcontrolproject.pk)
     else:
         form = Governance_And_ControlForm()
     return render(request, 'governanceandcontrol/addformgovernanceandcontrol.html', {'form': form})
