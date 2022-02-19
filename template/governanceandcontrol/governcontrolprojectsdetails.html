@@ -41,15 +41,21 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="button-list">
-                                    <button href="#" class="btn btn-info btn-wth-icon btn-rounded"><span
-                                            class="btn-text">Say Somenthing</span></button>
+                                     {% for group in request.user.groups.all %}
+                                                        {% if group.name == 'with_auditing_rights' %}
 
-                                    <button href="#" class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
+                                    <a href="/editgovernanceandcontrol/{{consolidateddata.id}}"
+                                            class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
                                             class="btn-icon-wrap bg-success rounded-circle">Edit<i
-                                            class="fa fa-delete"></i></span></button>
-                                    <button href="#"  data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
+                                            class="fa fa-delete"></i></span></a>
+                                    {% if user.is_superuser %}
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter"
+                                            class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
                                             class="btn-icon-wrap bg-danger rounded-circle ">Del<i
-                                            class="fa fa-delete"></i></span></button>
+                                            class="fa fa-delete"></i></span></a>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                        {% endfor %}
                                 </div>
 
 
@@ -296,7 +302,10 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-success" data-dismiss="modal">No Cancel</button>
-                                                    <button type="button" class="btn btn-danger">Yes Delete</button>
+                                                    <form method="POST" action="">
+                                                        {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger">Yes Delete</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
