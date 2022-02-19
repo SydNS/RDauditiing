@@ -133,25 +133,7 @@
                 {{gncobj.user}}Welcome to the
                 <a href="#">Auditing Tool Dashboard</a>
             </p>
-            <div class="d-flex w-500p">
 
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in gncojbects %}
-                    <option selected="">{{ singleinfo.audit_project_name | upper}}</option>
-                    {% endfor %}
-
-                </select>
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in gncojbects %}
-                    <option selected="">{{ singleinfo.criticality | upper}}</option>
-                    {% endfor %}
-                </select>
-                <select class="form-control custom-select custom-select-sm">
-                    {% for singleinfo in gncojbects %}
-                    <option selected="">{{ singleinfo.quarter | upper}}</option>
-                    {% endfor %}
-                </select>
-            </div>
         </div>
         <!-- /Title -->
 
@@ -195,7 +177,7 @@
                                         </div>
                                         <div>
                             <span class="text-danger font-14 font-weight-500"
-                            >{{highimpactissues}}%</span
+                            ></span
                             >
                                         </div>
                                     </div>
@@ -221,8 +203,7 @@
                                         </div>
                                         <div>
                             <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
-                            >
+                            ></span>
                                         </div>
                                     </div>
                                     <div>
@@ -242,20 +223,20 @@
                                         <div>
                             <span
                                     class="d-block font-15 text-info font-weight-500"
-                            >Total Ageing Days : {{totaldays}}</span
+                            >Total Ageing Days :</span
                             >
                                         </div>
                                         <div>
                             <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
+                            ></span
                             >
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">Total Ageing Days :
+                                        <small class="">
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-info counter-anim">{{totaldays}}</span></span></small>
-                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
+                                        <small class="d-block"> </small>
                                     </div>
                                 </div>
                             </div>
@@ -411,30 +392,6 @@
                             </div>
 
 
-                            <!--                            ageing days-->
-                            <div class="card card-sm bg-dark-80 text-white">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-5">
-                                        <div>
-                            <span
-                                    class="d-block font-15 text-white font-weight-500"
-                            ></span
-                            >
-                                        </div>
-                                        <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
-                            >
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <small class="">Affected Depts :
-                                            <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-info counter-anim">s</span></span></small>
-                                        <small class="d-block">Adequate Control : {{mediumimpactissues}} </small>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="col-xl-12">
@@ -532,15 +489,15 @@
                                             <!--    final_approver = models.CharField(db_column='Final_Approver', max_length=100, blank=False, null=True)  # Field name made lowercase.-->
 
                                             <tbody>
-                                            {% for singleinfo in highimpactprojects %}
-                                            <tr>
-                                                <td><a href="#">{{singleinfo.audit_project_code}}</a></td>
-                                                <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
-                                                <td><a href="#">{{singleinfo.quarter}}</a></td>
-                                                <td><a href="#">{{singleinfo.audit_project_type}}</a></td>
-                                                <td><a href="#">{{singleinfo.issue_title}}</a></td>
-                                                <td><a href="#">{{singleinfo.recommendation}}</a></td>
-                                                <td><a href="#">{{singleinfo.ageing_days}}</a></td>
+                                            {% for singleinfo in gncojbects %}
+                                            <tr class="text-dark">
+                                                <td><a href="/governanceandcontrolprojects/{{singleinfo.id}}">{{singleinfo.audit_project_code}}</a></td>
+                                                <td>{{singleinfo.audit_project_name}}</td>
+                                                <td>{{singleinfo.quarter}}</td>
+                                                <td>{{singleinfo.audit_project_type}}  </td>
+                                                <td>{{singleinfo.issue_title}}</td>
+                                                <td>{{singleinfo.recommendation}}</td>
+                                                <td>{{singleinfo.ageing_days}}</td>
 
 
                                             </tr>
