@@ -290,6 +290,9 @@ def AuditorsConsolidated(request):
 @login_required
 def Auditor_of_auditorsDetail(request, id):
     consolidatedgncobj = models.Auditor_of_auditors.objects.get(id=id)
+    if request.method == "POST":
+        consolidatedgncobj.delete()
+        return redirect('auditor_of_auditors:governanceandcontrolprojects')
 
     return render(request=request, template_name="auditorofauditor/auditorofauditorsdetails.html",
                   context={"consolidateddata": consolidatedgncobj, }
