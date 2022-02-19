@@ -385,13 +385,15 @@ def AddRiskRecords(request):
 def EditRiskRecords(request,id):
     consolidatedgncobj = models.RiskManagement.objects.get(id=id)
     if request.method == "POST":
-        form = RiskManagementForm(request.POST,consolidatedgncobj)
+        form = RiskManagementForm(request.POST,instance=consolidatedgncobj)
+
         if form.is_valid():
             riskmanagementrecord = form.save(commit=True)
+            print(riskmanagementrecord)
             return redirect('riskmanagement:risksdetails', riskmanagementrecord.pk)
     else:
         form = RiskManagementForm(instance=consolidatedgncobj)
-    return render(request, 'riskmanagement/addformrisk.html', {'type': 'edit_form','form': form,'bannertitle':"Edit this Risk Management Record"})
+    return render(request, 'riskmanagement/editrisk.html', {'type': 'edit_form','form': form,'bannertitle':"Edit this Risk Management Record"})
 
 
 
