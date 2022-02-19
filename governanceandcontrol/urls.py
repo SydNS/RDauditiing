@@ -18,6 +18,7 @@ urlpatterns = [
 
     # Add governance and governances
     path('addgovernanceandcontrol/', views.AddGoverncontrolprojects, name='addgoverncontrol'),
+    path('editgovernanceandcontrol/<int:id>/', views.EditGoverncontrolprojects, name='editgoverncontrol'),
 
 
     # Frequently Asked Questions
