@@ -1,6 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
+from import_export.admin import ImportExportModelAdmin
+
 from .models import Department, Person, RatingUser
 
 
@@ -18,7 +20,7 @@ from .models import Department, Person, RatingUser
 #                                    choices=CRITICALITY_LEVELS, default='draft')  # Field name made lowercase.
 
 @admin.register(Department)
-class DeptAdmin(admin.ModelAdmin):
+class DeptAdmin(ImportExportModelAdmin):
     list_display = ('departmentname', 'departmentrole', 'numberofmembers', 'criticality',)
     list_filter = ('departmentname', 'departmentrole', 'numberofmembers', 'criticality',)
     search_fields = ('departmentname', 'departmentrole', 'numberofmembers', 'criticality',)
@@ -31,7 +33,7 @@ class DeptAdmin(admin.ModelAdmin):
 #     personsdept = models.ForeignKey(Dept, on_delete=models.CASCADE)
 
 @admin.register(Person)
-class PersonAdmin(admin.ModelAdmin):
+class PersonAdmin(ImportExportModelAdmin):
     list_display = ('last_name', 'first_name', 'personsdept',)
     list_filter = ('last_name', 'first_name', 'personsdept',)
     search_fields = ('last_name', 'first_name', 'personsdept',)
@@ -44,7 +46,7 @@ class PersonAdmin(admin.ModelAdmin):
 #     deptnem = models.ForeignKey(Dept, on_delete=models.CASCADE)
 #
 @admin.register(RatingUser)
-class RatingUserAdmin(admin.ModelAdmin):
+class RatingUserAdmin(ImportExportModelAdmin):
     list_display = ('person', 'rate_level', 'department',)
     list_filter = ('person', 'rate_level', 'department',)
     search_fields = ('person', 'rate_level', 'department',)
