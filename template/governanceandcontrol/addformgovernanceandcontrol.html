@@ -32,31 +32,11 @@
     <div class="container mt-xl-50 mt-sm-30 mt-15">
         <!-- Title -->
         <div class="hk-pg-header align-items-top">
-            <h2 class="hk-pg-title font-weight-600 mb-10">Auditor of Auditors
+            <h2 class="hk-pg-title font-weight-600 mb-10">Governance & Control
             </h2>
             <p>
-                {{request.user.username|upper}} Welcome to the
-                <a href="#">Consolidated Recs.</a>
+                {{request.user.username|upper}} add some new records
             </p>
-            <div class="d-flex w-500p">
-
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.audit_project_name | upper}}</option>
-                    {% endfor %}
-
-                </select>
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.criticality | upper}}</option>
-                    {% endfor %}
-                </select>
-                <select class="form-control custom-select custom-select-sm">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.quarter | upper}}</option>
-                    {% endfor %}
-                </select>
-            </div>
         </div>
         <!-- /Title -->
 
