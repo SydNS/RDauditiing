@@ -37,25 +37,7 @@
                  {{request.user.username|upper}} Welcome to the
                 <a href="#">Governance & Control.</a>
             </p>
-            <div class="d-flex w-500p">
 
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.audit_project_name | upper}}</option>
-                    {% endfor %}
-
-                </select>
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.criticality | upper}}</option>
-                    {% endfor %}
-                </select>
-                <select class="form-control custom-select custom-select-sm">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.quarter | upper}}</option>
-                    {% endfor %}
-                </select>
-            </div>
         </div>
         <!-- /Title -->
 
@@ -148,16 +130,12 @@
                             >
                                         </div>
                                         <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
-                            >
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">Total Ageing Days :
+                                        <small class="">
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-info counter-anim">{{totaldays}}</span></span></small>
-                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
