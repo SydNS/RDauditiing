@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . import models
 
 from .forms import Auditor_of_auditorsForm
 from .models import Auditor_of_auditors
+
 
 # Create your views here.
 
@@ -73,9 +74,10 @@ def AuditorsPractices(request):
             percentagecompleted = 0
 
         # ageing days total
-        #
-        # for totaldays in consolidatedgncobj:
-        #     totaldays+=totaldays.ageing_days
+        totaldays = 0
+        for x in consolidatedgncobj:
+            totaldays += x.ageing_days
+        print(totaldays)
 
         return render(request=request, template_name="auditorofauditor/auditpractices.html",
                       context={
@@ -94,7 +96,7 @@ def AuditorsPractices(request):
                           "percentagecompleted": percentagecompleted,
 
                           # reommendations
-                          "totaldays": round(0, 1),
+                          "totaldays": round(totaldays, 1),
 
                       })
 
@@ -169,8 +171,10 @@ def AuditorsRecommendations(request):
 
         # ageing days total
 
-        # for totaldays in consolidatedgncobj:
-        #     totaldays =+totaldays.ageing_days
+        totaldays = 0
+        for x in consolidatedgncobj:
+            totaldays += x.ageing_days
+        print(totaldays)
 
         return render(request=request, template_name="auditorofauditor/auditrecommendations.html",
                       context={
@@ -189,7 +193,7 @@ def AuditorsRecommendations(request):
                           "percentagecompleted": percentagecompleted,
 
                           # reommendations
-                          "totaldays": round(0, 1),
+                          "totaldays": round(totaldays, 1),
 
                       })
 
@@ -255,8 +259,10 @@ def AuditorsConsolidated(request):
             percentagecompleted = 0
         # ageing days total
 
-        # for totaldays in consolidatedgncobj:
-        #     totaldays =+totaldays.ageing_days
+        totaldays = 0
+        for x in consolidatedgncobj:
+            totaldays += x.ageing_days
+        print(totaldays)
 
         return render(request=request, template_name="auditorofauditor/auditconsolidated.html",
                       context={
@@ -275,10 +281,9 @@ def AuditorsConsolidated(request):
                           "percentagecompleted": percentagecompleted,
 
                           # reommendations
-                          "totaldays": round(0, 1),
+                          "totaldays": round(totaldays, 1),
 
                       })
-
 
 
 # ======================Details views===========================
@@ -286,8 +291,8 @@ def AuditorsConsolidated(request):
 def Auditor_of_auditorsDetail(request, id):
     consolidatedgncobj = models.Auditor_of_auditors.objects.get(id=id)
 
-    return render(request=request, template_name="auditorofauditor/auditOfauditosdetails.html",
-                  context={ "consolidateddata": consolidatedgncobj,}
+    return render(request=request, template_name="auditorofauditor/auditorofauditorsdetails.html",
+                  context={"consolidateddata": consolidatedgncobj, }
                   )
 
 
@@ -297,9 +302,20 @@ def AddAuditor_of_auditorsDetail(request):
         form = Auditor_of_auditorsForm(request.POST)
         if form.is_valid():
             Auditor_of_auditors = form.save(commit=True)
-            return redirect('auditOfauditosdetails', Auditor_of_auditors.pk)
+            return redirect('auditor_of_auditors:auditOfauditosdetails', Auditor_of_auditors.pk)
     else:
         form = Auditor_of_auditorsForm()
     return render(request, 'auditorofauditor/addformauditor.html', {'form': form})
 
 
+@login_required
+def EditAuditor_of_auditorsDetail(request, id):
+    consolidatedgncobj = models.Auditor_of_auditors.objects.get(id=id)
+    if request.method == "POST":
+        form = Auditor_of_auditorsForm(request.POST, instance=consolidatedgncobj)
+        if form.is_valid():
+            Auditor_of_auditors = form.save(commit=True)
+            return redirect('auditor_of_auditors:auditorsofauditorsdetails', Auditor_of_auditors.pk)
+    else:
+        form = Auditor_of_auditorsForm(instance=consolidatedgncobj)
+    return render(request, 'auditorofauditor/editformauditor.html', {'form': form})

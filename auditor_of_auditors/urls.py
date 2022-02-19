@@ -21,4 +21,7 @@ urlpatterns = [
     # addrisk
     path('addauditorsofauditors/', views.AddAuditor_of_auditorsDetail, name='addauditorsofauditors'),
 
+    # editrisk
+    path('editauditorsofauditors/<int:id>', views.EditAuditor_of_auditorsDetail, name='editauditorsofauditors'),
+
 ]

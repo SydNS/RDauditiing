@@ -15,27 +15,8 @@
             <h2 class="hk-pg-title font-weight-600 mb-10">Auditors Of Auditors</h2>
             <p>
                 {{request.user.username|upper}} Welcome to the
-                <a href="#">Recomendations Section.</a>
+                <a href="#">Auditor Of Auditors Recomendations Section.</a>
             </p>
-            <div class="d-flex w-500p">
-
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.current_status_at_xy | upper}}</option>
-                    {% endfor %}
-
-                </select>
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.recommendation_state | upper}}</option>
-                    {% endfor %}
-                </select>
-                <select class="form-control custom-select custom-select-sm">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.final_approver | upper}}</option>
-                    {% endfor %}
-                </select>
-            </div>
         </div>
         <!-- /Title -->
 
@@ -65,7 +46,7 @@
                                 </div>
                             </div>
                             <!--                            criticalit-->
-                            <div class="card card-sm bg-dark text-white">
+                            <div class="card card-sm bg-dark text-warning">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
@@ -74,14 +55,11 @@
                             >Partially Impl'd Practices : {{lowimpactissues}}</span
                             >
                                         </div>
-                                        <div>
-                            <span class="text-success font-14 font-weight-500">{{""}}</span>
-                                        </div>
                                     </div>
                                     <div>
-                                        <small class="text-white">Closed & Impl'd Practices:
+                                        <small class="text-success">Closed & Impl'd Practices:
                                             <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-white counter-anim">{{highimpactissues}}</span></span></small>
+                                            <span class="text-success counter-anim">{{highimpactissues}}</span></span></small>
                                         <small class="d-block text-danger">Pending Practices:{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
@@ -97,14 +75,9 @@
                             >Pending Recom'n : {{PENDING}}</span
                             >
                                         </div>
-                                        <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
-                            >
-                                        </div>
                                     </div>
                                     <div>
-                                        <small class="text-white">Closed Recom'n :
+                                        <small class="text-success">Closed Recom'n :
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-white counter-anim">{{CLOSED}}</span></span></small>
                                         <small class="d-block text-warning">Partially Completed Recom'n: {{PARTIALLY_IMPLEMENTED}} </small>
@@ -114,26 +87,22 @@
 
 
                             <!--                            ageing days-->
-                            <div class="card card-sm bg-dark text-white">
+                            <div class="card card-sm bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-yellow font-weight-500"
+                                    class="d-block font-15 text-info font-weight-500"
                             >Total Ageing Days : {{totaldays}}</span
                             >
                                         </div>
                                         <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
-                            >
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">Total Ageing Days :
+                                        <small class="">
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-info counter-anim">{{totaldays}}</span></span></small>
-                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +145,7 @@
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
                                             <td>
-                                                <a href="#">
+                                                <a href="/auditor_of_auditors/{{singleinfo.id}}">
                                                     {{singleinfo.internal_audit_leading_practices|truncatechars:40}}
                                                 </a>
                                             </td>
@@ -199,24 +168,6 @@
                                         {% endfor %}
 
                                         </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th>IA_Practices</th>
-                                            <th>IA_Standards</th>
-                                            <th>Currentt Status</th>
-                                            <th>Assess't</th>
-                                            <th>Recom'n</th>
-                                            <th>Action Plan</th>
-                                            <th>Recommendation State</th>
-                                            <th>Ageing Days</th>
-                                            <th>Owner</th>
-                                            <th>Final Approver</th>
-                                            <th>Agreed Implementation Date</th>
-                                            <th>Revised Implementation Date</th>
-                                            <th>Last Status Update</th>
-                                            <th>Actual Implementation Date</th>
-                                        </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>

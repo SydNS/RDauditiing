@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+<!--{% load static %}-->
+{% block content %}
+
+{% include 'topnavbar.html' %}
+{% include 'verticalnavbar.html' %}
+{% include 'settings.html' %}
+ <!-- Script to print the content of a div -->
+    <script>
+        function printDiv() {
+            var divContents = document.getElementById("GFG").innerHTML;
+            var a = window.open('', '', 'height=500, width=500');
+            a.document.write('<html>');
+            a.document.write('<body > <h1>Div contents are <br>');
+            a.document.write(divContents);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+        }
+    </script>
+
+<!-- Main Content -->
+<div class="hk-pg-wrapper">
+    <!-- Container -->
+    <div class="container-fluid">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-xl-12 pa-0">
+                <div class="profile-cover-wrap overlay-wrap">
+                    <div class="bg-overlay bg-gradient-success"></div>
+                    <div class="container profile-cover-content py-50">
+                        <div class="hk-row">
+                            <div class="col-lg-6">
+                                <div class="media align-items-center">
+                                    <div class="media-img-wrap  d-flex">
+                                        <div class="avatar">
+                                            <img src="{% static 'dist/img/mg.png' %}" alt="user" class="avatar-img ">
+                                        </div>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <div class="text-white text-capitalize display-6 mb-5 font-weight-400">
+                                            {{ consolidateddata.internal_audit_leading_practices|truncatechars:35 }}
+                                        </div>
+                                        <div class="font-14 text-white"><span class="mr-5"><span
+                                                class="mr-5">{{consolidateddata.iia_standards}} <br></span></span><span
+                                                class="font-weight-500 pr-5">Ageing Days : {{consolidateddata.ageing_days}}</span>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="button-list">
+                                                        {% for group in request.user.groups.all %}
+                                                        {% if group.name == 'with_auditing_rights' %}
+
+                                    <a href="/editauditorsofauditors/{{consolidateddata.id}}"
+                                            class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
+                                            class="btn-icon-wrap bg-success rounded-circle">Edit<i
+                                            class="fa fa-delete"></i></span></a>
+                                    {% if user.is_superuser %}
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter"
+                                            class="btn btn-icon btn-icon-circle btn-indigo btn-icon-style-2"><span
+                                            class="btn-icon-wrap bg-danger rounded-circle ">Del<i
+                                            class="fa fa-delete"></i></span></a>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                        {% endfor %}
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white shadow-bottom">
+                    <div class="container">
+                        <ul class="nav nav-light nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <span class="font-20">
+                                    <a href="#" class="d-flex h-60p align-items-center nav-link active "><p
+                                            class="text-green">Internal Audit leading practice: </p><span class="text-blue">{{ consolidateddata.internal_audit_leading_practices|truncatechars:95 }} </span></a>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content mt-sm-60 mt-30">
+                    <div class="tab-pane fade show active" role="tabpanel">
+                        <div class="container">
+                            <div class="hk-row">
+                                <div class="col-lg-8">
+                                    <div class="card card-profile-feed">
+                                        <div class="card-header card-header-action">
+                                            <div class="d-flex align-items-center card-action-wrap">
+
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Container -->
+                                            <div class="container">
+                                                <!-- Title -->
+                                                <div class="hk-pg-header mb-10">
+                                                    <div>
+                                                        <h4 class="hk-pg-title"><span class="pg-title-icon"><span
+                                                                class="feather-icon"><i data-feather="book"></i></span></span>Internal Audit Practice
+                                                        </h4>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <a href="#" class="text-secondary mr-15" onclick="printDiv()"><span
+                                                                class="feather-icon"><i
+                                                                data-feather="printer"></i></span></a>
+                                                        {% for group in request.user.groups.all %}
+                                                        {% if group.name == 'with_auditing_rights' %}
+                                                        <a href="/addrisk" class="btn btn-primary btn-sm text-white">Create
+                                                            New</a>
+                                                        {% endif %}
+                                                        {% endfor %}
+<!--                                                        {{ user.groups.all }}-->
+                                                    </div>
+                                                </div>
+                                                <!-- /Title -->
+
+                                                <!-- Row -->
+                                                <div class="row">
+                                                    <div class="col-xl-12">
+                                                        <section class="hk-sec-wrapper hk-invoice-wrap pa-35">
+                                                            <div id="GFG" class="invoice-from-wrap">
+                                                                <div class="row">
+                                                                    <div class="col-md-7 mb-20">
+                                                                        <img class="img-fluid invoice-brand-img d-block mb-20"
+                                                                             src="{% static 'dist/img/logo-dark.png' %}"
+                                                                             alt="brand"/>
+                                                                        <h6 class="mb-5">Internal Audit Standard</h6>
+                                                                        <address>
+                                                                            <span class="d-block text-info font-15">{{ consolidateddata.iia_standards }}</span>
+
+                                                                        </address>
+                                                                        <h6 class="mb-5">Internal Audit Practice</h6>
+                                                                        <address>
+                                                                            <span class="d-block  text-info font-15">{{ consolidateddata.internal_audit_leading_practices }}</span>
+
+                                                                        </address>
+                                                                    </div>
+                                                                    <div class="col-md-5 mb-20">
+                                                                        <h4 class="text-left mb-35 font-weight-600 font-15">Details</h4>
+                                                                        <span class="text-left d-block font-15">Department :<span
+                                                                                {% if  consolidateddata.owner.criticality == 'low' %}
+                                                                                class="pl-10 text-success font-15"
+                                                                                {% elif consolidateddata.owner.criticality == 'high' %}
+                                                                                class="pl-10 text-red font-15"
+                                                                                {% elif  consolidateddata.owner.criticality == 'moderate' %}
+                                                                                class="pl-10 text-warning font-15"
+                                                                                {% endif %} >
+                                                                            {{ consolidateddata.owner|title }}</span>
+                                                                        </span>
+
+                                                                        <span class="text-left d-block font-15"> Recom'n Status :<span
+                                                                                {% if  consolidateddata.recommendation_state == 'CLOSED' %}
+                                                                                class="pl-10 text-success font-15"
+                                                                                {% elif  consolidateddata.recommendation_state == 'PENDING' %}
+                                                                                class="pl-10 text-red font-15"
+                                                                                {% elif  consolidateddata.recommendation_state == 'PARTIALLY_IMPLEMENTED' %}
+                                                                                class="pl-10 text-warning font-15"
+                                                                                {% endif %} >
+                                                                            {{ consolidateddata.recommendation_state|title }}</span>
+                                                                        </span>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr class="mt-0">
+                                                            <div class="invoice-to-wrap pb-20">
+                                                                <div class="row">
+                                                                    <div class="col-md-7 mb-30">
+                                                                       <h6> <span class="d-block text-uppercase mb-5 font-15">Recommendations</span></h6>
+                                                                        <span class="d-block  mb-5 font-14">{{ consolidateddata.recommendations|title }}</span>
+                                                                        <address>
+                                                                            <span class="d-block font-13">{{ consolidateddata.control_description }}</span>
+                                                                        </address>
+                                                                    </div>
+                                                                    <div class="col-md-5 mb-30">
+                                                                        <h6> <span class="d-block text-left text-uppercase mb-5 font-13">Action Plan</span></h6>
+                                                                        <span class="d-block text-left font-13">{{ consolidateddata.action_plan }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <h5>Details</h5>
+                                                            <hr>
+                                                            <div class="invoice-details">
+                                                                <div class="table-lg">
+                                                                    <div class="table-responsive">
+                                                                        <table id="datable_3" class="table table-striped table-border mb-0">
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th class="w-40 text-left font-15 text-dark mb-5"><h6>Risk Management {{ consolidateddata.id|truncatechars:20 }} </h6></th>
+                                                                                <th class="w-80 text-left font-15 mb-5"><h6>Details</h6></th>
+                                                                            </tr>
+                                                                            </thead>
+
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td class="w-40 text-left">Internal Audit Practices</td>
+                                                                                <td class="w-80 text-left">{{ consolidateddata.internal_audit_leading_practices }}</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="w-40 text-left">Recommendation</td>
+                                                                                <td class="w-80 text-left">{{ consolidateddata.recommendations }}</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="w-40 text-left">Assessment</td>
+                                                                                <td class="w-80 text-left">{{ consolidateddata.assessment }}</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="w-40 text-left">Recommendation State</td>
+                                                                                <td class="w-80 text-left">{{ consolidateddata.recommendation_state }}</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="w-40 text-left">Recommended Control</td>
+                                                                                <td class="w-80 text-left">{{ consolidateddata.recommended_control }}</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="w-40 text-left"></td>
+                                                                                <td class="w-80 text-left">
+
+                                                                    <img class="img-fluid"
+                                                                         src="{% static 'dist/img/logo-dark.png' %}" alt="ruth_doreen"/>
+                                                                    <span class="d-block text-light font-14">Ruth Doreen</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                            <tfoot class="border-bottom border-1">
+                                                                            <tr>
+                                                                            </tr>
+                                                                            </tfoot>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="invoice-sign-wrap text-right py-60">
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                                <!-- /Row -->
+                                            </div>
+                                            <!-- /Container -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--                              Right column-->
+
+                                <div class="col-lg-4">
+                                    <div class="card card-profile-feed">
+                                        <div class="card-header card-header-action">
+                                            <div class="media align-items-center">
+                                                <div class="media-img-wrap d-flex mr-10">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row text-center">
+                                            <div class="col-6 border-right pr-0">
+                                                <div class="pa-15">
+                                                    <span class="d-block display-6 text-dark mb-5">{{consolidateddata.dept}}</span>
+                                                    <span class="d-block text-capitalize font-14">Department</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 pl-0">
+                                                <div class="pa-15">
+                                                    <span class="d-block display-6 text-dark mb-5  text-capitalize ">{{consolidateddata.impact}}</span>
+                                                    <span class="d-block text-info text-capitalize font-14">Level Of Impact</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><h6>XY Strategic Pillar</h6><span
+                                                    class="ml-5 text-dark font-15"><br>{{consolidateddata.xy_strategic_pillar}}</span>
+                                            </li>
+                                            <li class="list-group-item"><h6>XY Strategic Objectives</h6><span
+                                                    class="ml-5 text-dark font-15"><br>{{consolidateddata.xy_strategic_objectives}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+    </div>
+    <!-- /Container -->
+
+    <!-- Footer -->
+    <div class="hk-footer-wrap container">
+        <footer class="footer">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <p>Created by<a href="/" class="text-dark" target="_blank">Ruth Doreen Mutebe</a> ©
+                        2021</p>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <p class="d-inline-block">Follow us</p>
+                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
+                            class="btn-icon-wrap"><i class="fa fa-facebook"></i></span></a>
+                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
+                            class="btn-icon-wrap"><i class="fa fa-twitter"></i></span></a>
+                    <a href="#" class="d-inline-block btn btn-icon btn-icon-only btn-indigo btn-icon-style-4"><span
+                            class="btn-icon-wrap"><i class="fa fa-google-plus"></i></span></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- /Footer -->
+</div>
+<!-- /Main Content -->
+<div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Are you sure ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Deleting this means the record will be erased completely
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">No Cancel</button>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% include 'verticalnavbar.html' %}
+{% endblock %}
