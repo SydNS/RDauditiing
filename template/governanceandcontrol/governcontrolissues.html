@@ -35,25 +35,6 @@
                 {{request.user.username|upper}} Welcome to the
                 <a href="#">G & C Issues.</a>
             </p>
-            <div class="d-flex w-500p">
-
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.audit_project_name | upper}}</option>
-                    {% endfor %}
-
-                </select>
-                <select class="form-control custom-select custom-select-sm mr-15">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.criticality | upper}}</option>
-                    {% endfor %}
-                </select>
-                <select class="form-control custom-select custom-select-sm">
-                    {% for singleinfo in consolidateddata %}
-                    <option selected="">{{ singleinfo.quarter | upper}}</option>
-                    {% endfor %}
-                </select>
-            </div>
         </div>
         <!-- /Title -->
 
@@ -63,99 +44,82 @@
                 <div class="hk-row">
                     <div class="col-sm-12">
                         <div class="card-group hk-dash-type-2">
-                            <div class="card card-sm">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-5">
+                            <div class="card card-sm text-info bg-dark">
+                                <div class="card-body text-info">
+                                    <div class="d-flex justify-content-between mb-5 text-info">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
+                                    class="d-block font-15 text-info font-weight-500"
                             >Projects</span
                             >
                                         </div>
-                                        <div>
-                                            <span>10%</span>
-                                        </div>
                                     </div>
                                     <div>
-                          <span class="d-block display-4 text-dark mb-5"
-                          ><span class="counter-anim">{{consolidateddata|length}}</span></span
+                          <span class="d-block display-4 text-info mb-5"
+                          ><span class="counter-anim text-info">{{consolidateddata|length}}</span></span
                           >
-                                        <small class="d-block">Total Issues</small>
+                                        <small class="d-block text-info">Total Issues</small>
                                     </div>
                                 </div>
                             </div>
                             <!--                            criticalit-->
-                            <div class="card card-sm">
+                            <div class="card card-sm bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
+                                    class="d-block font-15 text-success font-weight-500"
                             >Low Criticality Issues : {{lowimpactissues}}</span
-                            >
-                                        </div>
-                                        <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >+12.5%</span
                             >
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">High Criticality Issues:
+                                        <small class="text-danger">High Criticality Issues:
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-danger counter-anim">{{highimpactissues}}</span></span></small>
-                                        <small class="d-block">Low Criticality Issues:{{mediumimpactissues}} </small>
+                                        <small class="text-warning d-block">Low Criticality Issues:{{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
 
                             <!--                            recomendation state-->
-                            <div class="card card-sm">
+                            <div class="card card-sm bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
-                            >Pending Recom'n : {{PARTIALLY_IMPLEMENTED}}</span
-                            >
-                                        </div>
-                                        <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
+                                    class="d-block font-15 text-danger font-weight-500"
+                            >Pending Recom'n : {{PENDING}}</span
                             >
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">Closed Recom'n :
+                                        <small class="text-green">Closed Recom'n :
                                             <span class="d-block display-4 text-dark mb-5">
-                                            <span class="text-info counter-anim">{{CLOSED}}</span></span></small>
-                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
+                                            <span class="text-success counter-anim">{{CLOSED}}</span></span></small>
+                                        <small class="d-block text-warning">Partially Completed : {{PARTIALLY_IMPLEMENTED}} </small>
                                     </div>
                                 </div>
                             </div>
 
 
                             <!--                            ageing days-->
-                            <div class="card card-sm">
+                            <div class="card card-sm bg-dark">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-5">
                                         <div>
                             <span
-                                    class="d-block font-15 text-dark font-weight-500"
+                                    class="d-block font-15 text-info font-weight-500"
                             >Total Ageing Days : {{totaldays}}</span
                             >
                                         </div>
                                         <div>
-                            <span class="text-success font-14 font-weight-500"
-                            >{{ percentagecompleted}}%</span
-                            >
                                         </div>
                                     </div>
                                     <div>
-                                        <small class="">Total Ageing Days :
+                                        <small class="">
                                             <span class="d-block display-4 text-dark mb-5">
                                             <span class="text-info counter-anim">{{totaldays}}</span></span></small>
-                                        <small class="d-block">Partially Completed : {{mediumimpactissues}} </small>
                                     </div>
                                 </div>
                             </div>
@@ -298,7 +262,7 @@
                                         <tbody>
                                         {% for singleinfo in consolidateddata %}
                                         <tr>
-                                            <td><a href="#">{{singleinfo.audit_project_name}}</a></td>
+                                            <td><a href="/governanceandcontrolprojects/{{singleinfo.id}}">{{singleinfo.audit_project_name}}</a></td>
                                             <td>{{singleinfo.quarter}}</td>
                                             <td>{{singleinfo.audit_project_type}}</td>
                                             <td>{{singleinfo.issue_title}}</td>
