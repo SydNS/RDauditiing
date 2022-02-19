@@ -1,4 +1,6 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
+
 from . import models
 
 # Register your models here.
@@ -13,7 +15,7 @@ admin.site.site_header = 'Ruth Doreen Auditing Tool'
 
 
 @admin.register(Governance_And_Control)
-class Governance_And_ControlAdmin(admin.ModelAdmin):
+class Governance_And_ControlAdmin(ImportExportModelAdmin):
     list_display = ('audit_project_code', 'audit_project_name', 'quarter', 'audit_project_type',
                     'issue_title', 'criticality', 'root_cause_analysis', 'recommendation',
                     'action_plan', 'recommendation_state', 'agreed_implementation_date', 'revised_implementation_date'
