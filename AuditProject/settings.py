@@ -189,10 +189,10 @@ LOGIN_REDIRECT_URL = "/"
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'hnjyexnua',
-    'API_KEY': '783853679593493',
-    'API_SECRET': 'sCiERxbqC-eqjFg8rvgu_DZHoYE'
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'hnjyexnua',
+#     'API_KEY': '783853679593493',
+#     'API_SECRET': 'sCiERxbqC-eqjFg8rvgu_DZHoYE'
+# }
+#
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
