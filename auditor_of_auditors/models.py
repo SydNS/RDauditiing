@@ -69,5 +69,5 @@ class Auditor_of_auditors(models.Model):
         verbose_name_plural = "Auditor of auditors"
 
 
-class AuditngStandards(models.Model):
-    link_to_standards = models.URLField(max_length=200)
+# class AuditngStandards(models.Model):
+#     link_to_standards = models.URLField(max_length=200)

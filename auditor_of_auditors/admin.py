@@ -23,9 +23,9 @@ class AuditorofauditorsAdmin(ImportExportModelAdmin):
                     , 'actual_implementation_date','owner', 'final_approver',
                     )
 
-@admin.register(AuditngStandards)
-class AAuditngStandardsAdmin(ImportExportModelAdmin):
-    list_display = ( 'link_to_standards',)
+# @admin.register(AuditngStandards)
+# class AAuditngStandardsAdmin(ImportExportModelAdmin):
+#     list_display = ( 'link_to_standards',)
 
 
 # class Auditorofauditors(models.Model):
