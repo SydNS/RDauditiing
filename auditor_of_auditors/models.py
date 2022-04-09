@@ -47,7 +47,7 @@ class Auditor_of_auditors(models.Model):
         ("(IIA PS 2340) Engagements must be properly supervised to ensure objectives are achieved, quality is assured, and staff are developed. Interpretation: The extent of supervision will depend on the proficiency and experience of internal auditors and the complexity of the engagement. The Chief Audit Executive has the overall responsibility for supervising the engagement, whether by or for the internal audit activity, but may designate appropriately experienced members of the internal audit activity to perform the review. Appropriate evidence of supervision is documented and retained. ","IIA PS 2340")
     )
     internal_audit_leading_practices = models.TextField(db_column='Internal_audit_leading_Practices', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    iia_standards = models.TextField(choices=IIA_STANDARDS,db_column='Assessment', max_length=100, blank=False, null=True)  # Field name made lowercase.
+    iia_standards = models.TextField(choices=IIA_STANDARDS,db_column='IIA_Standards', max_length=100, blank=False, null=True)  # Field name made lowercase.
     current_status_at_xy = models.CharField(choices=CURRENT_STATUS_XY,db_column='Current_Status_at_XY', max_length=100, blank=False, null=True)  # Field name made lowercase.
     assessment = models.CharField(choices=ASSESSMENT,db_column='Assessment', max_length=100, blank=False, null=True)  # Field name made lowercase.
     recommendations = models.TextField(db_column='Recommendations', max_length=500, blank=True, null=True)  # Field name made lowercase.
