@@ -4,7 +4,7 @@ from import_export.admin import ImportExportModelAdmin
 from . import models
 
 # Register your models here.
-from .models import Auditor_of_auditors
+from .models import Auditor_of_auditors, AuditngStandards
 
 admin.site.site_header = 'Ruth Doreen Auditing Tool'
 
@@ -22,6 +22,11 @@ class AuditorofauditorsAdmin(ImportExportModelAdmin):
                     'revised_implementation_date', 'last_status_update', 'ageing_days'
                     , 'actual_implementation_date','owner', 'final_approver',
                     )
+
+@admin.register(AuditngStandards)
+class AAuditngStandardsAdmin(ImportExportModelAdmin):
+    list_display = ( 'link_to_standards',)
+
 
 # class Auditorofauditors(models.Model):
 #     internal_audit_leading_practices = models.CharField(db_column='Internal_audit_leading_Practices', max_length=100, blank=True, null=True)  # Field name made lowercase.
