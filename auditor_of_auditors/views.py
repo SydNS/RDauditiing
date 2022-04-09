@@ -130,6 +130,7 @@ def AuditorsRecommendations(request):
 
                           # reommendations
                           "totaldays": 0,
+                          "todaysDate": todaysDate
 
                       }
                       )
@@ -151,6 +152,8 @@ def AuditorsRecommendations(request):
         lowimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='CLOSED',
         ).count()
+
+        todaysDate=datetime.now().date()
 
         # counting the number issues at different levels of state
         # RECOMMENDATION_STATE = (
@@ -198,6 +201,7 @@ def AuditorsRecommendations(request):
 
                           # reommendations
                           "totaldays": round(totaldays, 1),
+                          "todaysDate": todaysDate
 
                       })
 
@@ -240,6 +244,8 @@ def AuditorsConsolidated(request):
         lowimpactissues = models.Auditor_of_auditors.objects.filter(
             current_status_at_xy='CLOSED',
         ).count()
+
+        todaysDate=datetime.now().date()
 
         # counting the number issues at different levels of state
         # RECOMMENDATION_STATE = (
