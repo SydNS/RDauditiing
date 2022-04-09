@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from . import models
@@ -78,6 +80,7 @@ def AuditorsPractices(request):
         for x in consolidatedgncobj:
             totaldays += x.ageing_days
         print(totaldays)
+        todaysDate=datetime.now().date()
 
         return render(request=request, template_name="auditorofauditor/auditpractices.html",
                       context={
@@ -94,6 +97,7 @@ def AuditorsPractices(request):
                           "PENDING": PENDING,
                           "CLOSED": CLOSED,
                           "percentagecompleted": percentagecompleted,
+                          "todaysDate": todaysDate,
 
                           # reommendations
                           "totaldays": round(totaldays, 1),
