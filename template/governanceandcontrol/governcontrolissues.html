@@ -271,7 +271,7 @@
                                             <td>{{singleinfo.recommendation}}</td>
                                             <td>{{singleinfo.action_plan}}</td>
                                             <td>{{singleinfo.recommendation_state}}</td>
-                                            <td>{{singleinfo.ageing_days}}</td>
+                                            <td>{{ singleinfo.agreed_implementation_date|timeuntil:todaysDate }}</td>
                                             <td>{{singleinfo.agreed_implementation_date}}</td>
                                             <td>{{singleinfo.revised_implementation_date}}</td>
                                             <td>{{singleinfo.actual_implementation_date}}</td>

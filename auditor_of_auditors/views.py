@@ -80,7 +80,7 @@ def AuditorsPractices(request):
         for x in consolidatedgncobj:
             totaldays += x.ageing_days
         print(totaldays)
-        todaysDate=datetime.now().date()
+        todaysDate = datetime.now().date()
 
         return render(request=request, template_name="auditorofauditor/auditpractices.html",
                       context={
@@ -153,7 +153,7 @@ def AuditorsRecommendations(request):
             current_status_at_xy='CLOSED',
         ).count()
 
-        todaysDate=datetime.now().date()
+        todaysDate = datetime.now().date()
 
         # counting the number issues at different levels of state
         # RECOMMENDATION_STATE = (
@@ -245,7 +245,7 @@ def AuditorsConsolidated(request):
             current_status_at_xy='CLOSED',
         ).count()
 
-        todaysDate=datetime.now().date()
+        todaysDate = datetime.now().date()
 
         # counting the number issues at different levels of state
         # RECOMMENDATION_STATE = (
@@ -292,6 +292,7 @@ def AuditorsConsolidated(request):
 
                           # reommendations
                           "totaldays": round(totaldays, 1),
+                          "todaysDate": todaysDate
 
                       })
 

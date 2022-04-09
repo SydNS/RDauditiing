@@ -1,4 +1,6 @@
 # import days as days
+import datetime
+
 from django.shortcuts import render
 from . import models
 from django.contrib.auth.forms import UserCreationForm
@@ -13,6 +15,7 @@ from auditor_of_auditors.models import Auditor_of_auditors
 from accounts.models import Department
 from accounts.models import Person
 from accounts.models import RatingUser
+
 
 # importing datetime module
 
@@ -99,7 +102,7 @@ def dashboard(request):
 
         # ageing days total
 
-        totaldays=0
+        totaldays = 0
         for x in gncobj:
             totaldays += x.ageing_days
 
@@ -140,9 +143,9 @@ def dashboard(request):
             Personobj = Person.objects.all()
             Gradingobj = GradingUser.objects.all()
         except:
-            Deptobj={}
-            Personobj={}
-            Gradingobj={}
+            Deptobj = {}
+            Personobj = {}
+            Gradingobj = {}
 
         # info =
         return render(request, 'governanceandcontrol/index.html', {
@@ -267,10 +270,11 @@ def Governcontrolprojects(request):
             percentagecompleted = 0
 
         # ageing days total
-        totaldays=0
+        totaldays = 0
         for x in consolidatedgncobj:
-            totaldays +=x.ageing_days
+            totaldays += x.ageing_days
         print(totaldays)
+        todaysDate = datetime.now().date()
 
         return render(request=request, template_name="governanceandcontrol/governcontrolprojects.html",
                       context={
@@ -290,6 +294,7 @@ def Governcontrolprojects(request):
 
                           # reommendations
                           "totaldays": round(totaldays, 1),
+                          "todaysDate": todaysDate
 
                       }
                       )
@@ -352,10 +357,12 @@ def GoverncontrolIssues(request):
 
         # ageing days total
 
-        totaldays=0
+        totaldays = 0
         for x in consolidatedgncobj:
-            totaldays +=x.ageing_days
+            totaldays += x.ageing_days
         print(totaldays)
+
+        todaysDate = datetime.now().date()
 
         return render(request=request, template_name="governanceandcontrol/governcontrolissues.html",
                       context={
@@ -375,6 +382,7 @@ def GoverncontrolIssues(request):
 
                           # reommendations
                           "totaldays": round(totaldays, 1),
+                          "todaysDate": todaysDate
 
                       })
 
@@ -433,9 +441,11 @@ def Governcontrolrecommendations(request):
 
         # ageing days total
 
-        totaldays=0
+        totaldays = 0
         for x in consolidatedgncobj:
             totaldays += x.ageing_days
+
+        todaysDate = datetime.now().date()
 
         return render(request=request, template_name="governanceandcontrol/governcontrolrecommendations.html",
                       context={
@@ -455,6 +465,7 @@ def Governcontrolrecommendations(request):
 
                           # reommendations
                           "totaldays": round(totaldays, 1),
+                          "todaysDate": todaysDate
 
                       })
 
@@ -520,10 +531,12 @@ def Governcontrolconsolidated(request):
 
         # ageing days total
 
-        totaldays=0
+        totaldays = 0
         for x in consolidatedgncobj:
             totaldays += x.ageing_days
         print(totaldays)
+
+        todaysDate = datetime.now().date()
 
         return render(request=request, template_name="governanceandcontrol/governcontrolconsolidated.html",
                       context={
@@ -543,6 +556,7 @@ def Governcontrolconsolidated(request):
 
                           # reommendations
                           "totaldays": round(totaldays, 1),
+                          "todaysDate": todaysDate
 
                       })
 
@@ -558,11 +572,13 @@ def GoverncontrolprojectsDetail(request, id):
     return render(request=request, template_name="governanceandcontrol/governcontrolprojectsdetails.html",
                   context={"consolidateddata": consolidatedgncobj, }
                   )
+
+
 @login_required
-def EditGoverncontrolprojects(request,id):
+def EditGoverncontrolprojects(request, id):
     consolidatedgncobj = models.Governance_And_Control.objects.get(id=id)
     if request.method == "POST":
-        form = Governance_And_ControlForm(request.POST,instance=consolidatedgncobj)
+        form = Governance_And_ControlForm(request.POST, instance=consolidatedgncobj)
 
         if form.is_valid():
             gncrecord = form.save(commit=True)
@@ -570,7 +586,8 @@ def EditGoverncontrolprojects(request,id):
             return redirect('governance_app:governcontrolprojectsdetails', gncrecord.id)
     else:
         form = Governance_And_ControlForm(instance=consolidatedgncobj)
-    return render(request, 'governanceandcontrol/editformgovernanceandcontrol.html', {'type': 'edit_form','form': form,'consolidatedgncobj':consolidatedgncobj})
+    return render(request, 'governanceandcontrol/editformgovernanceandcontrol.html',
+                  {'type': 'edit_form', 'form': form, 'consolidatedgncobj': consolidatedgncobj})
 
 
 @login_required

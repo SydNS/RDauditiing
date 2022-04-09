@@ -197,7 +197,7 @@
                                             <td>{{singleinfo.audit_project_type}}</td>
                                             <td>{{singleinfo.issue_title}}</td>
                                             <td>{{singleinfo.recommendation}}</td>
-                                            <td>{{singleinfo.ageing_days}}</td>
+                                            <td>{{ singleinfo.agreed_implementation_date|timeuntil:todaysDate }}</td>
 
 
                                         </tr>
