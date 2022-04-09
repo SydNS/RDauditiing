@@ -22,3 +22,4 @@ xlwt==1.3.
 Pillow==7.0.0
 cloudinary==1.29.0
 django-cloudinary-storage==0.2.3
+django_utils_six-2.0
